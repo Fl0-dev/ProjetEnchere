@@ -17,6 +17,8 @@ public class Utilisateur {
 	private String motDePasse;
 	private int credit;
 	private boolean administrateur;
+	
+	// liste des enchères effectuées par l'utilisateur
 	private List<Enchere> listeEncheres;
 	private List<ArticleVendu> listeArticlesVendus;
 	

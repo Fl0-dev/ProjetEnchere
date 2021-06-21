@@ -1,6 +1,7 @@
 package fr.eni.projetenchere.bo;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class ArticleVendu {
 	
@@ -15,6 +16,11 @@ public class ArticleVendu {
 	private Retrait lieuRetrait;
 	private Categorie categorieArticle;
 	private Utilisateur utilisateur;
+	
+	// liste des différentes enchères effectuées sur un article
+	private List<Enchere> encheresSurArticle; 
+	
+	
 	public int getNoArticle() {
 		return noArticle;
 	}
