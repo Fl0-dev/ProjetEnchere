@@ -21,6 +21,12 @@ public class ArticleVendu {
 	private List<Enchere> encheresSurArticle; 
 	
 	
+	public List<Enchere> getEncheresSurArticle() {
+		return encheresSurArticle;
+	}
+	public void setEncheresSurArticle(List<Enchere> encheresSurArticle) {
+		this.encheresSurArticle = encheresSurArticle;
+	}
 	public int getNoArticle() {
 		return noArticle;
 	}
