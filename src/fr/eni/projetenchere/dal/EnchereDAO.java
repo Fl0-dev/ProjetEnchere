@@ -3,6 +3,7 @@ package fr.eni.projetenchere.dal;
 import java.util.List;
 
 import fr.eni.projetenchere.bo.Enchere;
+
 import fr.eni.projetenchere.bo.Utilisateur;
 
 public interface EnchereDAO {
