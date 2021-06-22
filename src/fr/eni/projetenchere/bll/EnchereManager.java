@@ -73,14 +73,14 @@ public class EnchereManager {
 	 * @return listeEncheresByCategorie
 	 * avec enchère(dateEnchere,montantEnchere,utilisateur(pseudo), articleVendu(nomArticle)) 
 	 */
-//	public List<Enchere> selectEnchereByCategorie(String nomArticle,int noCategorie){
-//		List<Enchere> listeEncheresByCategorie;
-//		
-//		listeEncheresByCategorie =enchereDAO.selectEnchereByCategorie(nomArticle,noCategorie);
-//		
-//		return listeEncheresByCategorie;
-//	}
-//	
+	public List<Enchere> selectEnchereByCatAndArt(String nomArticle,int noCategorie){
+		List<Enchere> listeEncheresByCategorie;
+		
+		listeEncheresByCategorie =enchereDAO.selectEnchereByCatAndArt(nomArticle,noCategorie);
+		
+		return listeEncheresByCategorie;
+	}
+	
 	
 	
 	

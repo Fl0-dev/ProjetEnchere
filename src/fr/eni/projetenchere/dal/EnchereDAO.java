@@ -28,7 +28,7 @@ public interface EnchereDAO {
 	 * @param nomArticle 
 	 * @return listeEncheres
 	 */
-	//List<Enchere> selectEnchereByCategorie(String nomArticle, int noCategorie);
+	List<Enchere> selectEnchereByCatAndArt(String nomArticle, int noCategorie);
 
 	
 

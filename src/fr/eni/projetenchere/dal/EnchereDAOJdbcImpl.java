@@ -3,6 +3,7 @@ package fr.eni.projetenchere.dal;
 
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -26,7 +27,11 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		List<Enchere> listeEncheres = new ArrayList<>();
 		
 		//requête SQL
-		final String SELECT_ALL_ENCHERE = "select date_enchere, montant_enchere, a.nom_article, u.pseudo from ENCHERES as e inner join UTILISATEURS as u on e.no_utilisateur = u.no_utilisateur inner join ARTICLES_VENDUS as a on a.no_article= e.no_article where a.prix_vente is null;";
+		final String SELECT_ALL_ENCHERE = "select date_enchere, montant_enchere, a.nom_article, u.pseudo from ENCHERES as e "
+				+ "inner join UTILISATEURS as u on e.no_utilisateur = u.no_utilisateur "
+				+ "inner join ARTICLES_VENDUS as a on a.no_article= e.no_article "
+				+ "where a.prix_vente is null "
+				+ "order by date_enchere desc;";
 		
 		//ouverture de la connexion vers DB
 		try (Connection connection = JdbcTools.getConnection();
@@ -67,9 +72,55 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	 * @param noCategorie
 	 * @return listeEncheres
 	 */
-	//List<Enchere> selectEnchereByCategorie(String nomArticle, int noCategorie){
+	@Override
+	public List<Enchere> selectEnchereByCatAndArt(String nom_article, int noCategorie){
 		
-	//}
+		//création de la liste vide
+		List<Enchere> listeEncheresBy = new ArrayList<>();
+		
+		//création des variables
+		ArticleVendu articleVendu;
+		Utilisateur utilisateur;
+		Enchere enchere;
+		
+		//requête SQL
+		final String SELECT_ALL_ENCHERE_BY ="select date_enchere, montant_enchere, a.nom_article, u.pseudo from ENCHERES as e "
+				+ "inner join UTILISATEURS as u on e.no_utilisateur = u.no_utilisateur "
+				+ "inner join ARTICLES_VENDUS as a on a.no_article= e.no_article "
+				+ "where a.no_categorie=? and a.nom_article like '%?%' and a.prix_vente is null "
+				+ "order by date_enchere desc;";
+		
+		//ouverture de la connexion à la DB
+		try (Connection connection = JdbcTools.getConnection();
+	             PreparedStatement requete = connection.prepareStatement(SELECT_ALL_ENCHERE_BY)) {
+			
+			//initialisation de la requête
+			requete.setInt(1, noCategorie);
+			requete.setString(2, nom_article);
+			//récupération du résultat
+			ResultSet rs = requete.executeQuery();
+			
+			while (rs.next()) {
+				LocalDate dateEnchere = rs.getDate("date_enchere").toLocalDate();
+				int montantEnchere = rs.getInt("montant_enchere");
+				String nomArticle = rs.getString("nom_article");
+				String pseudo = rs.getString("pseudo");
+				
+				//utilisation des résultats
+				utilisateur = new Utilisateur(pseudo);
+				articleVendu = new ArticleVendu(nomArticle);
+				enchere = new Enchere(dateEnchere,montantEnchere,utilisateur,articleVendu);
+				
+				//ajout dans la liste d'enchères
+				listeEncheresBy.add(enchere);
+			}
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return listeEncheresBy;
+	}
 	
 	
 	
