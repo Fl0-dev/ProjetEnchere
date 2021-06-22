@@ -2,6 +2,9 @@ package fr.eni.projetenchere.bll;
 
 import java.util.List;
 
+import javax.swing.JSpinner.ListEditor;
+
+import fr.eni.projetenchere.bo.Categorie;
 import fr.eni.projetenchere.bo.Enchere;
 import fr.eni.projetenchere.bo.Utilisateur;
 import fr.eni.projetenchere.dal.DAOFactory;
@@ -44,9 +47,7 @@ public class EnchereManager {
 	public List<Enchere> selectAllEnchere(){
 		//création de la liste des enchères
 		List<Enchere> listeEncheres;
-		
 		listeEncheres = enchereDAO.selectAllEnchere();
-		
 		return listeEncheres;
 		//TODO gestion des exceptions
 	}
@@ -81,8 +82,18 @@ public class EnchereManager {
 		return listeEncheresByCategorie;
 	}
 	
-	
-	
+	/**
+	 * récupère les catégories et
+	 * @return listeCategories
+	 * à utiliser pour les options du menu déroulant
+	 */
+	public List<Categorie> selectCategorie(){
+		//création de la liste des enchères
+		List<Categorie> listeCategories;
+		listeCategories = enchereDAO.selectCategorie();
+		return listeCategories;
+		
+	}
 	
 	
 	

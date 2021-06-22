@@ -11,11 +11,42 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import fr.eni.projetenchere.bo.ArticleVendu;
+import fr.eni.projetenchere.bo.Categorie;
 import fr.eni.projetenchere.bo.Enchere;
 import fr.eni.projetenchere.bo.Utilisateur;
 
 
 public class EnchereDAOJdbcImpl implements EnchereDAO {
+	
+	@Override
+	public List<Categorie> selectCategorie(){
+		//création de la liste vide
+		List<Categorie> listeCategories = new ArrayList<>();
+		//requête SQL
+		final String SELECT_ALL_CAT = "select * from CATEGORIES";		
+		//ouverture de la connexion vers DB
+		try (Connection connection = JdbcTools.getConnection();
+				Statement requete = connection.createStatement()) {
+			//récupération du résultat
+			ResultSet rs = requete.executeQuery(SELECT_ALL_CAT);	
+			//création des variables
+			Categorie categorie;
+			while (rs.next()) {
+				int noCategorie = rs.getInt("no_categorie");
+				String libelle = rs.getString("libelle");
+				//utilisation des réultats
+				categorie = new Categorie(noCategorie,libelle);
+				//ajout dans la liste
+				listeCategories.add(categorie);
+			}
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}		
+				
+		return listeCategories;
+	}
+	
 
 	/**
 	 * selectionne en DB toutes les enchères en cours et les met dans une liste
@@ -121,8 +152,6 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		
 		return listeEncheresBy;
 	}
-	
-	
 	
 	/**
 	 * selectionne en base de données email, pseudo et mot de passe des utilisateurs et les met dans une liste
