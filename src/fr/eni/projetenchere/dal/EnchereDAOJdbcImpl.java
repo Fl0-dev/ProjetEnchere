@@ -41,8 +41,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			while (rs.next()) {
 				LocalDate dateEnchere = rs.getDate("date_enchere").toLocalDate();
 				int montantEnchere = rs.getInt("montant_enchere");
-				String nomArticle = rs.getString("a.nom_article");
-				String pseudo = rs.getString("u.pseudo");
+				String nomArticle = rs.getString("nom_article");
+				String pseudo = rs.getString("pseudo");
 				
 				//utilisation des résultats
 				utilisateur = new Utilisateur(pseudo);
