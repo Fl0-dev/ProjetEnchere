@@ -1,12 +1,13 @@
 package fr.eni.projetenchere.bo;
 
-import java.time.LocalDateTime;
+
+import java.util.Date;
 
 public class Enchere {
 	
 	private Utilisateur utilisateur;
 	private ArticleVendu articleVendu;
-	private LocalDateTime dateEnchere;
+	private Date dateEnchere;
 	private int montant_enchere;
 	
 	public Utilisateur getUtilisateur() {
@@ -21,10 +22,10 @@ public class Enchere {
 	public void setArticleVendu(ArticleVendu articleVendu) {
 		this.articleVendu = articleVendu;
 	}
-	public LocalDateTime getDateEnchere() {
+	public Date getDateEnchere() {
 		return dateEnchere;
 	}
-	public void setDateEnchere(LocalDateTime dateEnchere) {
+	public void setDateEnchere(Date dateEnchere) {
 		this.dateEnchere = dateEnchere;
 	}
 	public int getMontant_enchere() {
