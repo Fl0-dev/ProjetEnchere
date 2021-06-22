@@ -69,4 +69,44 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		
 	//}
 	
+	
+	
+	/**
+	 * selectionne en base de données email, pseudo et mot de passe des utilisateurs et les met dans une liste
+	 * @return listeEncheres
+	 */
+	@Override
+	public List<Utilisateur> selectConnexion() {
+		List<Utilisateur> listeUtilisateurConnexion = new ArrayList<>();
+		
+		final String SELECT_UTILISATEUR_CONNEXION = "SELECT pseudo, email, mot_de_passe FROM utilisateurs;";
+		
+		//ouverture de la connexion vers DB
+				try (Connection connection = JdbcTools.getConnection();
+			             Statement requete = connection.createStatement()) {
+					//récupération du résultat
+					ResultSet rs = requete.executeQuery(SELECT_UTILISATEUR_CONNEXION);
+					
+					Utilisateur utilisateur;
+					
+					while (rs.next()) {
+						
+						String pseudo = rs.getString("pseudo");
+						String email = rs.getString("email");
+						String mot_de_passe = rs.getString("mot_de_passe");
+						
+						utilisateur = new Utilisateur(pseudo, email, mot_de_passe);
+						
+						listeUtilisateurConnexion.add(utilisateur);
+					}
+				} catch (SQLException e) {
+					// TODO: handle exception
+				}
+				
+				
+		
+		return listeUtilisateurConnexion;
+		
+	}
+	
 }

@@ -3,6 +3,7 @@ package fr.eni.projetenchere.bll;
 import java.util.List;
 
 import fr.eni.projetenchere.bo.Enchere;
+import fr.eni.projetenchere.bo.Utilisateur;
 import fr.eni.projetenchere.dal.DAOFactory;
 import fr.eni.projetenchere.dal.EnchereDAO;
 
@@ -47,6 +48,21 @@ public class EnchereManager {
 		listeEncheres = enchereDAO.selectAllEnchere();
 		
 		return listeEncheres;
+		//TODO gestion des exceptions
+	}
+
+
+	/**
+	 * récupère email, pseudo et mot de passe des utilisateurs pour l'accès à la connexion
+	 * @return listeUtilisateurConnexion
+	 *  
+	 */
+	public List<Utilisateur> selectConnexion() {
+		//création de la liste des utilisateurs pour la connexion
+		List<Utilisateur> listeUtilisateurConnexion;
+		
+		listeUtilisateurConnexion = enchereDAO.selectConnexion();
+		return listeUtilisateurConnexion;
 		//TODO gestion des exceptions
 	}
 	
