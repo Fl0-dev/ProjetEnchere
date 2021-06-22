@@ -26,7 +26,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		List<Enchere> listeEncheres = new ArrayList<>();
 		
 		//requête SQL
-		final String SELECT_ALL_ENCHERE = "select date_enchere, montant_enchere, a.nom_article, u.pseudo from ENCHERES as e inner join UTILISATEURS as u on e.no_utilisateur = u.no_utilisateur inner join ARTICLES_VENDUS as a on a.no_article= e.no_article;";
+		final String SELECT_ALL_ENCHERE = "select date_enchere, montant_enchere, a.nom_article, u.pseudo from ENCHERES as e inner join UTILISATEURS as u on e.no_utilisateur = u.no_utilisateur inner join ARTICLES_VENDUS as a on a.no_article= e.no_article where a.prix_vente is null;";
 		
 		//ouverture de la connexion vers DB
 		try (Connection connection = JdbcTools.getConnection();
