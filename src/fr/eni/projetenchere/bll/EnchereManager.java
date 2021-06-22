@@ -1,9 +1,6 @@
 package fr.eni.projetenchere.bll;
 
 import java.util.List;
-
-import javax.swing.JSpinner.ListEditor;
-
 import fr.eni.projetenchere.bo.Categorie;
 import fr.eni.projetenchere.bo.Enchere;
 import fr.eni.projetenchere.bo.Utilisateur;
@@ -37,7 +34,6 @@ public class EnchereManager {
 	private EnchereManager() {
 		enchereDAO = DAOFactory.getEnchereDAO();
 	}
-	
 	
 	/**
 	 * récupère toutes les enchères en cours dans
@@ -92,10 +88,32 @@ public class EnchereManager {
 		List<Categorie> listeCategories;
 		listeCategories = enchereDAO.selectCategorie();
 		return listeCategories;
+		//TODO gestion exception
 		
 	}
 	
-	
+	/**
+	 * ajoute un utilisateur après l'avoir créer avec les données fournies :
+	 * @param pseudo
+	 * @param nom
+	 * @param prenom
+	 * @param email
+	 * @param telephone
+	 * @param rue
+	 * @param codePostal
+	 * @param ville
+	 * @param motDePasse
+	 * @return newUtilisateur
+	 */
+	public Utilisateur insertUtilisateur(String pseudo, String nom, String prenom, String email, String telephone , String rue,
+			String codePostal, String ville, String motDePasse){
+		Utilisateur newUtilisateur = new Utilisateur(pseudo,nom,prenom,email,telephone,rue,
+				codePostal,ville,motDePasse);
+		enchereDAO.insertUtilisateur(newUtilisateur);
+		return newUtilisateur;
+		//TODO : Gestion exception
+		
+	}
 	
 	
 	

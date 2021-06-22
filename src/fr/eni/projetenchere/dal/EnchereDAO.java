@@ -37,6 +37,13 @@ public interface EnchereDAO {
 	 */
 	List<Categorie> selectCategorie();
 
+	/**
+	 * ajoute un utilisateur en DB
+	 * @param newUtilisateur
+	 * @return newUtilisateur avec un noUtilisateur
+	 */
+	Utilisateur insertUtilisateur(Utilisateur newUtilisateur);
+
 	
 
 }
