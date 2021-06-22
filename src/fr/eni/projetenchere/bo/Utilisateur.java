@@ -96,6 +96,14 @@ public class Utilisateur {
 		this.pseudo = pseudo;
 		}
 
+	public Utilisateur(String pseudo, String email, String motDePasse) {
+		super();
+		this.pseudo = pseudo;
+		this.email = email;
+		this.motDePasse = motDePasse;
+	}
+
+
 	public int getNoUtilisateur() {
 		return noUtilisateur;
 	}
