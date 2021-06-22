@@ -96,6 +96,10 @@ public class ArticleVendu {
 	public ArticleVendu() {
 		super();
 	}
+	public ArticleVendu(String nomArticle) {
+		super();
+		this.nomArticle = nomArticle;
+	}
 	@Override
 	public String toString() {
 		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
