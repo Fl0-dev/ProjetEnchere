@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+
+body {
+	padding: 0px;
+	margin: 0px;
+}
+
+/* Header */
+header {
+	background-color: gray;
+	overflow: hidden;
+	padding: 10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	color: #fff;
+}
+
+header a {
+	color: #ffe;
+}
+
