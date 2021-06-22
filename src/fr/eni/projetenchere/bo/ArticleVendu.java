@@ -3,6 +3,7 @@ package fr.eni.projetenchere.bo;
 import java.time.LocalDateTime;
 import java.util.List;
 
+
 public class ArticleVendu {
 	
 	private int noArticle;
