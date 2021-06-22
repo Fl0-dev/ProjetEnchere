@@ -91,6 +91,10 @@ public class Utilisateur {
 		this.credit = credit;
 		this.administrateur = administrateur;
 	}
+	public Utilisateur(String pseudo) {
+		super();
+		this.pseudo = pseudo;
+		}
 
 	public int getNoUtilisateur() {
 		return noUtilisateur;
