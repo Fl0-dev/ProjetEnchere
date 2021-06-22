@@ -11,6 +11,9 @@
 
 <h1>ENI-Enchères</h1>
 
+
+<p>${messageErreur}</p>
+
 <!--  Formulaire de connexion -->
 
 <form method="POST" action="${pageContext.request.contextPath }/ServletIdentification">

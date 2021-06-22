@@ -51,7 +51,9 @@ public class ServletIdentification extends HttpServlet {
 				rd.forward(request, response);
 			}
 			else {
-				//TODO : mettre message d'erreur dans la JSP  
+				//message d'erreur dans la JSP  
+				String messageErreur = "L'identifiant ou le mot de passe est invalide";
+				request.setAttribute("messageErreur", messageErreur);
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSPIdentification.jsp");
 				rd.forward(request, response);
 			}
