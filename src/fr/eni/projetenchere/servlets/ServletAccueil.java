@@ -54,7 +54,7 @@ public class ServletAccueil extends HttpServlet {
 		System.out.println(listeCategories);
 		
 		// je récupère les résultats de la recherche
-		String contenuRecherche = request.getParameter("contenuRecherche");
+		String contenuRecherche = request.getParameter("contenuRecherche").trim();
 		int categorie = Integer.valueOf(request.getParameter("categorie"));
 		
 		
