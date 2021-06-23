@@ -57,9 +57,15 @@ public class ServletAccueil extends HttpServlet {
 		String contenuRecherche = request.getParameter("contenuRecherche").trim();
 		int categorie = Integer.valueOf(request.getParameter("categorie"));
 		
+		List<Enchere> listeEncheresEnCours;
 		
-		// TODO: afficher résultats de la recherche
-		List<Enchere> listeEncheresEnCours = EnchereManager.getInstance().selectEnchereByCatAndArt(contenuRecherche, categorie);
+		// si l'option choisit est "toutes"
+		if (categorie == 0) {
+			listeEncheresEnCours = EnchereManager.getInstance().selectAllEnchere();
+		} else {
+			// sinon, afficher résultats de la recherche par catégorie et/ou nom article
+			listeEncheresEnCours = EnchereManager.getInstance().selectEnchereByCatAndArt(contenuRecherche, categorie);
+		}
 		
 		request.setAttribute("listeEncheresEnCours", listeEncheresEnCours);
 		

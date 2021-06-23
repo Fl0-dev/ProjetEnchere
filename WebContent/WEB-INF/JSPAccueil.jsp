@@ -35,17 +35,13 @@
 	
 	<label for="categories">Catégorie :</label>
 	<select id="categories" name="categorie">
-	<!-- TODO: par défaut, toutes les catégories sont affichées -->
 	
-		<!-- <option value="toutes" selected>Toutes</option>  -->
+	<!-- FIXME: l'option toutes affiche toutes les enchères -->
+		<option value="0" selected>Toutes</option>
 	
 		<c:forEach items="${listeCategories }" var="categorie">
-		
 		<option value="${categorie.noCategorie }">${categorie.libelle }</option>
-		
 		</c:forEach>
-		
-		
 	</select>
 	</div>
 	
@@ -60,7 +56,7 @@
 
         	<c:forEach var="enchere" items="${listeEncheresEnCours }">
         	
-        	<!-- FIXME: formulaire renvoie les enchères filtrées -->
+        	<!-- FIXME: montrer uniquement les enchères dont la date de fin est inférieure à la date du jour (enchères en cours) -->
 	        
 	        	<ul class="carte-enchere">
 	        	<li>${enchere.articleVendu.nomArticle }</li>
