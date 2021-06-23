@@ -2,7 +2,6 @@
 
 
 body {
-	padding: 0px;
 	margin: 0px;
 }
 
@@ -28,9 +27,6 @@ header a {
 	margin: 10px;
 }
 
-.encheres {
-	
-}
 
 .carte-enchere {
 	list-style-type: none; /* Remove bullets */

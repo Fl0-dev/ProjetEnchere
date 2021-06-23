@@ -59,11 +59,11 @@ public class ServletAccueil extends HttpServlet {
 		
 		List<Enchere> listeEncheresEnCours;
 		
-		// si l'option choisit est "toutes"
+		// si l'option choisit est "toutes", on recherche uniquement par nom d'article
 		if (categorie == 0) {
-			listeEncheresEnCours = EnchereManager.getInstance().selectAllEnchere();
+			listeEncheresEnCours = EnchereManager.getInstance().selectEnchereByArticle(contenuRecherche);
 		} else {
-			// sinon, afficher résultats de la recherche par catégorie et/ou nom article
+			// sinon, afficher résultats de la recherche par catégorie ET nom article
 			listeEncheresEnCours = EnchereManager.getInstance().selectEnchereByCatAndArt(contenuRecherche, categorie);
 		}
 		
