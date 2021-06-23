@@ -39,7 +39,6 @@ public class ServletIdentification extends HttpServlet {
 		//on récupère les infos connexion des utilisateurs
 		List<Utilisateur> listeUtilisateursConnexion = EnchereManager.getInstance().selectConnexion();
 		
-		System.out.println(listeUtilisateursConnexion);
 		
 		//on vérifie que les identifiants sont identiques en BDD : si oui on part vers la servlet Accueil Connecté, sinon retour sur la JSP connexion avec un message d'erreur
 		for (Utilisateur utilisateur : listeUtilisateursConnexion) {
