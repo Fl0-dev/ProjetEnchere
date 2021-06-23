@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Identification</title>
+<title>Insert title here</title>
 </head>
 <body>
 
@@ -19,27 +19,25 @@
 <form method="POST" action="${pageContext.request.contextPath }/ServletIdentification">
 	<div>
 		<label for="identifiant">Identifiant : </label>
-		<input type="text" id="identifiant" name="identifiant" placeholder="Identifiant" autofocus required>
+		<input type="text" id="identifiant" name="identifiant" placeholder="monIdentifiant" autofocus required>
 	</div>
 	
 	<div>
 		<label for="mdp">Mot de passe : </label>
-		<input type="password" id="mdp" name="mdp" placeholder="Mot de passe" required>
+		<input type="password" id="mdp" name="mdp" placeholder="monMotDePasse" required>
 	</div>
 	
-	<!--  <div>
+	<div>
 		<input type="checkbox" name="seSouvenir" id="seSouvenir">
 		<label for="seSouvenir">Se souvenir de moi</label>
 	</div>
-	-->
-	
 	
 	<div>
 		<button type="submit">Connexion</button>
 	</div>
 </form>
 
-	<a href="${pageContext.request.contextPath }/********AJOUTLIENSERVLETCREATIONPROFIL**********">Créer un compte</a>
+	<a href="${pageContext.request.contextPath }/ServletCreationProfil">Créer un compte</a>
 
 
 
