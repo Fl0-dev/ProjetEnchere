@@ -31,7 +31,6 @@ public class ServletAccueil extends HttpServlet {
 		// on récupère la liste des catégories présentes en base de données
 				List<Categorie> listeCategories = EnchereManager.getInstance().selectCategorie();
 				request.setAttribute("listeCategories", listeCategories);
-				
 				System.out.println(listeCategories);
 		
 		// on récupère les enchères en cours
@@ -39,7 +38,6 @@ public class ServletAccueil extends HttpServlet {
 				
 		// on envoie ça dans la requête
 				request.setAttribute("listeEncheresEnCours", listeEncheresEnCours);
-				
 				System.out.println(listeEncheresEnCours);
 				
 		// renvoie vers la JSP après traitement
@@ -49,8 +47,25 @@ public class ServletAccueil extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO: traitement des données de formulaire pour afficher un résultat de recherche
-		doGet(request, response);
+		
+		// on récupère la liste des catégories présentes en base de données
+		List<Categorie> listeCategories = EnchereManager.getInstance().selectCategorie();
+		request.setAttribute("listeCategories", listeCategories);
+		System.out.println(listeCategories);
+		
+		// je récupère les résultats de la recherche
+		String contenuRecherche = request.getParameter("contenuRecherche");
+		int categorie = Integer.valueOf(request.getParameter("categorie"));
+		
+		
+		// TODO: afficher résultats de la recherche
+		List<Enchere> listeEncheresEnCours = EnchereManager.getInstance().selectEnchereByCatAndArt(contenuRecherche, categorie);
+		
+		request.setAttribute("listeEncheresEnCours", listeEncheresEnCours);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSPAccueil.jsp");
+		rd.forward(request, response);
+	
 	}
 
 }

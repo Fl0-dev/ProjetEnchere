@@ -24,19 +24,28 @@
 <h2>Listes des enchères</h2>
 
 <div>
-<form action="/ServletAccueil" method="post" class="recherche">
+<form action="${pageContext.request.contextPath }/ServletAccueil" method="post" class="recherche">
 	<div>
 	<!--  TODO: Implémenter la recherche filtrée -->
 	<label for="filtres">Filtres :</label>
-	<input type="text" placeholder="Le nom de l'article contient...">
+	<input type="text" placeholder="Le nom de l'article contient..." name="contenuRecherche">
 	</div>
 	
 	<div>
+	
 	<label for="categories">Catégorie :</label>
 	<select id="categories" name="categorie">
+	<!-- TODO: par défaut, toutes les catégories sont affichées -->
+	
+		<!-- <option value="toutes" selected>Toutes</option>  -->
+	
 		<c:forEach items="${listeCategories }" var="categorie">
+		
 		<option value="${categorie.noCategorie }">${categorie.libelle }</option>
+		
 		</c:forEach>
+		
+		
 	</select>
 	</div>
 	
@@ -50,11 +59,12 @@
 <div class="encheres">
 
         	<c:forEach var="enchere" items="${listeEncheresEnCours }">
-        	<!-- FIXME: afficher date de fin d'enchère -->
-	        	
+        	
+        	<!-- FIXME: formulaire renvoie les enchères filtrées -->
+	        
 	        	<ul class="carte-enchere">
 	        	<li>${enchere.articleVendu.nomArticle }</li>
-	        	<li>Prix : ${enchere.montant_enchere }</li>
+	        	<li>Prix : ${enchere.montant_enchere } points</li>
 	        	<li>Date de fin de l'enchère : ${enchere.articleVendu.dateFinEncheres }</li>
 	        	<li>Vendeur : ${enchere.utilisateur.pseudo }</li>
 	        	</ul>
