@@ -24,8 +24,9 @@
 <h2>Listes des enchères</h2>
 
 <div>
-<form action="/ServletAccueil" method="post">
+<form action="/ServletAccueil" method="post" class="recherche">
 	<div>
+	<!--  TODO: Implémenter la recherche filtrée -->
 	<label for="filtres">Filtres :</label>
 	<input type="text" placeholder="Le nom de l'article contient...">
 	</div>
@@ -33,6 +34,9 @@
 	<div>
 	<label for="categories">Catégorie :</label>
 	<select id="categories" name="categorie">
+		<c:forEach items="${listeCategories }" var="categorie">
+		<option value="${categorie.noCategorie }">${categorie.libelle }</option>
+		</c:forEach>
 	</select>
 	</div>
 	
@@ -43,14 +47,20 @@
 </div>
 
 <!-- Affichage des enchères en cours -->
-<div>
-<ul>
+<div class="encheres">
+
         	<c:forEach var="enchere" items="${listeEncheresEnCours }">
-        	<!-- TODO: afficher nom de l'article, prix, date de fin d'enchère, nom de l'utilisateur-vendeur -->
-	        	<li>${enchere }
-	                </li>
+        	<!-- FIXME: afficher date de fin d'enchère -->
+	        	
+	        	<ul class="carte-enchere">
+	        	<li>${enchere.articleVendu.nomArticle }</li>
+	        	<li>Prix : ${enchere.montant_enchere }</li>
+	        	<li>Date de fin de l'enchère : ${enchere.articleVendu.dateFinEncheres }</li>
+	        	<li>Vendeur : ${enchere.utilisateur.pseudo }</li>
+	        	</ul>
+	        	
         	</c:forEach>
-        </ul>
+        
 </div>
 </main>
 

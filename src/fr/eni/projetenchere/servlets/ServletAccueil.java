@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JSpinner.ListEditor;
 
 import fr.eni.projetenchere.bll.EnchereManager;
 import fr.eni.projetenchere.bo.ArticleVendu;
@@ -27,10 +28,12 @@ public class ServletAccueil extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/* on récupère la liste des catégories présentes en base de données
-				List<Categorie> listeCategories = 
+		// on récupère la liste des catégories présentes en base de données
+				List<Categorie> listeCategories = EnchereManager.getInstance().selectCategorie();
+				request.setAttribute("listeCategories", listeCategories);
+				
+				System.out.println(listeCategories);
 		
-	 	 	*/
 		// on récupère les enchères en cours
 				List<Enchere> listeEncheresEnCours = EnchereManager.getInstance().selectAllEnchere();
 				

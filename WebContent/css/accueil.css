@@ -21,3 +21,22 @@ header a {
 	color: #ffe;
 }
 
+
+.recherche {
+	border: solid 2px orange;
+	padding: 10px;
+	margin: 10px;
+}
+
+.encheres {
+	
+}
+
+.carte-enchere {
+	list-style-type: none; /* Remove bullets */
+  	border: solid 2px green;
+	padding: 10px;
+	margin: 10px;
+	width: 300px;
+}
+
