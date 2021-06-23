@@ -154,7 +154,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		Enchere enchere;
 
 		// requête SQL
-		final String SELECT_ALL_ENCHERE_BY = "select a.date_fin_encheres, montant_enchere, a.nom_article, u.pseudo from ENCHERES as e "
+		final String SELECT_ALL_ENCHERE_BY_NOM = "select a.date_fin_encheres, montant_enchere, a.nom_article, u.pseudo from ENCHERES as e "
 				+ "inner join UTILISATEURS as u on e.no_utilisateur = u.no_utilisateur "
 				+ "inner join ARTICLES_VENDUS as a on a.no_article= e.no_article "
 				+ "where a.nom_article like ? and (date_debut_encheres < GETDATE() and date_fin_encheres > GETDATE())"
@@ -162,7 +162,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 		// ouverture de la connexion à la DB
 		try (Connection connection = JdbcTools.getConnection();
-				PreparedStatement requete = connection.prepareStatement(SELECT_ALL_ENCHERE_BY)) {
+				PreparedStatement requete = connection.prepareStatement(SELECT_ALL_ENCHERE_BY_NOM)) {
 			// initialisation de la requête
 			
 			requete.setString(1, "%" + nom_article + "%");
