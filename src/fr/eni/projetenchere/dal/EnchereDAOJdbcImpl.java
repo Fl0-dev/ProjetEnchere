@@ -16,47 +16,48 @@ import fr.eni.projetenchere.bo.Utilisateur;
 public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 	public Utilisateur insertUtilisateur(Utilisateur newUtilisateur) {
-		//requête SQL
-		final String INSERT_UTILSATEUR ="insert into UTILISATEURS (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe)"
+		// requête SQL
+		final String INSERT_UTILSATEUR = "insert into UTILISATEURS (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe)"
 				+ "values(?,?,?,?,?,?,?,?,?)";
-		
-		//ouverture de la connexion à la DB
-        try (Connection connection = JdbcTools.getConnection()){
-        	try {
-        		//désactive l'auto-commit (pour pouvoir faire une transaction)
-        		connection.setAutoCommit(false);
-				PreparedStatement requete = connection.prepareStatement(INSERT_UTILSATEUR,PreparedStatement.RETURN_GENERATED_KEYS);
-             	requete.setString(1, newUtilisateur.getPseudo());
-             	requete.setString(2, newUtilisateur.getNom());
-             	requete.setString(3, newUtilisateur.getPrenom());
-             	requete.setString(4, newUtilisateur.getEmail());
-             	if (newUtilisateur.getTelephone()!=null) {
-             		requete.setString(5, newUtilisateur.getTelephone());
-             	}
-             	requete.setString(6, newUtilisateur.getRue());
-             	requete.setString(7, newUtilisateur.getCodePostal());
-             	requete.setString(8, newUtilisateur.getVille());
-             	requete.setString(9, newUtilisateur.getMotDePasse());
-             	//exécution de la requête
-             	requete.executeUpdate();
-     			
-             	//récupère le noUtilisateur 
-     			ResultSet rs = requete.getGeneratedKeys();
-     			if(rs.next()) {
-     				newUtilisateur.setNoUtilisateur(rs.getInt(1));
-     			}
-     			//valide
-     			connection.commit();
-     		//si souci 	
-        	}catch (SQLException e) {
+
+		// ouverture de la connexion à la DB
+		try (Connection connection = JdbcTools.getConnection()) {
+			try {
+				// désactive l'auto-commit (pour pouvoir faire une transaction)
+				connection.setAutoCommit(false);
+				PreparedStatement requete = connection.prepareStatement(INSERT_UTILSATEUR,
+						PreparedStatement.RETURN_GENERATED_KEYS);
+				requete.setString(1, newUtilisateur.getPseudo());
+				requete.setString(2, newUtilisateur.getNom());
+				requete.setString(3, newUtilisateur.getPrenom());
+				requete.setString(4, newUtilisateur.getEmail());
+				if (newUtilisateur.getTelephone() != null) {
+					requete.setString(5, newUtilisateur.getTelephone());
+				}
+				requete.setString(6, newUtilisateur.getRue());
+				requete.setString(7, newUtilisateur.getCodePostal());
+				requete.setString(8, newUtilisateur.getVille());
+				requete.setString(9, newUtilisateur.getMotDePasse());
+				// exécution de la requête
+				requete.executeUpdate();
+
+				// récupère le noUtilisateur
+				ResultSet rs = requete.getGeneratedKeys();
+				if (rs.next()) {
+					newUtilisateur.setNoUtilisateur(rs.getInt(1));
+				}
+				// valide
+				connection.commit();
+				// si souci
+			} catch (SQLException e) {
 				e.printStackTrace();
-				//efface l'insert
+				// efface l'insert
 				connection.rollback();
-				//TODO gestion exception
+				// TODO gestion exception
 			}
-        }catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-			//TODO gestion exception
+			// TODO gestion exception
 		}
 		return newUtilisateur;
 	}
@@ -107,7 +108,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		// requête SQL
 		final String SELECT_ALL_ENCHERE = "select a.date_fin_encheres, montant_enchere, a.nom_article, u.pseudo from ENCHERES as e "
 				+ "inner join UTILISATEURS as u on e.no_utilisateur = u.no_utilisateur "
-				+ "inner join ARTICLES_VENDUS as a on a.no_article= e.no_article " 
+				+ "inner join ARTICLES_VENDUS as a on a.no_article= e.no_article "
 				+ "where (date_debut_encheres < GETDATE() and date_fin_encheres > GETDATE())"
 				+ "order by date_enchere desc;";
 
@@ -130,7 +131,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 				// utilisation des résultats
 				utilisateur = new Utilisateur(pseudo);
-				articleVendu = new ArticleVendu(nomArticle,dateFinEnchere);
+				articleVendu = new ArticleVendu(nomArticle, dateFinEnchere);
 				enchere = new Enchere(montantEnchere, utilisateur, articleVendu);
 
 				// ajout dans la liste d'enchères
@@ -141,6 +142,54 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			e.printStackTrace();
 		}
 		return listeEncheres;
+	}
+
+	@Override
+	public List<Enchere> selectEnchereByArticle(String nom_article) {
+		// création de la liste vide
+		List<Enchere> listeEncheresByNom = new ArrayList<>();
+		// création des variables
+		ArticleVendu articleVendu;
+		Utilisateur utilisateur;
+		Enchere enchere;
+
+		// requête SQL
+		final String SELECT_ALL_ENCHERE_BY = "select a.date_fin_encheres, montant_enchere, a.nom_article, u.pseudo from ENCHERES as e "
+				+ "inner join UTILISATEURS as u on e.no_utilisateur = u.no_utilisateur "
+				+ "inner join ARTICLES_VENDUS as a on a.no_article= e.no_article "
+				+ "where a.nom_article like ? and (date_debut_encheres < GETDATE() and date_fin_encheres > GETDATE())"
+				+ "order by date_enchere desc;";
+
+		// ouverture de la connexion à la DB
+		try (Connection connection = JdbcTools.getConnection();
+				PreparedStatement requete = connection.prepareStatement(SELECT_ALL_ENCHERE_BY)) {
+			// initialisation de la requête
+			
+			requete.setString(1, "%" + nom_article + "%");
+			// récupération du résultat
+			ResultSet rs = requete.executeQuery();
+
+			while (rs.next()) {
+				LocalDate dateFinEnchere = rs.getDate("date_fin_encheres").toLocalDate();
+				int montantEnchere = rs.getInt("montant_enchere");
+				String nomArticle = rs.getString("nom_article");
+				String pseudo = rs.getString("pseudo");
+
+				// utilisation des résultats
+				utilisateur = new Utilisateur(pseudo);
+				articleVendu = new ArticleVendu(nomArticle, dateFinEnchere);
+				enchere = new Enchere(montantEnchere, utilisateur, articleVendu);
+
+				// ajout dans la liste d'enchères
+				listeEncheresByNom.add(enchere);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	return listeEncheresByNom;
+
 	}
 
 	/**
@@ -186,7 +235,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 				// utilisation des résultats
 				utilisateur = new Utilisateur(pseudo);
-				articleVendu = new ArticleVendu(nomArticle,dateFinEnchere);
+				articleVendu = new ArticleVendu(nomArticle, dateFinEnchere);
 				enchere = new Enchere(montantEnchere, utilisateur, articleVendu);
 
 				// ajout dans la liste d'enchères

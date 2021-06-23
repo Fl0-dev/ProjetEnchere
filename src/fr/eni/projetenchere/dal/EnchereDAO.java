@@ -27,7 +27,7 @@ public interface EnchereDAO {
 	 * selectionne en DB toutes les enchères en cours selon
 	 * @param noCategorie 
 	 * @param nomArticle 
-	 * @return listeEncheres
+	 * @return listeEncheresBy
 	 */
 	List<Enchere> selectEnchereByCatAndArt(String nomArticle, int noCategorie);
 
@@ -43,6 +43,14 @@ public interface EnchereDAO {
 	 * @return newUtilisateur avec un noUtilisateur
 	 */
 	Utilisateur insertUtilisateur(Utilisateur newUtilisateur);
+
+
+	/**
+	 * selectionne en DB toutes les enchères en cours selon 
+	 * @param nomArticle 
+	 * @return listeEncheresByNom
+	 */
+	List<Enchere> selectEnchereByArticle(String nomArticle);
 
 	
 

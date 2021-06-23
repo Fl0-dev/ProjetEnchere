@@ -79,6 +79,21 @@ public class EnchereManager {
 	}
 	
 	/**
+	 * récupère toutes les enchères selon
+	 * @param nomArticle
+	 * @return listeEncheresByArticle
+	 */
+	public List<Enchere> selectEnchereByArticle(String nomArticle){
+		List<Enchere> listeEncheresByArticle;
+		
+		listeEncheresByArticle =enchereDAO.selectEnchereByArticle(nomArticle);
+		
+		return listeEncheresByArticle;
+	}
+	
+	
+	
+	/**
 	 * récupère les catégories et
 	 * @return listeCategories
 	 * à utiliser pour les options du menu déroulant
