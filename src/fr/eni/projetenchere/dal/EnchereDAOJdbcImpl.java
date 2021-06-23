@@ -105,7 +105,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		List<Enchere> listeEncheres = new ArrayList<>();
 
 		// requête SQL
-		final String SELECT_ALL_ENCHERE = "select date_enchere, montant_enchere, a.nom_article, u.pseudo from ENCHERES as e "
+		final String SELECT_ALL_ENCHERE = "select a.date_fin_encheres, montant_enchere, a.nom_article, u.pseudo from ENCHERES as e "
 				+ "inner join UTILISATEURS as u on e.no_utilisateur = u.no_utilisateur "
 				+ "inner join ARTICLES_VENDUS as a on a.no_article= e.no_article " + "where a.prix_vente is null "
 				+ "order by date_enchere desc;";
@@ -122,15 +122,15 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 			// récupération en Java
 			while (rs.next()) {
-				LocalDate dateEnchere = rs.getDate("date_enchere").toLocalDate();
+				LocalDate dateFinEnchere = rs.getDate("date_fin_encheres").toLocalDate();
 				int montantEnchere = rs.getInt("montant_enchere");
 				String nomArticle = rs.getString("nom_article");
 				String pseudo = rs.getString("pseudo");
 
 				// utilisation des résultats
 				utilisateur = new Utilisateur(pseudo);
-				articleVendu = new ArticleVendu(nomArticle);
-				enchere = new Enchere(dateEnchere, montantEnchere, utilisateur, articleVendu);
+				articleVendu = new ArticleVendu(nomArticle,dateFinEnchere);
+				enchere = new Enchere(montantEnchere, utilisateur, articleVendu);
 
 				// ajout dans la liste d'enchères
 				listeEncheres.add(enchere);
@@ -161,7 +161,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		Enchere enchere;
 
 		// requête SQL
-		final String SELECT_ALL_ENCHERE_BY = "select date_enchere, montant_enchere, a.nom_article, u.pseudo from ENCHERES as e "
+		final String SELECT_ALL_ENCHERE_BY = "select a.date_fin_encheres, montant_enchere, a.nom_article, u.pseudo from ENCHERES as e "
 				+ "inner join UTILISATEURS as u on e.no_utilisateur = u.no_utilisateur "
 				+ "inner join ARTICLES_VENDUS as a on a.no_article= e.no_article "
 				+ "where a.no_categorie=? and a.nom_article like '%?%' and a.prix_vente is null "
@@ -178,15 +178,15 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			ResultSet rs = requete.executeQuery();
 
 			while (rs.next()) {
-				LocalDate dateEnchere = rs.getDate("date_enchere").toLocalDate();
+				LocalDate dateFinEnchere = rs.getDate("date_fin_encheres").toLocalDate();
 				int montantEnchere = rs.getInt("montant_enchere");
 				String nomArticle = rs.getString("nom_article");
 				String pseudo = rs.getString("pseudo");
 
 				// utilisation des résultats
 				utilisateur = new Utilisateur(pseudo);
-				articleVendu = new ArticleVendu(nomArticle);
-				enchere = new Enchere(dateEnchere, montantEnchere, utilisateur, articleVendu);
+				articleVendu = new ArticleVendu(nomArticle,dateFinEnchere);
+				enchere = new Enchere(montantEnchere, utilisateur, articleVendu);
 
 				// ajout dans la liste d'enchères
 				listeEncheresBy.add(enchere);
