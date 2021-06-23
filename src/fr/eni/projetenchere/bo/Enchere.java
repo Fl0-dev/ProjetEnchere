@@ -45,9 +45,8 @@ public class Enchere {
 	public Enchere() {
 		super();
 	}
-	public Enchere(LocalDate dateEnchere, int montant_enchere, Utilisateur utilisateur, ArticleVendu articleVendu) {
+	public Enchere(int montant_enchere, Utilisateur utilisateur, ArticleVendu articleVendu) {
 		super();
-		this.dateEnchere = dateEnchere;
 		this.montant_enchere = montant_enchere;
 		this.utilisateur = utilisateur;
 		this.articleVendu = articleVendu;
