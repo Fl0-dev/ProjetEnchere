@@ -14,7 +14,7 @@
 
 <nav>
 <a href="${pageContext.request.contextPath }/">Vendre un articles</a>
-<a href="${pageContext.request.contextPath }/">Mon profil</a>
+<a href="${pageContext.request.contextPath }/ServletMonProfil">Mon profil</a>
 <a href="${pageContext.request.contextPath }/ServletAccueilConnecte">Déconnexion</a>
 </nav>
 </header>
