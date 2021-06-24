@@ -40,7 +40,8 @@ public class ServletIdentification extends HttpServlet {
 		for (Utilisateur utilisateur : listeUtilisateursConnexion) {
 			if ((identifiant.equals(utilisateur.getPseudo()) || (identifiant.equals(utilisateur.getEmail()))) && mdp.equals(utilisateur.getMotDePasse())) {
 				HttpSession session = request.getSession();
-				session.setAttribute("pseudo", utilisateur.getPseudo());
+				Utilisateur utilisateurSession = EnchereManager.getInstance().selectUtilisateurByPseudo(utilisateur.getPseudo());
+				session.setAttribute("utilisateurSession", utilisateurSession);
 				
 				RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueilConnecte");
 				rd.forward(request, response);
