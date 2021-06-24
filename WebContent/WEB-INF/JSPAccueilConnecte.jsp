@@ -11,11 +11,11 @@
 
 <header>
 <h1>ENI-Enchères</h1>
+
 <nav>
-<a href="${pageContext.request.contextPath }/ServletIdentification">Enchères</a>
-<a href="${pageContext.request.contextPath }/ServletIdentification">Vendre un articles</a>
-<a href="${pageContext.request.contextPath }/ServletIdentification">Mon profil</a>
-<a href="${pageContext.request.contextPath }/ServletIdentification">Déconnexion</a>
+<a href="${pageContext.request.contextPath }/">Vendre un articles</a>
+<a href="${pageContext.request.contextPath }/">Mon profil</a>
+<a href="${pageContext.request.contextPath }/ServletAccueilConnecte">Déconnexion</a>
 </nav>
 </header>
 
@@ -23,7 +23,7 @@
 <h2>Listes des enchères</h2>
 
 <div>
-<form action="${pageContext.request.contextPath }/ServletAccueil" method="post" class="recherche">
+<form action="${pageContext.request.contextPath }/ServletAccueilConnecte" method="post" class="recherche">
 	<div>
 	<!--  TODO: Implémenter la recherche filtrée -->
 	<label for="filtres">Filtres :</label>

@@ -15,6 +15,10 @@
 
 <header>
 <h1>ENI-Enchères</h1>
+
+
+<p>${messageDeconnexion}</p>
+
 <nav>
 <a href="${pageContext.request.contextPath }/ServletIdentification">S'inscrire - Se connecter</a>
 </nav>
