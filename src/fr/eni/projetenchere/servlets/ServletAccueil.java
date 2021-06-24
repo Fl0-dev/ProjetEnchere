@@ -31,15 +31,13 @@ public class ServletAccueil extends HttpServlet {
 		// on récupère la liste des catégories présentes en base de données
 				List<Categorie> listeCategories = EnchereManager.getInstance().selectCategorie();
 				request.setAttribute("listeCategories", listeCategories);
-				System.out.println(listeCategories);
 		
 		// on récupère les enchères en cours
 				List<Enchere> listeEncheresEnCours = EnchereManager.getInstance().selectAllEnchere();
 				
 		// on envoie ça dans la requête
 				request.setAttribute("listeEncheresEnCours", listeEncheresEnCours);
-				System.out.println(listeEncheresEnCours);
-				
+			
 		// renvoie vers la JSP après traitement
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSPAccueil.jsp");
 				rd.forward(request, response);
