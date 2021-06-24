@@ -42,7 +42,7 @@ public interface EnchereDAO {
 	 * @param newUtilisateur
 	 * @return newUtilisateur avec un noUtilisateur
 	 */
-	Utilisateur insertUtilisateur(Utilisateur newUtilisateur);
+	void insertUtilisateur(Utilisateur newUtilisateur);
 
 
 	/**

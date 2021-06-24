@@ -90,9 +90,6 @@ public class EnchereManager {
 		
 		return listeEncheresByArticle;
 	}
-	
-	
-	
 	/**
 	 * récupère les catégories et
 	 * @return listeCategories
@@ -118,19 +115,74 @@ public class EnchereManager {
 	 * @param codePostal
 	 * @param ville
 	 * @param motDePasse
+	 * @param confirmation 
 	 * @return newUtilisateur
 	 */
-	public Utilisateur insertUtilisateur(String pseudo, String nom, String prenom, String email, String telephone , String rue,
+	public Utilisateur inserNewtUtilisateur(String pseudo, String nom, String prenom, String email, String telephone , String rue,
 			String codePostal, String ville, String motDePasse){
-		Utilisateur newUtilisateur = new Utilisateur(pseudo,nom,prenom,email,telephone,rue,
-				codePostal,ville,motDePasse);
-		enchereDAO.insertUtilisateur(newUtilisateur);
-		return newUtilisateur;
-		//TODO : Gestion exception
+		Utilisateur newUtilisateur= new Utilisateur(pseudo, nom, prenom, email, telephone,rue, codePostal, ville, motDePasse);
+		enchereDAO.insertUtilisateur(newUtilisateur); 
 		
+			return newUtilisateur;
 	}
 	
-	
-	
-	
+	/**
+	 * vérifie si l'email est en DB
+	 * @param email
+	 * @throws Exception
+	 */
+	public void validationEmail(String email) throws Exception{
+		//appel du manager pour récupérer une liste de tous les emails en DB
+		List<Utilisateur> listPseudoEmail = EnchereManager.getInstance().selectConnexion();
+		//si l'email n'est pas null et pas vide
+		if ( email != null && email.trim().length() != 0 ) {
+			//compare dans la DB
+			for (Utilisateur utilisateur : listPseudoEmail) {
+				if(email.equals(utilisateur.getEmail())) {
+					throw new Exception("L'email existe déjà"); 	
+				}
+				break;
+			}
+		}
+	}
+	/**
+	 * permet de vérifier si le pseudo est valide 
+	 * @param pseudo
+	 * @throws Exception
+	 */
+	public void validationPseudo(String pseudo) throws Exception{
+		//appel du manager pour récupérer une liste de tous les pseudo en DB
+		List<Utilisateur> listPseudoEmail = EnchereManager.getInstance().selectConnexion();
+		//si le pseudo n'est pas null et pas vide
+		if (pseudo != null && pseudo.trim().length() != 0) {
+			//si il ne contient que des caractères alphanumériques
+			if (!pseudo.matches("#^[:alnum:]$#")) {
+				throw new Exception("Le pseudo ne doit contenir que des caractères alphanumériques");
+			}
+		} 
+		
+		//compare le pseudo aux pseudos de la database
+		for (Utilisateur utilisateur : listPseudoEmail) {
+			if (pseudo.equals(utilisateur.getPseudo())) {
+				throw new Exception("Le pseudo existe déjà"); 	
+			}
+			break;
+		}
+	}
+
+	/**
+	 * Valide le mot de passe
+	 * @param motDePasse
+	 * @param confirmation
+	 * @throws Exception
+	 */
+	public void validationMotsDePasse( String motDePasse, String confirmation ) throws Exception{
+	    if (motDePasse != null && motDePasse.trim().length() != 0 && confirmation != null && confirmation.trim().length() != 0) {
+	        if (!motDePasse.equals(confirmation)) {
+	            throw new Exception("Les mots de passe entrés sont différents, merci de les saisir à nouveau.");
+	        } 
+	    } else {
+	        throw new Exception("Merci de saisir et confirmer votre mot de passe.");
+	    }
+	}
 }

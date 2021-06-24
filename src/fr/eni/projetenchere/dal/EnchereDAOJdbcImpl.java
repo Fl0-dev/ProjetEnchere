@@ -15,10 +15,10 @@ import fr.eni.projetenchere.bo.Utilisateur;
 
 public class EnchereDAOJdbcImpl implements EnchereDAO {
 
-	public Utilisateur insertUtilisateur(Utilisateur newUtilisateur) {
+	public void insertUtilisateur(Utilisateur newUtilisateur) {
 		// requête SQL
-		final String INSERT_UTILSATEUR = "insert into UTILISATEURS (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe)"
-				+ "values(?,?,?,?,?,?,?,?,?)";
+		final String INSERT_UTILSATEUR = "insert into UTILISATEURS (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur)"
+				+ "values(?,?,?,?,?,?,?,?,?,100,0)";
 
 		// ouverture de la connexion à la DB
 		try (Connection connection = JdbcTools.getConnection()) {
@@ -59,7 +59,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			e.printStackTrace();
 			// TODO gestion exception
 		}
-		return newUtilisateur;
+		
 	}
 
 	@Override
