@@ -8,9 +8,8 @@ import fr.eni.projetenchere.dal.DAOFactory;
 import fr.eni.projetenchere.dal.EnchereDAO;
 
 /**
- * Classe de la BLL contenant les méthodes utilisées en Vue et utilisant les
- * méthodes de la DAL
- * 
+ * Classe de la BLL contenant les méthodes
+ * utilisées en Vue et utilisant les méthodes de la DAL
  * @author Florian
  * @version 1.0
  * @date 22/06/21
@@ -201,6 +200,13 @@ public class EnchereManager {
 	}
 
 	
+	
+	
+	/**
+	 * récupère les données utilisateur à partir de son pseudo
+	 * @param pseudo
+	 * @return utilisateur
+	 */
 	public Utilisateur selectUtilisateurByPseudo(String pseudo) {
 		
 		Utilisateur utilisateur;
@@ -210,5 +216,8 @@ public class EnchereManager {
 		return utilisateur;
 		//TODO : Gestion exception
 	}
-
+	
+	
+	
+	
 }

@@ -326,6 +326,9 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				
 				// utilisation des résultats
 				utilisateur = new Utilisateur(numUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, mdp, credit,administrateur);
+
+				utilisateur = new Utilisateur(numUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, mdp, credit, administrateur);
+
 		
 			}
 		} catch (SQLException e) {
