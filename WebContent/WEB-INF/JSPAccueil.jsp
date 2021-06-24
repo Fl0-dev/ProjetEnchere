@@ -8,7 +8,7 @@
 <title>ENI-Enchères</title>
 
 <!-- CSS -->
-<link href="${pageContext.request.contextPath }/css/accueil.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/css/style.css" rel="stylesheet">
 </head>
 
 <body>
