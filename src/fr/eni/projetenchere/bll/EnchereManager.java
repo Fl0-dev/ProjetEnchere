@@ -130,7 +130,20 @@ public class EnchereManager {
 		
 	}
 	
-	
+	/**
+	 * récupère les données utilisateur à partir de son pseudo
+	 * @param pseudo
+	 * @return utilisateur
+	 */
+	public Utilisateur selectUtilisateurByPseudo(String pseudo) {
+		
+		Utilisateur utilisateur;
+		
+		utilisateur = enchereDAO.selectUtilisateurByPseudo(pseudo);
+		
+		return utilisateur;
+		//TODO : Gestion exception
+	}
 	
 	
 }

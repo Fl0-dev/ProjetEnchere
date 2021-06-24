@@ -285,5 +285,54 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		return listeUtilisateurConnexion;
 
 	}
+	
+	/**
+	 * sélectionne un utilisateur à partir de son pseudo
+	 * @return utilisateur
+	 */
+	@Override
+	public Utilisateur selectUtilisateurByPseudo(String pseudo) {
+		
+		// création des variables
+		Utilisateur utilisateur = new Utilisateur();
+		
+		// requête SQL
+		final String SELECT_UTILISATEUR_BY_PSEUDO = "SELECT no_utilisateur, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM utilisateurs WHERE pseudo=?;";
 
+		// ouverture de la connexion à la DB
+				try (Connection connection = JdbcTools.getConnection();
+						PreparedStatement requete = connection.prepareStatement(SELECT_UTILISATEUR_BY_PSEUDO)) {
+
+			// initialisation de la requête
+			requete.setString(1, pseudo);
+			
+			// récupération du résultat
+			ResultSet rs = requete.executeQuery();
+						
+			while (rs.next()) {
+				
+				int numUtilisateur = rs.getInt("no_utilisateur");
+				String nom = rs.getString("nom");
+				String prenom = rs.getString("prenom");
+				String email = rs.getString("email");
+				String telephone = rs.getString("telephone");
+				String rue = rs.getString("rue");
+				String codePostal = rs.getString("code_postal");
+				String ville = rs.getString("ville");
+				String mdp = rs.getString("mot_de_passe");
+				int credit = rs.getInt("credit");
+				boolean administrateur = rs.getBoolean("administrateur");
+				
+				// utilisation des résultats
+				utilisateur = new Utilisateur(numUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, mdp, credit, administrateur);
+		
+			}
+		} catch (SQLException e) {
+			// TODO: handle exception
+		}
+
+		return utilisateur;
+
+	}
+	
 }

@@ -52,6 +52,13 @@ public interface EnchereDAO {
 	 */
 	List<Enchere> selectEnchereByArticle(String nomArticle);
 
+	/**
+	 * sélectionne l'utilisateur à partir de son pseudo
+	 * @param pseudo
+	 * @return utilisateur
+	 */
+	Utilisateur selectUtilisateurByPseudo(String pseudo);
+
 	
 
 }
