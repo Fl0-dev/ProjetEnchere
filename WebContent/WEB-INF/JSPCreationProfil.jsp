@@ -16,25 +16,34 @@
 
 		<center>
 
-			<label for="pseudo">Pseudo : </label> <input type="text" id="pseudo"
-				name="pseudo" autofocus required> <label for="nom">Nom
-				: </label> <input type="text" id="nom" name="nom" autofocus required>
-			<br> <br> <label for="prenom">Prénom : </label> <input
-				type="text" id="prenom" name="prenom" autofocus required> <label
-				for="email">Email : </label> <input type="mail" id="email"
-				name="email" autofocus required> <br> <br> <label
-				for="telephone">Téléphone : </label> <input type="tel"
-				id="telephone" name="telephone"> <label for="rue">Rue
-				: </label> <input type="text" id="rue" name="rue" autofocus required>
-			<br> <br> <label for="codePostal">Code Postal : </label> <input
-				type="text" id="codePostal" name="codePostal" autofocus required>
-			<label for="ville">Ville : </label> <input type="text" id="ville"
-				name="ville" autofocus required> <br> <br> <label
-				for="motDePasse">Mot de passe : </label> <input type="password"
-				id="motDePasse" name="motDePasse" autofocus required> <label
-				for="confirmation">Confirmation : </label> <input type="password"
-				id="confirmation" name="confirmation" autofocus required> <br>
-			<br>
+			<label for="pseudo">Pseudo : </label> 
+			<input type="text" id="pseudo"name="pseudo" autofocus required> 
+			<span class="erreur">${erreurs['pseudo']}</span> 
+			<label for="nom">Nom : </label> 
+			<input type="text" id="nom" name="nom" autofocus required>
+			<br> <br> 
+			<label for="prenom">Prénom : </label> 
+			<input type="text" id="prenom" name="prenom" autofocus required> 
+			<label for="email">Email : </label> 
+			<input type="mail" id="email" name="email" autofocus required>
+			 <span class="erreur">${erreurs['email']}</span> 
+			<br> <br> 
+			<label for="telephone">Téléphone : </label> 
+			<input type="tel" id="telephone" name="telephone"> 
+			<label for="rue">Rue : </label> 
+			<input type="text" id="rue" name="rue" autofocus required>
+			<br> <br> 
+			<label for="codePostal">Code Postal : </label> 
+			<input type="text" id="codePostal" name="codePostal" autofocus required>
+			<label for="ville">Ville : </label> 
+			<input type="text" id="ville" name="ville" autofocus required> 
+			<br> <br> 
+			<label for="motDePasse">Mot de passe : </label> 
+			<input type="password" id="motDePasse" name="motDePasse" autofocus required> 
+			<label for="confirmation">Confirmation : </label> 
+			<input type="password"id="confirmation" name="confirmation" autofocus required> 
+			<span class="erreur">${erreurs['mot de passe']}</span> 
+			<br> <br>
 		</center>
 
 		<center>
