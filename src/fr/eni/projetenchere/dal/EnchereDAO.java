@@ -42,7 +42,7 @@ public interface EnchereDAO {
 	 * @param newUtilisateur
 	 * @return newUtilisateur avec un noUtilisateur
 	 */
-	void insertUtilisateur(Utilisateur newUtilisateur);
+	Utilisateur insertUtilisateur(Utilisateur newUtilisateur);
 
 
 	/**
@@ -51,6 +51,13 @@ public interface EnchereDAO {
 	 * @return listeEncheresByNom
 	 */
 	List<Enchere> selectEnchereByArticle(String nomArticle);
+
+	/**
+	 * sélectionne l'utilisateur à partir de son pseudo
+	 * @param pseudo
+	 * @return utilisateur
+	 */
+	Utilisateur selectUtilisateurByPseudo(String pseudo);
 
 	
 
