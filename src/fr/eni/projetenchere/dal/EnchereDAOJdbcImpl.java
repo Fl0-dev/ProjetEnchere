@@ -108,7 +108,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 		// requête SQL
 		final String SELECT_ALL_ENCHERE = "select a.date_fin_encheres, montant_enchere, a.nom_article, u.pseudo from ENCHERES as e "
-				+ "inner join UTILISATEURS as u on e.no_utilisateur = u.no_utilisateur "
+				+ "inner join UTILISATEURS as u on a.no_utilisateur = u.no_utilisateur "
 				+ "inner join ARTICLES_VENDUS as a on a.no_article= e.no_article "
 				+ "where (date_debut_encheres < GETDATE() and date_fin_encheres > GETDATE())"
 				+ "order by date_enchere desc;";
@@ -156,7 +156,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 		// requête SQL
 		final String SELECT_ALL_ENCHERE_BY_NOM = "select a.date_fin_encheres, montant_enchere, a.nom_article, u.pseudo from ENCHERES as e "
-				+ "inner join UTILISATEURS as u on e.no_utilisateur = u.no_utilisateur "
+				+ "inner join UTILISATEURS as u on a.no_utilisateur = u.no_utilisateur "
 				+ "inner join ARTICLES_VENDUS as a on a.no_article= e.no_article "
 				+ "where a.nom_article like ? and (date_debut_encheres < GETDATE() and date_fin_encheres > GETDATE())"
 				+ "order by date_enchere desc;";
