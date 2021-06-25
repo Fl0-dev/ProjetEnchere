@@ -64,9 +64,9 @@
 	        
 	        	<ul class="carte-enchere">
 	        	<li>${enchere.articleVendu.nomArticle }</li>
-	        	<li>Prix : ${enchere.montant_enchere } points par ${enchere.utilisateur.pseudo }</li>
+	        	<li>Prix : ${enchere.montant_enchere } points</li>
 	        	<li>Date de fin de l'enchère : ${enchere.articleVendu.dateFinEncheres }</li>
-	        	<li>Vendeur : ${enchere.articleVendu.utilisateur.pseudo }</li>
+	        	<li>Vendeur : ${enchere.utilisateur.pseudo  }</li>
 	        	</ul>
 	        	
         	</c:forEach>
