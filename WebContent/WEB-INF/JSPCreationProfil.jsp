@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,30 +18,30 @@
 		<center>
 
 			<label for="pseudo">Pseudo : </label> 
-			<input type="text" id="pseudo"name="pseudo" autofocus required> 
+			<input type="text" id="pseudo"name="pseudo" value="<c:out value="${param.pseudo }"/>" autofocus required> 
 			<span class="erreur">${MapErreurs['pseudo']}</span> 
 			 <br> <br> 
 			<label for="nom">Nom : </label> 
-			<input type="text" id="nom" name="nom" autofocus required>
+			<input type="text" id="nom" name="nom" value="<c:out value="${param.nom }"/>" autofocus required>
 			<br> <br> 
 			<label for="prenom">Prénom : </label> 
-			<input type="text" id="prenom" name="prenom" autofocus required> 
+			<input type="text" id="prenom" name="prenom" value="<c:out value="${param.prenom }"/>" autofocus required> 
 			 <br><br> 
 			<label for="email">Email : </label> 
-			<input type="mail" id="email" name="email" autofocus required>
+			<input type="mail" id="email" name="email" value="<c:out value="${param.email }"/>" autofocus required>
 			<span class="erreur">${MapErreurs['email']}</span> 
 			<br> <br> 
 			<label for="telephone">Téléphone : </label> 
-			<input type="tel" id="telephone" name="telephone"> 
+			<input type="tel" id="telephone" name="telephone" value="<c:out value="${param.telephone }"/>"> 
 			 <br><br> 
 			<label for="rue">Rue : </label> 
-			<input type="text" id="rue" name="rue" autofocus required>
+			<input type="text" id="rue" name="rue" value="<c:out value="${param.rue }"/>" autofocus required>
 			<br> <br> 
 			<label for="codePostal">Code Postal : </label> 
-			<input type="text" id="codePostal" name="codePostal" autofocus required>
+			<input type="text" id="codePostal" name="codePostal" value="<c:out value="${param.codePostal }"/>" autofocus required>
 			 <br><br> 
 			<label for="ville">Ville : </label> 
-			<input type="text" id="ville" name="ville" autofocus required> 
+			<input type="text" id="ville" name="ville" value="<c:out value="${param.ville }"/>" autofocus required> 
 			<br> <br> 
 			<label for="motDePasse">Mot de passe : </label> 
 			<input type="password" id="motDePasse" name="motDePasse" autofocus required> 
@@ -55,7 +56,7 @@
 			<button type="submit">Créer</button>
 			<br>
 			<br>
-			<p>${resultat}</p>
+			<p>message : ${resultat}</p>
 		</center>
 	</form>
 	<center>

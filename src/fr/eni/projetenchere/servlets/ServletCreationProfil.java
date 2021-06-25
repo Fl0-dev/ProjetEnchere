@@ -79,7 +79,8 @@ public class ServletCreationProfil extends HttpServlet {
             resultat = "Échec de l'inscription";
             
         }
-        request.setAttribute("résultat", resultat);
+       System.out.println(resultat);
+        request.setAttribute("resultat", resultat);
         request.setAttribute("MapErreurs", MapErreurs);
 		
        
