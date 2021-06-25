@@ -155,6 +155,21 @@ public class EnchereManager {
 			}
 		}
 	}
+	
+	
+	/**
+	 * permet de vérifier si le champ est vide si l'utilisateur 
+	 * fait sauter les balises html
+	 * @param test
+	 * @throws Exception
+	 */
+	public void validationChamp (String test) throws Exception {
+		if (test == null || test.trim().length() != 0) {
+			throw new Exception("Le champ ne peut être vide");
+		}
+	}
+	
+	
 
 	/**
 	 * permet de vérifier si le pseudo est valide

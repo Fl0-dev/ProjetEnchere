@@ -45,29 +45,36 @@ public class ServletCreationProfil extends HttpServlet {
 		String resultat;
         Map<String, String> MapErreurs = new HashMap<String, String>();
         
+        //Validation pour éviter les champs vides
+        try {
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 
-        /* Validation du champ email. */
+        //Validation du champ email
         try {
            EnchereManager.getInstance().validationEmail( email );
         } catch ( Exception e ) {
         	MapErreurs.put( "email", e.getMessage() );
         }
 
-        /* Validation des champs mot de passe et confirmation. */
+        //Validation des champs mot de passe et confirmation
         try {
         	EnchereManager.getInstance().validationMotsDePasse( motDePasse, confirmation );
         } catch ( Exception e ) {
         	MapErreurs.put( "motDePasse", e.getMessage() );
         }
-        /* Validation du champ nom. */
+        //Validation du champ pseudo
        try {
         	EnchereManager.getInstance().validationPseudo( pseudo );
         } catch ( Exception e ) {
        	MapErreurs.put( "pseudo", e.getMessage() );        
        	}
 
-       /* Initialisation du résultat global de la validation. */
+       //Initialisation du résultat global de la validation
        if ( MapErreurs.isEmpty() ) {
+    	   //insertion des infos
     	   Utilisateur newUtilisateur = EnchereManager.getInstance().inserNewtUtilisateur(pseudo,nom,prenom,email,telephone,rue,
    				codePostal,ville,motDePasse);
     		
