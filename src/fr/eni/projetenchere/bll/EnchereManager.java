@@ -8,8 +8,9 @@ import fr.eni.projetenchere.dal.DAOFactory;
 import fr.eni.projetenchere.dal.EnchereDAO;
 
 /**
- * Classe de la BLL contenant les méthodes
- * utilisées en Vue et utilisant les méthodes de la DAL
+ * Classe de la BLL contenant les méthodes utilisées en Vue et utilisant les
+ * méthodes de la DAL
+ * 
  * @author Florian
  * @version 1.0
  * @date 22/06/21
@@ -128,7 +129,7 @@ public class EnchereManager {
 	 */
 	public Utilisateur inserNewtUtilisateur(String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String motDePasse) {
-		Utilisateur newUtilisateur= new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville,
+		Utilisateur newUtilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville,
 				motDePasse);
 		enchereDAO.insertUtilisateur(newUtilisateur);
 
@@ -136,7 +137,8 @@ public class EnchereManager {
 	}
 
 	/**
-	 *  si l'email est en DB
+	 * si l'email est en DB
+	 * 
 	 * @param email
 	 * @throws Exception
 	 */
@@ -170,14 +172,15 @@ public class EnchereManager {
 			if (!pseudo.matches("[a-zA-z0-9]*")) {
 				throw new Exception("Le pseudo ne doit contenir que des caractères alphanumériques");
 			}
-		}
-		
-		// compare le pseudo aux pseudos de la database
-		for (Utilisateur utilisateur : listPseudoEmail) {
-			if (pseudo.equals(utilisateur.getPseudo())) {
-				throw new Exception("Le pseudo existe déjà");
+			System.out.println("coucou1");
+			// compare le pseudo aux pseudos de la database
+			for (Utilisateur utilisateur : listPseudoEmail) {
+				System.out.println(utilisateur.getPseudo());
+				if (pseudo.equals(utilisateur.getPseudo())) {
+					throw new Exception("Le pseudo existe déjà");
+				}
+				
 			}
-			break;
 		}
 	}
 
@@ -199,25 +202,20 @@ public class EnchereManager {
 		}
 	}
 
-	
-	
-	
 	/**
 	 * récupère les données utilisateur à partir de son pseudo
+	 * 
 	 * @param pseudo
 	 * @return utilisateur
 	 */
 	public Utilisateur selectUtilisateurByPseudo(String pseudo) {
-		
+
 		Utilisateur utilisateur;
-		
+
 		utilisateur = enchereDAO.selectUtilisateurByPseudo(pseudo);
-		
+
 		return utilisateur;
-		//TODO : Gestion exception
+		// TODO : Gestion exception
 	}
-	
-	
-	
-	
+
 }
