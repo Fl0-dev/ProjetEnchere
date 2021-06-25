@@ -45,9 +45,7 @@ public class ServletCreationProfil extends HttpServlet {
 		String resultat;
         Map<String, String> MapErreurs = new HashMap<String, String>();
         
-//        Utilisateur newUtilisateur = EnchereManager.getInstance().inserNewtUtilisateur(pseudo,nom,prenom,email,telephone,rue,
-//				codePostal,ville,motDePasse);
-//    	System.out.println(newUtilisateur);
+
         /* Validation du champ email. */
         try {
            EnchereManager.getInstance().validationEmail( email );
