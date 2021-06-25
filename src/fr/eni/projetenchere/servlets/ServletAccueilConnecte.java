@@ -15,32 +15,44 @@ import javax.websocket.Session;
 import fr.eni.projetenchere.bll.EnchereManager;
 import fr.eni.projetenchere.bo.Categorie;
 import fr.eni.projetenchere.bo.Enchere;
+import fr.eni.projetenchere.bo.Utilisateur;
 
 /**
  * Servlet implementation class ServletAccueilConnecte
  */
-@WebServlet("/ServletAccueilConnecte")
+@WebServlet(urlPatterns = {"/ServletAccueilConnecte", "/deconnexion"})
 public class ServletAccueilConnecte extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-   
-    public ServletAccueilConnecte() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		session.invalidate();
-		String messageDeconnexion = "Vous êtes bien déconnecté";
-		request.setAttribute("messageDeconnexion", messageDeconnexion);
-		RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueil");
-		rd.forward(request, response);
+	public ServletAccueilConnecte() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		// on regarde quelle URL a été utilisée pour accéder à la servlet
+		String urlUtilisee = request.getServletPath();
+		// si c'est l'url /déconnexion, on ferme la session et retour vers page
+		// d'accueil non connecté
+		if (urlUtilisee.equals("/deconnexion")) {
+			HttpSession session = request.getSession();
+			session.invalidate();
+			String messageDeconnexion = "Vous êtes bien déconnecté";
+			request.setAttribute("messageDeconnexion", messageDeconnexion);
+			RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueil");
+			rd.forward(request, response);
+		}
+		
+		doPost(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		HttpSession session = request.getSession();
+		Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("utilisateurSession");
 		
 		// on récupère la liste des catégories présentes en base de données
 		List<Categorie> listeCategories = EnchereManager.getInstance().selectCategorie();
@@ -49,13 +61,13 @@ public class ServletAccueilConnecte extends HttpServlet {
 
 		// on récupère les enchères en cours
 		List<Enchere> listeEncheresEnCours = EnchereManager.getInstance().selectAllEnchere();
-		
+
 		// on envoie ça dans la requête
 		request.setAttribute("listeEncheresEnCours", listeEncheresEnCours);
 		System.out.println(listeEncheresEnCours);
-		
+
 		// renvoie vers la JSP après traitement
-		
+
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSPAccueilConnecte.jsp");
 		rd.forward(request, response);
 	}
