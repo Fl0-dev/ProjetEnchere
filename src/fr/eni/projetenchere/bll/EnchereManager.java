@@ -167,7 +167,7 @@ public class EnchereManager {
 		// si le pseudo n'est pas null et pas vide
 		if (pseudo != null && pseudo.trim().length() != 0) {
 			// si il ne contient que des caractères alphanumériques
-			if (!pseudo.matches("#^[:alnum:]$#")) {
+			if (pseudo.matches("#^[:alnum:]$#")) {
 				throw new Exception("Le pseudo ne doit contenir que des caractères alphanumériques");
 			}
 		}
