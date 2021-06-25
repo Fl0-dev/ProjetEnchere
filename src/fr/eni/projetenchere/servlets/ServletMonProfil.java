@@ -29,12 +29,10 @@ public class ServletMonProfil extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		// TODO: récupérer un objet utilisateur à partir de la session
+		// récupère l'utilisateur de la session
 		HttpSession session = request.getSession();
 		Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("utilisateurSession");
 		
-		System.out.println(utilisateurSession);
 		
 		// renvoie vers la JSP après traitement
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSPMonProfil.jsp");

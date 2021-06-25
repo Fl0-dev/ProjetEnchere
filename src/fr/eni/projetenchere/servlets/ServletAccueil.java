@@ -49,7 +49,6 @@ public class ServletAccueil extends HttpServlet {
 		// on récupère la liste des catégories présentes en base de données
 		List<Categorie> listeCategories = EnchereManager.getInstance().selectCategorie();
 		request.setAttribute("listeCategories", listeCategories);
-		System.out.println(listeCategories);
 		
 		// je récupère les résultats de la recherche
 		String contenuRecherche = request.getParameter("contenuRecherche").trim();
