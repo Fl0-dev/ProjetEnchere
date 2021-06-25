@@ -161,7 +161,7 @@ public class EnchereManager {
 	 * @throws Exception
 	 */
 	public void validationChamp (String test) throws Exception {
-		if (test == null || test.trim().length() != 0) {
+		if (test == null || test.trim().length() == 0) {
 			throw new Exception("Les champs marqués d'un * sont obligatoires");
 		}
 	}
