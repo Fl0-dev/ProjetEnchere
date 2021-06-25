@@ -75,10 +75,10 @@ public class ServletIdentification extends HttpServlet {
 			HttpSession session = request.getSession();
 
 			session.setAttribute("utilisateurSession", utilisateurSession);
+			
+			response.sendRedirect("ServletAccueilConnecte");
 
-			RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueilConnecte");
-
-			rd.forward(request, response);
+			
 		} else {
 			String messageErreur = "L'identifiant ou le mot de passe est invalide";
 			request.setAttribute("messageErreur", messageErreur);
