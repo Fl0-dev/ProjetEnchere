@@ -71,10 +71,17 @@ public class ServletCreationProfil extends HttpServlet {
     	   Utilisateur newUtilisateur = EnchereManager.getInstance().inserNewtUtilisateur(pseudo,nom,prenom,email,telephone,rue,
    				codePostal,ville,motDePasse);
     		
-       	System.out.println(newUtilisateur);
+       	//récupération de tous les attributs de newUtilisateur par son pseudo
+    	Utilisateur utilisateurSession = EnchereManager.getInstance().selectUtilisateurByPseudo(pseudo);
+    	//ouverture d'une session et mise en attribut du nouvel utilisateur
         HttpSession session = request.getSession();
-        session.setAttribute("UtilisateurSession", newUtilisateur);
-    	resultat = "Succès de l'inscription";   
+        session.setAttribute("UtilisateurSession", utilisateurSession);
+        
+    	resultat = "Succès de l'inscription.";  
+    	request.setAttribute("resultat", resultat);
+    	RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueilConnecte");
+		rd.forward(request, response);
+    	
         } else {
             resultat = "Échec de l'inscription";
             

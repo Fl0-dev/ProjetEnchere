@@ -16,11 +16,12 @@ import fr.eni.projetenchere.bll.EnchereManager;
 import fr.eni.projetenchere.bo.Categorie;
 import fr.eni.projetenchere.bo.Enchere;
 import fr.eni.projetenchere.bo.Utilisateur;
+import javafx.geometry.Side;
 
 /**
  * Servlet implementation class ServletAccueilConnecte
  */
-@WebServlet(urlPatterns = {"/ServletAccueilConnecte", "/deconnexion"})
+@WebServlet(urlPatterns = {"/ServletAccueilConnecte", "/deconnexion","/AccueilNewProfil"})
 public class ServletAccueilConnecte extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -43,8 +44,9 @@ public class ServletAccueilConnecte extends HttpServlet {
 			request.setAttribute("messageDeconnexion", messageDeconnexion);
 			RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueil");
 			rd.forward(request, response);
-		}
+		//Si c'est l'url /AccueilNewProfil, on met un message de bienvenue dans la JSP
 		
+		}
 		doPost(request, response);
 	}
 

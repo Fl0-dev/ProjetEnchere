@@ -11,7 +11,7 @@
 
 <header>
 <h1>ENI-Enchères</h1>
-
+<p>${resultat} Bienvenue!</p>
 <nav>
 <a href="${pageContext.request.contextPath }/ServletNouvelleVente">Vendre un articles</a>
 <a href="${pageContext.request.contextPath }/ServletMonProfil">Mon profil</a>

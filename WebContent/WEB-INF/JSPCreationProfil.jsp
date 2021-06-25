@@ -22,32 +22,32 @@
 			<span class="erreur">${MapErreurs['pseudo']}</span> 
 			 <br> <br> 
 			<label for="nom">Nom : </label> 
-			<input type="text" id="nom" name="nom" value="<c:out value="${param.nom }"/>" autofocus required>
+			<input type="text" id="nom" name="nom" value="<c:out value="${param.nom }"/>" required>
 			<br> <br> 
 			<label for="prenom">Prénom : </label> 
-			<input type="text" id="prenom" name="prenom" value="<c:out value="${param.prenom }"/>" autofocus required> 
+			<input type="text" id="prenom" name="prenom" value="<c:out value="${param.prenom }"/>"  required> 
 			 <br><br> 
 			<label for="email">Email : </label> 
-			<input type="mail" id="email" name="email" value="<c:out value="${param.email }"/>" autofocus required>
-			<span class="erreur">${MapErreurs['email']}</span> 
+			<input type="mail" id="email" name="email" value="<c:out value="${param.email }"/>"  required>
+			<span class="erreur">${MapErreurs['email']}</span>
 			<br> <br> 
 			<label for="telephone">Téléphone : </label> 
 			<input type="tel" id="telephone" name="telephone" value="<c:out value="${param.telephone }"/>"> 
 			 <br><br> 
 			<label for="rue">Rue : </label> 
-			<input type="text" id="rue" name="rue" value="<c:out value="${param.rue }"/>" autofocus required>
+			<input type="text" id="rue" name="rue" value="<c:out value="${param.rue }"/>"  required>
 			<br> <br> 
 			<label for="codePostal">Code Postal : </label> 
-			<input type="text" id="codePostal" name="codePostal" value="<c:out value="${param.codePostal }"/>" autofocus required>
+			<input type="text" id="codePostal" name="codePostal" value="<c:out value="${param.codePostal }"/>"  required>
 			 <br><br> 
 			<label for="ville">Ville : </label> 
-			<input type="text" id="ville" name="ville" value="<c:out value="${param.ville }"/>" autofocus required> 
+			<input type="text" id="ville" name="ville" value="<c:out value="${param.ville }"/>"  required> 
 			<br> <br> 
 			<label for="motDePasse">Mot de passe : </label> 
-			<input type="password" id="motDePasse" name="motDePasse" autofocus required> 
+			<input type="password" id="motDePasse" name="motDePasse"  required> 
 			 <br><br> 
 			<label for="confirmation">Confirmation : </label> 
-			<input type="password"id="confirmation" name="confirmation" autofocus required> 
+			<input type="password"id="confirmation" name="confirmation"  required> 
 			<span class="erreur">${MapErreurs['motDePasse']}</span> 
 			<br> <br>
 		</center>
@@ -56,7 +56,7 @@
 			<button type="submit">Créer</button>
 			<br>
 			<br>
-			<p>message : ${resultat}</p>
+			<p>${resultat}</p>
 		</center>
 	</form>
 	<center>
