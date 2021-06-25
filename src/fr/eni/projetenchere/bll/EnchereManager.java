@@ -152,7 +152,6 @@ public class EnchereManager {
 				if (email.equals(utilisateur.getEmail())) {
 					throw new Exception("L'email existe déjà");
 				}
-				break;
 			}
 		}
 	}
@@ -172,10 +171,10 @@ public class EnchereManager {
 			if (!pseudo.matches("[a-zA-z0-9]*")) {
 				throw new Exception("Le pseudo ne doit contenir que des caractères alphanumériques");
 			}
-			System.out.println("coucou1");
+			
 			// compare le pseudo aux pseudos de la database
 			for (Utilisateur utilisateur : listPseudoEmail) {
-				System.out.println(utilisateur.getPseudo());
+				
 				if (pseudo.equals(utilisateur.getPseudo())) {
 					throw new Exception("Le pseudo existe déjà");
 				}
