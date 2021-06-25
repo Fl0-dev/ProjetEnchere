@@ -47,7 +47,7 @@
 			 <br><br> 
 			<label for="confirmation">Confirmation : </label> 
 			<input type="password"id="confirmation" name="confirmation" autofocus required> 
-			<span class="erreur">${MapErreurs['mot de passe']}</span> 
+			<span class="erreur">${MapErreurs['motDePasse']}</span> 
 			<br> <br>
 		</center>
 
