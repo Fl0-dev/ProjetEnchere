@@ -62,7 +62,7 @@
     </tbody>
 </table>
 
-<a href="">Modifier</a>
+<a href="${pageContext.request.contextPath }/ServletModifProfil">Modifier</a>
 
 </main>
 
