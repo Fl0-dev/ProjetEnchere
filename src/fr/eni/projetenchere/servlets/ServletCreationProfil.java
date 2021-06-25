@@ -47,9 +47,17 @@ public class ServletCreationProfil extends HttpServlet {
         
         //Validation pour éviter les champs vides
         try {
-			
+        	EnchereManager.getInstance().validationChamp(pseudo);
+			EnchereManager.getInstance().validationChamp(nom);
+			EnchereManager.getInstance().validationChamp(prenom);
+			EnchereManager.getInstance().validationChamp(email);
+			EnchereManager.getInstance().validationChamp(rue);
+			EnchereManager.getInstance().validationChamp(codePostal);
+			EnchereManager.getInstance().validationChamp(ville);
+			EnchereManager.getInstance().validationChamp(motDePasse);
+			EnchereManager.getInstance().validationChamp(confirmation);
 		} catch (Exception e) {
-			// TODO: handle exception
+			MapErreurs.put( "champ", e.getMessage() );
 		}
 
         //Validation du champ email

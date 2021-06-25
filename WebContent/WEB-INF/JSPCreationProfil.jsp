@@ -17,42 +17,44 @@
 
 		<center>
 
-			<label for="pseudo">Pseudo : </label> 
-			<input type="text" id="pseudo"name="pseudo" value="<c:out value="${param.pseudo }"/>" autofocus required> 
-			<span class="erreur">${MapErreurs['pseudo']}</span> 
+			<label for="pseudo">Pseudo <span>*</span> </label> 
+			<input type="text" id="pseudo"name="pseudo" value="<c:out value="${param.pseudo }"/>" autofocus > 
+			<span>${MapErreurs['pseudo']}</span> 
 			 <br> <br> 
-			<label for="nom">Nom : </label> 
-			<input type="text" id="nom" name="nom" value="<c:out value="${param.nom }"/>" required>
+			<label for="nom">Nom <span>*</span> </label> 
+			<input type="text" id="nom" name="nom" value="<c:out value="${param.nom }"/>" >
 			<br> <br> 
-			<label for="prenom">Prénom : </label> 
-			<input type="text" id="prenom" name="prenom" value="<c:out value="${param.prenom }"/>"  required> 
+			<label for="prenom">Prénom <span>*</span> </label> 
+			<input type="text" id="prenom" name="prenom" value="<c:out value="${param.prenom }"/>"  > 
 			 <br><br> 
-			<label for="email">Email : </label> 
-			<input type="mail" id="email" name="email" value="<c:out value="${param.email }"/>"  required>
-			<span class="erreur">${MapErreurs['email']}</span>
+			<label for="email">Email <span>*</span> </label> 
+			<input type="mail" id="email" name="email" value="<c:out value="${param.email }"/>"  >
+			<span>${MapErreurs['email']}</span>
 			<br> <br> 
 			<label for="telephone">Téléphone : </label> 
 			<input type="tel" id="telephone" name="telephone" value="<c:out value="${param.telephone }"/>"> 
 			 <br><br> 
-			<label for="rue">Rue : </label> 
-			<input type="text" id="rue" name="rue" value="<c:out value="${param.rue }"/>"  required>
+			<label for="rue">Rue <span>*</span> </label> 
+			<input type="text" id="rue" name="rue" value="<c:out value="${param.rue }"/>"  >
 			<br> <br> 
-			<label for="codePostal">Code Postal : </label> 
-			<input type="text" id="codePostal" name="codePostal" value="<c:out value="${param.codePostal }"/>"  required>
+			<label for="codePostal">Code Postal <span>*</span> </label> 
+			<input type="text" id="codePostal" name="codePostal" value="<c:out value="${param.codePostal }"/>"  >
 			 <br><br> 
-			<label for="ville">Ville : </label> 
-			<input type="text" id="ville" name="ville" value="<c:out value="${param.ville }"/>"  required> 
+			<label for="ville">Ville <span>*</span> </label> 
+			<input type="text" id="ville" name="ville" value="<c:out value="${param.ville }"/>"  > 
 			<br> <br> 
-			<label for="motDePasse">Mot de passe : </label> 
-			<input type="password" id="motDePasse" name="motDePasse"  required> 
+			<label for="motDePasse">Mot de passe <span>*</span> </label> 
+			<input type="password" id="motDePasse" name="motDePasse"  > 
 			 <br><br> 
-			<label for="confirmation">Confirmation : </label> 
-			<input type="password"id="confirmation" name="confirmation"  required> 
-			<span class="erreur">${MapErreurs['motDePasse']}</span> 
+			<label for="confirmation">Confirmation <span>*</span> </label> 
+			<input type="password"id="confirmation" name="confirmation"  > 
+			<span>${MapErreurs['motDePasse']}</span> 
 			<br> <br>
 		</center>
 
 		<center>
+			<span>${MapErreurs['champ']}</span> 
+			<br><br>
 			<button type="submit">Créer</button>
 			<br>
 			<br>

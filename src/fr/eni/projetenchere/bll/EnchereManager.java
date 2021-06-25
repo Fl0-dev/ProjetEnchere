@@ -145,16 +145,13 @@ public class EnchereManager {
 	public void validationEmail(String email) throws Exception {
 		// appel du manager pour récupérer une liste de tous les emails en DB
 		List<Utilisateur> listPseudoEmail = EnchereManager.getInstance().selectConnexion();
-		// si l'email n'est pas null et pas vide
-		if (email != null && email.trim().length() != 0) {
-			// compare dans la DB
 			for (Utilisateur utilisateur : listPseudoEmail) {
 				if (email.equals(utilisateur.getEmail())) {
 					throw new Exception("L'email existe déjà");
 				}
 			}
 		}
-	}
+	
 	
 	
 	/**
@@ -165,7 +162,7 @@ public class EnchereManager {
 	 */
 	public void validationChamp (String test) throws Exception {
 		if (test == null || test.trim().length() != 0) {
-			throw new Exception("Le champ ne peut être vide");
+			throw new Exception("Les champs marqués d'un * sont obligatoires");
 		}
 	}
 	
@@ -181,8 +178,7 @@ public class EnchereManager {
 		// appel du manager pour récupérer une liste de tous les pseudo en DB
 		List<Utilisateur> listPseudoEmail = EnchereManager.getInstance().selectConnexion();
 		// si le pseudo n'est pas null et pas vide
-		if (pseudo != null && pseudo.trim().length() != 0) {
-			// si il ne contient que des caractères alphanumériques
+		
 			if (!pseudo.matches("[a-zA-z0-9]*")) {
 				throw new Exception("Le pseudo ne doit contenir que des caractères alphanumériques");
 			}
@@ -196,7 +192,7 @@ public class EnchereManager {
 				
 			}
 		}
-	}
+	
 
 	/**
 	 * Valide le mot de passe
@@ -206,15 +202,12 @@ public class EnchereManager {
 	 * @throws Exception
 	 */
 	public void validationMotsDePasse(String motDePasse, String confirmation) throws Exception {
-		if (motDePasse != null && motDePasse.trim().length() != 0 && confirmation != null
-				&& confirmation.trim().length() != 0) {
+		
 			if (!motDePasse.equals(confirmation)) {
 				throw new Exception("Les mots de passe entrés sont différents, merci de les saisir à nouveau.");
 			}
-		} else {
-			throw new Exception("Merci de saisir et confirmer votre mot de passe.");
-		}
 	}
+	
 
 	/**
 	 * récupère les données utilisateur à partir de son pseudo
