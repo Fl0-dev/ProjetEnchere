@@ -55,7 +55,7 @@
 			<button type="submit">Créer</button>
 			<br>
 			<br>
-			<p class="${empty MapErreurs ? 'succes' : 'erreur'}">${resultat}</p>
+			<p>${resultat}</p>
 		</center>
 	</form>
 	<center>
