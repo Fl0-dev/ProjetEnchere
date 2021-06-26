@@ -36,6 +36,11 @@ public class EnchereManager {
 		enchereDAO = DAOFactory.getEnchereDAO();
 	}
 
+	
+	
+	
+	
+	
 	/**
 	 * récupère toutes les enchères en cours dans
 	 * 
@@ -208,7 +213,6 @@ public class EnchereManager {
 			}
 	}
 	
-
 	/**
 	 * récupère les données utilisateur à partir de son pseudo
 	 * 
