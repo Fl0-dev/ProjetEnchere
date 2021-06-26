@@ -16,7 +16,7 @@
 		<h1>Mon Profil</h1>
 	</center>
 	<form
-		action="${pageContext.request.contextPath }/ServletCreationProfil"
+		action="${pageContext.request.contextPath }/ServletModifProfil"
 		method="POST">
 
 		<center>
@@ -48,7 +48,8 @@
 			<input type="text" id="ville" name="ville" value="<c:out value="${utilisateurSession.ville }"/>"  > 
 			<br> <br> 
 			<label for="motDePasse">Mot de passe actuel <span>*</span> </label> 
-			<input type="password" id="motDePasse" name="motDePasse"  > 
+			<input type="password" id="motDePasse" name="motDePasse" value="<c:out value="${utilisateurSession.motDePasse }"/>" > 
+			<span>${MapErreurs['VerifMdp']}</span> 
 			 <br><br> 
 			 <label for="motDePasseNew">Nouveau mot de passe <span>*</span> </label> 
 			<input type="password" id="motDePasseNew" name="motDePasseNew"  > 

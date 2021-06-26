@@ -229,4 +229,34 @@ public class EnchereManager {
 		// TODO : Gestion exception
 	}
 
+
+
+
+
+
+	public void modifUtilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
+			String codePostal, String ville, String motDePasse) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+
+	/**
+	 * Vérifie si le mot de passe correspond au pseudo
+	 * @param pseudo
+	 * @param motDePasse
+	 * @throws Exception
+	 */
+	public void verifMdp(String pseudo, String motDePasse)  throws Exception{
+		Utilisateur utilisateur;
+		utilisateur = selectUtilisateurByPseudo(pseudo);
+		if (utilisateur.getMotDePasse()!=motDePasse) {
+			throw new Exception("Le mot de passe de "+pseudo+" est incorrect");
+		}
+		
+	}
+
 }
