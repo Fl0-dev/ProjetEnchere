@@ -21,7 +21,7 @@ import javafx.geometry.Side;
 /**
  * Servlet implementation class ServletAccueilConnecte
  */
-@WebServlet(urlPatterns = {"/ServletAccueilConnecte", "/deconnexion","/AccueilNewProfil"})
+@WebServlet(urlPatterns = { "/ServletAccueilConnecte", "/deconnexion", "/AccueilNewProfil", "/recherche" })
 public class ServletAccueilConnecte extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -32,7 +32,7 @@ public class ServletAccueilConnecte extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		// on regarde quelle URL a été utilisée pour accéder à la servlet
 		String urlUtilisee = request.getServletPath();
 		// si c'est l'url /déconnexion, on ferme la session et retour vers page
@@ -44,8 +44,8 @@ public class ServletAccueilConnecte extends HttpServlet {
 			request.setAttribute("messageDeconnexion", messageDeconnexion);
 			RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueil");
 			rd.forward(request, response);
-		//Si c'est l'url /AccueilNewProfil, on met un message de bienvenue dans la JSP
-		
+			// Si c'est l'url /AccueilNewProfil, on met un message de bienvenue dans la JSP
+
 		}
 		doPost(request, response);
 	}
@@ -55,7 +55,7 @@ public class ServletAccueilConnecte extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("utilisateurSession");
-		
+
 		// on récupère la liste des catégories présentes en base de données
 		List<Categorie> listeCategories = EnchereManager.getInstance().selectCategorie();
 		request.setAttribute("listeCategories", listeCategories);
@@ -68,10 +68,39 @@ public class ServletAccueilConnecte extends HttpServlet {
 		request.setAttribute("listeEncheresEnCours", listeEncheresEnCours);
 		System.out.println(listeEncheresEnCours);
 
-		// renvoie vers la JSP après traitement
+		// on regarde quelle URL a été utilisée pour accéder à la servlet
+		String urlUtilisee = request.getServletPath();
+		// si c'est l'url /recherche, on récupère les infos saisies par l'utilisateur
 
+		if (urlUtilisee.equals("/recherche")) {
+			// on récupère la liste des catégories présentes en base de données
+			List<Categorie> listeCategoriesConnecte = EnchereManager.getInstance().selectCategorie();
+			request.setAttribute("listeCategories", listeCategoriesConnecte);
+
+			// je récupère les résultats de la recherche
+			String contenuRecherche = request.getParameter("contenuRecherche").trim();
+			int categorie = Integer.valueOf(request.getParameter("categorie"));
+
+			List<Enchere> listeEncheresEnCoursConnecte;
+
+			// si l'option choisit est "toutes", on recherche uniquement par nom d'article
+			if (categorie == 0) {
+				listeEncheresEnCoursConnecte = EnchereManager.getInstance().selectEnchereByArticle(contenuRecherche);
+			} else {
+				// sinon, afficher résultats de la recherche par catégorie ET nom article
+				listeEncheresEnCoursConnecte = EnchereManager.getInstance().selectEnchereByCatAndArt(contenuRecherche,
+						categorie);
+			}
+
+			request.setAttribute("listeEncheresEnCours", listeEncheresEnCoursConnecte);
+
+			
+
+			
+
+		}
+		// renvoie vers la JSP après traitement
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSPAccueilConnecte.jsp");
 		rd.forward(request, response);
 	}
-
 }

@@ -27,7 +27,7 @@
 
 			<div>
 				<form
-					action="${pageContext.request.contextPath }/ServletAccueilConnecte"
+					action="${pageContext.request.contextPath }/recherche"
 					method="post" class="recherche">
 					<div>
 						<!--  TODO: Implémenter la recherche filtrée -->
@@ -52,8 +52,8 @@
 					
 					<div>
 		
-			<input type="radio" name="choixAchatVente" value="achats"> <label>Mes
-				achats</label>
+			<input type="radio" name="choixAchatVente" value="achats"> 
+			<label>Mes achats</label>
 			<div>
 				<input type="checkbox" name="encheresOuvertes"
 					value="encheresOuvertes"> <label>Enchères ouvertes</label>
@@ -70,12 +70,12 @@
 					<label>Mes ventes</label>
 					<div>
 						<input type="checkbox" name="mesVentesEnCours"
-							value="mesVentesEnCours"> <label>Enchères
-							ouvertes</label> <br> <input type="checkbox"
-							name="ventesNonDebutees" value="ventesNonDebutees"> <label>Mes
-							enchères</label> <br> <input type="checkbox" name="ventesTerminees"
-							value="ventesTerminees"> <label>Mes enchères
-							remportées</label> <br>
+							value="mesVentesEnCours"> <label>Mes ventes en cours
+							</label> <br> <input type="checkbox"
+							name="ventesNonDebutees" value="ventesNonDebutees"> <label>Ventes non débutées
+							</label> <br>
+							<input type="checkbox" name="ventesTerminees"
+							value="ventesTerminees"> <label>Ventes terminées</label> <br>
 					</div>
 
 				
