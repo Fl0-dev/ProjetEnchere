@@ -46,7 +46,6 @@ public class ServletModifProfil extends HttpServlet {
 		//Appel de la session et de l'attribut utilisateurSession
 				HttpSession session = request.getSession();
 				Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("utilisateurSession");
-		
 		//récupération des données
 		String pseudo = request.getParameter("pseudo");
 		String nom = request.getParameter("nom");
@@ -64,7 +63,7 @@ public class ServletModifProfil extends HttpServlet {
         Map<String, String> MapErreurs = new HashMap<String, String>();
         
         //Vérifier si nouveau pseudo, qu'il n'existe pas en DB et sa taille
-        if (pseudo!=utilisateurSession.getPseudo()) {
+        if (!pseudo.equals(utilisateurSession.getPseudo())) {
         	try {
         		Verification.getInstance().validationChamp30(pseudo);
          	    Verification.getInstance().validationPseudo( pseudo );
@@ -88,7 +87,7 @@ public class ServletModifProfil extends HttpServlet {
          	}
         
       //Vérifier si nouveau email, qu'il n'existe pas en DB et sa taille
-        if (email !=utilisateurSession.getEmail()) {
+        if (!email.equals(utilisateurSession.getEmail())) {
         	try {
         		Verification.getInstance().validationChamp20(email);
             	Verification.getInstance().validationEmail( email );

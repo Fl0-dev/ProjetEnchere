@@ -151,7 +151,7 @@ public class Verification {
 		public void verifMdp(String pseudo, String motDePasse)  throws Exception{
 			Utilisateur utilisateur;
 			utilisateur = EnchereManager.getInstance().selectUtilisateurByPseudo(pseudo);
-			if (utilisateur.getMotDePasse()!=motDePasse) {
+			if (!utilisateur.getMotDePasse().equals(motDePasse)) {
 				throw new Exception("Le mot de passe de "+pseudo+" est incorrect");
 			}
 			
