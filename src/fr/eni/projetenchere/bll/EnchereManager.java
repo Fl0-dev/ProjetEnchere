@@ -37,10 +37,6 @@ public class EnchereManager {
 	}
 
 	
-	
-	
-	
-	
 	/**
 	 * récupère toutes les enchères en cours dans
 	 * 
@@ -142,78 +138,6 @@ public class EnchereManager {
 	}
 
 	/**
-	 * si l'email est en DB
-	 * 
-	 * @param email
-	 * @throws Exception
-	 */
-	public void validationEmail(String email) throws Exception {
-		// appel du manager pour récupérer une liste de tous les emails en DB
-		List<Utilisateur> listPseudoEmail = EnchereManager.getInstance().selectConnexion();
-			for (Utilisateur utilisateur : listPseudoEmail) {
-				if (email.equals(utilisateur.getEmail())) {
-					throw new Exception("L'email existe déjà");
-				}
-			}
-		}
-	
-	
-	
-	/**
-	 * permet de vérifier si le champ est vide si l'utilisateur 
-	 * fait sauter les balises html
-	 * @param test
-	 * @throws Exception
-	 */
-	public void validationChamp (String test) throws Exception {
-		if (test == null || test.trim().length() == 0) {
-			throw new Exception("Les champs marqués d'un * sont obligatoires");
-		}
-	}
-	
-	
-
-	/**
-	 * permet de vérifier si le pseudo est valide
-	 * 
-	 * @param pseudo
-	 * @throws Exception
-	 */
-	public void validationPseudo(String pseudo) throws Exception {
-		// appel du manager pour récupérer une liste de tous les pseudo en DB
-		List<Utilisateur> listPseudoEmail = EnchereManager.getInstance().selectConnexion();
-		// si le pseudo n'est pas null et pas vide
-		
-			if (!pseudo.matches("[a-zA-z0-9]*")) {
-				throw new Exception("Le pseudo ne doit contenir que des caractères alphanumériques");
-			}
-			
-			// compare le pseudo aux pseudos de la database
-			for (Utilisateur utilisateur : listPseudoEmail) {
-				
-				if (pseudo.equals(utilisateur.getPseudo())) {
-					throw new Exception("Le pseudo existe déjà");
-				}
-				
-			}
-		}
-	
-
-	/**
-	 * Valide le mot de passe
-	 * 
-	 * @param motDePasse
-	 * @param confirmation
-	 * @throws Exception
-	 */
-	public void validationMotsDePasse(String motDePasse, String confirmation) throws Exception {
-		
-			if (!motDePasse.equals(confirmation)) {
-				throw new Exception("Les mots de passe entrés sont différents, merci de les saisir à nouveau.");
-			}
-	}
-	
-	/**
 	 * récupère les données utilisateur à partir de son pseudo
 	 * 
 	 * @param pseudo
@@ -230,32 +154,9 @@ public class EnchereManager {
 	}
 
 
-
-
-
-
 	public void modifUtilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String codePostal, String ville, String motDePasse) {
 		// TODO Auto-generated method stub
-		
-	}
-
-
-
-
-
-	/**
-	 * Vérifie si le mot de passe correspond au pseudo
-	 * @param pseudo
-	 * @param motDePasse
-	 * @throws Exception
-	 */
-	public void verifMdp(String pseudo, String motDePasse)  throws Exception{
-		Utilisateur utilisateur;
-		utilisateur = selectUtilisateurByPseudo(pseudo);
-		if (utilisateur.getMotDePasse()!=motDePasse) {
-			throw new Exception("Le mot de passe de "+pseudo+" est incorrect");
-		}
 		
 	}
 
