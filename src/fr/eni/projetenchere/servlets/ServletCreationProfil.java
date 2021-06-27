@@ -12,7 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.el.util.Validation;
+
 import fr.eni.projetenchere.bll.EnchereManager;
+import fr.eni.projetenchere.bll.Verification;
 import fr.eni.projetenchere.bo.Utilisateur;
 
 
@@ -47,39 +50,40 @@ public class ServletCreationProfil extends HttpServlet {
         
         //Validation pour éviter les champs vides
         try {
-        	EnchereManager.getInstance().validationChamp(pseudo);
-			EnchereManager.getInstance().validationChamp(nom);
-			EnchereManager.getInstance().validationChamp(prenom);
-			EnchereManager.getInstance().validationChamp(email);
-			EnchereManager.getInstance().validationChamp(rue);
-			EnchereManager.getInstance().validationChamp(codePostal);
-			EnchereManager.getInstance().validationChamp(ville);
-			EnchereManager.getInstance().validationChamp(motDePasse);
-			EnchereManager.getInstance().validationChamp(confirmation);
+        	Verification.getInstance().validationChamp(pseudo);
+        	Verification.getInstance().validationChamp(nom);
+        	Verification.getInstance().validationChamp(prenom);
+        	Verification.getInstance().validationChamp(email);
+        	Verification.getInstance().validationChamp(rue);
+        	Verification.getInstance().validationChamp(codePostal);
+        	Verification.getInstance().validationChamp(ville);
+        	Verification.getInstance().validationChamp(motDePasse);
+        	Verification.getInstance().validationChamp(confirmation);
 		} catch (Exception e) {
 			MapErreurs.put( "champ", e.getMessage() );
 		}
 
+        //Validation du champ pseudo
+        try {
+     	   Verification.getInstance().validationPseudo( pseudo );
+         } catch ( Exception e ) {
+        	MapErreurs.put( "pseudo", e.getMessage() );        
+        	}
+        
         //Validation du champ email
         try {
-           EnchereManager.getInstance().validationEmail( email );
+           Verification.getInstance().validationEmail( email );
         } catch ( Exception e ) {
         	MapErreurs.put( "email", e.getMessage() );
         }
 
         //Validation des champs mot de passe et confirmation
         try {
-        	EnchereManager.getInstance().validationMotsDePasse( motDePasse, confirmation );
+        	Verification.getInstance().validationMotsDePasse( motDePasse, confirmation );
         } catch ( Exception e ) {
         	MapErreurs.put( "motDePasse", e.getMessage() );
         }
-        //Validation du champ pseudo
-       try {
-        	EnchereManager.getInstance().validationPseudo( pseudo );
-        } catch ( Exception e ) {
-       	MapErreurs.put( "pseudo", e.getMessage() );        
-       	}
-
+       
        //Initialisation du résultat global de la validation
        if ( MapErreurs.isEmpty() ) {
     	   //insertion des infos

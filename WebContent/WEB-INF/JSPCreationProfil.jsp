@@ -16,7 +16,7 @@
 		<h1>Mon Profil</h1>
 	</center>
 	<form
-		action="${pageContext.request.contextPath }/ServletModifProfil"
+		action="${pageContext.request.contextPath }/ServletCreationProfil"
 		method="POST">
 
 		<center>

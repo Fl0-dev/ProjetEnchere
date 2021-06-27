@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.eni.projetenchere.bll.EnchereManager;
+import fr.eni.projetenchere.bll.Verification;
 import fr.eni.projetenchere.bo.Utilisateur;
 
 /**
@@ -41,6 +42,11 @@ public class ServletModifProfil extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//Appel de la session et de l'attribut utilisateurSession
+				HttpSession session = request.getSession();
+				Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("utilisateurSession");
+		
 		//récupération des données
 		String pseudo = request.getParameter("pseudo");
 		String nom = request.getParameter("nom");
@@ -59,46 +65,54 @@ public class ServletModifProfil extends HttpServlet {
 		
       //Validation pour éviter les champs vides
         try {
-        	EnchereManager.getInstance().validationChamp(pseudo);
-			EnchereManager.getInstance().validationChamp(nom);
-			EnchereManager.getInstance().validationChamp(prenom);
-			EnchereManager.getInstance().validationChamp(email);
-			EnchereManager.getInstance().validationChamp(rue);
-			EnchereManager.getInstance().validationChamp(codePostal);
-			EnchereManager.getInstance().validationChamp(ville);
-			EnchereManager.getInstance().validationChamp(motDePasse);
-			EnchereManager.getInstance().validationChamp(motDePasseNew);
-			EnchereManager.getInstance().validationChamp(confirmation);
+        	Verification.getInstance().validationChamp(pseudo);
+        	Verification.getInstance().validationChamp(nom);
+        	Verification.getInstance().validationChamp(prenom);
+        	Verification.getInstance().validationChamp(email);
+        	Verification.getInstance().validationChamp(rue);
+        	Verification.getInstance().validationChamp(codePostal);
+        	Verification.getInstance().validationChamp(ville);
+        	Verification.getInstance().validationChamp(motDePasse);
+        	Verification.getInstance().validationChamp(motDePasseNew);
+        	Verification.getInstance().validationChamp(confirmation);
 		} catch (Exception e) {
 			MapErreurs.put( "champ", e.getMessage() );
 		}
         
-        //Vérification mot de passe
+        
+        //Vérifier si nouveau pseudo, qu'il n'existe pas en DB
+        if (pseudo!=utilisateurSession.getPseudo()) {
+        	try {
+         	   Verification.getInstance().validationPseudo( pseudo );
+             } catch ( Exception e ) {
+            	MapErreurs.put( "pseudo", e.getMessage() );        
+            	}
+		}
+        
+      //Vérifier si nouveau email, qu'il n'existe pas en DB
+        if (email !=utilisateurSession.getEmail()) {
+        	try {
+            	Verification.getInstance().validationEmail( email );
+            } catch ( Exception e ) {
+            	MapErreurs.put( "email", e.getMessage() );
+            }
+		}
+        
+        //Vérification mot de passe 
         try {
-        	EnchereManager.getInstance().verifMdp(pseudo,motDePasse);
+        	Verification.getInstance().verifMdp(pseudo,motDePasse);
 		} catch (Exception e) {
 			MapErreurs.put("VerifMdp",e.getMessage());
 		}
 
-        //Validation du champ email
-        try {
-           EnchereManager.getInstance().validationEmail( email );
-        } catch ( Exception e ) {
-        	MapErreurs.put( "email", e.getMessage() );
-        }
-
         //Validation des champs mot de passe et confirmation
         try {
-        	EnchereManager.getInstance().validationMotsDePasse( motDePasseNew, confirmation );
+        	Verification.getInstance().validationMotsDePasse( motDePasseNew, confirmation );
         } catch ( Exception e ) {
         	MapErreurs.put( "motDePasse", e.getMessage() );
         }
-        //Validation du champ pseudo
-       try {
-        	EnchereManager.getInstance().validationPseudo( pseudo );
-        } catch ( Exception e ) {
-       	MapErreurs.put( "pseudo", e.getMessage() );        
-       	}
+       
+       
 		
      //Initialisation du résultat global de la validation
        if ( MapErreurs.isEmpty() ) {
@@ -107,9 +121,8 @@ public class ServletModifProfil extends HttpServlet {
    				codePostal,ville,motDePasse);
     		
        	//récupération de tous les attributs de newUtilisateur par son pseudo
-    	Utilisateur utilisateurSession = EnchereManager.getInstance().selectUtilisateurByPseudo(pseudo);
+    	utilisateurSession = EnchereManager.getInstance().selectUtilisateurByPseudo(pseudo);
     	//ouverture d'une session et mise en attribut du nouvel utilisateur
-        HttpSession session = request.getSession();
         session.setAttribute("UtilisateurSession", utilisateurSession);
         
     	resultat = "Succès de la modification";  
