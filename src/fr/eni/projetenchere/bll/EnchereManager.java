@@ -154,10 +154,26 @@ public class EnchereManager {
 	}
 
 
-	public void modifUtilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
-			String codePostal, String ville, String motDePasseNew) {
-		
-		
+	/**
+	 * permet de modifier le profil d'un utilisateur
+	 * @param noUtilisateur
+	 * @param pseudo
+	 * @param nom
+	 * @param prenom
+	 * @param email
+	 * @param telephone
+	 * @param rue
+	 * @param codePostal
+	 * @param ville
+	 * @param motDePasse
+	 */
+	public void modifUtilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue,
+			String codePostal, String ville, String motDePasse) {
+		Utilisateur utilisateur = new Utilisateur(noUtilisateur,pseudo, nom, prenom, email, telephone, rue, codePostal, ville,
+				motDePasse);
+		enchereDAO.updateUtilisateur(utilisateur);
+		System.out.println("coucou bll");
+		// TODO : Gestion exception
 	}
 
 }

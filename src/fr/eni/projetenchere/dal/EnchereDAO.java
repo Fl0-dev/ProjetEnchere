@@ -59,6 +59,13 @@ public interface EnchereDAO {
 	 */
 	Utilisateur selectUtilisateurByPseudo(String pseudo);
 
+
+	/**
+	 * permet de modifier le profil d'un utilisateur
+	 * @param utilisateur
+	 */
+	void updateUtilisateur(Utilisateur utilisateur);
+
 	
 
 }

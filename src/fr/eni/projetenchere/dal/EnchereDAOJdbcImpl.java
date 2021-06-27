@@ -14,7 +14,48 @@ import fr.eni.projetenchere.bo.Enchere;
 import fr.eni.projetenchere.bo.Utilisateur;
 
 public class EnchereDAOJdbcImpl implements EnchereDAO {
+	
 	@Override
+	/**
+	 * update en DB le profil d'un utilisateur
+	 */
+	public void updateUtilisateur(Utilisateur utilisateur) {
+		System.out.println("coucouDAL");
+		// requête SQL
+		final String UPDATE_UTILISATEUR ="update UTILISATEURS set pseudo=?,nom=?,prenom=?,email=?,telephone=?,rue=?,code_postal=?,ville=?,mot_de_passe=?"
+				+ "where no_utilisateur=?;";
+		// ouverture de la connexion à la DB
+				try (Connection connection = JdbcTools.getConnection()){
+					PreparedStatement requete = connection.prepareStatement(UPDATE_UTILISATEUR);
+					//initialisation de la requête
+					requete.setString(1, utilisateur.getPseudo());
+					requete.setString(2, utilisateur.getNom());
+					requete.setString(3, utilisateur.getPrenom());
+					requete.setString(4, utilisateur.getEmail());
+					//if (utilisateur.getTelephone()!=null) {
+						requete.setString(5, utilisateur.getTelephone());
+					//}
+					requete.setString(6, utilisateur.getRue());
+					requete.setString(7, utilisateur.getCodePostal());
+					requete.setString(8, utilisateur.getVille());
+					requete.setString(9, utilisateur.getMotDePasse());
+					requete.setInt(10, utilisateur.getNoUtilisateur());
+					//exécution de la requête
+					requete.executeUpdate();
+				} catch (SQLException e) {
+					
+					e.printStackTrace();
+				}
+	}
+	
+	
+	
+	@Override
+	/**
+	 * insert en DB un nouvel utilisateur
+	 * 
+	 * @return newUtilisateur
+	 */
 	public Utilisateur insertUtilisateur(Utilisateur newUtilisateur) {
 		// requête SQL
 		final String INSERT_UTILSATEUR = "insert into UTILISATEURS (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur)"
@@ -26,6 +67,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				connection.setAutoCommit(false);
 				PreparedStatement requete = connection.prepareStatement(INSERT_UTILSATEUR,
 						PreparedStatement.RETURN_GENERATED_KEYS);
+				//initialisation de la requête
 				requete.setString(1, newUtilisateur.getPseudo());
 				requete.setString(2, newUtilisateur.getNom());
 				requete.setString(3, newUtilisateur.getPrenom());
