@@ -48,40 +48,76 @@ public class ServletCreationProfil extends HttpServlet {
 		String resultat;
         Map<String, String> MapErreurs = new HashMap<String, String>();
         
-        //Validation pour éviter les champs vides
-        try {
-        	Verification.getInstance().validationChamp(pseudo);
-        	Verification.getInstance().validationChamp(nom);
-        	Verification.getInstance().validationChamp(prenom);
-        	Verification.getInstance().validationChamp(email);
-        	Verification.getInstance().validationChamp(rue);
-        	Verification.getInstance().validationChamp(codePostal);
-        	Verification.getInstance().validationChamp(ville);
-        	Verification.getInstance().validationChamp(motDePasse);
-        	Verification.getInstance().validationChamp(confirmation);
-		} catch (Exception e) {
-			MapErreurs.put( "champ", e.getMessage() );
-		}
-
+        
         //Validation du champ pseudo
         try {
      	   Verification.getInstance().validationPseudo( pseudo );
+     	  Verification.getInstance().validationChamp30(pseudo);
          } catch ( Exception e ) {
         	MapErreurs.put( "pseudo", e.getMessage() );        
         	}
+        //Validation nom
+        try {
+      	  Verification.getInstance().validationChamp30(nom);
+          } catch ( Exception e ) {
+         	MapErreurs.put( "nom", e.getMessage() );        
+         	}
+        
+      //Validation prenom
+        try {
+      	  Verification.getInstance().validationChamp30(prenom);
+          } catch ( Exception e ) {
+         	MapErreurs.put( "prenom", e.getMessage() );        
+         	}
         
         //Validation du champ email
         try {
+        	Verification.getInstance().validationChamp20(email);
            Verification.getInstance().validationEmail( email );
         } catch ( Exception e ) {
         	MapErreurs.put( "email", e.getMessage() );
         }
-
-        //Validation des champs mot de passe et confirmation
+        
+      //Vérifie si téléphone la taille de l'information
+        try {
+        	Verification.getInstance().validationChampTel(telephone);
+        }catch(Exception e) {
+        	MapErreurs.put( "tel", e.getMessage() );
+        }
+        
+      //Validation rue
+        try {
+      	  Verification.getInstance().validationChamp30(rue);
+          } catch ( Exception e ) {
+         	MapErreurs.put( "rue", e.getMessage() );        
+         	}
+        
+      //Validation codePostal
+        try {
+      	  Verification.getInstance().validationChamp10(codePostal);
+          } catch ( Exception e ) {
+         	MapErreurs.put( "codePostal", e.getMessage() );        
+         	}
+        
+      //Validation ville
+        try {
+      	  Verification.getInstance().validationChamp30(ville);
+          } catch ( Exception e ) {
+         	MapErreurs.put( "ville", e.getMessage() );        
+         	}
+        
+        //Validation motDePasse
+        try {
+        	  Verification.getInstance().validationChamp30(motDePasse);
+            } catch ( Exception e ) {
+           	MapErreurs.put( "motDePasse", e.getMessage() );        
+           	}
+        
+        //Validation confirmation similaire à motDePasse
         try {
         	Verification.getInstance().validationMotsDePasse( motDePasse, confirmation );
         } catch ( Exception e ) {
-        	MapErreurs.put( "motDePasse", e.getMessage() );
+        	MapErreurs.put( "confirmation", e.getMessage() );
         }
        
        //Initialisation du résultat global de la validation

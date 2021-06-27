@@ -48,10 +48,59 @@ public class Verification {
 		 * @param test
 		 * @throws Exception
 		 */
-		public void validationChamp (String test) throws Exception {
+		public void validationChamp30 (String test) throws Exception {
 			if (test == null || test.trim().length() == 0) {
-				throw new Exception("Les champs marqués d'un * sont obligatoires");
+				throw new Exception("Le champ est obligatoire");
 			}
+			if (test.length()>30) {
+				throw new Exception("Pas plus de 30 caractères");
+			}
+		}
+		
+		/**
+		 * permet de vérifier si le champ est vide si l'utilisateur 
+		 * fait sauter les balises html
+		 * et que le champ ne dépasse pas 20 caractères
+		 * @param test
+		 * @throws Exception
+		 */
+		public void validationChamp20 (String test) throws Exception {
+			if (test == null || test.trim().length() == 0) {
+				throw new Exception("Le champ est obligatoire");
+			}
+			if (test.length()>20) {
+				throw new Exception("Pas plus de 20 caractères");
+			}
+		}
+		
+		/**
+		 * permet de vérifier si le champ est vide si l'utilisateur 
+		 * fait sauter les balises html
+		 * et que le champ ne dépasse pas 10 caractères
+		 * @param test
+		 * @throws Exception
+		 */
+		public void validationChamp10 (String test) throws Exception {
+			if (test == null || test.trim().length() == 0) {
+				throw new Exception("Le champ est obligatoire");
+			}
+			if (test.length()>10) {
+				throw new Exception("Pas plus de 10 caractères");
+			}
+		}
+		
+		/**
+		 * permet de vérifier si le champ est vide si l'utilisateur 
+		 * fait sauter les balises html
+		 * et que le champ ne dépasse pas 15 caractères
+		 * @param test
+		 * @throws Exception
+		 */
+		public void validationChampTel (String test) throws Exception {
+			if (test != null && test.length()>15) {
+				throw new Exception("Pas plus de 15 caractères");
+			}
+			
 		}
 		
 		/**

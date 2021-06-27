@@ -155,8 +155,8 @@ public class EnchereManager {
 
 
 	public void modifUtilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
-			String codePostal, String ville, String motDePasse) {
-		// TODO Auto-generated method stub
+			String codePostal, String ville, String motDePasseNew) {
+		
 		
 	}
 

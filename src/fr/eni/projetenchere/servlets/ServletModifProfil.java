@@ -62,54 +62,87 @@ public class ServletModifProfil extends HttpServlet {
 		
 		String resultat;
         Map<String, String> MapErreurs = new HashMap<String, String>();
-		
-      //Validation pour éviter les champs vides
-        try {
-        	Verification.getInstance().validationChamp(pseudo);
-        	Verification.getInstance().validationChamp(nom);
-        	Verification.getInstance().validationChamp(prenom);
-        	Verification.getInstance().validationChamp(email);
-        	Verification.getInstance().validationChamp(rue);
-        	Verification.getInstance().validationChamp(codePostal);
-        	Verification.getInstance().validationChamp(ville);
-        	Verification.getInstance().validationChamp(motDePasse);
-        	Verification.getInstance().validationChamp(motDePasseNew);
-        	Verification.getInstance().validationChamp(confirmation);
-		} catch (Exception e) {
-			MapErreurs.put( "champ", e.getMessage() );
-		}
         
-        
-        //Vérifier si nouveau pseudo, qu'il n'existe pas en DB
+        //Vérifier si nouveau pseudo, qu'il n'existe pas en DB et sa taille
         if (pseudo!=utilisateurSession.getPseudo()) {
         	try {
-         	   Verification.getInstance().validationPseudo( pseudo );
+        		Verification.getInstance().validationChamp30(pseudo);
+         	    Verification.getInstance().validationPseudo( pseudo );
              } catch ( Exception e ) {
             	MapErreurs.put( "pseudo", e.getMessage() );        
             	}
 		}
         
-      //Vérifier si nouveau email, qu'il n'existe pas en DB
+        //Validation nom
+        try {
+      	  Verification.getInstance().validationChamp30(nom);
+          } catch ( Exception e ) {
+         	MapErreurs.put( "nom", e.getMessage() );        
+         	}
+        
+      //Validation prenom
+        try {
+      	  Verification.getInstance().validationChamp30(prenom);
+          } catch ( Exception e ) {
+         	MapErreurs.put( "prenom", e.getMessage() );        
+         	}
+        
+      //Vérifier si nouveau email, qu'il n'existe pas en DB et sa taille
         if (email !=utilisateurSession.getEmail()) {
         	try {
+        		Verification.getInstance().validationChamp20(email);
             	Verification.getInstance().validationEmail( email );
             } catch ( Exception e ) {
             	MapErreurs.put( "email", e.getMessage() );
             }
 		}
-        
-        //Vérification mot de passe 
+      //Vérifie si téléphone la taille de l'information
         try {
-        	Verification.getInstance().verifMdp(pseudo,motDePasse);
+        	Verification.getInstance().validationChampTel(telephone);
+        }catch(Exception e) {
+        	MapErreurs.put( "tel", e.getMessage() );
+        }
+        
+      //Validation rue
+        try {
+      	  Verification.getInstance().validationChamp30(rue);
+          } catch ( Exception e ) {
+         	MapErreurs.put( "rue", e.getMessage() );        
+         	}
+        
+      //Validation codePostal
+        try {
+      	  Verification.getInstance().validationChamp10(codePostal);
+          } catch ( Exception e ) {
+         	MapErreurs.put( "codePostal", e.getMessage() );        
+         	}
+        
+      //Validation ville
+        try {
+      	  Verification.getInstance().validationChamp30(ville);
+          } catch ( Exception e ) {
+         	MapErreurs.put( "ville", e.getMessage() );        
+         	}
+        
+        //Vérification mot de passe avec le pseudo d'utilisateurSession
+        try {
+        	Verification.getInstance().verifMdp(utilisateurSession.getPseudo(),motDePasse);
 		} catch (Exception e) {
 			MapErreurs.put("VerifMdp",e.getMessage());
 		}
+        
+      //Validation motDePasseNew
+        try {
+        	  Verification.getInstance().validationChamp30(motDePasseNew);
+            } catch ( Exception e ) {
+           	MapErreurs.put( "motDePasseNew", e.getMessage() );        
+           	}
 
-        //Validation des champs mot de passe et confirmation
+        //Validation des champs motDePasseNew et confirmation
         try {
         	Verification.getInstance().validationMotsDePasse( motDePasseNew, confirmation );
         } catch ( Exception e ) {
-        	MapErreurs.put( "motDePasse", e.getMessage() );
+        	MapErreurs.put( "confirmation", e.getMessage() );
         }
        
        
@@ -118,7 +151,7 @@ public class ServletModifProfil extends HttpServlet {
        if ( MapErreurs.isEmpty() ) {
     	   //insertion des infos
     	   EnchereManager.getInstance().modifUtilisateur(pseudo,nom,prenom,email,telephone,rue,
-   				codePostal,ville,motDePasse);
+   				codePostal,ville,motDePasseNew);
     		
        	//récupération de tous les attributs de newUtilisateur par son pseudo
     	utilisateurSession = EnchereManager.getInstance().selectUtilisateurByPseudo(pseudo);
