@@ -10,7 +10,7 @@
 </head>
 <body>
 	<header>
-		<h1><a href="${pageContext.request.contextPath }/ServletAccueilConnecte">ENI-Enchères</a></h1>
+		<h1><a href="${pageContext.request.contextPath }/ServletAccueil">ENI-Enchères</a></h1>
 	</header>
 	<center>
 		<h1>Mon Profil</h1>
