@@ -40,10 +40,8 @@ public class ServletAccueilConnecte extends HttpServlet {
 		if (urlUtilisee.equals("/deconnexion")) {
 			HttpSession session = request.getSession();
 			session.invalidate();
-			String messageDeconnexion = "Vous êtes bien déconnecté";
-			request.setAttribute("messageDeconnexion", messageDeconnexion);
-			RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueil");
-			rd.forward(request, response);
+			request.setAttribute("messageDeconnexion", "Vous êtes bien déconnecté");
+			this.getServletContext().getRequestDispatcher("/ServletAccueil").forward(request, response);
 			// Si c'est l'url /AccueilNewProfil, on met un message de bienvenue dans la JSP
 
 		}
