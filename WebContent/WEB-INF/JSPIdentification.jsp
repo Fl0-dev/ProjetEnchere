@@ -19,12 +19,12 @@
 <form method="POST" action="${pageContext.request.contextPath }/ServletIdentification">
 	<div>
 		<label for="identifiant">Identifiant : </label>
-		<input type="text" id="identifiant" name="identifiant" placeholder="monIdentifiant" autofocus required>
+		<input type="text" id="identifiant" name="identifiant" placeholder="monIdentifiant" autofocus >
 	</div>
 	
 	<div>
 		<label for="mdp">Mot de passe : </label>
-		<input type="password" id="mdp" name="mdp" placeholder="monMotDePasse" required>
+		<input type="password" id="mdp" name="mdp" placeholder="monMotDePasse" >
 	</div>
 	
 	<div>

@@ -23,8 +23,8 @@ public class ServletIdentification extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSPIdentification.jsp");
-		rd.forward(request, response);
+
+		this.getServletContext().getRequestDispatcher("/WEB-INF/JSPIdentification.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -35,22 +35,17 @@ public class ServletIdentification extends HttpServlet {
 
 		// on récupère les infos connexion des utilisateurs
 		List<Utilisateur> listeUtilisateursConnexion = EnchereManager.getInstance().selectConnexion();
-		
-		//si les champs identifiant ou mdp vides : message erreur
-        if (identifiant.length()==0 || identifiant.isEmpty()) {
-            //message d'erreur dans la JSP
-            String messageErreur = "L'identifiant doit être renseigné";
-            request.setAttribute("messageErreur", messageErreur);
-            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSPIdentification.jsp");
-            rd.forward(request, response);
-        }
-        else if (mdp.length()==0 || mdp.isEmpty()) {
-            //message d'erreur dans la JSP
-            String messageErreur = "Le mot de passe doit être renseigné";
-            request.setAttribute("messageErreur", messageErreur);
-            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSPIdentification.jsp");
-            rd.forward(request, response);
-        }
+
+		// si les champs identifiant ou mdp vides : message erreur
+		if (identifiant.length() == 0 || identifiant.isEmpty()) {
+			// message d'erreur dans la JSP
+			request.setAttribute("messageErreur", "L'identifiant doit être renseigné");
+			this.getServletContext().getRequestDispatcher("/WEB-INF/JSPIdentification.jsp").forward(request, response);
+		} else if (mdp.length() == 0 || mdp.isEmpty()) {
+			// message d'erreur dans la JSP
+			request.setAttribute("messageErreur", "Le mot de passe doit être renseigné");
+			this.getServletContext().getRequestDispatcher("/WEB-INF/JSPIdentification.jsp").forward(request, response);
+		}
 
 		// on vérifie que les identifiants sont identiques en BDD : si oui on part vers
 		// la servlet Accueil Connecté, sinon retour sur la JSP connexion avec un
@@ -64,29 +59,24 @@ public class ServletIdentification extends HttpServlet {
 					&& mdp.equals(utilisateur.getMotDePasse())) {
 
 				utilisateurPseudo = utilisateur.getPseudo();
-				
+
 			}
 
 		}
-		
+
 		if (utilisateurPseudo != null) {
 			Utilisateur utilisateurSession = EnchereManager.getInstance().selectUtilisateurByPseudo(utilisateurPseudo);
 
 			HttpSession session = request.getSession();
 
 			session.setAttribute("utilisateurSession", utilisateurSession);
-			
+
 			response.sendRedirect("ServletAccueilConnecte");
 
-			
 		} else {
-			String messageErreur = "L'identifiant ou le mot de passe est invalide";
-			request.setAttribute("messageErreur", messageErreur);
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSPIdentification.jsp");
-			rd.forward(request, response);
+			request.setAttribute("messageErreur", "L'identifiant ou le mot de passe est invalide");
+			this.getServletContext().getRequestDispatcher( "/WEB-INF/JSPIdentification.jsp" ).forward( request, response );
 		}
-		
-		
 
 	}
 
