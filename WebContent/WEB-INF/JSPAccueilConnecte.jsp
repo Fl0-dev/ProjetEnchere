@@ -6,6 +6,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Accueil</title>
+<!-- CSS -->
+<link href="${pageContext.request.contextPath }/css/style.css" rel="stylesheet">
 </head>
 <body>
 
@@ -87,6 +89,10 @@
 						<button type="submit">Rechercher</button>
 					</div>
 				</form>
+				
+				
+				
+				
 			</div>
 
 			<!-- Affichage des enchères en cours -->
