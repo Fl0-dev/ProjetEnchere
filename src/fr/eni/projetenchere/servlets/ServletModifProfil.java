@@ -172,14 +172,14 @@ public class ServletModifProfil extends HttpServlet {
 		} else {
 			resultat = "Échec de la modification. ";
 
-		}
+		
 		System.out.println(resultat);
 		request.setAttribute("resultat", resultat);
 		request.setAttribute("MapErreurs", MapErreurs);
 
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSPModifProfil.jsp");
 		rd.forward(request, response);
-
+		}
 	}
 
 }
