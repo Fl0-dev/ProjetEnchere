@@ -54,7 +54,7 @@
 			<span>${MapErreurs['ville']}</span>
 			<br> <br> 
 			<label for="motDePasse">Mot de passe actuel <span>*</span> </label> 
-			<input type="password" id="motDePasse" name="motDePasse" value="<c:out value="${utilisateurSession.motDePasse }"/>" > 
+			<input type="password" id="motDePasse" name="motDePasse" > 
 			<span>${MapErreurs['VerifMdp']}</span> 
 			 <br><br> 
 			 <label for="motDePasseNew">Nouveau mot de passe <span>*</span> </label> 
