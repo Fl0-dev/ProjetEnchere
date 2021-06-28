@@ -198,10 +198,8 @@ public class ServletModifProfil extends HttpServlet {
 						if (MapErreurs.isEmpty()) {
 							EnchereManager.getInstance().desactiveUtilisateur(utilisateurSession);
 							session.invalidate();
-							resultat = "Succès de la suppression. ";
-							request.setAttribute("resultat", resultat);
-							RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueil");
-							rd.forward(request, response);
+							resultat = "Le profil a bien été supprimé. ";
+							this.getServletContext().getRequestDispatcher("/ServletAccueil").forward(request, response);
 						}else {
 							resultat = "Échec de la suppression. ";
 
