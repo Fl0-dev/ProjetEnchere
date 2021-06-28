@@ -77,6 +77,9 @@ public interface EnchereDAO {
 	 */
 	void deleteUtilisateur(Utilisateur utilisateurSession);
 
+
+	List<Enchere> selectEncheresOuvertesExceptUtilisateur(int noUtilisateur);
+
 	
 
 }

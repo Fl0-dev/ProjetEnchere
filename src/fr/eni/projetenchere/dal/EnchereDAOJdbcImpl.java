@@ -13,14 +13,39 @@ import fr.eni.projetenchere.bo.Categorie;
 import fr.eni.projetenchere.bo.Enchere;
 import fr.eni.projetenchere.bo.Utilisateur;
 
+
 public class EnchereDAOJdbcImpl implements EnchereDAO {
+	
+	
+	
+	/**
+	 * efface un utilisateur en DB
+	 */
+	@Override
+	public void deleteUtilisateur(Utilisateur utilisateurSession) {
+		// requête SQL
+		final String DELETE_UTILISATEUR ="delete from UTILISATEURS WHERE no_utilisateur = ?";
+		// ouverture de la connexion à la DB
+		try (Connection connection = JdbcTools.getConnection()){
+			PreparedStatement requete = connection.prepareStatement(DELETE_UTILISATEUR);
+			//initialisation de la requête
+			requete.setInt(1, utilisateurSession.getNoUtilisateur());
+			//exécution de la requête
+			requete.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	
 	@Override
 	/**
 	 * update en DB le profil d'un utilisateur
 	 */
 	public void updateUtilisateur(Utilisateur utilisateur) {
-		System.out.println("coucouDAL");
+		
 		// requête SQL
 		final String UPDATE_UTILISATEUR ="update UTILISATEURS set pseudo=?,nom=?,prenom=?,email=?,telephone=?,rue=?,code_postal=?,ville=?,mot_de_passe=? where no_utilisateur=?;";
 		// ouverture de la connexion à la DB
