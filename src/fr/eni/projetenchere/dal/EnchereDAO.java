@@ -7,6 +7,10 @@ import fr.eni.projetenchere.bo.Enchere;
 
 import fr.eni.projetenchere.bo.Utilisateur;
 
+/**
+ * @author fgirard2021
+ *
+ */
 public interface EnchereDAO {
 
 	/**
@@ -65,13 +69,13 @@ public interface EnchereDAO {
 	 * @param utilisateur
 	 */
 	void updateUtilisateur(Utilisateur utilisateur);
-
+	
+	
 	/**
-	 * permet de sélectionner les enchères ouvertes sauf celles de l'utilisateur de session
-	 * @param noUtilisateur
-	 * @return
+	 * permet de supprimer un utilisateur
+	 * @param utilisateurSession
 	 */
-	List<Enchere> selectEncheresOuvertesExceptUtilisateur(int noUtilisateur);
+	void deleteUtilisateur(Utilisateur utilisateurSession);
 
 	
 
