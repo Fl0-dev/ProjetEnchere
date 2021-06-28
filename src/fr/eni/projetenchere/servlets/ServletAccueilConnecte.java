@@ -21,7 +21,7 @@ import javafx.geometry.Side;
 /**
  * Servlet implementation class ServletAccueilConnecte
  */
-@WebServlet(urlPatterns = { "/ServletAccueilConnecte", "/deconnexion", "/AccueilNewProfil", "/recherche" })
+@WebServlet(urlPatterns = { "/ServletAccueilConnecte", "/deconnexion", "/recherche" })
 public class ServletAccueilConnecte extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -42,7 +42,7 @@ public class ServletAccueilConnecte extends HttpServlet {
 			session.invalidate();
 			request.setAttribute("messageDeconnexion", "Vous êtes bien déconnecté");
 			this.getServletContext().getRequestDispatcher("/ServletAccueil").forward(request, response);
-			// Si c'est l'url /AccueilNewProfil, on met un message de bienvenue dans la JSP
+			
 
 		}
 		doPost(request, response);
