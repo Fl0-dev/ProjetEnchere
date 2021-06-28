@@ -129,8 +129,9 @@ public class ServletCreationProfil extends HttpServlet {
        	//récupération de tous les attributs de newUtilisateur par son pseudo
     	Utilisateur utilisateurSession = EnchereManager.getInstance().selectUtilisateurByPseudo(pseudo);
     	//ouverture d'une session et mise en attribut du nouvel utilisateur
-        HttpSession session = request.getSession();
-        session.setAttribute("UtilisateurSession", utilisateurSession);
+    	HttpSession session = request.getSession();
+
+        session.setAttribute("utilisateurSession", utilisateurSession);
         
     	resultat = "Succès de l'inscription.";  
     	request.setAttribute("resultat", resultat);
@@ -140,7 +141,7 @@ public class ServletCreationProfil extends HttpServlet {
         } else {
             resultat = "Échec de l'inscription";
             
-        }
+        
        System.out.println(resultat);
         request.setAttribute("resultat", resultat);
         request.setAttribute("MapErreurs", MapErreurs);
@@ -149,7 +150,7 @@ public class ServletCreationProfil extends HttpServlet {
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSPCreationProfil.jsp");
 		rd.forward(request, response);
-		
+        }
 	}
 
 }

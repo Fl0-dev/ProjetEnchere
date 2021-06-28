@@ -162,7 +162,7 @@ public class ServletModifProfil extends HttpServlet {
 			// récupération de tous les attributs de newUtilisateur par son pseudo
 			utilisateurSession = EnchereManager.getInstance().selectUtilisateurByPseudo(pseudo);
 			// ouverture d'une session et mise en attribut du nouvel utilisateur
-			session.setAttribute("UtilisateurSession", utilisateurSession);
+			session.setAttribute("utilisateurSession", utilisateurSession);
 
 			resultat = "Succès de la modification. ";
 			request.setAttribute("resultat", resultat);
