@@ -130,7 +130,7 @@ public class ServletModifProfil extends HttpServlet {
 		}
 
 		// Validation si motDePasseNew
-		if (motDePasseNew != null || motDePasseNew.trim().length() == 0) {
+		if (motDePasseNew != null & motDePasseNew.trim().length() != 0) {
 
 			try {
 				Verification.getInstance().validationChamp30(motDePasseNew);
