@@ -53,7 +53,7 @@
 					<div>
 		
 			<input type="radio" name="choixAchatVente" value="achats"> 
-			<label>Mes achats</label>
+			<label>Achats</label>
 			<div>
 				<input type="checkbox" name="encheresOuvertes"
 					value="encheresOuvertes"> <label>Enchères ouvertes</label>
