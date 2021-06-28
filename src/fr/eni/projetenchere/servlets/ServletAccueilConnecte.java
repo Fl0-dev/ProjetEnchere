@@ -21,7 +21,7 @@ import javafx.geometry.Side;
 /**
  * Servlet implementation class ServletAccueilConnecte
  */
-@WebServlet(urlPatterns = { "/ServletAccueilConnecte", "/deconnexion", "/recherche" })
+@WebServlet(urlPatterns = { "/AccueilConnecte", "/deconnexion", "/recherche" })
 public class ServletAccueilConnecte extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -41,7 +41,7 @@ public class ServletAccueilConnecte extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.invalidate();
 			request.setAttribute("messageDeconnexion", "Vous êtes bien déconnecté");
-			this.getServletContext().getRequestDispatcher("/ServletAccueil").forward(request, response);
+			this.getServletContext().getRequestDispatcher("/Accueil").forward(request, response);
 			
 
 		}else {

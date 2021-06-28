@@ -12,12 +12,12 @@
 <body>
 
 	<header>
-	<h1><a href="${pageContext.request.contextPath }/ServletAccueilConnecte">ENI-Enchères</a></h1>
+	<h1><a href="${pageContext.request.contextPath }/AccueilConnecte">ENI-Enchères</a></h1>
 	<p>${resultat}Bienvenue ${ sessionScope.utilisateurSession.pseudo }!</p>
 	<nav> <a
-		href="${pageContext.request.contextPath }/ServletNouvelleVente">Vendre
+		href="${pageContext.request.contextPath }/NouvelleVente">Vendre
 		un articles</a> <a
-		href="${pageContext.request.contextPath }/ServletMonProfil">Mon
+		href="${pageContext.request.contextPath }/MonProfil">Mon
 		profil</a> <a href="${pageContext.request.contextPath }/deconnexion">Déconnexion</a>
 	</nav> </header>
 
@@ -52,12 +52,12 @@
 						</select>
 					</div>
 					
-					<div>
+					 <div>
 		
-			<input type="radio" name="choixAchatVente" value="achats"> 
+			<input type="radio" name="choixAchatVente" value="achats" checked> 
 			<label>Achats</label>
 			<div>
-				<input type="checkbox" name="encheresOuvertes"
+				<input type="checkbox" name="encheresOuvertes" checked 
 					value="encheresOuvertes"> <label>Enchères ouvertes</label>
 				<br> <input type="checkbox" name="mesEncheres"
 					value="mesEncheres"> <label>Mes enchères</label> <br>
@@ -83,7 +83,7 @@
 				
 
 
-			</div>
+			</div> 			
 
 					<div>
 						<button type="submit">Rechercher</button>

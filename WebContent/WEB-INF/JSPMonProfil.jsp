@@ -11,7 +11,7 @@
 </head>
 <body>
 <header>
-<h1><a href="${pageContext.request.contextPath }/ServletAccueilConnecte">ENI-Enchères</a></h1>
+<h1><a href="${pageContext.request.contextPath }/AccueilConnecte">ENI-Enchères</a></h1>
 </header>
 <main>
 
@@ -62,7 +62,7 @@
     </tbody>
 </table>
 
-<a href="${pageContext.request.contextPath }/ServletModifProfil">Modifier</a>
+<a href="${pageContext.request.contextPath }/ModifProfil">Modifier</a>
 
 </main>
 

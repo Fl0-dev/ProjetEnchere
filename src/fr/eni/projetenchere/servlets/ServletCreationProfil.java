@@ -19,7 +19,7 @@ import fr.eni.projetenchere.bll.Verification;
 import fr.eni.projetenchere.bo.Utilisateur;
 
 
-@WebServlet("/ServletCreationProfil")
+@WebServlet("/CreationProfil")
 public class ServletCreationProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -135,7 +135,7 @@ public class ServletCreationProfil extends HttpServlet {
         
     	resultat = "Succès de l'inscription.";  
     	request.setAttribute("resultat", resultat);
-    	RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueilConnecte");
+    	RequestDispatcher rd = request.getRequestDispatcher("/AccueilConnecte");
 		rd.forward(request, response);
     	
         } else {
