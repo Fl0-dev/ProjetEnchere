@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<h1>ENI-Enchères</h1>
+<h1><a href="${pageContext.request.contextPath }/ServletAccueil">ENI-Enchères</a></h1>
 
 
 <p>${messageErreur}</p>

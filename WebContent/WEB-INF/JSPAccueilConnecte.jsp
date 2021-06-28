@@ -10,7 +10,7 @@
 <body>
 
 	<header>
-	<h1>ENI-Enchères</h1>
+	<h1><a href="${pageContext.request.contextPath }/ServletAccueilConnecte">ENI-Enchères</a></h1>
 	<p>${resultat}Bienvenue ${ sessionScope.utilisateurSession.pseudo }!</p>
 	<nav> <a
 		href="${pageContext.request.contextPath }/ServletNouvelleVente">Vendre
