@@ -16,7 +16,7 @@
 <header>
 <h1>ENI-Enchères</h1>
 
-
+<p>${resultat}</p>
 <p>${messageDeconnexion}</p>
 
 <nav>
