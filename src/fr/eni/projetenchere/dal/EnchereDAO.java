@@ -66,6 +66,13 @@ public interface EnchereDAO {
 	 */
 	void updateUtilisateur(Utilisateur utilisateur);
 
+	/**
+	 * permet de sélectionner les enchères ouvertes sauf celles de l'utilisateur de session
+	 * @param noUtilisateur
+	 * @return
+	 */
+	List<Enchere> selectEncheresOuvertesExceptUtilisateur(int noUtilisateur);
+
 	
 
 }

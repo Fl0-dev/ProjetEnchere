@@ -380,4 +380,57 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 	}
 	
+	/**
+	 * Requêtes SQL préparées pour la page d'accueil connecté
+	 */
+	
+	// affiche toutes les enchères ouvertes sauf celle d'utilisateurSession
+	@Override
+	public List<Enchere> selectEncheresOuvertesExceptUtilisateur(int noUtilisateur) {
+		
+		// création de la liste vide
+				List<Enchere> listeEncheres = new ArrayList<>();
+
+				// création des variables
+				ArticleVendu articleVendu;
+				Utilisateur utilisateur;
+				Enchere enchere;
+
+		// requête SQL
+		final String SELECT_ALL_ENCHERES_OUVERTES_EXCEPT_USER = "SELECT a.date_fin_encheres, montant_enchere, a.nom_article, u.pseudo from ENCHERES"
+				+ " as e inner join ARTICLES_VENDUS as a on a.no_article= e.no_article "
+				+ "inner join UTILISATEURS as u on a.no_utilisateur = u.no_utilisateur "
+				+ "WHERE ((date_debut_encheres < GETDATE() and date_fin_encheres > GETDATE()) AND a.no_utilisateur <> ? );";
+
+		// ouverture de la connexion à la DB
+		try (Connection connection = JdbcTools.getConnection();
+				PreparedStatement requete = connection.prepareStatement(SELECT_ALL_ENCHERES_OUVERTES_EXCEPT_USER)) {
+			
+			// initialisation de la requête
+			requete.setInt(1, noUtilisateur);
+			// récupération du résultat
+			ResultSet rs = requete.executeQuery();
+
+			while (rs.next()) {
+				LocalDate dateFinEnchere = rs.getDate("date_fin_encheres").toLocalDate();
+				int montantEnchere = rs.getInt("montant_enchere");
+				String nomArticle = rs.getString("nom_article");
+				String pseudo = rs.getString("pseudo");
+
+				// utilisation des résultats
+				utilisateur = new Utilisateur(pseudo);
+				articleVendu = new ArticleVendu(nomArticle, dateFinEnchere);
+				enchere = new Enchere(montantEnchere, utilisateur, articleVendu);
+
+				// ajout dans la liste d'enchères
+				listeEncheres.add(enchere);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	return listeEncheres;
+
+	}
 }
