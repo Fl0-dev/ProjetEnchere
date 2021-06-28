@@ -5,12 +5,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Identification</title>
+
+<!-- CSS -->
+<link href="${pageContext.request.contextPath }/css/style.css" rel="stylesheet">
 </head>
 <body>
-
+<header>
 <h1><a href="${pageContext.request.contextPath }/ServletAccueil">ENI-Enchères</a></h1>
-
+</header>
 
 <p>${messageErreur}</p>
 

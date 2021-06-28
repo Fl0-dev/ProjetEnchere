@@ -11,7 +11,7 @@ import fr.eni.projetenchere.dal.EnchereDAO;
  * Classe de la BLL contenant les méthodes utilisées en Vue et utilisant les
  * méthodes de la DAL
  * 
- * @author Florian
+ * 
  * @version 1.0
  * @date 22/06/21
  */
@@ -172,8 +172,13 @@ public class EnchereManager {
 		Utilisateur utilisateur = new Utilisateur(noUtilisateur,pseudo, nom, prenom, email, telephone, rue, codePostal, ville,
 				motDePasse);
 		enchereDAO.updateUtilisateur(utilisateur);
-		System.out.println("coucou bll");
 		// TODO : Gestion exception
+	}
+
+
+	public void desactiveUtilisateur(Utilisateur utilisateurSession) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

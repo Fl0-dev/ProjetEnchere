@@ -72,7 +72,10 @@
 		<center>
 			<span>${MapErreurs['champ']}</span> 
 			<br><br>
-			<button type="submit">Enregistrer</button>
+			<button type="submit" value="modif" name="bouton" >Enregistrer</button>
+			<br>
+			<br>
+			<button type="submit" value="suppr" name="bouton" >Supprimer mon compte</button>
 			<br>
 			<br>
 			<p>${resultat}</p>
