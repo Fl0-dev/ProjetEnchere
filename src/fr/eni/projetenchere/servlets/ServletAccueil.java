@@ -17,7 +17,7 @@ import fr.eni.projetenchere.bo.Categorie;
 import fr.eni.projetenchere.bo.Enchere;
 
 
-@WebServlet("/ServletAccueil")
+@WebServlet(urlPatterns = { "/ServletAccueil", "/SuppressionProfil"})
 public class ServletAccueil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -28,6 +28,17 @@ public class ServletAccueil extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		// on regarde quelle URL a été utilisée pour accéder à la servlet
+				String urlUtilisee = request.getServletPath();
+				// si c'est l'url /SuppressionProfil
+				if (urlUtilisee.equals("/SuppressionProfil")) {
+					String resultat = "Le profil a bien été supprimé.";
+					request.setAttribute("resultat", resultat);		
+				}
+		
+		
 		// on récupère la liste des catégories présentes en base de données
 				List<Categorie> listeCategories = EnchereManager.getInstance().selectCategorie();
 				request.setAttribute("listeCategories", listeCategories);
