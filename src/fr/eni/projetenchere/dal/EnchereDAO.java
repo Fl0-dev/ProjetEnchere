@@ -7,6 +7,10 @@ import fr.eni.projetenchere.bo.Enchere;
 
 import fr.eni.projetenchere.bo.Utilisateur;
 
+/**
+ * @author fgirard2021
+ *
+ */
 public interface EnchereDAO {
 
 	/**
@@ -65,6 +69,13 @@ public interface EnchereDAO {
 	 * @param utilisateur
 	 */
 	void updateUtilisateur(Utilisateur utilisateur);
+
+
+	/**
+	 * permet de supprimer un utilisateur
+	 * @param utilisateurSession
+	 */
+	void deleteUtilisateur(Utilisateur utilisateurSession);
 
 	
 

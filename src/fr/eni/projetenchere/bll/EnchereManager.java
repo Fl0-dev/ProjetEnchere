@@ -176,4 +176,17 @@ public class EnchereManager {
 		// TODO : Gestion exception
 	}
 
+
+	/**
+	 * permet de supprimer un utilisateur 
+	 * @param utilisateurSession
+	 */
+	public void supprUtilisateur(Utilisateur utilisateurSession) {
+		enchereDAO.deleteUtilisateur(utilisateurSession);
+		
+	}
+
+
+
+
 }

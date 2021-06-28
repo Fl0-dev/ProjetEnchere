@@ -79,7 +79,7 @@
 		</center>
 	</form>
 	<center>
-	<a href="${pageContext.request.contextPath }/ServletAccueil">Supprimer mon compte</a>
+	<a href="${pageContext.request.contextPath }/ServletModifProfilSuppr">Supprimer mon compte</a>
 	</center>
 </body>
 </html>

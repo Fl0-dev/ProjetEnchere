@@ -19,7 +19,7 @@ import fr.eni.projetenchere.bo.Utilisateur;
 /**
  * Servlet implementation class ServletModifProfil
  */
-@WebServlet("/ServletModifProfil")
+@WebServlet(urlPatterns = { "/ServletModifProfil", "/ServletModifProfilSuppr"})
 public class ServletModifProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -31,17 +31,36 @@ public class ServletModifProfil extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		// on regarde quelle URL a été utilisée pour accéder à la servlet
+				String urlUtilisee = request.getServletPath();
+				// si c'est l'url /déconnexion, on ferme la session et retour vers page
+				// d'accueil non connecté
+				if (urlUtilisee.equals("/ServletModifProfilSuppr")) {
+					//ouverture de la seesion et récupération de l'attribut
+					HttpSession session = request.getSession();
+					Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("utilisateurSession");
+					//suppression de l'utilisateur
+					EnchereManager.getInstance().supprUtilisateur(utilisateurSession);
+					//coupure de la session
+					session.invalidate();
+					//envoie vers acceuilNonConnecté
+					RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueil");
+					rd.forward(request, response);
+					
+				}else {
 		// Appel de la session et de l'attribut utilisateurSession
 		HttpSession session = request.getSession();
 		Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("utilisateurSession");
 		// Envoie vers la JSP
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSPModifProfil.jsp");
 		rd.forward(request, response);
+				}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		//evite les soucis de caractère 
+		request.setCharacterEncoding("UTF-8"); 
 		// Appel de la session et de l'attribut utilisateurSession
 		HttpSession session = request.getSession();
 		Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("utilisateurSession");
