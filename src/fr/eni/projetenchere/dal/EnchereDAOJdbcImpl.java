@@ -22,8 +22,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	public void updateUtilisateur(Utilisateur utilisateur) {
 		System.out.println("coucouDAL");
 		// requête SQL
-		final String UPDATE_UTILISATEUR ="update UTILISATEURS set pseudo=?,nom=?,prenom=?,email=?,telephone=?,rue=?,code_postal=?,ville=?,mot_de_passe=?"
-				+ "where no_utilisateur=?;";
+		final String UPDATE_UTILISATEUR ="update UTILISATEURS set pseudo=?,nom=?,prenom=?,email=?,telephone=?,rue=?,code_postal=?,ville=?,mot_de_passe=? where no_utilisateur=?;";
 		// ouverture de la connexion à la DB
 				try (Connection connection = JdbcTools.getConnection()){
 					PreparedStatement requete = connection.prepareStatement(UPDATE_UTILISATEUR);
