@@ -44,8 +44,10 @@ public class ServletAccueilConnecte extends HttpServlet {
 			this.getServletContext().getRequestDispatcher("/ServletAccueil").forward(request, response);
 			
 
+		}else {
+			doPost(request, response);
 		}
-		doPost(request, response);
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
