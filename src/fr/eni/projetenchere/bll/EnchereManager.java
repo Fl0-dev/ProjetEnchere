@@ -199,4 +199,10 @@ public class EnchereManager {
 		
 	}
 
+
+	public List<Enchere> selectEncheresOuvertes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
