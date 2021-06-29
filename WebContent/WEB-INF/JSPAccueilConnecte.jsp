@@ -66,6 +66,20 @@
 					remportées</label> <br>
 			</div>
 
+			<div>
+				
+					<input type="radio" name="choixAchatVente" value="ventes" >
+					<label>Mes ventes</label>
+					<div>
+						<input type="checkbox" name="mesVentesEnCours"
+							value="mesVentesEnCours" > <label>Mes ventes en cours
+							</label> <br> <input type="checkbox"
+							name="ventesNonDebutees" value="ventesNonDebutees" > <label>Ventes non débutées
+							</label> <br>
+							<input type="checkbox" name="ventesTerminees"
+							value="ventesTerminees"  > <label>Ventes terminées</label> <br>
+					</div>
+ 
  
 
 <div>
