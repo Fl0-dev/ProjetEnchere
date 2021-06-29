@@ -30,17 +30,19 @@
 		<input type="password" id="mdp" name="mdp" placeholder="monMotDePasse" >
 	</div>
 	
-	<div>
+	<!-- <div>
 		<input type="checkbox" name="seSouvenir" id="seSouvenir">
 		<label for="seSouvenir">Se souvenir de moi</label>
 	</div>
+	-->
+	
 	
 	<div>
 		<button type="submit">Connexion</button>
 	</div>
 </form>
 
-	<a href="${pageContext.request.contextPath }/CreationProfil">Créer un compte</a>
+	<button><a href="${pageContext.request.contextPath }/CreationProfil">Créer un compte</a></button>
 
 
 
