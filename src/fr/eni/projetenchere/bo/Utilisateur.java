@@ -147,10 +147,30 @@ public class Utilisateur {
 
 
 	public Utilisateur(String pseudo, String email, String motDePasse, Boolean etat) {
+		super();
 		this.pseudo = pseudo;
 		this.email = email;
 		this.motDePasse = motDePasse;
 		this.etat = etat;
+	}
+
+
+
+	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email,
+			String telephone, String rue, String codePostal, String ville, String motDePasse, int credit,
+			boolean administrateur, boolean etat) {
+		super();
+		this.noUtilisateur = noUtilisateur;
+		this.pseudo = pseudo;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.telephone = telephone;
+		this.rue = rue;
+		this.codePostal = codePostal;
+		this.ville = ville;
+		this.motDePasse = motDePasse;
+		this.etat =etat;
 	}
 
 
