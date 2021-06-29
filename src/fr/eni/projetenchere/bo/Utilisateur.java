@@ -17,6 +17,7 @@ public class Utilisateur {
 	private String motDePasse;
 	private int credit;
 	private boolean administrateur;
+	private boolean actif;
 	
 	// liste des enchères effectuées par l'utilisateur
 	private List<Enchere> listeEncheres;
@@ -28,9 +29,22 @@ public class Utilisateur {
 		return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
 				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
 				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit
-				+ ", administrateur=" + administrateur + ", listeEncheres=" + listeEncheres + ", listeArticlesVendus="
-				+ listeArticlesVendus + "]";
+				+ ", administrateur=" + administrateur + ", actif=" + actif + ", listeEncheres=" + listeEncheres
+				+ ", listeArticlesVendus=" + listeArticlesVendus + "]";
 	}
+
+	
+
+	public boolean isActif() {
+		return actif;
+	}
+
+
+
+	public void setActif(boolean actif) {
+		this.actif = actif;
+	}
+
 
 
 	public List<Enchere> getListeEncheres() {
