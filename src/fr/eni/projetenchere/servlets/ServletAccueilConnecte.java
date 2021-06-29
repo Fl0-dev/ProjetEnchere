@@ -70,8 +70,8 @@ public class ServletAccueilConnecte extends HttpServlet {
 
 		// on regarde quelle URL a été utilisée pour accéder à la servlet
 		String urlUtilisee = request.getServletPath();
+		
 		// si c'est l'url /recherche, on récupère les infos saisies par l'utilisateur
-
 		if (urlUtilisee.equals("/recherche")) {
 			// on récupère la liste des catégories présentes en base de données
 			List<Categorie> listeCategoriesConnecte = EnchereManager.getInstance().selectCategorie();

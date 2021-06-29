@@ -58,50 +58,38 @@
 			<input type="radio" name="choixAchatVente" value="achats" checked> 
 			<label>Achats</label>
 			<div>
-				<input type="radio" name="encheres" checked 
-					value="encheresOuvertes"> <label>Enchères ouvertes</label>
-				<br> <input type="radio" name="encheres"
-					value="mesEncheres"> <label>Mes enchères</label> <br>
-				<input type="radio" name="encheres"
-					value="mesEncheresRemportees"> <label>Mes enchères
-					remportées</label> <br>
+				<ul>
+                <li>
+				<input type="radio" name="encheres" checked value="encheresOuvertes"> <label>Enchères ouvertes</label>
+				</li>
+				<li>
+				<input type="radio" name="encheres" value="mesEncheres"> <label>Mes enchères</label> 
+				</li>
+				<li>
+				<input type="radio" name="encheres" value="mesEncheresRemportees"> <label>Mes enchères
+					remportées</label> 
+				</li>
 			</div>
 
 			
 		<!-- boutons radio mes ventes -->
-			<input type="radio" name="choixAchatVente" value="MesVentes" checked> 
+			<input type="radio" name="choixAchatVente" value="MesVentes"> 
 			<label>Mes ventes</label>
 			<div>
-				<input type="radio" name="Ventes" checked 
-					value="mesVentesEnCours"> <label>Mes ventes en cours</label>
-				<br> <input type="radio" name="Ventes"
-					value="mesEncheres"> <label>Ventes non débutées</label> <br>
-				<input type="radio" name="Ventes"
-					value="mesEncheresRemportees"> <label>Ventes terminées</label> <br>
+				<ul>
+                <li>
+				<input type="radio" name="Ventes" value="mesVentesEnCours"> <label>Mes ventes en cours</label>
+				</li>
+				<li>
+				<input type="radio" name="Ventes" value="mesEncheres"> <label>Ventes non débutées</label> 
+				</li>
+				<li>
+				<input type="radio" name="Ventes" value="mesEncheresRemportees"> <label>Ventes terminées</label> 
+				</li>
 			</div>
 
-
-			
-<!--
-<div>
-<input onclick="activer" type="radio" id="groupeVentes" name="typeEncheres" value="2">
-<label for="groupeVentes">Ventes</label>
-<br>
-
-
-
-  
-<input disabled="disabled" class="ck_ventes" id="ventesEnCours" name="ventesEnCours" type="checkbox" value="1">
-<label for="ventesEnCours">Mes ventes en cours</label>
-<br>
-<input disabled="disabled" class="ck_ventes" id="ventesNonDebutees" name="ventesNonDebutees" type="checkbox" value="1">
-<label for="ventesNonDebutees">Ventes non débutées</label>
-<br>
-<input disabled="disabled" class="ck_ventes" id="ventesTerminees" name="ventesTerminees" type="checkbox" value="1">
-<label for="ventesTerminees">Ventes terminées</label>
 </div>
--->
-
+            
 			</div> 			
 
 					<div>
