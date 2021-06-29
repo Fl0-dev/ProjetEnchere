@@ -86,10 +86,25 @@ public interface EnchereDAO {
 
 
 	/**
-	 * selectionne tous les articles actuellement en vente et qui ne soit pas vendu par l'utilisateur
-	 * @return ListeEncheresOuvertes
+	 * sélectionne l'utilisateur à partir de son numéro utilisateur (id)
+	 * @param no_utilisateur
+	 * @return utilisateur
 	 */
-	List<ArticleVendu> selectEncheresOuvertes();
+	Utilisateur selectUserById(int no_utilisateur);
+
+	/**
+	 * sélectionne l'article à partir de son numéro article (id)
+	 * @param no_article
+	 * @return articleVendu
+	 */
+	ArticleVendu selectArticleById(int no_article);
 	
+	/**
+	 * sélectionne la catégorie à partir de son numéro article (id)
+	 * @param noCategorie
+	 * @return categorie
+	 */
+	Categorie selectCategorieById(int noCategorie);
+
 
 }

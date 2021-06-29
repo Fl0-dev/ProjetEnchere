@@ -208,5 +208,37 @@ public class EnchereManager {
 		List<ArticleVendu> ListeEncheresOuvertes = enchereDAO.selectEncheresOuvertes();
 		return ListeEncheresOuvertes;
 	}
+	
+	/**
+	 * sélectionne un utilisateur à partir de son numéro utilisateur (id)
+	 * @param no_utilisateur
+	 * @return utilisateur
+	 */
+	public Utilisateur selectUserById(int no_utilisateur) {
+		Utilisateur utilisateur = enchereDAO.selectUserById(no_utilisateur);
+		return utilisateur;
+		
+	}
+	
+	/**
+	 * sélectionne un article à partir de son numéro (id)
+	 * @param no_article
+	 * @return articleVendu
+	 */
+	public ArticleVendu selectArticleById(int no_article) {
+		ArticleVendu articleVendu = enchereDAO.selectArticleById(no_article);
+		return articleVendu;
+	}
+	
+	/**
+	 * sélectionne une catégorie à partir de son numéro (id)
+	 * @param no_categorie
+	 * @return categorie
+	 */
+	public Categorie selectCategorieById(int noCategorie) {
+		Categorie categorie = enchereDAO.selectCategorieById(noCategorie);
+		return categorie;
+		
+	}
 
 }
