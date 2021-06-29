@@ -6,10 +6,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Nouvelle vente</title>
+<!-- CSS -->
+<link href="${pageContext.request.contextPath }/css/style.css" rel="stylesheet">
 </head>
 <body>
+<header>
+	<h1><a href="${pageContext.request.contextPath }/AccueilConnecte">ENI-Enchères</a></h1>
+	<p>${resultat}Bienvenue ${ sessionScope.utilisateurSession.pseudo }!</p>
+	<nav> <a
+		href="${pageContext.request.contextPath }/NouvelleVente">Vendre
+		un articles</a> <a
+		href="${pageContext.request.contextPath }/MonProfil">Mon
+		profil</a> <a href="${pageContext.request.contextPath }/deconnexion">Déconnexion</a>
+	</nav> </header>
 
-<h1><a href="${pageContext.request.contextPath }/AccueilConnecte">ENI-Enchères</a></h1>
 
 <form action="/NouvelleVente" method="post">
    <div>
