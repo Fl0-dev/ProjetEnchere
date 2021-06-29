@@ -35,7 +35,7 @@ public class Utilisateur {
 
 	
 
-	public boolean isEtat() {
+	public boolean getEtat() {
 		return etat;
 	}
 
@@ -144,6 +144,15 @@ public class Utilisateur {
 		this.ville = ville;
 		this.motDePasse = motDePasse;
 	}
+
+
+	public Utilisateur(String pseudo, String email, String motDePasse, Boolean etat) {
+		this.pseudo = pseudo;
+		this.email = email;
+		this.motDePasse = motDePasse;
+		this.etat = etat;
+	}
+
 
 
 	public int getNoUtilisateur() {
