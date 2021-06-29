@@ -52,29 +52,36 @@ public class ServletAccueilConnecte extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
+		
+		//ouverture de la session et récupération de l'utilisateur
 		HttpSession session = request.getSession();
 		Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("utilisateurSession");
-
+		
+		/////////////////////////////Première arrivée sur la JSP////////////////////////////////////////////////
+		
 		// on récupère la liste des catégories présentes en base de données
-		List<Categorie> listeCategories = EnchereManager.getInstance().selectCategorie();
-		request.setAttribute("listeCategories", listeCategories);
-		System.out.println(listeCategories);
+		List<Categorie> listeCategoriesConnecte = EnchereManager.getInstance().selectCategorie();
+		request.setAttribute("listeCategories", listeCategoriesConnecte);
 
+		
 		// on récupère les enchères en cours
-		List<Enchere> listeEncheresEnCours = EnchereManager.getInstance().selectAllEnchere();
+		List<Enchere> listeEncheresOuvertes = EnchereManager.getInstance().selectEncheresOuvertes();
 
 		// on envoie ça dans la requête
-		request.setAttribute("listeEncheresEnCours", listeEncheresEnCours);
-		System.out.println(listeEncheresEnCours);
+		request.setAttribute("listeEncheresOuvertes", listeEncheresOuvertes);
+		System.out.println(listeEncheresOuvertes);
 
 		// on regarde quelle URL a été utilisée pour accéder à la servlet
 		String urlUtilisee = request.getServletPath();
 		
+/////////////////////////////Passage après une recherche////////////////////////////////////////////////
+		
 		// si c'est l'url /recherche, on récupère les infos saisies par l'utilisateur
 		if (urlUtilisee.equals("/recherche")) {
+			
 			// on récupère la liste des catégories présentes en base de données
-			List<Categorie> listeCategoriesConnecte = EnchereManager.getInstance().selectCategorie();
+			listeCategoriesConnecte = EnchereManager.getInstance().selectCategorie();
 			request.setAttribute("listeCategories", listeCategoriesConnecte);
 
 			// je récupère les résultats de la recherche
