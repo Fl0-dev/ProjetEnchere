@@ -17,6 +17,15 @@ import fr.eni.projetenchere.bo.Utilisateur;
 
 public class EnchereDAOJdbcImpl implements EnchereDAO {
 	
+	@Override
+	/* (non-Javadoc)
+	 * @see fr.eni.projetenchere.dal.EnchereDAO#selectEncheresOuvertes()
+	 */
+	public List<ArticleVendu> selectEncheresOuvertes(){
+		return null;
+		
+	}
+	
 	
 	@Override
 	/* (non-Javadoc)

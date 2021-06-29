@@ -106,5 +106,11 @@ public interface EnchereDAO {
 	 */
 	Categorie selectCategorieById(int noCategorie);
 
+	/**
+	 * selectionne tous les articles actuellement en vente et qui ne soit pas vendu par l'utilisateur
+	 * @return ListeEncheresOuvertes
+	 */
+	List<ArticleVendu> selectEncheresOuvertes();
+
 
 }
