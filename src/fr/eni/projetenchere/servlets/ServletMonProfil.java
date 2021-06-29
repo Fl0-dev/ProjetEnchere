@@ -21,7 +21,7 @@ import sun.launcher.resources.launcher;
 /**
  * Servlet implementation class ServletMonProfil
  */
-@WebServlet("/ServletMonProfil")
+@WebServlet("/MonProfil")
 public class ServletMonProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -42,7 +42,7 @@ public class ServletMonProfil extends HttpServlet {
 			rd.forward(request, response);
 		} else {
 			// renvoie vers l'accueil
-			RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueil");
+			RequestDispatcher rd = request.getRequestDispatcher("/Accueil");
 			rd.forward(request, response);
 		}
 		

@@ -19,7 +19,7 @@ import fr.eni.projetenchere.bo.Utilisateur;
 /**
  * Servlet implementation class ServletModifProfil
  */
-@WebServlet("/ServletModifProfil")
+@WebServlet("/ModifProfil")
 public class ServletModifProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -171,7 +171,7 @@ public class ServletModifProfil extends HttpServlet {
 
 				resultat = "Succès de la modification. ";
 				request.setAttribute("resultat", resultat);
-				RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueilConnecte");
+				RequestDispatcher rd = request.getRequestDispatcher("/AccueilConnecte");
 				rd.forward(request, response);
 
 			} else {

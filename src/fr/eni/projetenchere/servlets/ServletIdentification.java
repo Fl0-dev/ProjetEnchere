@@ -17,7 +17,7 @@ import fr.eni.projetenchere.bo.Utilisateur;
 /**
  * Servlet implementation class ServletIdentification
  */
-@WebServlet("/ServletIdentification")
+@WebServlet("/Identification")
 public class ServletIdentification extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -71,7 +71,7 @@ public class ServletIdentification extends HttpServlet {
 
 			session.setAttribute("utilisateurSession", utilisateurSession);
 
-			response.sendRedirect("ServletAccueilConnecte");
+			response.sendRedirect("AccueilConnecte");
 
 		} else {
 			request.setAttribute("messageErreur", "L'identifiant ou le mot de passe est invalide");

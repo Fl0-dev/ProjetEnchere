@@ -12,14 +12,14 @@
 </head>
 <body>
 <header>
-<h1><a href="${pageContext.request.contextPath }/ServletAccueil">ENI-Enchères</a></h1>
+<h1><a href="${pageContext.request.contextPath }/Accueil">ENI-Enchères</a></h1>
 </header>
 
 <p>${messageErreur}</p>
 
 <!--  Formulaire de connexion -->
 
-<form method="POST" action="${pageContext.request.contextPath }/ServletIdentification">
+<form method="POST" action="${pageContext.request.contextPath }/Identification">
 	<div>
 		<label for="identifiant">Identifiant : </label>
 		<input type="text" id="identifiant" name="identifiant" placeholder="monIdentifiant" autofocus >
@@ -40,7 +40,7 @@
 	</div>
 </form>
 
-	<a href="${pageContext.request.contextPath }/ServletCreationProfil">Créer un compte</a>
+	<a href="${pageContext.request.contextPath }/CreationProfil">Créer un compte</a>
 
 
 

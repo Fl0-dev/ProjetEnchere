@@ -17,7 +17,7 @@ import fr.eni.projetenchere.bo.Categorie;
 import fr.eni.projetenchere.bo.Enchere;
 
 
-@WebServlet(urlPatterns = { "/ServletAccueil", "/SuppressionProfil"})
+@WebServlet(urlPatterns = { "/Accueil", "/SuppressionProfil"})
 public class ServletAccueil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
