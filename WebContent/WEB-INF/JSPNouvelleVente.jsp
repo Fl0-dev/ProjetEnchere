@@ -60,15 +60,15 @@
 			<legend>Retrait</legend>
 			<div>
 			<label for="rue">Rue :</label> 
-			<input type="text" id="rue" name="rue">
+			<input type="text" id="rue" name="rue" value="<c:out value="${utilisateurSession.rue }"/>">
 			</div>
 			<div>
 			<label for="codePostal">Code postal :</label> 
-			<input type="text" id="codePostal" name="codePostal">
+			<input type="text" id="codePostal" name="codePostal" value="<c:out value="${utilisateurSession.codePostal }"/>">
 			</div>
 			<div>
 			<label for="ville">Ville :</label> 
-			<input type="text" id="ville" name="ville">
+			<input type="text" id="ville" name="ville" value="<c:out value="${utilisateurSession.ville }"/>">
 			</div>
 		</fieldset>
 		
