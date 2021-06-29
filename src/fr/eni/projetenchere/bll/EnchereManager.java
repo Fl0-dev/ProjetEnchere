@@ -204,5 +204,16 @@ public class EnchereManager {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	/**
+	 * sélectionne un utilisateur à partir de son numéro utilisateur (id)
+	 * @param no_utilisateur
+	 * @return utilisateur
+	 */
+	public Utilisateur selectUserById(int no_utilisateur) {
+		Utilisateur utilisateur = enchereDAO.selectUserById(no_utilisateur);
+		return utilisateur;
+		
+	}
 
 }

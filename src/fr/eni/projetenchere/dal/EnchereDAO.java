@@ -83,6 +83,13 @@ public interface EnchereDAO {
 	 * @return listeArticlesVendus
 	 */
 	List<ArticleVendu> selectAllVentesEnCours();
+
+	/**
+	 * sélectionne l'utilisateur à partir de son numéro utilisateur (id)
+	 * @param no_utilisateur
+	 * @return utilisateur
+	 */
+	Utilisateur selectUserById(int no_utilisateur);
 	
 
 }
