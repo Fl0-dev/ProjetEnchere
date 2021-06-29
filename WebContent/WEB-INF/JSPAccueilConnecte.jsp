@@ -58,33 +58,33 @@
 			<label>Achats</label>
 			<div>
 				<input type="checkbox" name="encheresOuvertes" checked 
-					value="encheresOuvertes"> <label>Enchères ouvertes</label>
+					value="encheresOuvertes" > <label>Enchères ouvertes</label>
 				<br> <input type="checkbox" name="mesEncheres"
-					value="mesEncheres"> <label>Mes enchères</label> <br>
+					value="mesEncheres" > <label>Mes enchères</label> <br>
 				<input type="checkbox" name="mesEncheresRemportees"
-					value="mesEncheresRemportees"> <label>Mes enchères
+					value="mesEncheresRemportees" > <label>Mes enchères
 					remportées</label> <br>
 			</div>
 
 			<div>
 				
-					<input type="radio" name="choixAchatVente" value="ventes">
+					<input type="radio" name="choixAchatVente" value="ventes" >
 					<label>Mes ventes</label>
 					<div>
 						<input type="checkbox" name="mesVentesEnCours"
-							value="mesVentesEnCours"> <label>Mes ventes en cours
+							value="mesVentesEnCours" > <label>Mes ventes en cours
 							</label> <br> <input type="checkbox"
-							name="ventesNonDebutees" value="ventesNonDebutees"> <label>Ventes non débutées
+							name="ventesNonDebutees" value="ventesNonDebutees" > <label>Ventes non débutées
 							</label> <br>
 							<input type="checkbox" name="ventesTerminees"
-							value="ventesTerminees"> <label>Ventes terminées</label> <br>
+							value="ventesTerminees"  > <label>Ventes terminées</label> <br>
 					</div>
 
 				
 
 
-			</div> 			
-
+			</div> 		
+			
 					<div>
 						<button type="submit">Rechercher</button>
 					</div>
@@ -114,6 +114,7 @@
 
 			</div>
 	</main>
+
 
 </body>
 </html>
