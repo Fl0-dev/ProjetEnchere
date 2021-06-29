@@ -6,7 +6,7 @@ public class Categorie {
 
 	private int noCategorie;
 	private String libelle;
-	private List<ArticleVendu> listeArticlesCategorie;
+	private List<ArticleVendu> listeArticlesCategorie;//TODO:A delete si inutile
 	public int getNoCategorie() {
 		return noCategorie;
 	}
@@ -19,10 +19,10 @@ public class Categorie {
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
-	public List<ArticleVendu> getListeArticlesCategorie() {
+	public List<ArticleVendu> getListeArticlesCategorie() {//TODO:A delete si inutile
 		return listeArticlesCategorie;
 	}
-	public void setListeArticlesCategorie(List<ArticleVendu> listeArticlesCategorie) {
+	public void setListeArticlesCategorie(List<ArticleVendu> listeArticlesCategorie) {//TODO:A delete si inutile
 		this.listeArticlesCategorie = listeArticlesCategorie;
 	}
 	public Categorie() {
