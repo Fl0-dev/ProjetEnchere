@@ -547,7 +547,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 			// requête SQL
 			final String SELECT_ARTICLE_BY_ID =
-					"SELECT a.nom_article, a.description, c.libelle, MAX(e.montant_enchere), " + 
+					"SELECT a.nom_article, a.description, c.no_categorie, MAX(e.montant_enchere) as enchere_max, " + 
 					"a.prix_initial as miseaprix, a.date_fin_encheres, a.no_retrait, vendeur.pseudo " + 
 					"FROM articles_vendus AS a  " + 
 					"inner join CATEGORIES as c on c.no_categorie = a.no_categorie " + 
@@ -555,7 +555,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 					"left join ENCHERES as e on a.no_article = e.no_article " + 
 					"left join UTILISATEURS as acheteur on e.no_utilisateur = acheteur.no_utilisateur " + 
 					"WHERE a.no_article = ?" + 
-					" GROUP BY a.nom_article, a.description, c.libelle, " + 
+					" GROUP BY a.nom_article, a.description, c.no_categorie, " + 
 					"a.prix_initial, a.date_fin_encheres, a.no_retrait, vendeur.pseudo;";
 
 			// ouverture de la connexion à la DB
@@ -573,7 +573,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 					int enchereMax = rs.getInt("enchere_max");
 					String nomArticle = rs.getString("nom_article");
 					String pseudoVendeur = rs.getString("pseudo");
-					int idUserAcheteur = rs.getInt("encheres.no_utilisateur");
+					int idUserAcheteur = rs.getInt("acheteur.no_utilisateur");
 					int noCategorie = rs.getInt("no_categorie");
 					int prixInitial = rs.getInt("prix_initial");
 					LocalDate dateFinEnchere = rs.getDate("date_fin_encheres").toLocalDate();
