@@ -361,7 +361,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		Utilisateur utilisateur = new Utilisateur();
 		
 		// requête SQL
-		final String SELECT_UTILISATEUR_BY_PSEUDO = "SELECT no_utilisateur, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM utilisateurs WHERE pseudo=?;";
+		final String SELECT_UTILISATEUR_BY_PSEUDO = "SELECT no_utilisateur, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur,etat FROM utilisateurs WHERE pseudo=?;";
 
 		// ouverture de la connexion à la DB
 				try (Connection connection = JdbcTools.getConnection();
@@ -386,11 +386,12 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				String mdp = rs.getString("mot_de_passe");
 				int credit = rs.getInt("credit");
 				boolean administrateur = rs.getBoolean("administrateur");
+				boolean etat = rs.getBoolean("etat");
 				
 				// utilisation des résultats
-				utilisateur = new Utilisateur(numUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, mdp, credit,administrateur);
+				utilisateur = new Utilisateur(numUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, mdp, credit,administrateur,etat);
 
-				utilisateur = new Utilisateur(numUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, mdp, credit, administrateur);
+				
 
 		
 			}
