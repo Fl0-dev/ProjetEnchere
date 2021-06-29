@@ -77,11 +77,8 @@ public interface EnchereDAO {
 	 */
 	void deleteUtilisateur(Utilisateur utilisateurSession);
 
-	/**
-	 * sélectionne tous les articles en BDD et affiche le cas échéant la dernière enchère effectuée dessus
-	 * @return listeArticlesVendus
-	 */
-	List<ArticleVendu> selectAllArticles();
+
+	List<Enchere> selectEncheresOuvertesExceptUtilisateur(int noUtilisateur);
 
 	
 

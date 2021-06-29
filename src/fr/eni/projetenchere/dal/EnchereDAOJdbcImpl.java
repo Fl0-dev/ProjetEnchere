@@ -17,26 +17,22 @@ import fr.eni.projetenchere.bo.Utilisateur;
 public class EnchereDAOJdbcImpl implements EnchereDAO {
 	
 	
-	
-	/**
-	 * efface un utilisateur en DB
-	 */
 	@Override
-	public void deleteUtilisateur(Utilisateur utilisateurSession) {
-		// requête SQL
-		final String DELETE_UTILISATEUR ="delete from UTILISATEURS WHERE no_utilisateur = ?";
+	/* (non-Javadoc)
+	 * @see fr.eni.projetenchere.dal.EnchereDAO#updateActif(fr.eni.projetenchere.bo.Utilisateur)
+	 */
+	public void updateEtat(Utilisateur utilisateurSession) {
+		final String UPDATE_ACTIF ="update UTILSATEURS set etat = 0 where no_utilsateur=?;";
 		// ouverture de la connexion à la DB
 		try (Connection connection = JdbcTools.getConnection()){
-			PreparedStatement requete = connection.prepareStatement(DELETE_UTILISATEUR);
-			//initialisation de la requête
+			PreparedStatement requete = connection.prepareStatement(UPDATE_ACTIF);
 			requete.setInt(1, utilisateurSession.getNoUtilisateur());
 			//exécution de la requête
 			requete.executeUpdate();
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
 	}
 	
 	
@@ -458,4 +454,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	return listeEncheres;
 
 	}
+
+
+	
 }

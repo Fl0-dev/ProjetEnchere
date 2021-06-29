@@ -23,8 +23,8 @@
 
 <form action="/NouvelleVente" method="post">
    <div>
-        <label for="article">Article :</label>
-        <input type="text" id="article" name="article">
+        <label for="nom_article">Article :</label>
+        <input type="text" id="nom_article" name="nom_article">
     </div>
     
     <div>
@@ -42,8 +42,8 @@
 	</div>
 	
 	<div>
-	<label for="miseaprix">Mise à prix :</label>
-<input type="number" id="miseaprix" name="miseaprix">
+	<label for="prix_initial">Mise à prix :</label>
+<input type="number" id="prix_initial" name="prix_initial">
 	</div>
 	
 	<div>

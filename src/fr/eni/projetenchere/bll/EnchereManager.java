@@ -176,8 +176,13 @@ public class EnchereManager {
 	}
 
 
+	/**
+	 * permet de changer la valeur d'un utilisateur
+	 * et de désactiver son compte
+	 * @param utilisateurSession
+	 */
 	public void desactiveUtilisateur(Utilisateur utilisateurSession) {
-		// TODO Auto-generated method stub
+		enchereDAO.updateEtat(utilisateurSession);
 		
 	}
 
