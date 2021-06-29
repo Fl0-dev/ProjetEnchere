@@ -20,7 +20,48 @@
 		href="${pageContext.request.contextPath }/MonProfil">Mon
 		profil</a> <a href="${pageContext.request.contextPath }/deconnexion">Déconnexion</a>
 	</nav> </header>
-	<h2>Détail vente</h2>
+	
+	<table>
+    <thead>
+        <tr>
+            <th colspan="2">Détail vente</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            
+            <td>${ articleSelected.nomArticle }</td>
+        </tr>
+         <tr>
+            <td>Description :</td>
+            <td></td>
+        </tr>
+         <tr>
+            <td>Catégorie :</td>
+            <td></td>
+        </tr>
+         <tr>
+            <td>Meilleure offre :</td>
+            <td></td>
+        </tr>
+         <tr>
+            <td>Mise à prix :</td>
+            <td></td>
+        </tr>
+         <tr>
+            <td>Fin de l'enchère :</td>
+            <td></td>
+        </tr>
+         <tr>
+            <td>Code postal</td>
+            <td></td>
+        </tr>
+         <tr>
+            <td>Ville</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
 	
 
 </body>

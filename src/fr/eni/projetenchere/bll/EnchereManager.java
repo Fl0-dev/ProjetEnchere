@@ -215,5 +215,26 @@ public class EnchereManager {
 		return utilisateur;
 		
 	}
+	
+	/**
+	 * sélectionne un article à partir de son numéro (id)
+	 * @param no_article
+	 * @return articleVendu
+	 */
+	public ArticleVendu selectArticleById(int no_article) {
+		ArticleVendu articleVendu = enchereDAO.selectArticleById(no_article);
+		return articleVendu;
+	}
+	
+	/**
+	 * sélectionne une catégorie à partir de son numéro (id)
+	 * @param no_categorie
+	 * @return categorie
+	 */
+	public Categorie selectCategorieById(int noCategorie) {
+		Categorie categorie = enchereDAO.selectCategorieById(noCategorie);
+		return categorie;
+		
+	}
 
 }

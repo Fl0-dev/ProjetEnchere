@@ -11,6 +11,7 @@ import java.util.List;
 import fr.eni.projetenchere.bo.ArticleVendu;
 import fr.eni.projetenchere.bo.Categorie;
 import fr.eni.projetenchere.bo.Enchere;
+import fr.eni.projetenchere.bo.Retrait;
 import fr.eni.projetenchere.bo.Utilisateur;
 
 
@@ -518,6 +519,128 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 		return utilisateur;
 
+	}
+	
+	/**
+	 * sélectionne un article à partir de son id
+	 * @return articleVendu
+	 */
+		@Override
+		public ArticleVendu selectArticleById(int no_article) {
+			
+			// création des variables
+					ArticleVendu articleVendu = new ArticleVendu();
+					Utilisateur vendeur;
+					Utilisateur acheteur;
+					Enchere enchere = new Enchere();
+					Retrait retrait = new Retrait();
+					Categorie categorie;
+
+			// requête SQL
+			final String SELECT_ARTICLE_BY_ID =
+					"SELECT a.nom_article, a.description, c.libelle, MAX(e.montant_enchere), " + 
+					"a.prix_initial as miseaprix, a.date_fin_encheres, a.no_retrait, vendeur.pseudo " + 
+					"FROM articles_vendus AS a  " + 
+					"inner join CATEGORIES as c on c.no_categorie = a.no_categorie " + 
+					"inner join UTILISATEURS as vendeur on a.no_utilisateur = vendeur.no_utilisateur " + 
+					"left join ENCHERES as e on a.no_article = e.no_article " + 
+					"left join UTILISATEURS as acheteur on e.no_utilisateur = acheteur.no_utilisateur " + 
+					"WHERE a.no_article = ?" + 
+					"GROUP BY a.nom_article, a.description, c.libelle, " + 
+					"a.prix_initial, a.date_fin_encheres, a.no_retrait, vendeur.pseudo;";
+
+			// ouverture de la connexion à la DB
+			try (Connection connection = JdbcTools.getConnection();
+					PreparedStatement requete = connection.prepareStatement(SELECT_ARTICLE_BY_ID)) {
+				
+			// initialisation de la requête
+				requete.setInt(1, no_article);
+				
+			// récupération du résultat
+				ResultSet rs = requete.executeQuery();
+
+				while (rs.next()) {
+					
+					int enchereMax = rs.getInt("enchere_max");
+					String nomArticle = rs.getString("nom_article");
+					String pseudoVendeur = rs.getString("pseudo");
+					int idUserAcheteur = rs.getInt("encheres.no_utilisateur");
+					int noCategorie = rs.getInt("no_categorie");
+					int prixInitial = rs.getInt("prix_initial");
+					LocalDate dateFinEnchere = rs.getDate("date_fin_encheres").toLocalDate();
+					String rue = rs.getString("rue");
+					String codePostal = rs.getString("codePostal");
+					String ville = rs.getString("ville");
+
+					// utilisation des résultats
+					vendeur = new Utilisateur(pseudoVendeur);
+					acheteur = selectUserById(idUserAcheteur);
+					
+					categorie = selectCategorieById(noCategorie);
+					
+					retrait.setCode_postal_retrait(codePostal);
+					retrait.setRue_retrait(rue);
+					retrait.setVille_retrait(ville);
+					
+					enchere.setMontant_enchere(enchereMax);
+					enchere.setUtilisateur(acheteur);
+					
+					articleVendu.setDateFinEncheres(dateFinEnchere);
+					articleVendu.setMiseAPrix(prixInitial);
+					articleVendu.setNomArticle(nomArticle);
+					articleVendu.setEnchereMax(enchere);
+					articleVendu.setUtilisateur(vendeur);
+					articleVendu.setCategorieArticle(categorie);
+		
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		return articleVendu;
+
+		}
+
+/**
+ * sélectionne une catégorie à partir de son numéro (id)
+ * @param noCategorie
+ * @return categorie
+ */
+		@Override
+	public Categorie selectCategorieById(int noCategorie) {
+		// création des variables
+			Categorie categorie = new Categorie();
+
+		// requête SQL
+		final String SELECT_CAT_BY_ID =
+				"SELECT libelle FROM CATEGORIES WHERE no_categorie=?;";
+
+		// ouverture de la connexion à la DB
+		try (Connection connection = JdbcTools.getConnection();
+				PreparedStatement requete = connection.prepareStatement(SELECT_CAT_BY_ID)) {
+			
+			// initialisation de la requête
+			requete.setInt(1, noCategorie);
+			
+		// récupération du résultat
+			ResultSet rs = requete.executeQuery();
+
+			while (rs.next()) {
+				
+				String libelle = rs.getString("libelle");
+
+				// utilisation des résultats
+				categorie.setLibelle(libelle);
+				categorie.setNoCategorie(noCategorie);
+	
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	return categorie;
 	}
 	
 }

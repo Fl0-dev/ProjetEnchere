@@ -90,6 +90,20 @@ public interface EnchereDAO {
 	 * @return utilisateur
 	 */
 	Utilisateur selectUserById(int no_utilisateur);
+
+	/**
+	 * sélectionne l'article à partir de son numéro article (id)
+	 * @param no_article
+	 * @return articleVendu
+	 */
+	ArticleVendu selectArticleById(int no_article);
 	
+	/**
+	 * sélectionne la catégorie à partir de son numéro article (id)
+	 * @param noCategorie
+	 * @return categorie
+	 */
+	Categorie selectCategorieById(int noCategorie);
+
 
 }
