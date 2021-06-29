@@ -16,7 +16,7 @@
 	<p>${resultat}Bienvenue ${ sessionScope.utilisateurSession.pseudo }!</p>
 	<nav> <a
 		href="${pageContext.request.contextPath }/NouvelleVente">Vendre
-		un articles</a> <a
+		un article</a> <a
 		href="${pageContext.request.contextPath }/MonProfil">Mon
 		profil</a> <a href="${pageContext.request.contextPath }/deconnexion">Déconnexion</a>
 	</nav> </header>
