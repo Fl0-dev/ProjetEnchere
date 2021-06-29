@@ -123,7 +123,7 @@ public class ServletCreationProfil extends HttpServlet {
        //Initialisation du résultat global de la validation
        if ( MapErreurs.isEmpty() ) {
     	   //insertion des infos
-    	   Utilisateur newUtilisateur = EnchereManager.getInstance().inserNewtUtilisateur(pseudo,nom,prenom,email,telephone,rue,
+    	   Utilisateur newUtilisateur = EnchereManager.getInstance().insertNewUtilisateur(pseudo,nom,prenom,email,telephone,rue,
    				codePostal,ville,motDePasse);
     		
        	//récupération de tous les attributs de newUtilisateur par son pseudo
