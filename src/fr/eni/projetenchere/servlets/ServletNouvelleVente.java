@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.eni.projetenchere.bll.EnchereManager;
+import fr.eni.projetenchere.bo.ArticleVendu;
 import fr.eni.projetenchere.bo.Categorie;
 
 /**
@@ -34,6 +35,19 @@ public class ServletNouvelleVente extends HttpServlet {
 		// on récupère la liste des catégories présentes en base de données
 		List<Categorie> listeCategories = EnchereManager.getInstance().selectCategorie();
 		request.setAttribute("listeCategories", listeCategories);
+		
+		// on récupère les données du formulaire
+		String nomArticle = request.getParameter("nom_article");
+		String description = request.getParameter("description");
+		String categorie = request.getParameter("categorie");
+		String prix_initial = request.getParameter("prix_initial");
+		String debutenchere = request.getParameter("debutenchere");
+		String finenchere = request.getParameter("finenchere");
+		
+		// TODO: vérification des erreurs
+		
+		// insertion des infos
+		ArticleVendu newArticleVendu = EnchereManager.getInstance().insertArticle();
 		
 		// renvoie vers la JSP après traitement
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSPNouvelleVente.jsp");

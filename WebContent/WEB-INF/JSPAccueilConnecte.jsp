@@ -58,11 +58,11 @@
 			<label>Achats</label>
 			<div>
 				<input type="checkbox" name="encheresOuvertes" checked 
-					value="encheresOuvertes" > <label>Enchères ouvertes</label>
+					value="encheresOuvertes"> <label>Enchères ouvertes</label>
 				<br> <input type="checkbox" name="mesEncheres"
-					value="mesEncheres" > <label>Mes enchères</label> <br>
+					value="mesEncheres"> <label>Mes enchères</label> <br>
 				<input type="checkbox" name="mesEncheresRemportees"
-					value="mesEncheresRemportees" > <label>Mes enchères
+					value="mesEncheresRemportees"> <label>Mes enchères
 					remportées</label> <br>
 			</div>
 
@@ -79,12 +79,26 @@
 							<input type="checkbox" name="ventesTerminees"
 							value="ventesTerminees"  > <label>Ventes terminées</label> <br>
 					</div>
+ 
+ 
 
-				
+<div>
+<input onclick="activer" type="radio" id="groupeVentes" name="typeEncheres" value="2">
+<label for="groupeVentes">Ventes</label>
+<br>
+<input disabled="disabled" class="ck_ventes" id="ventesEnCours" name="ventesEnCours" type="checkbox" value="1">
+<label for="ventesEnCours">Mes ventes en cours</label>
+<br>
+<input disabled="disabled" class="ck_ventes" id="ventesNonDebutees" name="ventesNonDebutees" type="checkbox" value="1">
+<label for="ventesNonDebutees">Ventes non débutées</label>
+<br>
+<input disabled="disabled" class="ck_ventes" id="ventesTerminees" name="ventesTerminees" type="checkbox" value="1">
+<label for="ventesTerminees">Ventes terminées</label>
+</div>
 
 
-			</div> 		
-			
+			</div> 			
+
 					<div>
 						<button type="submit">Rechercher</button>
 					</div>
@@ -100,21 +114,21 @@
 
 				<c:forEach var="enchere" items="${listeEncheresEnCours }">
 
-					<!-- FIXME: montrer uniquement les enchères dont la date de fin est inférieure à la date du jour (enchères en cours) -->
-
 					<ul class="carte-enchere">
 						<li>${enchere.articleVendu.nomArticle }</li>
 						<li>Prix : ${enchere.montant_enchere } points</li>
 						<li>Date de fin de l'enchère :
 							${enchere.articleVendu.dateFinEncheres }</li>
 						<li>Vendeur : ${enchere.utilisateur.pseudo }</li>
+						<li>Meilleur enchérisseur : ${articleVendu.utilisateur.pseudo }</li>
 					</ul>
 
 				</c:forEach>
 
 			</div>
+			
+		
 	</main>
-
 
 </body>
 </html>
