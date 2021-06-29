@@ -43,11 +43,11 @@ public class ServletAccueil extends HttpServlet {
 				List<Categorie> listeCategories = EnchereManager.getInstance().selectCategorie();
 				request.setAttribute("listeCategories", listeCategories);
 		
-		// on récupère les enchères en cours
-				List<Enchere> listeEncheresEnCours = EnchereManager.getInstance().selectAllEnchere();
+		// on récupère les ventes (enchères) en cours
+				List<ArticleVendu> listeVentesEnCours = EnchereManager.getInstance().selectAllVentesEnCours();
 				
 		// on envoie ça dans la requête
-				request.setAttribute("listeEncheresEnCours", listeEncheresEnCours);
+				request.setAttribute("listeVentesEnCours", listeVentesEnCours);
 			
 		// renvoie vers la JSP après traitement
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSPAccueil.jsp");
@@ -62,20 +62,19 @@ public class ServletAccueil extends HttpServlet {
 		request.setAttribute("listeCategories", listeCategories);
 		
 		// je récupère les résultats de la recherche
-		String contenuRecherche = request.getParameter("contenuRecherche").trim();
+		// String contenuRecherche = request.getParameter("contenuRecherche").trim();
 		int categorie = Integer.valueOf(request.getParameter("categorie"));
 		
-		List<Enchere> listeEncheresEnCours;
+		List<ArticleVendu> listeVentesEnCours = EnchereManager.getInstance().selectAllVentesEnCours();
 		
 		// si l'option choisit est "toutes", on recherche uniquement par nom d'article
 		if (categorie == 0) {
-			listeEncheresEnCours = EnchereManager.getInstance().selectEnchereByArticle(contenuRecherche);
+			
 		} else {
 			// sinon, afficher résultats de la recherche par catégorie ET nom article
-			listeEncheresEnCours = EnchereManager.getInstance().selectEnchereByCatAndArt(contenuRecherche, categorie);
 		}
 		
-		request.setAttribute("listeEncheresEnCours", listeEncheresEnCours);
+		request.setAttribute("listeVentesEnCours", listeVentesEnCours);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSPAccueil.jsp");
 		rd.forward(request, response);
