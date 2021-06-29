@@ -1,5 +1,6 @@
 package fr.eni.projetenchere.bll;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.projetenchere.bo.ArticleVendu;
@@ -188,7 +189,13 @@ public class EnchereManager {
 		
 	}
 	
-	public void selectAllVentesEnCours() {
+	/**
+	 * sélectionne tous les articles actuellement en vente
+	 * @return listeArticlesEnVente
+	 */
+	public List<ArticleVendu> selectAllVentesEnCours() {
+		List<ArticleVendu> listeArticlesEnVente = enchereDAO.selectAllVentesEnCours();
+		return listeArticlesEnVente;
 		
 	}
 
