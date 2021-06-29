@@ -5,7 +5,7 @@ import java.util.List;
 import fr.eni.projetenchere.bo.ArticleVendu;
 import fr.eni.projetenchere.bo.Categorie;
 import fr.eni.projetenchere.bo.Enchere;
-
+import fr.eni.projetenchere.bo.Retrait;
 import fr.eni.projetenchere.bo.Utilisateur;
 
 /**
@@ -111,6 +111,12 @@ public interface EnchereDAO {
 	 * @return ListeEncheresOuvertes
 	 */
 	List<ArticleVendu> selectEncheresOuvertes();
+
+	/**
+	 * selectionne un lieu de retrait en fonction de l'article
+	 * @return retrait
+	 */
+	Retrait selectRetraitByArticleId(int noArticle);
 
 
 }

@@ -38,7 +38,7 @@ public class ServletEncherir extends HttpServlet {
 		if (utilisateurSession != null) {
 			//int no_article = Integer.parseInt(request.getParameter("no_article"));
 			// récupère id article pour l'afficher
-			int no_article = 1;
+			int no_article = 3;
 			ArticleVendu articleSelected = EnchereManager.getInstance().selectArticleById(no_article);
 			request.setAttribute("articleSelected", articleSelected);
 			System.out.println(articleSelected);
