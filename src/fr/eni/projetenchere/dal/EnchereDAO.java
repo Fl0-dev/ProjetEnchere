@@ -2,6 +2,7 @@ package fr.eni.projetenchere.dal;
 
 import java.util.List;
 
+import fr.eni.projetenchere.bo.ArticleVendu;
 import fr.eni.projetenchere.bo.Categorie;
 import fr.eni.projetenchere.bo.Enchere;
 
@@ -69,17 +70,19 @@ public interface EnchereDAO {
 	 * @param utilisateur
 	 */
 	void updateUtilisateur(Utilisateur utilisateur);
-	
-	
-	/**
-	 * permet de supprimer un utilisateur
+
+	/**permet de changer la valeur du boolean actif
+	 * pour désactiver un utilisateur
 	 * @param utilisateurSession
 	 */
-	void deleteUtilisateur(Utilisateur utilisateurSession);
+	void updateEtat(Utilisateur utilisateurSession);
 
 
-	List<Enchere> selectEncheresOuvertesExceptUtilisateur(int noUtilisateur);
-
+	/**
+	 * permet d'afficher tous les articles actuellement en vente
+	 * @return listeArticlesVendus
+	 */
+	List<ArticleVendu> selectAllVentesEnCours();
 	
 
 }

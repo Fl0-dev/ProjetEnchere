@@ -20,14 +20,14 @@ public class ArticleVendu {
 	private Utilisateur utilisateur;
 	
 	// liste des différentes enchères effectuées sur un article
-	private List<Enchere> encheresSurArticle; 
+	private Enchere enchereMax; 
 	
 	
-	public List<Enchere> getEncheresSurArticle() {
-		return encheresSurArticle;
+	public Enchere getEnchereMax() {
+		return enchereMax;
 	}
-	public void setEncheresSurArticle(List<Enchere> encheresSurArticle) {
-		this.encheresSurArticle = encheresSurArticle;
+	public void setEnchereMax(Enchere enchereMax) {
+		this.enchereMax = enchereMax;
 	}
 	public int getNoArticle() {
 		return noArticle;

@@ -1,6 +1,8 @@
 package fr.eni.projetenchere.bll;
 
 import java.util.List;
+
+import fr.eni.projetenchere.bo.ArticleVendu;
 import fr.eni.projetenchere.bo.Categorie;
 import fr.eni.projetenchere.bo.Enchere;
 import fr.eni.projetenchere.bo.Utilisateur;
@@ -183,6 +185,10 @@ public class EnchereManager {
 	 */
 	public void desactiveUtilisateur(Utilisateur utilisateurSession) {
 		enchereDAO.updateEtat(utilisateurSession);
+		
+	}
+	
+	public void selectAllVentesEnCours() {
 		
 	}
 
