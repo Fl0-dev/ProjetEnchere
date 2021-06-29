@@ -200,9 +200,13 @@ public class EnchereManager {
 	}
 
 
-	public List<Enchere> selectEncheresOuvertes() {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * selectionne tous les articles actuellement en vente et qui ne soit pas vendu par l'utilisateur
+	 * @return ListeEncheresOuvertes
+	 */
+	public List<ArticleVendu> selectEncheresOuvertes() {
+		List<ArticleVendu> ListeEncheresOuvertes = enchereDAO.selectEncheresOuvertes();
+		return ListeEncheresOuvertes;
 	}
 	
 	/**
