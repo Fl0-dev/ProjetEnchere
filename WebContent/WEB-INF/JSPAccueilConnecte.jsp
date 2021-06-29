@@ -90,27 +90,6 @@
 
 </div>
             
-			
-<!--
-<div>
-<input onclick="activer" type="radio" id="groupeVentes" name="typeEncheres" value="2">
-<label for="groupeVentes">Ventes</label>
-<br>
-
-
-
-  
-<input disabled="disabled" class="ck_ventes" id="ventesEnCours" name="ventesEnCours" type="checkbox" value="1">
-<label for="ventesEnCours">Mes ventes en cours</label>
-<br>
-<input disabled="disabled" class="ck_ventes" id="ventesNonDebutees" name="ventesNonDebutees" type="checkbox" value="1">
-<label for="ventesNonDebutees">Ventes non débutées</label>
-<br>
-<input disabled="disabled" class="ck_ventes" id="ventesTerminees" name="ventesTerminees" type="checkbox" value="1">
-<label for="ventesTerminees">Ventes terminées</label>
-</div>
--->
-
 			</div> 			
 
 					<div>
