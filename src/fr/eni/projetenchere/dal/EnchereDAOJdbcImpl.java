@@ -546,7 +546,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 					"left join ENCHERES as e on a.no_article = e.no_article " + 
 					"left join UTILISATEURS as acheteur on e.no_utilisateur = acheteur.no_utilisateur " + 
 					"WHERE a.no_article = ?" + 
-					"GROUP BY a.nom_article, a.description, c.libelle, " + 
+					" GROUP BY a.nom_article, a.description, c.libelle, " + 
 					"a.prix_initial, a.date_fin_encheres, a.no_retrait, vendeur.pseudo;";
 
 			// ouverture de la connexion à la DB
