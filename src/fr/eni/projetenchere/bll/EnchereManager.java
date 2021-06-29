@@ -177,7 +177,7 @@ public class EnchereManager {
 
 
 	public void desactiveUtilisateur(Utilisateur utilisateurSession) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
