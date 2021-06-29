@@ -75,10 +75,10 @@
 		
 
 		<div class="button">
-			<button type="submit">Enregistrer</button>
+			<button type="submit"><a href="${pageContext.request.contextPath }/NouvelleVente">Enregistrer</button>
 		</div>
 		<div class="button">
-			<button type="reset">Annuler</button>
+			<button type="reset" ><a href="${pageContext.request.contextPath }/AccueilConnecte">Annuler</button>
 		</div>
 
 			</form>
