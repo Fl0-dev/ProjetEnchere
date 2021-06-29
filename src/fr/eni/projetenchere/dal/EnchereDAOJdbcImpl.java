@@ -322,7 +322,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	public List<Utilisateur> selectConnexion() {
 		List<Utilisateur> listeUtilisateurConnexion = new ArrayList<>();
 
-		final String SELECT_UTILISATEUR_CONNEXION = "SELECT pseudo, email, mot_de_passe FROM utilisateurs;";
+		final String SELECT_UTILISATEUR_CONNEXION = "SELECT pseudo, email, mot_de_passe, etat FROM utilisateurs;";
 
 		// ouverture de la connexion vers DB
 		try (Connection connection = JdbcTools.getConnection(); Statement requete = connection.createStatement()) {
@@ -336,8 +336,9 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				String pseudo = rs.getString("pseudo");
 				String email = rs.getString("email");
 				String mot_de_passe = rs.getString("mot_de_passe");
+				Boolean etat = rs.getBoolean("etat");
 
-				utilisateur = new Utilisateur(pseudo, email, mot_de_passe);
+				utilisateur = new Utilisateur(pseudo, email, mot_de_passe,etat);
 
 				listeUtilisateurConnexion.add(utilisateur);
 			}

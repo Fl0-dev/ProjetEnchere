@@ -56,7 +56,7 @@ public class ServletIdentification extends HttpServlet {
 
 			// si l'identifiant (pseudo ou e-mail) est trouvé en BDD ET si le mot de passe
 			if ((identifiant.equals(utilisateur.getPseudo()) || (identifiant.equals(utilisateur.getEmail())))
-					&& mdp.equals(utilisateur.getMotDePasse())) {
+					&& mdp.equals(utilisateur.getMotDePasse()) && utilisateur.getEtat()==true) {
 
 				utilisateurPseudo = utilisateur.getPseudo();
 
