@@ -22,7 +22,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	 * @see fr.eni.projetenchere.dal.EnchereDAO#updateActif(fr.eni.projetenchere.bo.Utilisateur)
 	 */
 	public void updateEtat(Utilisateur utilisateurSession) {
-		final String UPDATE_ACTIF ="update UTILSATEURS set etat = 0 where no_utilsateur=?;";
+		final String UPDATE_ACTIF ="update UTILISATEURS set etat = 0 where no_utilisateur=?;";
 		// ouverture de la connexion à la DB
 		try (Connection connection = JdbcTools.getConnection()){
 			PreparedStatement requete = connection.prepareStatement(UPDATE_ACTIF);
