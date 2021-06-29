@@ -561,7 +561,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 				while (rs.next()) {
 					
-					int enchereMax = rs.getInt("encheres.montant_enchere");
+					int enchereMax = rs.getInt("enchere_max");
 					String nomArticle = rs.getString("nom_article");
 					String pseudoVendeur = rs.getString("pseudo");
 					int idUserAcheteur = rs.getInt("encheres.no_utilisateur");

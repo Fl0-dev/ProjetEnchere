@@ -1,6 +1,7 @@
 package fr.eni.projetenchere.servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,6 +30,10 @@ public class ServletEncherir extends HttpServlet {
 		// récupère l'utilisateur de la session
 		HttpSession session = request.getSession();
 		Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("utilisateurSession");
+		
+		// on récupère les ventes (enchères) en cours
+		List<ArticleVendu> listeVentesEnCours = EnchereManager.getInstance().selectAllVentesEnCours();
+		request.setAttribute("listeVentesEnCours", listeVentesEnCours);
 		
 		if (utilisateurSession != null) {
 			//int no_article = Integer.parseInt(request.getParameter("no_article"));
