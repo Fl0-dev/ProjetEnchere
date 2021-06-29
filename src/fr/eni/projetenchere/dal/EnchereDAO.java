@@ -2,12 +2,14 @@ package fr.eni.projetenchere.dal;
 
 import java.util.List;
 
+import fr.eni.projetenchere.bo.ArticleVendu;
 import fr.eni.projetenchere.bo.Categorie;
 import fr.eni.projetenchere.bo.Enchere;
 
 import fr.eni.projetenchere.bo.Utilisateur;
 
 /**
+ * @author fgirard2021
  *
  */
 public interface EnchereDAO {
@@ -68,10 +70,6 @@ public interface EnchereDAO {
 	 * @param utilisateur
 	 */
 	void updateUtilisateur(Utilisateur utilisateur);
-	
-
-	List<Enchere> selectEncheresOuvertesExceptUtilisateur(int noUtilisateur);
-
 
 	/**permet de changer la valeur du boolean actif
 	 * pour désactiver un utilisateur
@@ -79,6 +77,12 @@ public interface EnchereDAO {
 	 */
 	void updateEtat(Utilisateur utilisateurSession);
 
+
+	/**
+	 * permet d'afficher tous les articles actuellement en vente
+	 * @return listeArticlesVendus
+	 */
+	List<ArticleVendu> selectAllVentesEnCours();
 	
 
 }

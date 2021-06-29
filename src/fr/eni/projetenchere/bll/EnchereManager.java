@@ -1,6 +1,9 @@
 package fr.eni.projetenchere.bll;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import fr.eni.projetenchere.bo.ArticleVendu;
 import fr.eni.projetenchere.bo.Categorie;
 import fr.eni.projetenchere.bo.Enchere;
 import fr.eni.projetenchere.bo.Utilisateur;
@@ -183,6 +186,16 @@ public class EnchereManager {
 	 */
 	public void desactiveUtilisateur(Utilisateur utilisateurSession) {
 		enchereDAO.updateEtat(utilisateurSession);
+		
+	}
+	
+	/**
+	 * sélectionne tous les articles actuellement en vente
+	 * @return listeArticlesEnVente
+	 */
+	public List<ArticleVendu> selectAllVentesEnCours() {
+		List<ArticleVendu> listeArticlesEnVente = enchereDAO.selectAllVentesEnCours();
+		return listeArticlesEnVente;
 		
 	}
 

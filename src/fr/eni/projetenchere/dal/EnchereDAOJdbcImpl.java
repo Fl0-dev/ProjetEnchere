@@ -404,15 +404,15 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	}
 	
 	/**
-	 * Requêtes SQL préparées pour la page d'accueil connecté
+	 * Requêtes SQL préparées pour la page d'accueil
 	 */
 	
-	// affiche toutes les enchères ouvertes sauf celle d'utilisateurSession
+	// affiche toutes les enchères ouvertes
 	@Override
-	public List<Enchere> selectEncheresOuvertesExceptUtilisateur(int noUtilisateur) {
+	public List<ArticleVendu> selectAllVentesEnCours() {
 		
 		// création de la liste vide
-				List<Enchere> listeEncheres = new ArrayList<>();
+				List<ArticleVendu> listeArticlesEnVente = new ArrayList<>();
 
 				// création des variables
 				ArticleVendu articleVendu;
@@ -420,40 +420,51 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				Enchere enchere;
 
 		// requête SQL
-		final String SELECT_ALL_ENCHERES_OUVERTES_EXCEPT_USER = "SELECT a.date_fin_encheres, montant_enchere, a.nom_article, u.pseudo from ENCHERES"
-				+ " as e inner join ARTICLES_VENDUS as a on a.no_article= e.no_article "
-				+ "inner join UTILISATEURS as u on a.no_utilisateur = u.no_utilisateur "
-				+ "WHERE ((date_debut_encheres < GETDATE() and date_fin_encheres > GETDATE()) AND a.no_utilisateur <> ? );";
+		final String SELECT_ALL_VENTES_EN_COURS =
+				"SELECT MAX(e.montant_enchere) as enchere_max, " + 
+				"a.nom_article, vendeur.pseudo, date_fin_encheres, c.no_categorie, c.libelle " + 
+				"FROM articles_vendus AS a  " + 
+				"inner join CATEGORIES as c on c.no_categorie = a.no_categorie " + 
+				"inner join UTILISATEURS as vendeur on a.no_utilisateur = vendeur.no_utilisateur " + 
+				"left join ENCHERES as e on a.no_article = e.no_article " + 
+				"left join UTILISATEURS as acheteur on e.no_utilisateur = acheteur.no_utilisateur " + 
+				"where (date_debut_encheres < GETDATE() and date_fin_encheres > GETDATE()) " + 
+				"group by a.nom_article, vendeur.pseudo, date_fin_encheres, c.no_categorie, c.libelle;";
 
 		// ouverture de la connexion à la DB
 		try (Connection connection = JdbcTools.getConnection();
-				PreparedStatement requete = connection.prepareStatement(SELECT_ALL_ENCHERES_OUVERTES_EXCEPT_USER)) {
+				PreparedStatement requete = connection.prepareStatement(SELECT_ALL_VENTES_EN_COURS)) {
 			
-			// initialisation de la requête
-			requete.setInt(1, noUtilisateur);
-			// récupération du résultat
+		// récupération du résultat
 			ResultSet rs = requete.executeQuery();
 
 			while (rs.next()) {
 				LocalDate dateFinEnchere = rs.getDate("date_fin_encheres").toLocalDate();
-				int montantEnchere = rs.getInt("montant_enchere");
-				String nomArticle = rs.getString("nom_article");
-				String pseudo = rs.getString("pseudo");
+				 int enchereMax = rs.getInt("enchere_max");
+				String nomArticle = rs.getString("a.nom_article");
+				String pseudoVendeur = rs.getString("vendeur.pseudo");
 
 				// utilisation des résultats
-				utilisateur = new Utilisateur(pseudo);
-				articleVendu = new ArticleVendu(nomArticle, dateFinEnchere);
-				enchere = new Enchere(montantEnchere, utilisateur, articleVendu);
-
+				utilisateur = new Utilisateur(pseudoVendeur);
+				
+				enchere = new Enchere();
+				enchere.setMontant_enchere(enchereMax);
+				
+				articleVendu = new ArticleVendu();
+				articleVendu.setDateFinEncheres(dateFinEnchere);
+				articleVendu.setNomArticle(nomArticle);
+				articleVendu.setEnchereMax(enchere);
+				articleVendu.setUtilisateur(utilisateur);
+		
 				// ajout dans la liste d'enchères
-				listeEncheres.add(enchere);
+				listeArticlesEnVente.add(articleVendu);
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-	return listeEncheres;
+	return listeArticlesEnVente;
 
 	}
 
