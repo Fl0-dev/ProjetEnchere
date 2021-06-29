@@ -67,7 +67,7 @@ public class ServletAccueilConnecte extends HttpServlet {
 
 		
 		// on récupère les enchères en cours
-		List<ArticleVendu> listeEncheresOuvertes = EnchereManager.getInstance().selectEncheresOuvertes();
+		List<ArticleVendu> listeEncheresOuvertes = EnchereManager.getInstance().selectEncheresOuvertes(utilisateurSession.getPseudo());
 
 		// on envoie ça dans la requête
 		request.setAttribute("listeEncheresOuvertes", listeEncheresOuvertes);

@@ -204,9 +204,9 @@ public class EnchereManager {
 	 * selectionne tous les articles actuellement en vente et qui ne soit pas vendu par l'utilisateur
 	 * @return ListeEncheresOuvertes
 	 */
-	public List<ArticleVendu> selectEncheresOuvertes() {
-		List<ArticleVendu> ListeEncheresOuvertes = enchereDAO.selectEncheresOuvertes();
-		return ListeEncheresOuvertes;
+	public List<ArticleVendu> selectEncheresOuvertes(String pseudo) {
+		List<ArticleVendu> listeEncheresOuvertes = enchereDAO.selectEncheresOuvertes(pseudo);
+		return listeEncheresOuvertes;
 	}
 	
 	/**

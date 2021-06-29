@@ -108,9 +108,9 @@ public interface EnchereDAO {
 
 	/**
 	 * selectionne tous les articles actuellement en vente et qui ne soit pas vendu par l'utilisateur
-	 * @return ListeEncheresOuvertes
+	 * @return listeEncheresOuvertes
 	 */
-	List<ArticleVendu> selectEncheresOuvertes();
+	List<ArticleVendu> selectEncheresOuvertes(String pseudo);
 
 
 }

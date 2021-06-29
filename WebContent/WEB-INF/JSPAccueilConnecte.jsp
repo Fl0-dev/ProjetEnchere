@@ -94,14 +94,13 @@
 			<!-- Affichage des enchères en cours -->
 			<div class="encheres">
 
-				<c:forEach var="enchere" items="${listeEncheresOuvertes }">
+				<c:forEach var="articleVendu" items="${listeEncheresOuvertes }">
 
 					<ul class="carte-enchere">
-						<li>${enchere.articleVendu.nomArticle }</li>
-						<li>Prix : ${enchere.montant_enchere } points</li>
-						<li>Date de fin de l'enchère :
-							${enchere.articleVendu.dateFinEncheres }</li>
-						<li>Vendeur : ${enchere.utilisateur.pseudo }</li>
+						<li>${articleVendu.nomArticle }</li>
+						<li>Prix : ${articleVendu.enchereMax.montant_enchere } points</li>
+						<li>Date de fin de l'enchère : ${articleVendu.dateFinEncheres }</li>
+						<li>Vendeur : ${articleVendu.utilisateur.pseudo }</li>
 						
 					</ul>
 
