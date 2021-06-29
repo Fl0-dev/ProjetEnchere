@@ -29,8 +29,7 @@
     </thead>
     <tbody>
         <tr>
-            
-            <td>${ articleSelected.nomArticle }</td>
+            <td><em>${articleSelected.nomArticle }</em></td>
         </tr>
          <tr>
             <td>Description :</td>
@@ -42,11 +41,11 @@
         </tr>
          <tr>
             <td>Meilleure offre :</td>
-            <td></td>
+            <td>${articleSelected.enchereMax.montant_enchere } points par ${articleSelected.enchereMax.utilisateur.pseudo }</td>
         </tr>
          <tr>
             <td>Mise à prix :</td>
-            <td></td>
+            <td>${articleSelected.miseAPrix } points</td>
         </tr>
          <tr>
             <td>Fin de l'enchère :</td>
