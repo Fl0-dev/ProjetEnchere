@@ -9,9 +9,9 @@
 </head>
 <body>
 
-<h1><a href="${pageContext.request.contextPath }/ServletAccueilConnecte">ENI-Enchères</a></h1>
+<h1><a href="${pageContext.request.contextPath }/AccueilConnecte">ENI-Enchères</a></h1>
 
-<form action="/ServletNouvelleVente" method="post">
+<form action="/NouvelleVente" method="post">
    <div>
         <label for="article">Article :</label>
         <input type="text" id="article" name="article">

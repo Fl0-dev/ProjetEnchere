@@ -10,13 +10,13 @@
 </head>
 <body>
 	<header>
-		<h1><a href="${pageContext.request.contextPath }/ServletAccueilConnecte">ENI-Enchères</a></h1>
+		<h1><a href="${pageContext.request.contextPath }/AccueilConnecte">ENI-Enchères</a></h1>
 	</header>
 	<center>
 		<h1>Mon Profil</h1>
 	</center>
 	<form
-		action="${pageContext.request.contextPath }/ServletModifProfil"
+		action="${pageContext.request.contextPath }/ModifProfil"
 		method="POST">
 
 		<center>
@@ -82,7 +82,7 @@
 		</center>
 	</form>
 	<center>
-	<a href="${pageContext.request.contextPath }/ServletAccueil">Supprimer mon compte</a>
+	<a href="${pageContext.request.contextPath }/Accueil">Supprimer mon compte</a>
 	</center>
 </body>
 </html>

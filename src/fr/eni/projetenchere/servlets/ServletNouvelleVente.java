@@ -17,7 +17,7 @@ import fr.eni.projetenchere.bo.Categorie;
 /**
  * Servlet implementation class ServletNouvelleVente
  */
-@WebServlet("/ServletNouvelleVente")
+@WebServlet("/NouvelleVente")
 public class ServletNouvelleVente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
