@@ -128,7 +128,7 @@ public class ServletNouvelleVente extends HttpServlet {
 				newArticle.setLieuRetrait(retrait);
 				
 				
-				//ArticleVendu articleVendu = EnchereManager.getInstance().insertArticle(newArticle);
+				ArticleVendu articleVendu = EnchereManager.getInstance().insertArticle(newArticle);
 				
 		
 		// renvoie vers la JSP après traitement

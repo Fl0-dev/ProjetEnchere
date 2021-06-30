@@ -264,5 +264,12 @@ public class EnchereManager {
 		Enchere enchere = enchereDAO.insertEnchere(utilisateur, montant_enchere, no_article);
 		return enchere;
 	}
+
+
+	public ArticleVendu insertArticle(ArticleVendu newArticle) {
+		// TODO Auto-generated method stub
+		enchereDAO.insertNouvelleVente(newArticle);
+		return newArticle;
+	}
 	
 }
