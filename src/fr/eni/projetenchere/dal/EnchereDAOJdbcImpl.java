@@ -738,7 +738,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 					while (rs.next()) {
 						
 						String rue = rs.getString("rue");
-						String codePostal = rs.getString("codePostal");
+						String codePostal = rs.getString("code_postal");
 						String ville = rs.getString("ville");
 
 						// utilisation des résultats
