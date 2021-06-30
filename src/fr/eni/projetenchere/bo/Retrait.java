@@ -6,6 +6,14 @@ public class Retrait {
 	private String code_postal_retrait;
 	private String ville_retrait;
 	private ArticleVendu articleVendu_retrait;
+	private int num_retrait;
+	
+	public int getNum_retrait() {
+		return num_retrait;
+	}
+	public void setNum_retrait(int num_retrait) {
+		this.num_retrait = num_retrait;
+	}
 	public String getRue_retrait() {
 		return rue_retrait;
 	}

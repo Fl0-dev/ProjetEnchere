@@ -1,5 +1,6 @@
 package fr.eni.projetenchere.dal;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import fr.eni.projetenchere.bo.ArticleVendu;
@@ -145,9 +146,9 @@ public interface EnchereDAO {
 	
 	/**
 	 * ajoute un article
+	 * @throws SQLException 
 	 */
-	ArticleVendu insertNouvelleVente(ArticleVendu articleVendu);
-
+	void insertNouvelleVente(ArticleVendu articleVendu) throws SQLException;
 		
 
 }
