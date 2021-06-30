@@ -118,6 +118,15 @@ public interface EnchereDAO {
 	 */
 	Retrait selectRetraitByArticleId(int noArticle);
 
+	/**
+	 * ajoute une enchère en DB
+	 * @param newEnchere
+	 * @return newEnchere
+	 */
+	//Enchere insertEnchere(Enchere newEnchere);
+
+	Enchere insertEnchere(Utilisateur utilisateur, int montant_enchere, int no_article);
+
 
 	
 	/**

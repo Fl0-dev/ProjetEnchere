@@ -5,9 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.eclipse.jdt.internal.compiler.classfmt.NonNullDefaultAwareTypeAnnotationWalker;
+
 import fr.eni.projetenchere.bo.ArticleVendu;
 import fr.eni.projetenchere.bo.Categorie;
 import fr.eni.projetenchere.bo.Enchere;
@@ -531,14 +535,13 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			// création des variables
 					ArticleVendu articleVendu = new ArticleVendu();
 					Utilisateur vendeur;
-					Utilisateur acheteur;
 					Enchere enchere = new Enchere();
 					Retrait retrait = new Retrait();
 					Categorie categorie;
 
 			// requête SQL
 			final String SELECT_ARTICLE_BY_ID =
-					"SELECT a.nom_article, a.description, c.no_categorie, MAX(e.montant_enchere) as enchere_max, MAX(acheteur.pseudo) as meilleur_encherisseur,  " + 
+					"SELECT a.nom_article, a.description, c.no_categorie, MAX(e.montant_enchere) as enchere_max,  " + 
 					"a.prix_initial, a.date_fin_encheres, a.no_retrait, vendeur.pseudo as vendeur " + 
 					"FROM articles_vendus AS a " + 
 					"inner join CATEGORIES as c on c.no_categorie = a.no_categorie " + 
@@ -564,21 +567,18 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 					int enchereMax = rs.getInt("enchere_max");
 					String nomArticle = rs.getString("nom_article");
 					String pseudoVendeur = rs.getString("vendeur");
-					String pseudoAcheteur = rs.getString("meilleur_encherisseur");
 					int noCategorie = rs.getInt("no_categorie");
 					int prixInitial = rs.getInt("prix_initial");
 					LocalDate dateFinEnchere = rs.getDate("date_fin_encheres").toLocalDate();
 				
 					// utilisation des résultats
 					vendeur = selectUtilisateurByPseudo(pseudoVendeur);
-					acheteur = selectUtilisateurByPseudo(pseudoAcheteur);
-					
+									
 					categorie = selectCategorieById(noCategorie);
 					retrait = selectRetraitByArticleId(no_article);
 					
 					enchere.setMontant_enchere(enchereMax);
-					enchere.setUtilisateur(acheteur);
-					
+										
 					articleVendu.setDateFinEncheres(dateFinEnchere);
 					articleVendu.setMiseAPrix(prixInitial);
 					articleVendu.setNomArticle(nomArticle);
@@ -725,7 +725,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				// requête SQL
 				final String SELECT_RETRAIT_BY_ARTID =
 						"SELECT rue, ville, code_postal " + 
-						"FROM RETRAITS as  " + 
+						"FROM RETRAITS as r " + 
 						"INNER JOIN ARTICLES_VENDUS as a on a.no_retrait = r.no_retrait " + 
 						"WHERE a.no_article = ?;";
 
@@ -742,7 +742,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 					while (rs.next()) {
 						
 						String rue = rs.getString("rue");
-						String codePostal = rs.getString("codePostal");
+						String codePostal = rs.getString("code_postal");
 						String ville = rs.getString("ville");
 
 						// utilisation des résultats
@@ -758,6 +758,58 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 			return retrait;
 			}
+				
+				
+				@Override
+				/**
+				 * insert en DB une nouvelle enchère
+				 * 
+				 * @return newEnchere
+				 */
+				public Enchere insertEnchere(Utilisateur utilisateur, int montant_enchere, int no_article) {
+					// requête SQL
+					final String INSERT_ENCHERE = "insert into ENCHERES (date_enchere, montant_enchere, no_article, no_utilisateur) "
+							+ "values(GETDATE(),?,?,?);";
+					
+					Enchere newEnchere = new Enchere();
+					ArticleVendu articleVendu = selectArticleById(no_article);
+					newEnchere.setMontant_enchere(montant_enchere);
+					newEnchere.setUtilisateur(utilisateur);
+					newEnchere.setArticleVendu(articleVendu);
+							
+					// ouverture de la connexion à la DB
+					try (Connection connection = JdbcTools.getConnection()) {
+						try {
+							// désactive l'auto-commit (pour pouvoir faire une transaction)
+							connection.setAutoCommit(false);
+							
+							PreparedStatement requete = connection.prepareStatement(INSERT_ENCHERE);
+		
+							//initialisation de la requête
+							//requete.setDate(1, Date.valueOf(LocalDate.now()));
+							requete.setInt(1, montant_enchere);
+							requete.setInt(2, no_article);
+							requete.setInt(3, utilisateur.getNoUtilisateur());
+														
+							// exécution de la requête
+							requete.executeUpdate();
+
+							// valide
+							connection.commit();
+							// si souci
+						} catch (SQLException e) {
+							e.printStackTrace();
+							// efface l'insert
+							connection.rollback();
+							// TODO gestion exception
+						}
+					} catch (SQLException e) {
+						e.printStackTrace();
+						// TODO gestion exception
+					}
+				
+					return newEnchere;
+				}
 
 
 				@Override

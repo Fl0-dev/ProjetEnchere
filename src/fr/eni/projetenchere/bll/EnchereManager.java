@@ -254,4 +254,24 @@ public class EnchereManager {
 	}
 	
 	
+	
+	/**
+	 * ajoute une enchère en DB
+	 * @param newEnchere
+	 * @return newEnchere
+	 */
+	public Enchere insertEnchere(Utilisateur utilisateur, int montant_enchere, int no_article) {
+		Enchere enchere = enchereDAO.insertEnchere(utilisateur, montant_enchere, no_article);
+		return enchere;
+	}
+	
+	/**
+	 * ajoute une enchère en DB
+	 * @param newEnchere
+	 * @return newEnchere
+	 */
+	public Enchere insertEnchere(Utilisateur utilisateur, int montant_enchere, int no_article) {
+		Enchere enchere = enchereDAO.insertEnchere(utilisateur, montant_enchere, no_article);
+		return enchere;
+	}
 }
