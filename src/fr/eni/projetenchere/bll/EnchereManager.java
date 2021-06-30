@@ -252,4 +252,6 @@ public class EnchereManager {
 		return retrait;
 		
 	}
+	
+	
 }

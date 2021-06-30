@@ -1,6 +1,6 @@
 package fr.eni.projetenchere.dal;
-
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -758,5 +758,81 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 			return retrait;
 			}
-			
+
+
+				@Override
+								
+				public ArticleVendu insertNouvelleVente(ArticleVendu articleVendu)  {
+					
+					//if(articleVendu == null) {
+						//BusinessException be = new BusinessException();
+						//be.ajouterErreur(CodesErreurDAL.INSERT_OBJECT_NULL);
+						//throw be;
+					//}
+					final  String INSERT_RETRAIT = "INSERT INTO retraits(rue, code_postal, ville) VALUES (?,?,?);";
+					final  String INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS (nom_article, description, no_categorie, prix_initial, date_debut_encheres, "
+							+ "date_fin_encheres, no_utilisateur, no_retrait) VALUES (?,?,?,?,?,?,?,?);";
+					
+					int num_retrait_pour_article = 0;
+					
+					try(Connection cnx = JdbcTools.getConnection()) {
+						
+						try {
+							cnx.setAutoCommit(false); //on désactive l'auto-commit (pour pouvoir faire une transaction)
+							
+							//1. on ajoute le retrait
+							PreparedStatement pStmt = cnx.prepareStatement(INSERT_RETRAIT, PreparedStatement.RETURN_GENERATED_KEYS);
+							pStmt.setString(1,articleVendu.getLieuRetrait().getRue_retrait());
+							pStmt.setString(2,articleVendu.getLieuRetrait().getCode_postal_retrait());
+							pStmt.setString(2,articleVendu.getLieuRetrait().getVille_retrait());
+							pStmt.executeUpdate();
+							
+							// récupère le no de retrait
+							ResultSet rs = pStmt.getGeneratedKeys();
+							if (rs.next()) {
+								num_retrait_pour_article = rs.getInt(1);
+							}
+														
+							//ArticleVendu 
+							
+							//	return newArticle
+							
+														
+							//2. on ajoute l'article à vendre
+							
+							PreparedStatement pStmt1 = cnx.prepareStatement(INSERT_ARTICLE, PreparedStatement.RETURN_GENERATED_KEYS);
+							pStmt1.setString(1, articleVendu.getNomArticle());
+							pStmt1.setString(2,articleVendu.getDescription());
+							pStmt1.setInt(3,articleVendu.getCategorieArticle().getNoCategorie());
+							pStmt1.setInt(4,articleVendu.getMiseAPrix());
+							pStmt1.setDate(5,Date.valueOf(articleVendu.getDateDebutEncheres()));
+							pStmt1.setDate(6,Date.valueOf(articleVendu.getDateFinEncheres()));
+							pStmt1.setInt(7,articleVendu.getUtilisateur().getNoUtilisateur());
+							pStmt1.setInt(8,num_retrait_pour_article);
+							pStmt1.executeUpdate();
+							
+							
+							//3. on valide
+							cnx.commit();
+						} catch (SQLException e) {
+							e.printStackTrace();
+							cnx.rollback();
+							//BusinessException be = new BusinessException();
+							//be.ajouterErreur(CodesErreurDAL.INSERT_REPAS_ECHEC);
+							//throw be;
+						}
+						
+					} catch (SQLException e) {
+						e.printStackTrace();
+						//BusinessException be = new BusinessException();
+						//be.ajouterErreur(CodesErreurDAL.INSERT_REPAS_ECHEC);
+						//throw be;
+					}
+					
+					return articleVendu;
+				
+					
+				
+				
+}
 }

@@ -33,6 +33,13 @@ public class Retrait {
 	public Retrait() {
 		super();
 	}
+		
+	public Retrait(String rue_retrait, String code_postal_retrait, String ville_retrait) {
+		super();
+		this.rue_retrait = rue_retrait;
+		this.code_postal_retrait = code_postal_retrait;
+		this.ville_retrait = ville_retrait;
+	}
 	@Override
 	public String toString() {
 		return "Retrait [rue_retrait=" + rue_retrait + ", code_postal_retrait=" + code_postal_retrait

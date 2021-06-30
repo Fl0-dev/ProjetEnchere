@@ -119,4 +119,12 @@ public interface EnchereDAO {
 	Retrait selectRetraitByArticleId(int noArticle);
 
 
+	
+	/**
+	 * ajoute un article
+	 */
+	ArticleVendu insertNouvelleVente(ArticleVendu articleVendu);
+
+		
+
 }
