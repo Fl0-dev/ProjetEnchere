@@ -28,12 +28,11 @@
 	<main class="container-fluid">
 		<div class="h2 container d-flex justify-content-center">Listes des enchères</div>
 		
-		<div>
 			<form action="${pageContext.request.contextPath }/Accueil" method="post" class="recherche">
 				<div class ="form-group">
 					<label for="filtres">Filtres :</label>
 					<input class="form-control" type="text" placeholder="Le nom de l'article contient..." name="contenuRecherche">
-					</div>
+				</div>
 	
 					<div class="form-control">
 						<label for="categories">Catégorie :</label>
@@ -52,26 +51,27 @@
 
 <!-- Affichage des enchères en cours -->
 		
-        <c:forEach var="articleVendu" items="${listeVentesEnCours }">
-        	
-			<div class="card ">
-
+        
+        <c:forEach var="articleVendu" items="${listeVentesEnCours }">	
+			<div class="card">
+				
 	        	<div class="card-body">
-	        	<h5 class="card-title"><a href="" class="card-link text-info">${articleVendu.nomArticle }</a><h5>
-	        	<h6 class"card-subtitle mb-2 text-muted">Prix : ${articleVendu.enchereMax.montant_enchere } points<h6>
-	        	<p>Date de fin de l'enchère : ${articleVendu.dateFinEncheres }</p>
-	        	<p>Vendeur : <a href="" class="card-link text-info">${articleVendu.utilisateur.pseudo  }</a><p>
+		        	<h5 class="card-title"><a href="" class="card-link text-info">${articleVendu.nomArticle }</a><h5>
+		        	<h6 class"card-subtitle mb-2 text-muted">Prix : ${articleVendu.enchereMax.montant_enchere } points<h6>
+		        	<p>Date de fin de l'enchère : ${articleVendu.dateFinEncheres }</p>
+		        	<p>Vendeur : <a href="" class="card-link text-info">${articleVendu.utilisateur.pseudo  }</a><p>
 	        	</div>
 	        	
+	        </div>	
         </c:forEach>
-        </div>
-		</div>
-</main>
+        
+		
+	</main>
 
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 </body>
 </html>
