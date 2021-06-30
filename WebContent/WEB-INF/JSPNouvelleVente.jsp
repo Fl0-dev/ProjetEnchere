@@ -15,14 +15,17 @@
 	<h1>
 		<a href="${pageContext.request.contextPath }/AccueilConnecte">ENI-Enchères</a>
 	</h1>
-	<p>${resultat}Bienvenue${ sessionScope.utilisateurSession.pseudo }!</p>
+	<p>${resultat}Bienvenue ${ sessionScope.utilisateurSession.pseudo }!</p>
 	<nav> <a href="${pageContext.request.contextPath }/NouvelleVente">Vendre
 		un article</a> <a href="${pageContext.request.contextPath }/MonProfil">Mon
 		profil</a> <a href="${pageContext.request.contextPath }/deconnexion">Déconnexion</a>
 	</nav> </header>
 
 
-	<form action="/NouvelleVente" method="post">
+<p>${messageErreur}</p>
+<p>${succès}</p>
+
+	<form action="${pageContext.request.contextPath }/NouvelleVente" method="post">
 		<div>
 			<label for="nom_article">Article :</label> <input type="text"
 				id="nom_article" name="nom_article">
@@ -30,7 +33,7 @@
 
 		<div>
 			<label for="description">Description :</label>
-			<textarea id="description" name="description" rows="5" cols="15">Description de l'article</textarea>
+			<textarea id="description" name="description" rows="5" cols="15" placeholder="Description de l'article"></textarea>
 		</div>
 
 		<div>
@@ -77,12 +80,14 @@
 		
 
 		<div class="button">
-			<button type="submit"><a href="${pageContext.request.contextPath }/NouvelleVente">Enregistrer</button>
+			<input type="submit" value="Enregistrer">
 		</div>
-		<div class="button">
-			<button type="reset" ><a href="${pageContext.request.contextPath }/AccueilConnecte">Annuler</button>
-		</div>
+		
 
 			</form>
+			
+			<div class="button">
+			<button type="reset" ><a href="${pageContext.request.contextPath }/AccueilConnecte">Annuler</button>
+		</div>
 </body>
 </html>
