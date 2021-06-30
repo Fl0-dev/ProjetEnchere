@@ -135,5 +135,22 @@ public interface EnchereDAO {
 	 */
 	List<ArticleVendu> selectMesEncheres(String pseudo, String contenuRecherche, String categorie);
 
+	/**
+	 * ajoute une enchère en DB
+	 * @param newEnchere
+	 * @return newEnchere
+	 */
+	//Enchere insertEnchere(Enchere newEnchere);
+
+	Enchere insertEnchere(Utilisateur utilisateur, int montant_enchere, int no_article);
+
+
+	
+	/**
+	 * ajoute un article
+	 */
+	ArticleVendu insertNouvelleVente(ArticleVendu articleVendu);
+
+		
 
 }

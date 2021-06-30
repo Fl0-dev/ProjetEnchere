@@ -262,6 +262,7 @@ public class EnchereManager {
 		
 	}
 
+
 	
 	/**
 	 * selectionne tous les articles actuellement en vente et qui ne soit pas vendu par l'utilisateur
@@ -287,5 +288,16 @@ public class EnchereManager {
 	public List<ArticleVendu> selectMesEncheres(String pseudo, String contenuRecherche, String categorie) {
 		List<ArticleVendu> listeMesEncheres = enchereDAO.selectMesEncheres(pseudo,contenuRecherche,categorie);
 		return listeMesEncheres;
+	}
+
+	/**
+	 * ajoute une enchère en DB
+	 * @param newEnchere
+	 * @return newEnchere
+	 */
+	public Enchere insertEnchere(Utilisateur utilisateur, int montant_enchere, int no_article) {
+		Enchere enchere = enchereDAO.insertEnchere(utilisateur, montant_enchere, no_article);
+		return enchere;
+
 	}
 }

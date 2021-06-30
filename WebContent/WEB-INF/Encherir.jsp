@@ -41,7 +41,7 @@
         </tr>
          <tr>
             <td>Meilleure offre :</td>
-            <td>${articleSelected.enchereMax.montant_enchere } points par ${articleSelected.enchereMax.utilisateur.pseudo }</td>
+            <td>${articleSelected.enchereMax.montant_enchere } points par un utilisateur</td>
         </tr>
          <tr>
             <td>Mise à prix :</td>
@@ -49,18 +49,28 @@
         </tr>
          <tr>
             <td>Fin de l'enchère :</td>
-            <td></td>
+            <td>${articleSelected.dateFinEncheres }</td>
         </tr>
          <tr>
-            <td>Code postal</td>
-            <td></td>
+            <td>Retrait :</td>
+            <td>${articleSelected.lieuRetrait.rue_retrait } <br />
+            ${articleSelected.lieuRetrait.code_postal_retrait } ${articleSelected.lieuRetrait.ville_retrait }</td>
         </tr>
-         <tr>
-            <td>Ville</td>
-            <td></td>
+        <tr>
+            <td>Vendeur :</td>
+            <td>${articleSelected.utilisateur.pseudo }</td>
         </tr>
+ 
     </tbody>
 </table>
+	<form method="POST" action="${pageContext.request.contextPath }/encherir">
+	
+			<label for="montant_enchere">Ma proposition :</label> <input type="number"
+				id="montant_enchere" name="montant_enchere" step="1" min="${articleSelected.enchereMax.montant_enchere == 0 ? articleSelected.miseAPrix : articleSelected.enchereMax.montant_enchere }" placeholder="${articleSelected.enchereMax.montant_enchere == 0 ? articleSelected.miseAPrix : articleSelected.enchereMax.montant_enchere }">
+		
+			<button type="submit">Enchérir</button>
+	
+	</form>
 	
 
 </body>
