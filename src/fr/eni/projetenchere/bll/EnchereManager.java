@@ -19,6 +19,14 @@ import fr.eni.projetenchere.dal.EnchereDAO;
  * @version 1.0
  * @date 22/06/21
  */
+/**
+ * @author fgirard2021
+ *
+ */
+/**
+ * @author fgirard2021
+ *
+ */
 public class EnchereManager {
 
 	// création d'instance
@@ -254,13 +262,30 @@ public class EnchereManager {
 		
 	}
 
+	
 	/**
 	 * selectionne tous les articles actuellement en vente et qui ne soit pas vendu par l'utilisateur
 	 * avec recherche
-	 * @return ListeEncheresOuvertes
+	 * @param pseudo
+	 * @param contenuRecherche
+	 * @param categorie
+	 * @return listeEncheresOuvertes
 	 */
 	public List<ArticleVendu> selectEncheresOuvertes(String pseudo, String contenuRecherche, String categorie) {
 		List<ArticleVendu> listeEncheresOuvertes = enchereDAO.selectEncheresOuvertes(pseudo,contenuRecherche,categorie);
 		return listeEncheresOuvertes;
+	}
+
+	/**
+	 * selectionne tous les articles actuellemnt en vente et sur lesquels l'utilisateur
+	 * a enchérit
+	 * @param pseudo
+	 * @param contenuRecherche
+	 * @param categorie
+	 * @return listeMesEncheres
+	 */
+	public List<ArticleVendu> selectMesEncheres(String pseudo, String contenuRecherche, String categorie) {
+		List<ArticleVendu> listeMesEncheres = enchereDAO.selectMesEncheres(pseudo,contenuRecherche,categorie);
+		return listeMesEncheres;
 	}
 }

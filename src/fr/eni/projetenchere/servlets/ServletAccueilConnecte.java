@@ -102,10 +102,10 @@ public class ServletAccueilConnecte extends HttpServlet {
 					listeAafficher = EnchereManager.getInstance().selectEncheresOuvertes(utilisateurSession.getPseudo(),contenuRecherche,categorie);
 					break;
 				case "mesEncheres":
-					
+					listeAafficher = EnchereManager.getInstance().selectMesEncheres(utilisateurSession.getPseudo(),contenuRecherche,categorie);
 					break;
 				case "mesEncheresRemportees":
-					
+					//listeAafficher = EnchereManager.getInstance().selectMesEncheresRemportees(utilisateurSession.getPseudo(),contenuRecherche,categorie);
 					break;
 				}
 

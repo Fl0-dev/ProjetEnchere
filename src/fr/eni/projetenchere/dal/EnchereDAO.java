@@ -125,5 +125,15 @@ public interface EnchereDAO {
 	 */
 	List<ArticleVendu> selectEncheresOuvertes(String pseudo, String contenuRecherche, String categorie);
 
+	/**
+	 * selectionne tous les articles actuellemnt en vente et sur lesquels l'utilisateur
+	 * a enchérit
+	 * @param pseudo
+	 * @param contenuRecherche
+	 * @param categorie
+	 * @return listeMesEncheres
+	 */
+	List<ArticleVendu> selectMesEncheres(String pseudo, String contenuRecherche, String categorie);
+
 
 }
