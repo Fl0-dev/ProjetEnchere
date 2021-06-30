@@ -17,15 +17,6 @@ import fr.eni.projetenchere.bo.Utilisateur;
 
 public class EnchereDAOJdbcImpl implements EnchereDAO {
 	
-	@Override
-	/* (non-Javadoc)
-	 * @see fr.eni.projetenchere.dal.EnchereDAO#selectEncheresOuvertes()
-	 */
-	public List<ArticleVendu> selectEncheresOuvertes(){
-		return null;
-		
-	}
-	
 	
 	@Override
 	/* (non-Javadoc)
@@ -547,15 +538,15 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 			// requête SQL
 			final String SELECT_ARTICLE_BY_ID =
-					"SELECT a.nom_article, a.description, c.libelle, MAX(e.montant_enchere), " + 
-					"a.prix_initial as miseaprix, a.date_fin_encheres, a.no_retrait, vendeur.pseudo " + 
-					"FROM articles_vendus AS a  " + 
+					"SELECT a.nom_article, a.description, c.no_categorie, MAX(e.montant_enchere) as enchere_max, MAX(acheteur.pseudo) as meilleur_encherisseur,  " + 
+					"a.prix_initial, a.date_fin_encheres, a.no_retrait, vendeur.pseudo as vendeur " + 
+					"FROM articles_vendus AS a " + 
 					"inner join CATEGORIES as c on c.no_categorie = a.no_categorie " + 
 					"inner join UTILISATEURS as vendeur on a.no_utilisateur = vendeur.no_utilisateur " + 
 					"left join ENCHERES as e on a.no_article = e.no_article " + 
 					"left join UTILISATEURS as acheteur on e.no_utilisateur = acheteur.no_utilisateur " + 
-					"WHERE a.no_article = ?" + 
-					" GROUP BY a.nom_article, a.description, c.libelle, " + 
+					"WHERE a.no_article = ? " + 
+					"GROUP BY a.nom_article, a.description, c.no_categorie, " + 
 					"a.prix_initial, a.date_fin_encheres, a.no_retrait, vendeur.pseudo;";
 
 			// ouverture de la connexion à la DB
@@ -572,24 +563,18 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 					
 					int enchereMax = rs.getInt("enchere_max");
 					String nomArticle = rs.getString("nom_article");
-					String pseudoVendeur = rs.getString("pseudo");
-					int idUserAcheteur = rs.getInt("encheres.no_utilisateur");
+					String pseudoVendeur = rs.getString("vendeur");
+					String pseudoAcheteur = rs.getString("meilleur_encherisseur");
 					int noCategorie = rs.getInt("no_categorie");
 					int prixInitial = rs.getInt("prix_initial");
 					LocalDate dateFinEnchere = rs.getDate("date_fin_encheres").toLocalDate();
-					String rue = rs.getString("rue");
-					String codePostal = rs.getString("codePostal");
-					String ville = rs.getString("ville");
-
+				
 					// utilisation des résultats
-					vendeur = new Utilisateur(pseudoVendeur);
-					acheteur = selectUserById(idUserAcheteur);
+					vendeur = selectUtilisateurByPseudo(pseudoVendeur);
+					acheteur = selectUtilisateurByPseudo(pseudoAcheteur);
 					
 					categorie = selectCategorieById(noCategorie);
-					
-					retrait.setCode_postal_retrait(codePostal);
-					retrait.setRue_retrait(rue);
-					retrait.setVille_retrait(ville);
+					retrait = selectRetraitByArticleId(no_article);
 					
 					enchere.setMontant_enchere(enchereMax);
 					enchere.setUtilisateur(acheteur);
@@ -600,6 +585,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 					articleVendu.setEnchereMax(enchere);
 					articleVendu.setUtilisateur(vendeur);
 					articleVendu.setCategorieArticle(categorie);
+					articleVendu.setLieuRetrait(retrait);
 		
 				}
 
@@ -651,5 +637,126 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 	return categorie;
 	}
+		
+		
+		@Override
+		/* (non-Javadoc)
+		 * @see fr.eni.projetenchere.dal.EnchereDAO#selectEncheresOuvertes()
+		 */
+		public List<ArticleVendu> selectEncheresOuvertes(String pseudo){
+			
+			// création de la liste vide
+			List<ArticleVendu> listeEncheresOuvertes = new ArrayList<>();
+
+			// création des variables
+			ArticleVendu articleVendu = new ArticleVendu();
+			Utilisateur vendeur = new Utilisateur();
+			Enchere enchereMax = new Enchere();
+			
+			//requête SQL
+			final String SELECT_ENCHERES_OUVERTES = "SELECT MAX(e.montant_enchere) as enchere_max, a.prix_initial, " + 
+					"a.nom_article, vendeur.pseudo as vendeur, date_fin_encheres " + 
+					"FROM articles_vendus AS a \n" + 
+					"inner join CATEGORIES as c on c.no_categorie = a.no_categorie " + 
+					"inner join UTILISATEURS as vendeur on a.no_utilisateur = vendeur.no_utilisateur " + 
+					"left join ENCHERES as e on a.no_article = e.no_article " + 
+					"left join UTILISATEURS as acheteur on e.no_utilisateur = acheteur.no_utilisateur " + 
+					"where (date_debut_encheres < GETDATE() and date_fin_encheres > GETDATE()) and vendeur.pseudo <> ? " + 
+					"group by a.nom_article, vendeur.pseudo, date_fin_encheres, a.prix_initial;";
+			
+			// ouverture de la connexion à la DB
+			try (Connection connection = JdbcTools.getConnection();
+					PreparedStatement requete = connection.prepareStatement(SELECT_ENCHERES_OUVERTES)) {
+				
+				// initialisation de la requête
+				requete.setString(1, pseudo);
+				
+				// récupération du résultat
+				ResultSet rs = requete.executeQuery();
+							
+				while (rs.next()) {
+					int enchere = rs.getInt("enchere_max");
+					int miseAPrix = rs.getInt("prix_initial");
+					String nomArticle = rs.getString("nom_article");
+					String vendeurPseudo = rs.getString("vendeur");
+					LocalDate dateFinEnchere = rs.getDate("date_fin_encheres").toLocalDate();
+					
+					// utilisation des résultats
+					vendeur.setPseudo(vendeurPseudo);
+					articleVendu.setNomArticle(nomArticle);
+					
+					//si il n'y a pas encore d'enchère on utilise la mie à prix comme enchère max
+					if (enchere!=0) {
+						enchereMax.setMontant_enchere(enchere);
+					}else {
+						enchereMax.setMontant_enchere(miseAPrix);
+					}
+					articleVendu.setUtilisateur(vendeur);
+					articleVendu.setDateFinEncheres(dateFinEnchere);
+					articleVendu.setEnchereMax(enchereMax);
+					
+					//ajout dans la liste
+					listeEncheresOuvertes.add(articleVendu);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return listeEncheresOuvertes;
+		}
+		
+		
+		
+		
+		
+		
+		
 	
+		/**
+		 * sélectionne un lieu de retrait à partir de son numéro (id)
+		 * @param noArticle
+		 * @return retrait
+		 */
+				@Override
+			public Retrait selectRetraitByArticleId(int noArticle) {
+				// création des variables
+					Retrait retrait = new Retrait();
+
+				// requête SQL
+				final String SELECT_RETRAIT_BY_ARTID =
+						"SELECT rue, ville, code_postal " + 
+						"FROM RETRAITS as  " + 
+						"INNER JOIN ARTICLES_VENDUS as a on a.no_retrait = r.no_retrait " + 
+						"WHERE a.no_article = ?;";
+
+				// ouverture de la connexion à la DB
+				try (Connection connection = JdbcTools.getConnection();
+						PreparedStatement requete = connection.prepareStatement(SELECT_RETRAIT_BY_ARTID)) {
+					
+					// initialisation de la requête
+					requete.setInt(1, noArticle);
+					
+				// récupération du résultat
+					ResultSet rs = requete.executeQuery();
+
+					while (rs.next()) {
+						
+						String rue = rs.getString("rue");
+						String codePostal = rs.getString("codePostal");
+						String ville = rs.getString("ville");
+
+						// utilisation des résultats
+						retrait.setCode_postal_retrait(codePostal);
+						retrait.setRue_retrait(rue);
+						retrait.setVille_retrait(ville);
+			
+					}
+
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+
+			return retrait;
+			}
+			
 }

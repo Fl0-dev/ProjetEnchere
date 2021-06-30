@@ -6,6 +6,7 @@ import java.util.List;
 import fr.eni.projetenchere.bo.ArticleVendu;
 import fr.eni.projetenchere.bo.Categorie;
 import fr.eni.projetenchere.bo.Enchere;
+import fr.eni.projetenchere.bo.Retrait;
 import fr.eni.projetenchere.bo.Utilisateur;
 import fr.eni.projetenchere.dal.DAOFactory;
 import fr.eni.projetenchere.dal.EnchereDAO;
@@ -204,9 +205,9 @@ public class EnchereManager {
 	 * selectionne tous les articles actuellement en vente et qui ne soit pas vendu par l'utilisateur
 	 * @return ListeEncheresOuvertes
 	 */
-	public List<ArticleVendu> selectEncheresOuvertes() {
-		List<ArticleVendu> ListeEncheresOuvertes = enchereDAO.selectEncheresOuvertes();
-		return ListeEncheresOuvertes;
+	public List<ArticleVendu> selectEncheresOuvertes(String pseudo) {
+		List<ArticleVendu> listeEncheresOuvertes = enchereDAO.selectEncheresOuvertes(pseudo);
+		return listeEncheresOuvertes;
 	}
 	
 	/**
@@ -241,4 +242,14 @@ public class EnchereManager {
 		
 	}
 
+	/**
+	 * sélectionne un lieu de retrait à partir d'un article
+	 * @param noArticle
+	 * @return retrait
+	 */
+	public Retrait selectRetraitByArticleId(int noArticle) {
+		Retrait retrait = enchereDAO.selectRetraitByArticleId(noArticle);
+		return retrait;
+		
+	}
 }
