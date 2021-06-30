@@ -123,7 +123,9 @@ public interface EnchereDAO {
 	 * @param newEnchere
 	 * @return newEnchere
 	 */
-	Enchere insertEnchere(Enchere newEnchere);
+	//Enchere insertEnchere(Enchere newEnchere);
+
+	Enchere insertEnchere(Utilisateur utilisateur, int montant_enchere, int no_article);
 
 
 }

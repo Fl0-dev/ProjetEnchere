@@ -63,15 +63,13 @@
  
     </tbody>
 </table>
-	<form>
-		<div>
+	<form method="POST" action="${pageContext.request.contextPath }/encherir">
+	
 			<label for="montant_enchere">Ma proposition :</label> <input type="number"
 				id="montant_enchere" name="montant_enchere" step="1" min="${articleSelected.enchereMax.montant_enchere == 0 ? articleSelected.miseAPrix : articleSelected.enchereMax.montant_enchere }" placeholder="${articleSelected.enchereMax.montant_enchere == 0 ? articleSelected.miseAPrix : articleSelected.enchereMax.montant_enchere }">
-		</div>
 		
-		<div class="button">
-			<button type="submit"><a href="${pageContext.request.contextPath }/ServletEncherir">Enchérir</button>
-		</div>
+			<button type="submit">Enchérir</button>
+	
 	</form>
 	
 

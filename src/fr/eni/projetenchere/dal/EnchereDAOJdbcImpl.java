@@ -767,23 +767,30 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				 * 
 				 * @return newEnchere
 				 */
-				public Enchere insertEnchere(Enchere newEnchere) {
+				public Enchere insertEnchere(Utilisateur utilisateur, int montant_enchere, int no_article) {
 					// requête SQL
-					final String INSERT_ENCHERE = "insert into ENCHERES (date_enchere, montant_enchere, no_article, no_utilisateur)"
-							+ "values(?,?,?,?)";
+					final String INSERT_ENCHERE = "insert into ENCHERES (date_enchere, montant_enchere, no_article, no_utilisateur) "
+							+ "values(GETDATE(),?,?,?);";
+					
+					Enchere newEnchere = new Enchere();
+					ArticleVendu articleVendu = selectArticleById(no_article);
+					newEnchere.setMontant_enchere(montant_enchere);
+					newEnchere.setUtilisateur(utilisateur);
+					newEnchere.setArticleVendu(articleVendu);
 							
 					// ouverture de la connexion à la DB
 					try (Connection connection = JdbcTools.getConnection()) {
 						try {
 							// désactive l'auto-commit (pour pouvoir faire une transaction)
 							connection.setAutoCommit(false);
+							
 							PreparedStatement requete = connection.prepareStatement(INSERT_ENCHERE);
-									
+		
 							//initialisation de la requête
-							requete.setDate(1, Date.valueOf(LocalDate.now()));
-							requete.setInt(2, newEnchere.getMontant_enchere());
-							requete.setInt(3, newEnchere.getArticleVendu().getNoArticle());
-							requete.setInt(4, newEnchere.getUtilisateur().getNoUtilisateur());
+							//requete.setDate(1, Date.valueOf(LocalDate.now()));
+							requete.setInt(1, montant_enchere);
+							requete.setInt(2, no_article);
+							requete.setInt(3, utilisateur.getNoUtilisateur());
 														
 							// exécution de la requête
 							requete.executeUpdate();
@@ -801,6 +808,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 						e.printStackTrace();
 						// TODO gestion exception
 					}
+				
 					return newEnchere;
 				}
 			

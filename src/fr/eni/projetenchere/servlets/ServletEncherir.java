@@ -18,7 +18,7 @@ import fr.eni.projetenchere.bo.Enchere;
 import fr.eni.projetenchere.bo.Retrait;
 import fr.eni.projetenchere.bo.Utilisateur;
 
-@WebServlet("/ServletEncherir")
+@WebServlet("/encherir")
 public class ServletEncherir extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -64,28 +64,21 @@ public class ServletEncherir extends HttpServlet {
 		// on récupère la session
 		HttpSession session = request.getSession();
 		Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("utilisateurSession");
-		int no_article = Integer.parseInt(request.getParameter("no_article"));	
+		//int no_article = Integer.parseInt(request.getParameter("no_article"));	
+		int no_article = 7;
 		
 		ArticleVendu articleSelected = EnchereManager.getInstance().selectArticleById(no_article);
-		
 		request.setAttribute("articleSelected", articleSelected);
 		
 		// on récupère les données du formulaire
 		int montantEnchere = Integer.valueOf(request.getParameter("montant_enchere"));
+	
+		// insertion de l'enchere en BD
+		Enchere newEnchere = EnchereManager.getInstance().insertEnchere(utilisateurSession, montantEnchere, no_article);
+		System.out.println("Le montant de l'enchere : " + newEnchere.getMontant_enchere());
 		
-		
-		Enchere newEnchere = new Enchere();
-		newEnchere.setDateEnchere(LocalDate.now());
-		newEnchere.setMontant_enchere(montantEnchere);
-		newEnchere.setUtilisateur(utilisateurSession);
-		newEnchere.setArticleVendu(articleSelected);
-		
-		EnchereManager.getInstance().insertEnchere(newEnchere);
-		System.out.println(newEnchere);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encherir.jsp");
-		
-		rd.forward(request, response);
+	
+		response.sendRedirect("encherir");
 	}
 
 }

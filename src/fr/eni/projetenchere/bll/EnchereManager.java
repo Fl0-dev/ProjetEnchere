@@ -258,8 +258,8 @@ public class EnchereManager {
 	 * @param newEnchere
 	 * @return newEnchere
 	 */
-	public Enchere insertEnchere(Enchere newEnchere) {
-		Enchere enchere = enchereDAO.insertEnchere(newEnchere);
+	public Enchere insertEnchere(Utilisateur utilisateur, int montant_enchere, int no_article) {
+		Enchere enchere = enchereDAO.insertEnchere(utilisateur, montant_enchere, no_article);
 		return enchere;
 	}
 }
