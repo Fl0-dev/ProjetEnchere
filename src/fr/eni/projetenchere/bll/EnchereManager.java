@@ -270,15 +270,23 @@ public class EnchereManager {
 		return listeEncheresOuvertes;
 	}
 
-<<<<<<< HEAD
-
+	
+	/**
+	 * ajoute une enchère en DB
+	 * @param newEnchere
+	 * @return newEnchere
+	 * */
+	public Enchere insertEnchere(Utilisateur utilisateur, int montant_enchere, int no_article) {
+		Enchere enchere = enchereDAO.insertEnchere(utilisateur, montant_enchere, no_article);
+		return enchere;
+	}
 	public ArticleVendu insertArticle(ArticleVendu newArticle) {
 		// TODO Auto-generated method stub
 		enchereDAO.insertNouvelleVente(newArticle);
 		return newArticle;
 	}
 	
-=======
+
 	/**
 	 * selectionne tous les articles actuellemnt en vente et sur lesquels l'utilisateur
 	 * a enchérit
@@ -293,5 +301,5 @@ public class EnchereManager {
 	}
 
 
->>>>>>> branch 'main' of https://github.com/Fl0-dev/ProjetEnchere
+
 }
