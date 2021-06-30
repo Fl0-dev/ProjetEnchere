@@ -845,11 +845,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 								num_retrait_pour_article = rs.getInt(1);
 							}
 														
-							//ArticleVendu 
-							
-							//	return newArticle
-							
-														
+																				
 							//2. on ajoute l'article à vendre
 							
 							PreparedStatement pStmt1 = cnx.prepareStatement(INSERT_ARTICLE, PreparedStatement.RETURN_GENERATED_KEYS);

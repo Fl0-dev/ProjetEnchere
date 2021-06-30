@@ -112,7 +112,7 @@ public class ServletNouvelleVente extends HttpServlet {
 				
 		// insertion des infos
 				
-				//faire appel à la methode avec getInstance
+				
 				//Retrait retrait = EnchereManager.getInstance().insertRetrait(rue, codePostal, ville);
 				Retrait retrait = new Retrait(rue, codePostal, ville);
 				Categorie categorie2 = EnchereManager.getInstance().selectCategorieById(categorie);
