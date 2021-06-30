@@ -70,7 +70,7 @@ public class ServletAccueilConnecte extends HttpServlet {
 		List<ArticleVendu> listeEncheresOuvertes = EnchereManager.getInstance().selectEncheresOuvertes(utilisateurSession.getPseudo());
 
 		// on envoie ça dans la requête
-		request.setAttribute("listeEncheresOuvertes", listeEncheresOuvertes);
+		request.setAttribute("listeAafficher", listeEncheresOuvertes);
 		System.out.println(listeEncheresOuvertes);
 
 		// on regarde quelle URL a été utilisée pour accéder à la servlet
@@ -81,26 +81,28 @@ public class ServletAccueilConnecte extends HttpServlet {
 		// si c'est l'url /recherche, on récupère les infos saisies par l'utilisateur
 		if (urlUtilisee.equals("/recherche")) {
 			
-			// on récupère la liste des catégories présentes en base de données
+			// on récupère la liste des catégories présentes en base de données pour charger dans la JSP
 			listeCategoriesConnecte = EnchereManager.getInstance().selectCategorie();
 			request.setAttribute("listeCategories", listeCategoriesConnecte);
-
+			
+			//création de la liste à afficher
+			List<ArticleVendu> listeAafficher = null;
+			
 			// je récupère les résultats de la recherche
 			String contenuRecherche = request.getParameter("contenuRecherche").trim();
 			int categorie = Integer.valueOf(request.getParameter("categorie"));
-
-			List<Enchere> listeEncheresEnCoursConnecte;
+			String choixAchatVente= request.getParameter("choixAchatVente");
+			
 
 			// si l'option choisit est "toutes", on recherche uniquement par nom d'article
 			if (categorie == 0) {
-				listeEncheresEnCoursConnecte = EnchereManager.getInstance().selectEnchereByArticle(contenuRecherche);
+				//listeAafficher = EnchereManager.getInstance().selectEnchereByArticle(contenuRecherche);
 			} else {
 				// sinon, afficher résultats de la recherche par catégorie ET nom article
-				listeEncheresEnCoursConnecte = EnchereManager.getInstance().selectEnchereByCatAndArt(contenuRecherche,
-						categorie);
+				//listeEncheresEnCoursConnecte = EnchereManager.getInstance().selectEnchereByCatAndArt(contenuRecherche,categorie);
 			}
 
-			request.setAttribute("listeEncheresEnCours", listeEncheresEnCoursConnecte);
+			request.setAttribute("listeAafficher", listeAafficher);
 
 			
 

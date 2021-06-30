@@ -86,15 +86,10 @@
 			</div> 
 		</form>
 				
-				
-				
-				
-		
-
 			<!-- Affichage des enchères en cours -->
 			<div class="encheres">
 
-				<c:forEach var="articleVendu" items="${listeEncheresOuvertes }">
+				<c:forEach var="articleVendu" items="${listeAafficher }">
 
 					<ul class="carte-enchere">
 						<li>${articleVendu.nomArticle }</li>
