@@ -19,6 +19,7 @@ import fr.eni.projetenchere.dal.EnchereDAO;
  * @version 1.0
  * @date 22/06/21
  */
+
 public class EnchereManager {
 
 	// création d'instance
@@ -203,10 +204,11 @@ public class EnchereManager {
 
 	/**
 	 * selectionne tous les articles actuellement en vente et qui ne soit pas vendu par l'utilisateur
+	 * à son arrivée(sans recherche)
 	 * @return ListeEncheresOuvertes
 	 */
-	public List<ArticleVendu> selectEncheresOuvertes(String pseudo) {
-		List<ArticleVendu> listeEncheresOuvertes = enchereDAO.selectEncheresOuvertes(pseudo);
+	public List<ArticleVendu> selectEncheresOuvertesA(String pseudo) {
+		List<ArticleVendu> listeEncheresOuvertes = enchereDAO.selectEncheresOuvertesA(pseudo);
 		return listeEncheresOuvertes;
 	}
 	
@@ -252,17 +254,34 @@ public class EnchereManager {
 		return retrait;
 		
 	}
-	
-	
+
+
 	
 	/**
-	 * ajoute une enchère en DB
-	 * @param newEnchere
-	 * @return newEnchere
+	 * selectionne tous les articles actuellement en vente et qui ne soit pas vendu par l'utilisateur
+	 * avec recherche
+	 * @param pseudo
+	 * @param contenuRecherche
+	 * @param categorie
+	 * @return listeEncheresOuvertes
 	 */
-	public Enchere insertEnchere(Utilisateur utilisateur, int montant_enchere, int no_article) {
-		Enchere enchere = enchereDAO.insertEnchere(utilisateur, montant_enchere, no_article);
-		return enchere;
+	public List<ArticleVendu> selectEncheresOuvertes(String pseudo, String contenuRecherche, String categorie) {
+		List<ArticleVendu> listeEncheresOuvertes = enchereDAO.selectEncheresOuvertes(pseudo,contenuRecherche,categorie);
+		return listeEncheresOuvertes;
 	}
-	
+
+	/**
+	 * selectionne tous les articles actuellemnt en vente et sur lesquels l'utilisateur
+	 * a enchérit
+	 * @param pseudo
+	 * @param contenuRecherche
+	 * @param categorie
+	 * @return listeMesEncheres
+	 */
+	public List<ArticleVendu> selectMesEncheres(String pseudo, String contenuRecherche, String categorie) {
+		List<ArticleVendu> listeMesEncheres = enchereDAO.selectMesEncheres(pseudo,contenuRecherche,categorie);
+		return listeMesEncheres;
+	}
+
+
 }

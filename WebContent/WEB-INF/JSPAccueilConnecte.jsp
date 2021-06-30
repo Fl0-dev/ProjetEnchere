@@ -35,7 +35,7 @@
 					<select id="categories" name="categorie">					
 						<option value="0" selected>Toutes</option>
 							<c:forEach items="${listeCategories }" var="categorie">
-								<option value="${categorie.noCategorie }">${categorie.libelle }</option>
+								<option value="${categorie.libelle }">${categorie.libelle }</option>
 							</c:forEach>
 					</select>
 				</div>
@@ -69,13 +69,13 @@
 					<div>
 						<ul>
 		                	<li>
-								<input type="radio" name="Ventes" value="mesVentesEnCours"> <label>Mes ventes en cours</label>
+								<input type="radio" name="ventes" value="mesVentesEnCours"> <label>Mes ventes en cours</label>
 							</li>
 							<li>
-								<input type="radio" name="Ventes" value="mesEncheres"> <label>Ventes non débutées</label> 
+								<input type="radio" name="ventes" value="mesEncheres"> <label>Ventes non débutées</label> 
 							</li>
 							<li>
-								<input type="radio" name="Ventes" value="mesEncheresRemportees"> <label>Ventes terminées</label> 
+								<input type="radio" name="ventes" value="mesEncheresRemportees"> <label>Ventes terminées</label> 
 							</li>
 						</ul>
 					</div>
@@ -86,15 +86,10 @@
 			</div> 
 		</form>
 				
-				
-				
-				
-		
-
 			<!-- Affichage des enchères en cours -->
 			<div class="encheres">
 
-				<c:forEach var="articleVendu" items="${listeEncheresOuvertes }">
+				<c:forEach var="articleVendu" items="${listeAafficher }">
 
 					<ul class="carte-enchere">
 						<li>${articleVendu.nomArticle }</li>
