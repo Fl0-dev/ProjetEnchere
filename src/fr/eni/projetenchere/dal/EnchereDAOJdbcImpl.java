@@ -1,13 +1,18 @@
 package fr.eni.projetenchere.dal;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.eclipse.jdt.internal.compiler.classfmt.NonNullDefaultAwareTypeAnnotationWalker;
+
 import fr.eni.projetenchere.bo.ArticleVendu;
 import fr.eni.projetenchere.bo.Categorie;
 import fr.eni.projetenchere.bo.Enchere;
@@ -754,5 +759,49 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 			return retrait;
 			}
+				
+				
+				@Override
+				/**
+				 * insert en DB une nouvelle enchère
+				 * 
+				 * @return newEnchere
+				 */
+				public Enchere insertEnchere(Enchere newEnchere) {
+					// requête SQL
+					final String INSERT_ENCHERE = "insert into ENCHERES (date_enchere, montant_enchere, no_article, no_utilisateur)"
+							+ "values(?,?,?,?)";
+							
+					// ouverture de la connexion à la DB
+					try (Connection connection = JdbcTools.getConnection()) {
+						try {
+							// désactive l'auto-commit (pour pouvoir faire une transaction)
+							connection.setAutoCommit(false);
+							PreparedStatement requete = connection.prepareStatement(INSERT_ENCHERE);
+									
+							//initialisation de la requête
+							requete.setDate(1, Date.valueOf(LocalDate.now()));
+							requete.setInt(2, newEnchere.getMontant_enchere());
+							requete.setInt(3, newEnchere.getArticleVendu().getNoArticle());
+							requete.setInt(4, newEnchere.getUtilisateur().getNoUtilisateur());
+														
+							// exécution de la requête
+							requete.executeUpdate();
+
+							// valide
+							connection.commit();
+							// si souci
+						} catch (SQLException e) {
+							e.printStackTrace();
+							// efface l'insert
+							connection.rollback();
+							// TODO gestion exception
+						}
+					} catch (SQLException e) {
+						e.printStackTrace();
+						// TODO gestion exception
+					}
+					return newEnchere;
+				}
 			
 }

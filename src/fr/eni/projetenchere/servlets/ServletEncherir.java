@@ -1,6 +1,7 @@
 package fr.eni.projetenchere.servlets;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpSession;
 
 import fr.eni.projetenchere.bll.EnchereManager;
 import fr.eni.projetenchere.bo.ArticleVendu;
+import fr.eni.projetenchere.bo.Enchere;
+import fr.eni.projetenchere.bo.Retrait;
 import fr.eni.projetenchere.bo.Utilisateur;
 
 @WebServlet("/ServletEncherir")
@@ -40,9 +43,8 @@ public class ServletEncherir extends HttpServlet {
 			//int no_article = Integer.parseInt(request.getParameter("no_article"));
 			// récupère id article pour l'afficher
 			
-			int no_article = 3;
-			ArticleVendu articleSelected = EnchereManager.getInstance().selectArticleById(no_article);
-			
+			int no_article = 7;
+			ArticleVendu articleSelected = EnchereManager.getInstance().selectArticleById(no_article);		
 			request.setAttribute("articleSelected", articleSelected);
 			System.out.println(articleSelected);
 			
@@ -57,8 +59,33 @@ public class ServletEncherir extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		doGet(request, response);
+		request.setCharacterEncoding("UTF-8"); 
+		
+		// on récupère la session
+		HttpSession session = request.getSession();
+		Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("utilisateurSession");
+		int no_article = Integer.parseInt(request.getParameter("no_article"));	
+		
+		ArticleVendu articleSelected = EnchereManager.getInstance().selectArticleById(no_article);
+		
+		request.setAttribute("articleSelected", articleSelected);
+		
+		// on récupère les données du formulaire
+		int montantEnchere = Integer.valueOf(request.getParameter("montant_enchere"));
+		
+		
+		Enchere newEnchere = new Enchere();
+		newEnchere.setDateEnchere(LocalDate.now());
+		newEnchere.setMontant_enchere(montantEnchere);
+		newEnchere.setUtilisateur(utilisateurSession);
+		newEnchere.setArticleVendu(articleSelected);
+		
+		EnchereManager.getInstance().insertEnchere(newEnchere);
+		System.out.println(newEnchere);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encherir.jsp");
+		
+		rd.forward(request, response);
 	}
 
 }

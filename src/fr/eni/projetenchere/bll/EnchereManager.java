@@ -252,4 +252,14 @@ public class EnchereManager {
 		return retrait;
 		
 	}
+	
+	/**
+	 * ajoute une enchère en DB
+	 * @param newEnchere
+	 * @return newEnchere
+	 */
+	public Enchere insertEnchere(Enchere newEnchere) {
+		Enchere enchere = enchereDAO.insertEnchere(newEnchere);
+		return enchere;
+	}
 }
