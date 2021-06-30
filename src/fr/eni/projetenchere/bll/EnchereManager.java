@@ -203,10 +203,11 @@ public class EnchereManager {
 
 	/**
 	 * selectionne tous les articles actuellement en vente et qui ne soit pas vendu par l'utilisateur
+	 * à son arrivée(sans recherche)
 	 * @return ListeEncheresOuvertes
 	 */
-	public List<ArticleVendu> selectEncheresOuvertes(String pseudo) {
-		List<ArticleVendu> listeEncheresOuvertes = enchereDAO.selectEncheresOuvertes(pseudo);
+	public List<ArticleVendu> selectEncheresOuvertesA(String pseudo) {
+		List<ArticleVendu> listeEncheresOuvertes = enchereDAO.selectEncheresOuvertesA(pseudo);
 		return listeEncheresOuvertes;
 	}
 	
@@ -251,5 +252,15 @@ public class EnchereManager {
 		Retrait retrait = enchereDAO.selectRetraitByArticleId(noArticle);
 		return retrait;
 		
+	}
+
+	/**
+	 * selectionne tous les articles actuellement en vente et qui ne soit pas vendu par l'utilisateur
+	 * avec recherche
+	 * @return ListeEncheresOuvertes
+	 */
+	public List<ArticleVendu> selectEncheresOuvertes(String pseudo, String contenuRecherche, String categorie) {
+		List<ArticleVendu> listeEncheresOuvertes = enchereDAO.selectEncheresOuvertes(pseudo,contenuRecherche,categorie);
+		return listeEncheresOuvertes;
 	}
 }

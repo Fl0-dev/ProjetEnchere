@@ -110,13 +110,20 @@ public interface EnchereDAO {
 	 * selectionne tous les articles actuellement en vente et qui ne soit pas vendu par l'utilisateur
 	 * @return listeEncheresOuvertes
 	 */
-	List<ArticleVendu> selectEncheresOuvertes(String pseudo);
+	List<ArticleVendu> selectEncheresOuvertesA(String pseudo);
 
 	/**
 	 * selectionne un lieu de retrait en fonction de l'article
 	 * @return retrait
 	 */
 	Retrait selectRetraitByArticleId(int noArticle);
+
+	/**
+	 * selectionne tous les articles actuellement en vente et qui ne soit pas vendu par l'utilisateur
+	 * avec recherche
+	 * @return ListeEncheresOuvertes
+	 */
+	List<ArticleVendu> selectEncheresOuvertes(String pseudo, String contenuRecherche, String categorie);
 
 
 }

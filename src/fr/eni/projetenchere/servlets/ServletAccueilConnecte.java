@@ -43,74 +43,92 @@ public class ServletAccueilConnecte extends HttpServlet {
 			session.invalidate();
 			request.setAttribute("messageDeconnexion", "Vous êtes bien déconnecté");
 			this.getServletContext().getRequestDispatcher("/Accueil").forward(request, response);
-			
 
-		}else {
+		} else {
 			doPost(request, response);
 		}
-		
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		
-		//ouverture de la session et récupération de l'utilisateur
+
+		///////////////////////////// Première arrivée sur la
+		///////////////////////////// JSP////////////////////////////////////////////////
+		List<ArticleVendu> listeAafficher = null;
+		// ouverture de la session et récupération de l'utilisateur
 		HttpSession session = request.getSession();
 		Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("utilisateurSession");
-		
-		/////////////////////////////Première arrivée sur la JSP////////////////////////////////////////////////
-		
-		// on récupère la liste des catégories présentes en base de données
+
+		// on récupère la liste des catégories présentes en base de données pour charger
+		// dans la JSP
 		List<Categorie> listeCategoriesConnecte = EnchereManager.getInstance().selectCategorie();
 		request.setAttribute("listeCategories", listeCategoriesConnecte);
-
 		
-		// on récupère les enchères en cours
-		List<ArticleVendu> listeEncheresOuvertes = EnchereManager.getInstance().selectEncheresOuvertes(utilisateurSession.getPseudo());
-
-		// on envoie ça dans la requête
-		request.setAttribute("listeAafficher", listeEncheresOuvertes);
-		System.out.println(listeEncheresOuvertes);
-
 		// on regarde quelle URL a été utilisée pour accéder à la servlet
 		String urlUtilisee = request.getServletPath();
 		
-/////////////////////////////Passage après une recherche////////////////////////////////////////////////
-		
+		if (urlUtilisee.equals("/AccueilConnecte")) {
+		// on récupère la liste des catégories présentes en base de données
+		listeCategoriesConnecte = EnchereManager.getInstance().selectCategorie();
+		request.setAttribute("listeCategories", listeCategoriesConnecte);
+
+		// on récupère les enchères en cours
+		listeAafficher = EnchereManager.getInstance().selectEncheresOuvertesA(utilisateurSession.getPseudo());
+
+		// on envoie ça dans la requête
+		request.setAttribute("listeAafficher", listeAafficher);
+		System.out.println(listeAafficher);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSPAccueilConnecte.jsp");
+		rd.forward(request, response);
+		}
+		///////////////////////////// Passage après une
+		///////////////////////////// recherche////////////////////////////////////////////////
+
 		// si c'est l'url /recherche, on récupère les infos saisies par l'utilisateur
+		
 		if (urlUtilisee.equals("/recherche")) {
-			
-			// on récupère la liste des catégories présentes en base de données pour charger dans la JSP
-			listeCategoriesConnecte = EnchereManager.getInstance().selectCategorie();
-			request.setAttribute("listeCategories", listeCategoriesConnecte);
-			
-			//création de la liste à afficher
-			List<ArticleVendu> listeAafficher = null;
-			
+
 			// je récupère les résultats de la recherche
 			String contenuRecherche = request.getParameter("contenuRecherche").trim();
-			int categorie = Integer.valueOf(request.getParameter("categorie"));
-			String choixAchatVente= request.getParameter("choixAchatVente");
-			
+			String categorie = request.getParameter("categorie");
+			String choixAchatVente = request.getParameter("choixAchatVente");
+			// choix achats
+			if (choixAchatVente.equals("achats")) {
+				String choixRadioAchats = request.getParameter("encheres");
+				switch (choixRadioAchats) {
+				// selon le choix
+				case "encheresOuvertes": 
+					listeAafficher = EnchereManager.getInstance().selectEncheresOuvertes(utilisateurSession.getPseudo(),contenuRecherche,categorie);
+					break;
+				case "mesEncheres":
+					
+					break;
+				case "mesEncheresRemportees":
+					
+					break;
+				}
+
+				// choix ventes
+			} else {
+				String choixRadioVentes = request.getParameter("ventes");
+			}
 
 			// si l'option choisit est "toutes", on recherche uniquement par nom d'article
-			if (categorie == 0) {
-				//listeAafficher = EnchereManager.getInstance().selectEnchereByArticle(contenuRecherche);
+			if (categorie.equals("0")) {
+				// listeAafficher =
+				// EnchereManager.getInstance().selectEnchereByArticle(contenuRecherche);
 			} else {
 				// sinon, afficher résultats de la recherche par catégorie ET nom article
-				//listeEncheresEnCoursConnecte = EnchereManager.getInstance().selectEnchereByCatAndArt(contenuRecherche,categorie);
+				// listeEncheresEnCoursConnecte =
+				// EnchereManager.getInstance().selectEnchereByCatAndArt(contenuRecherche,categorie);
 			}
 
 			request.setAttribute("listeAafficher", listeAafficher);
-
-			
-
-			
-
+			// renvoie vers la JSP après traitement
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSPAccueilConnecte.jsp");
+			rd.forward(request, response);
 		}
-		// renvoie vers la JSP après traitement
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSPAccueilConnecte.jsp");
-		rd.forward(request, response);
+
 	}
 }
