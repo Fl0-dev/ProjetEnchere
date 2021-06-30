@@ -2,6 +2,8 @@ package fr.eni.projetenchere.bll;
 
 import java.util.List;
 
+import fr.eni.projetenchere.bo.ArticleVendu;
+import fr.eni.projetenchere.bo.Enchere;
 import fr.eni.projetenchere.bo.Utilisateur;
 import fr.eni.projetenchere.dal.DAOFactory;
 import fr.eni.projetenchere.dal.EnchereDAO;
@@ -153,6 +155,41 @@ public class Verification {
 			utilisateur = EnchereManager.getInstance().selectUtilisateurByPseudo(pseudo);
 			if (!utilisateur.getMotDePasse().equals(motDePasse)) {
 				throw new Exception("Le mot de passe de "+pseudo+" est incorrect");
+			}
+			
+		}
+		
+		/**
+		 * Vérifie que l'offre saisie est strictement supérieure à la meilleure offre
+		 * @param montant_enchere
+		 * @param no_article
+		 * @throws Exception
+		 */
+		public void verifEnchere(Utilisateur utilisateur, int montant_enchere, int no_article) throws Exception {
+			ArticleVendu articleVendu = EnchereManager.getInstance().selectArticleById(no_article);
+	
+			
+			if (montant_enchere < articleVendu.getEnchereMax().getMontant_enchere()) {
+				throw new Exception("Votre offre doit être strictement supérieure à la meilleure offre.");
+			}
+			
+			if (montant_enchere == 0) {
+				throw new Exception("Veuillez saisir un montant.");
+			}
+			
+			// s'il n'y a pas encore d'enchère sur l'article
+			if (articleVendu.getEnchereMax() == null) {
+				
+				// l'utilisateur a-t-il suffisamment de crédit pour enchérir sur le prix initial ?
+				if (utilisateur.getCredit() < articleVendu.getMiseAPrix()) {
+				throw new Exception("Votre crédit est insuffisant.");	
+				}
+				
+			} else {
+				// l'utilisateur a-t-il suffisamment de crédit pour enchérir sur le prix initial ?
+				if (utilisateur.getCredit() < articleVendu.getEnchereMax().getMontant_enchere()) {
+				throw new Exception("Votre crédit est insuffisant.");	
+				}
 			}
 			
 		}
