@@ -19,14 +19,7 @@ import fr.eni.projetenchere.dal.EnchereDAO;
  * @version 1.0
  * @date 22/06/21
  */
-/**
- * @author fgirard2021
- *
- */
-/**
- * @author fgirard2021
- *
- */
+
 public class EnchereManager {
 
 	// création d'instance
@@ -290,14 +283,5 @@ public class EnchereManager {
 		return listeMesEncheres;
 	}
 
-	/**
-	 * ajoute une enchère en DB
-	 * @param newEnchere
-	 * @return newEnchere
-	 */
-	public Enchere insertEnchere(Utilisateur utilisateur, int montant_enchere, int no_article) {
-		Enchere enchere = enchereDAO.insertEnchere(utilisateur, montant_enchere, no_article);
-		return enchere;
 
-	}
 }
