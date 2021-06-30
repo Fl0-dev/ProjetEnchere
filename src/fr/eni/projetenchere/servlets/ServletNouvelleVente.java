@@ -74,11 +74,11 @@ public class ServletNouvelleVente extends HttpServlet {
 		
 		
 		//on regarde si les champs sont vides (si oui message erreur)
-				if (nomArticle.isEmpty()|| nomArticle.equals(null)) {
+				if (nomArticle.isEmpty()|| nomArticle==null) {
 					request.setAttribute("messageErreur", "Veuillez remplir le nom de l'article");
 					this.getServletContext().getRequestDispatcher("/WEB-INF/JSPNouvelleVente.jsp").forward(request, response);
 				}
-				if (description.isEmpty()|| description.equals(null)) {
+				if (description.isEmpty()|| description==null) {
 					request.setAttribute("messageErreur", "Veuillez saisir une description");
 					this.getServletContext().getRequestDispatcher("/WEB-INF/JSPNouvelleVente.jsp").forward(request, response);
 				}
@@ -102,6 +102,11 @@ public class ServletNouvelleVente extends HttpServlet {
 				
 				if (prix_initial<=0) {
 					request.setAttribute("messageErreur", "Le prix doit être positif");
+					this.getServletContext().getRequestDispatcher("/WEB-INF/JSPNouvelleVente.jsp").forward(request, response);
+				}
+				
+				if (rue.isEmpty() || rue==null || codePostal.isEmpty() || codePostal==null || ville.isEmpty() || ville==null) {
+					request.setAttribute("messageErreur", "L'adresse de retrait doit être renseignée");
 					this.getServletContext().getRequestDispatcher("/WEB-INF/JSPNouvelleVente.jsp").forward(request, response);
 				}
 				
