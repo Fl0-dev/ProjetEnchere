@@ -93,6 +93,9 @@ public class ServletEncherir extends HttpServlet {
       		Enchere newEnchere = EnchereManager.getInstance().insertEnchere(utilisateurSession, montantEnchere, no_article);
       		System.out.println("Le montant de l'enchere : " + newEnchere.getMontant_enchere());
       		
+      		//TODO: retirer le montant de l'offre du crédit utilisateur
+      		int creditUtilisateur = utilisateurSession.getCredit() - newEnchere.getMontant_enchere();
+      		
       		resultat = "Enchère réussie.";  
         	request.setAttribute("resultat", resultat);
         } else {

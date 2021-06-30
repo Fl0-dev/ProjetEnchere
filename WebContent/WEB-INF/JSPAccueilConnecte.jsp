@@ -86,6 +86,11 @@
 			</div> 
 		</form>
 				
+				
+				
+				
+		
+
 			<!-- Affichage des enchères en cours -->
 			<div class="encheres">
 

@@ -8,10 +8,7 @@ import fr.eni.projetenchere.bo.Enchere;
 import fr.eni.projetenchere.bo.Retrait;
 import fr.eni.projetenchere.bo.Utilisateur;
 
-/**
- * @author fgirard2021
- *
- */
+
 public interface EnchereDAO {
 
 	/**
@@ -126,7 +123,7 @@ public interface EnchereDAO {
 	List<ArticleVendu> selectEncheresOuvertes(String pseudo, String contenuRecherche, String categorie);
 
 	/**
-	 * selectionne tous les articles actuellemnt en vente et sur lesquels l'utilisateur
+	 * selectionne tous les articles actuellement en vente et sur lesquels l'utilisateur
 	 * a enchérit
 	 * @param pseudo
 	 * @param contenuRecherche
@@ -134,7 +131,7 @@ public interface EnchereDAO {
 	 * @return listeMesEncheres
 	 */
 	List<ArticleVendu> selectMesEncheres(String pseudo, String contenuRecherche, String categorie);
-
+	
 	/**
 	 * ajoute une enchère en DB
 	 * @param newEnchere
