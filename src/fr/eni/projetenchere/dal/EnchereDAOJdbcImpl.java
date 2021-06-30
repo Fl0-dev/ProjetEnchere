@@ -538,7 +538,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 			// requête SQL
 			final String SELECT_ARTICLE_BY_ID =
-					"SELECT a.nom_article, a.description, c.no_categorie, MAX(e.montant_enchere) as enchere_max, MAX(acheteur.pseudo) as meilleur_encherisseur,  " + 
+					"SELECT a.nom_article, a.description, c.no_categorie, MAX(e.montant_enchere) as enchere_max,  " + 
 					"a.prix_initial, a.date_fin_encheres, a.no_retrait, vendeur.pseudo as vendeur " + 
 					"FROM articles_vendus AS a " + 
 					"inner join CATEGORIES as c on c.no_categorie = a.no_categorie " + 
@@ -564,15 +564,13 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 					int enchereMax = rs.getInt("enchere_max");
 					String nomArticle = rs.getString("nom_article");
 					String pseudoVendeur = rs.getString("vendeur");
-					String pseudoAcheteur = rs.getString("meilleur_encherisseur");
 					int noCategorie = rs.getInt("no_categorie");
 					int prixInitial = rs.getInt("prix_initial");
 					LocalDate dateFinEnchere = rs.getDate("date_fin_encheres").toLocalDate();
 				
 					// utilisation des résultats
 					vendeur = selectUtilisateurByPseudo(pseudoVendeur);
-					acheteur = selectUtilisateurByPseudo(pseudoAcheteur);
-					
+									
 					categorie = selectCategorieById(noCategorie);
 					retrait = selectRetraitByArticleId(no_article);
 					
