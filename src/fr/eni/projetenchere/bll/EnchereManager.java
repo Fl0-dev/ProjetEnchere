@@ -283,5 +283,20 @@ public class EnchereManager {
 		return listeMesEncheres;
 	}
 
+	/**
+	 * ajoute une enchère en DB
+	 * @param newEnchere
+	 * @return newEnchere
+	 */
+	public Enchere insertEnchere(Utilisateur utilisateur, int montant_enchere, int no_article) {
+		Enchere enchere = enchereDAO.insertEnchere(utilisateur, montant_enchere, no_article);
+		return enchere;
+	}
+	
+	public ArticleVendu insertArticle(ArticleVendu newArticle) {
+		// TODO Auto-generated method stub
+		enchereDAO.insertNouvelleVente(newArticle);
+		return newArticle;
+	}
 
 }
