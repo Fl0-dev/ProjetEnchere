@@ -49,7 +49,6 @@ public class ServletEncherir extends HttpServlet {
 			int no_article = 7;
 			ArticleVendu articleSelected = EnchereManager.getInstance().selectArticleById(no_article);		
 			request.setAttribute("articleSelected", articleSelected);
-			System.out.println(articleSelected);
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encherir.jsp");
 			rd.forward(request, response);
@@ -81,8 +80,7 @@ public class ServletEncherir extends HttpServlet {
 		// Validation montant de l'offre
         try {
       	  Verification.getInstance().verifEnchere(utilisateurSession, montantEnchere, no_article);
-      	  
-      	
+
          
         } catch ( Exception e ) {
         	MapErreurs.put( "montant", e.getMessage() );    
