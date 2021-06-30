@@ -15,17 +15,25 @@
 <body>
 
 	<header>
-		<nav class="navbar expand-sm bg-dark navbar-dark">
-			<h1><a class="text-info" href="${pageContext.request.contextPath }/Accueil">ENI-Enchères</a></h1>
-	
-			<p class="text-info">${resultat}</p>
-			<p class="text-info">${messageDeconnexion}</p>
-	
-			<a class="text-info" href="${pageContext.request.contextPath }/Identification">S'inscrire - Se connecter</a>
+		<nav class="navbar navbar-expand-lg bg-dark navbar-dark mb-3">
+			<h1><a class="navbar-brand text-info" href="${pageContext.request.contextPath }/Accueil">ENI-Enchères</a></h1>
+			
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#liens">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			
+			<div class="collapse navbar-collapse justify-content-end" id="liens">
+				<ul class="navbar-nav">
+					<li class="nav-item active">
+						<a class="nav-link text-info" href="${pageContext.request.contextPath }/Identification">S'inscrire - Se connecter</a>
+					</li>
+				</ul>
 		</nav>
 	</header>
 
 	<main class="container-fluid">
+		<p class="text-dark container d-flex justify-content-center">${resultat}</p>
+		<p class="text-dark container d-flex justify-content-center">${messageDeconnexion}</p>
 		<div class="h2 container d-flex justify-content-center">Listes des enchères</div>
 		
 			<form action="${pageContext.request.contextPath }/Accueil" method="post" class="recherche">
@@ -44,7 +52,7 @@
 						</select>
 					</div>
 					
-				<button class="btn btn-info btn-block"type="submit">Rechercher</button>
+				<button class="btn btn-info btn-block my-3 "type="submit">Rechercher</button>
 		
 			</form>
 		
@@ -53,13 +61,13 @@
 		
         
         <c:forEach var="articleVendu" items="${listeVentesEnCours }">	
-			<div class="card">
+			<div class="card mb-3">
 				
 	        	<div class="card-body">
-		        	<h5 class="card-title"><a href="" class="card-link text-info">${articleVendu.nomArticle }</a><h5>
+		        	<h5 class="card-title">${articleVendu.nomArticle }<h5>
 		        	<h6 class"card-subtitle mb-2 text-muted">Prix : ${articleVendu.enchereMax.montant_enchere } points<h6>
 		        	<p>Date de fin de l'enchère : ${articleVendu.dateFinEncheres }</p>
-		        	<p>Vendeur : <a href="" class="card-link text-info">${articleVendu.utilisateur.pseudo  }</a><p>
+		        	<p>Vendeur : ${articleVendu.utilisateur.pseudo  }<p>
 	        	</div>
 	        	
 	        </div>	
