@@ -531,7 +531,6 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			// création des variables
 					ArticleVendu articleVendu = new ArticleVendu();
 					Utilisateur vendeur;
-					Utilisateur acheteur;
 					Enchere enchere = new Enchere();
 					Retrait retrait = new Retrait();
 					Categorie categorie;
@@ -575,8 +574,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 					retrait = selectRetraitByArticleId(no_article);
 					
 					enchere.setMontant_enchere(enchereMax);
-					enchere.setUtilisateur(acheteur);
-					
+										
 					articleVendu.setDateFinEncheres(dateFinEnchere);
 					articleVendu.setMiseAPrix(prixInitial);
 					articleVendu.setNomArticle(nomArticle);
@@ -723,7 +721,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				// requête SQL
 				final String SELECT_RETRAIT_BY_ARTID =
 						"SELECT rue, ville, code_postal " + 
-						"FROM RETRAITS as  " + 
+						"FROM RETRAITS as r " + 
 						"INNER JOIN ARTICLES_VENDUS as a on a.no_retrait = r.no_retrait " + 
 						"WHERE a.no_article = ?;";
 
