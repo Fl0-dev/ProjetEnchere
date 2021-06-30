@@ -37,6 +37,7 @@
 	</header>
 
 	<main class="container-fluid">
+		<p class="text-dark container d-flex justify-content-center">${resultat}Bienvenue ${ sessionScope.utilisateurSession.pseudo }!</p> 
 		<div class="h2 container d-flex justify-content-center">Listes des enchères</div>
 	
 			<form action="${pageContext.request.contextPath }/recherche" method="post" class="recherche">	
