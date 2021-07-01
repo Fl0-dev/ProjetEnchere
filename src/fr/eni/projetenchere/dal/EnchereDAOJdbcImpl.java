@@ -641,8 +641,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				+ "                inner join UTILISATEURS as vendeur on a.no_utilisateur = vendeur.no_utilisateur "
 				+ "                left join ENCHERES as e on a.no_article = e.no_article "
 				+ "                left join UTILISATEURS as acheteur on e.no_utilisateur = acheteur.no_utilisateur "
-				+ "                where (date_debut_encheres < GETDATE() and date_fin_encheres > GETDATE()) and c.libelle like ? and a.nom_article like ? "
-				+ "                and vendeur.pseudo <> ?"
+				+ "                where (date_debut_encheres < GETDATE() and date_fin_encheres > GETDATE()) and c.libelle like ? and a.nom_article like ?"
+				+ "                 and vendeur.pseudo <> ?"
 				+ "                group by a.nom_article, vendeur.pseudo, date_fin_encheres, c.no_categorie, c.libelle, a.prix_initial;";
 
 		// ouverture de la connexion à la DB
@@ -652,13 +652,13 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			// initialisation de la requête
 			// si toute catégorie (categorie = "0")
 			if (categorie.equals("0")) {
-				requete.setString(1, "%%");
+				requete.setString(1, "%");
 			} else {
-				requete.setString(1, "%" + categorie);
+				requete.setString(1, "%" + categorie + "%");
 			}
-			requete.setString(2, "%" + contenuRecherche + "%");
+			requete.setString(2,"%" + contenuRecherche + "%");
 			requete.setString(3, pseudo);
-
+			System.out.println(SELECT_ENCHERES_OUVERTES);
 			// récupération du résultat
 			ResultSet rs = requete.executeQuery();
 

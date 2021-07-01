@@ -58,7 +58,7 @@
 						<select id="categories" name="categorie" class="form-control">
 							<option value="0" selected>Toutes</option>
 							<c:forEach items="${listeCategories }" var="categorie">
-							<option value="${categorie.noCategorie }">${categorie.libelle }</option>
+							<option value="${categorie.libelle }">${categorie.libelle }</option>
 							</c:forEach>
 						</select>
 					</div>
