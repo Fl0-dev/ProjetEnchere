@@ -1,6 +1,7 @@
 package fr.eni.projetenchere.servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
@@ -63,26 +64,21 @@ public class ServletNouvelleVente extends HttpServlet {
 		String description = request.getParameter("description");
 		int categorie = Integer.valueOf(request.getParameter("categorie"));
 		int prix_initial = Integer.valueOf(request.getParameter("prix_initial"));
-		try {
-			debutenchere = LocalDate.parse(request.getParameter("debutenchere"));
-		} catch (DateTimeParseException e) {
-			e.printStackTrace();
+		debutenchere = LocalDate.parse(request.getParameter("debutenchere"));
+		finenchere = LocalDate.parse(request.getParameter("finenchere"));
 		
-		try {
-			finenchere = LocalDate.parse(request.getParameter("finenchere"));
-		} catch (DateTimeParseException f) {
-				f.printStackTrace();	
 		//String finenchere = request.getParameter("finenchere");
 		String rue = request.getParameter("rue");
 		String codePostal = request.getParameter("codePostal");
 		String ville = request.getParameter("ville");
 		
+		
 		//on regarde si les champs sont vides (si oui message erreur)
-				if (nomArticle.isEmpty()|| nomArticle.equals(null)) {
+				if (nomArticle.isEmpty()|| nomArticle==null) {
 					request.setAttribute("messageErreur", "Veuillez remplir le nom de l'article");
 					this.getServletContext().getRequestDispatcher("/WEB-INF/JSPNouvelleVente.jsp").forward(request, response);
 				}
-				if (description.isEmpty()|| description.equals(null)) {
+				if (description.isEmpty()|| description==null) {
 					request.setAttribute("messageErreur", "Veuillez saisir une description");
 					this.getServletContext().getRequestDispatcher("/WEB-INF/JSPNouvelleVente.jsp").forward(request, response);
 				}
@@ -90,30 +86,35 @@ public class ServletNouvelleVente extends HttpServlet {
 					request.setAttribute("messageErreur", "Veuillez sélectionner une catégorie");
 					this.getServletContext().getRequestDispatcher("/WEB-INF/JSPNouvelleVente.jsp").forward(request, response);
 				}
-				if (debutenchere.equals(null)|| finenchere.equals(null))  {
+				if (debutenchere == null|| finenchere == null)  {
 					request.setAttribute("messageErreur", "Veuillez saisir une date");
 					this.getServletContext().getRequestDispatcher("/WEB-INF/JSPNouvelleVente.jsp").forward(request, response);
 				}
-				if (debutenchere.isBefore(finenchere)) {
+				
+				if (finenchere.isBefore(debutenchere)) {
 					request.setAttribute("messageErreur", "La date de début d'enchère doit être inférieure à la date de fin d'enchère");
 					this.getServletContext().getRequestDispatcher("/WEB-INF/JSPNouvelleVente.jsp").forward(request, response);
 				}
-				if (debutenchere.isAfter(LocalDate.now())) {
+				if (debutenchere.isBefore(LocalDate.now())) {
 					request.setAttribute("messageErreur", "La date de début d'enchère doit être supérieure à la date du jour");
 					this.getServletContext().getRequestDispatcher("/WEB-INF/JSPNouvelleVente.jsp").forward(request, response);
 				}
+				
 				if (prix_initial<=0) {
 					request.setAttribute("messageErreur", "Le prix doit être positif");
 					this.getServletContext().getRequestDispatcher("/WEB-INF/JSPNouvelleVente.jsp").forward(request, response);
 				}
+				
+				if (rue.isEmpty() || rue==null || codePostal.isEmpty() || codePostal==null || ville.isEmpty() || ville==null) {
+					request.setAttribute("messageErreur", "L'adresse de retrait doit être renseignée");
+					this.getServletContext().getRequestDispatcher("/WEB-INF/JSPNouvelleVente.jsp").forward(request, response);
+				}
+				
 		
 		// TODO: vérification des erreurs
 				
 				
-		// insertion des infos
-				
-				
-				//Retrait retrait = EnchereManager.getInstance().insertRetrait(rue, codePostal, ville);
+					
 				Retrait retrait = new Retrait(rue, codePostal, ville);
 				Categorie categorie2 = EnchereManager.getInstance().selectCategorieById(categorie);
 				
@@ -126,16 +127,22 @@ public class ServletNouvelleVente extends HttpServlet {
 				newArticle.setDateFinEncheres(finenchere);
 				newArticle.setUtilisateur(utilisateurSession);
 				newArticle.setLieuRetrait(retrait);
+								
 				
+				try {
+					EnchereManager.getInstance().insertArticle(newArticle);
+					request.setAttribute("succès","Votre article a été ajouté aux ventes !");
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
-				ArticleVendu articleVendu = EnchereManager.getInstance().insertArticle(newArticle);
-				
+														
 		
 		// renvoie vers la JSP après traitement
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSPNouvelleVente.jsp");
 				rd.forward(request, response);
 		
 			}
-		}
-}
+
 }

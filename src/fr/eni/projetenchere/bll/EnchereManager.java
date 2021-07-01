@@ -1,5 +1,6 @@
 package fr.eni.projetenchere.bll;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -293,10 +294,9 @@ public class EnchereManager {
 		return enchere;
 	}
 	
-	public ArticleVendu insertArticle(ArticleVendu newArticle) {
+	public void insertArticle(ArticleVendu newArticle) throws SQLException {
 		// TODO Auto-generated method stub
 		enchereDAO.insertNouvelleVente(newArticle);
-		return newArticle;
 	}
 	
 	/**
