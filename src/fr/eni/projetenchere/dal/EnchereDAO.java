@@ -140,6 +140,17 @@ public interface EnchereDAO {
 	 */
 	List<ArticleVendu> selectAllVentesEnCoursRecherche(String pseudo, String contenuRecherche, String categorie);
 
+
+	/**
+	 * permet la récupération des enchères remportées par
+	 * un utilisateur
+	 * @param pseudo
+	 * @param contenuRecherche
+	 * @param categorie
+	 * @return listeMesEncheresRemportees
+	 */
+	List<ArticleVendu> selectMesEncheresRemportees(String pseudo, String contenuRecherche, String categorie);
+
 		
 
 }
