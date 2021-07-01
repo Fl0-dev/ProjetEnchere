@@ -505,7 +505,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				int enchereMax = rs.getInt("enchere_max");
 				String nomArticle = rs.getString("nom_article");
 				String pseudoVendeur = rs.getString("vendeur");
-				int noCategorie = rs.getInt("no_categorie");
+								int noCategorie = rs.getInt("no_categorie");
 				int prixInitial = rs.getInt("prix_initial");
 				LocalDate dateFinEnchere = rs.getDate("date_fin_encheres").toLocalDate();
 
@@ -516,7 +516,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				retrait = selectRetraitByArticleId(no_article);
 
 				enchere.setMontant_enchere(enchereMax);
-
+				articleVendu.setNoArticle(no_article);
 				articleVendu.setDateFinEncheres(dateFinEnchere);
 				articleVendu.setMiseAPrix(prixInitial);
 				articleVendu.setNomArticle(nomArticle);

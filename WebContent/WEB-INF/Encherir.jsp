@@ -60,11 +60,14 @@
 	<table>
   
     <tbody>
-
+		<tr>
+		<td>${articleSelected.noArticle }</td>
+		</tr>
          <tr>
             <td>Description :</td>
             <td>${articleSelected.description }</td>
         </tr>
+       
          <tr>
             <td>Catégorie :</td>
             <td>${articleSelected.categorieArticle.libelle }</td>
@@ -93,15 +96,16 @@
  
     </tbody>
 </table>
-	<form method="POST" action="${pageContext.request.contextPath }/encherir">
+	<form name="enchere" method="POST" action="${pageContext.request.contextPath }/encherir">
 	
 			<label for="montant_enchere">Ma proposition :</label>
 			
-			<input type="number" id="montant_enchere" name="montant_enchere" required step="1" min="${articleSelected.enchereMax.montant_enchere == 0 ? articleSelected.miseAPrix : articleSelected.enchereMax.montant_enchere }" placeholder="${articleSelected.enchereMax.montant_enchere == 0 ? articleSelected.miseAPrix : articleSelected.enchereMax.montant_enchere }">
+			<input type="number" id="montant_enchere" name="montant_enchere" required step="1" min="${articleSelected.enchereMax.montant_enchere == 0 ? articleSelected.miseAPrix + 1 : articleSelected.enchereMax.montant_enchere + 1 }" placeholder="${articleSelected.enchereMax.montant_enchere == 0 ? articleSelected.miseAPrix + 1 : articleSelected.enchereMax.montant_enchere + 1 }">
 			
-			<input id="artid" name="artid" type="hidden" value="${articleSelected.noArticle}">
+			<label for="article">Numéro d'article :</label>
+			<input id="article" name="article" type="number" value="${articleSelected.noArticle}" readonly>
 			
-			<button class="btn btn-info btn-block mb-3" type="submit">Enchérir</button>
+			<button id="submitEnchere" name="submitEnchere" class="btn btn-info btn-block mb-3" type="submit">Enchérir</button>
 	
 	</form>
 			</div>
