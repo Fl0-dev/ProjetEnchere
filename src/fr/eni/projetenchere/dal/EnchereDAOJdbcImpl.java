@@ -531,7 +531,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				+ "left join ENCHERES as e on a.no_article = e.no_article "
 				+ "left join UTILISATEURS as acheteur on e.no_utilisateur = acheteur.no_utilisateur "
 				+ "where (date_debut_encheres < GETDATE() and date_fin_encheres > GETDATE()) and vendeur.pseudo <> ? "
-				+ "group by a.nom_article, vendeur.pseudo, date_fin_encheres, a.prix_initial;";
+				+ "group by a.nom_article, vendeur.pseudo, date_fin_encheres, a.prix_initial, a.no_article, vendeur.no_utilisateur;";
 
 		// ouverture de la connexion à la DB
 		try (Connection connection = JdbcTools.getConnection();
@@ -553,7 +553,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				int idArticle = rs.getInt("no_article");
 				int miseAPrix = rs.getInt("prix_initial");
 				String nomArticle = rs.getString("nom_article");
-				int idUtilisateur = rs.getInt("vendeur.no_utilisateur");
+				int idUtilisateur = rs.getInt("no_utilisateur");
 				String vendeurPseudo = rs.getString("vendeur");
 				LocalDate dateFinEnchere = rs.getDate("date_fin_encheres").toLocalDate();
 

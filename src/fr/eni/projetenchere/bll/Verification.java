@@ -178,9 +178,9 @@ public class Verification {
 			}
 			
 			// l'utilisateur a-t-il suffisamment de crédit pour faire cette offre ?
-				if (utilisateur.getCredit() < montant_enchere) {
-				throw new Exception("Votre crédit est insuffisant.");	
-				}
+			//	if (utilisateur.getCredit() < montant_enchere) {
+			//	throw new Exception("Votre crédit est insuffisant.");	
+			//	}
 				
 		}
 		
