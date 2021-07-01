@@ -298,5 +298,13 @@ public class EnchereManager {
 		enchereDAO.insertNouvelleVente(newArticle);
 		return newArticle;
 	}
+	
+	/**
+	 * update en DB le profil d'un utilisateur
+	 */
+	public void updateCredit(Utilisateur utilisateur, int montant_enchere) {
+		
+		enchereDAO.updateCredit(utilisateur, montant_enchere);
+	}
 
 }
