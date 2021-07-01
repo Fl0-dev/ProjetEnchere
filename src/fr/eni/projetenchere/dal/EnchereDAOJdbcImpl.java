@@ -594,7 +594,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 		// requête SQL
 		final String SELECT_ENCHERES_OUVERTES = "SELECT MAX(e.montant_enchere) as enchere_max, a.prix_initial, "
-				+ "a.nom_article, a.no_article, vendeur.no_utilisateur, vendeur.pseudo as vendeur, date_fin_encheres " + "FROM articles_vendus AS a \n"
+				+ "a.nom_article, a.no_article, vendeur.no_utilisateur, vendeur.pseudo as vendeur, date_fin_encheres " + "FROM articles_vendus AS a "
 				+ "inner join CATEGORIES as c on c.no_categorie = a.no_categorie "
 				+ "inner join UTILISATEURS as vendeur on a.no_utilisateur = vendeur.no_utilisateur "
 				+ "left join ENCHERES as e on a.no_article = e.no_article "
@@ -706,7 +706,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 		// requête SQL
 		final String SELECT_ENCHERES_OUVERTES = "SELECT MAX(e.montant_enchere) as enchere_max, a.prix_initial, "
-				+ "                a.nom_article, vendeur.pseudo as vendeur, date_fin_encheres, c.no_categorie, c.libelle "
+				+ "                a.nom_article, a.no_article, vendeur.no_utilisateur, vendeur.pseudo as vendeur, date_fin_encheres, c.no_categorie, c.libelle "
 				+ "                FROM articles_vendus AS a "
 				+ "                inner join CATEGORIES as c on c.no_categorie = a.no_categorie "
 				+ "                inner join UTILISATEURS as vendeur on a.no_utilisateur = vendeur.no_utilisateur "
@@ -714,7 +714,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				+ "                left join UTILISATEURS as acheteur on e.no_utilisateur = acheteur.no_utilisateur "
 				+ "                where (date_debut_encheres < GETDATE() and date_fin_encheres > GETDATE()) and c.libelle like ? and a.nom_article like ?"
 				+ "                 and vendeur.pseudo not like ? "
-				+ "                group by a.nom_article, vendeur.pseudo, date_fin_encheres, c.no_categorie, c.libelle, a.prix_initial;";
+				+ "                group by a.nom_article, a.no_article, vendeur.no_utilisateur, vendeur.pseudo, date_fin_encheres, c.no_categorie, c.libelle, a.prix_initial;";
 
 		// ouverture de la connexion à la DB
 		try (Connection connection = JdbcTools.getConnection();
@@ -739,6 +739,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				Utilisateur vendeur = new Utilisateur();
 				Enchere enchereMax = new Enchere();
 				
+				int idArticle = rs.getInt("no_article");
+				int idUtilisateur = rs.getInt("no_utilisateur");
 				int enchere = rs.getInt("enchere_max");
 				int miseAPrix = rs.getInt("prix_initial");
 				String nomArticle = rs.getString("nom_article");
@@ -747,7 +749,10 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 				// utilisation des résultats
 				vendeur.setPseudo(vendeurPseudo);
+				vendeur.setNoUtilisateur(idUtilisateur);
+				articleVendu.setNoArticle(idArticle);
 				articleVendu.setNomArticle(nomArticle);
+				
 
 				// si il n'y a pas encore d'enchère on utilise la mie à prix comme enchère max
 				if (enchere != 0) {
@@ -783,13 +788,13 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		
 		// requête SQL
 		final String SELECT_MES_ENCHERES = "SELECT MAX(e.montant_enchere) as enchere_max, "
-				+ "a.nom_article, vendeur.pseudo as vendeur, date_fin_encheres " + "FROM articles_vendus AS a  "
+				+ "a.nom_article, a.no_article, vendeur.no_utilisateur, vendeur.pseudo as vendeur, date_fin_encheres " + "FROM articles_vendus AS a  "
 				+ "inner join CATEGORIES as c on c.no_categorie = a.no_categorie "
 				+ "inner join UTILISATEURS as vendeur on a.no_utilisateur = vendeur.no_utilisateur "
 				+ "inner join ENCHERES as e on a.no_article = e.no_article "
 				+ "inner join UTILISATEURS as u on u.pseudo = ? "
 				+ "where vendeur.pseudo <> ? and c.libelle like ? and a.nom_article like ? "
-				+ "group by a.nom_article, vendeur.pseudo, date_fin_encheres;";
+				+ "group by a.nom_article, a.no_article, vendeur.no_utilisateur, vendeur.pseudo, date_fin_encheres;";
 
 		// ouverture de la connexion à la DB
 		try (Connection connection = JdbcTools.getConnection();
@@ -817,12 +822,16 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				Utilisateur vendeur = new Utilisateur();
 				Enchere enchereMax = new Enchere();
 				
+				int idArticle = rs.getInt("no_article");
+				int idUtilisateur = rs.getInt("no_utilisateur");
 				int enchere = rs.getInt("enchere_max");
 				String nomArticle = rs.getString("nom_article");
 				String vendeurPseudo = rs.getString("vendeur");
 				LocalDate dateFinEnchere = rs.getDate("date_fin_encheres").toLocalDate();
 				
 				// utilisation des résultats
+				vendeur.setNoUtilisateur(idUtilisateur);
+				articleVendu.setNoArticle(idArticle);
 				vendeur.setPseudo(vendeurPseudo);
 				articleVendu.setNomArticle(nomArticle);
 				enchereMax.setMontant_enchere(enchere);
@@ -851,7 +860,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		List<ArticleVendu> listeMesEncheresRemportees = new ArrayList<>();
 		// requête SQL
 		final String SELECT_MES_ENCHERES_REMPORTEES = "SELECT MAX(e.montant_enchere) as enchere_max, " + 
-				"a.nom_article, vendeur.pseudo as vendeur, date_fin_encheres " + 
+				"a.nom_article, a.no_article, vendeur.no_utilisateur, vendeur.pseudo as vendeur, date_fin_encheres " + 
 				"FROM articles_vendus AS a \r\n" + 
 				"inner join CATEGORIES as c on c.no_categorie = a.no_categorie " + 
 				"inner join UTILISATEURS as vendeur on a.no_utilisateur = vendeur.no_utilisateur " + 
@@ -859,7 +868,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				"inner join UTILISATEURS as u on u.pseudo = ? " + 
 				"where vendeur.pseudo <> ?  and c.libelle like ? and a.nom_article like ? " + 
 				"AND a.prix_vente = e.montant_enchere " + 
-				"group by a.nom_article, vendeur.pseudo, date_fin_encheres;";
+				"group by a.nom_article, a.no_article, vendeur.no_utilisateur, vendeur.pseudo, date_fin_encheres;";
 		
 		// ouverture de la connexion à la DB
 				try (Connection connection = JdbcTools.getConnection();
@@ -887,12 +896,16 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 						Utilisateur vendeur = new Utilisateur();
 						Enchere enchereMax = new Enchere();
 						
+						int idArticle = rs.getInt("no_article");
+						int idUtilisateur = rs.getInt("no_utilisateur");
 						int enchere = rs.getInt("enchere_max");
 						String nomArticle = rs.getString("nom_article");
 						String vendeurPseudo = rs.getString("vendeur");
 						LocalDate dateFinEnchere = rs.getDate("date_fin_encheres").toLocalDate();
 						
 						// utilisation des résultats
+						vendeur.setNoUtilisateur(idUtilisateur);
+						articleVendu.setNoArticle(idArticle);
 						vendeur.setPseudo(vendeurPseudo);
 						articleVendu.setNomArticle(nomArticle);
 						enchereMax.setMontant_enchere(enchere);
