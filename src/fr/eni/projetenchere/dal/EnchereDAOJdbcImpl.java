@@ -459,6 +459,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				articleVendu.setCategorieArticle(categorie);
 				articleVendu.setLieuRetrait(retrait);
 				articleVendu.setDescription(description);
+				articleVendu.setLieuRetrait(retrait);
 
 			}
 
