@@ -173,6 +173,17 @@ public interface EnchereDAO {
 	 */
 	List<ArticleVendu> selectVentesNonDebutees(String pseudo, String contenuRecherche, String categorie);
 
+	
+	/**
+	 * permet la récupération des ventes terminées 
+	 * d'un utilisateurs
+	 * @param pseudo
+	 * @param contenuRecherche
+	 * @param categorie
+	 * @return listeVentesTerminees
+	 */
+	List<ArticleVendu> selectVentesTerminees(String pseudo, String contenuRecherche, String categorie);
+
 		
 
 }
