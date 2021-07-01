@@ -33,78 +33,88 @@
 			</div>
 		</nav> 
 	</header>
-	<center>
-		<h1>Mon Profil</h1>
-	</center>
-	<form
-		action="${pageContext.request.contextPath }/ModifProfil"
-		method="POST">
+	
+	<div class="h2 container d-flex justify-content-center">Modifier Profil</div>
+	
+	<form action="${pageContext.request.contextPath }/ModifProfil" method="POST">
 
-		<center>
-
-			<label for="pseudo">Pseudo <span>*</span> </label> 
-			<input type="text" id="pseudo"name="pseudo" value="<c:out value="${utilisateurSession.pseudo }"/>" autofocus > 
-			<span>${MapErreurs['pseudo']}</span> 
-			 <br> <br> 
-			<label for="nom">Nom <span>*</span> </label> 
-			<input type="text" id="nom" name="nom" value="<c:out value="${utilisateurSession.nom }"/>" >
-			<span>${MapErreurs['nom']}</span>
-			<br> <br> 
-			<label for="prenom">Prénom <span>*</span> </label> 
-			<input type="text" id="prenom" name="prenom" value="<c:out value="${utilisateurSession.prenom }"/>"  > 
-			<span>${MapErreurs['prenom']}</span>
-			 <br><br> 
-			<label for="email">Email <span>*</span> </label> 
-			<input type="mail" id="email" name="email" value="<c:out value="${utilisateurSession.email }"/>"  >
-			<span>${MapErreurs['email']}</span>
-			<br> <br> 
-			<label for="telephone">Téléphone : </label> 
-			<input type="tel" id="telephone" name="telephone" value="<c:out value="${utilisateurSession.telephone }"/>"> 
-			<span>${MapErreurs['tel']}</span>
-			 <br><br> 
-			<label for="rue">Rue <span>*</span> </label> 
-			<input type="text" id="rue" name="rue" value="<c:out value="${utilisateurSession.rue }"/>"  >
-			<span>${MapErreurs['rue']}</span>
-			<br> <br> 
-			<label for="codePostal">Code Postal <span>*</span> </label> 
-			<input type="text" id="codePostal" name="codePostal" value="<c:out value="${utilisateurSession.codePostal }"/>"  >
-			<span>${MapErreurs['codePostal']}</span> 
-			 <br><br> 
-			<label for="ville">Ville <span>*</span> </label> 
-			<input type="text" id="ville" name="ville" value="<c:out value="${utilisateurSession.ville }"/>"  > 
-			<span>${MapErreurs['ville']}</span>
-			<br> <br> 
-			<label for="motDePasse">Mot de passe actuel <span>*</span> </label> 
-			<input type="password" id="motDePasse" name="motDePasse" > 
-			<span>${MapErreurs['VerifMdp']}</span> 
-			 <br><br> 
-			 <label for="motDePasseNew">Nouveau mot de passe <span>*</span> </label> 
-			<input type="password" id="motDePasseNew" name="motDePasseNew"  > 
-			<span>${MapErreurs['motDePasseNew']}</span> 
-			 <br><br> 
-			<label for="confirmation">Confirmation <span>*</span> </label> 
-			<input type="password"id="confirmation" name="confirmation"  > 
-			<span>${MapErreurs['confirmation']}</span> 
-			<br> <br>
-			<label for="credit">Crédit : </label>
-			<label for="credit">${utilisateurSession.credit}</label>
-			</center>
-
-		<center>
-			<span>${MapErreurs['champ']}</span> 
-			<br><br>
-			<button type="submit" value="modif" name="bouton" >Enregistrer</button>
-			<br>
-			<br>
-			<button type="submit" value="suppr" name="bouton" >Supprimer mon compte</button>
-			<br>
-			<br>
-			<p>${resultat}</p>
-		</center>
+		<div class="form-group container fluid d-flex flex-column">
+				<div class="form-row justify-content-center">
+					<div class="form-group col-md-6">
+						<label for="pseudo">Pseudo <span>*</span> </label> 
+						<input class="form-control" type="text" id="pseudo"name="pseudo" value="<c:out value="${utilisateurSession.pseudo }"/>" > 
+						<span>${MapErreurs['pseudo']}</span> 
+					</div>
+				 	<div class="form-group col-md-6">
+						<label for="nom">Nom <span>*</span></label> 
+						<input class="form-control" type="text" id="nom" name="nom" value="<c:out value="${utilisateurSession.nom }"/>" >
+						<span>${MapErreurs['nom']}</span>
+					</div>
+				</div>
+				<div class="form-row justify-content-center">
+					<div class="form-group col-md-6">
+						<label for="prenom">Prénom <span>*</span> </label> 
+						<input class="form-control" type="text" id="prenom" name="prenom" value="<c:out value="${utilisateurSession.prenom }"/>"  > 
+						<span>${MapErreurs['prenom']}</span>
+					</div>
+				 	<div class="form-group col-md-6">
+						<label for="email">Email <span>*</span> </label> 
+						<input  class="form-control"type="mail" id="email" name="email" value="<c:out value="${utilisateurSession.email }"/>"  >
+						<span>${MapErreurs['email']}</span>
+					</div>
+				</div>
+				<div class="form-row justify-content-center">
+					<div class="form-group col-md-6"> 
+						<label for="telephone">Téléphone : </label> 
+						<input class="form-control" type="tel" id="telephone" name="telephone" value="<c:out value="${utilisateurSession.telephone }"/>"> 
+						<span>${MapErreurs['tel']}</span>
+					</div>
+				 	<div class="form-group col-md-6">
+						<label for="rue">Rue <span>*</span> </label> 
+						<input class="form-control" type="text" id="rue" name="rue" value="<c:out value="${utilisateurSession.rue }"/>"  >
+						<span>${MapErreurs['rue']}</span>
+					</div>
+				</div>
+				<div class="form-row justify-content-center">
+					<div class="form-group col-md-6">
+						<label for="codePostal">Code Postal <span>*</span> </label> 
+						<input class="form-control" type="text" id="codePostal" name="codePostal" value="<c:out value="${utilisateurSession.codePostal }"/>"  >
+						<span>${MapErreurs['codePostal']}</span> 
+					</div>
+				 	<div class="form-group col-md-6"> 
+						<label for="ville">Ville <span>*</span> </label> 
+						<input class="form-control" type="text" id="ville" name="ville" value="<c:out value="${utilisateurSession.ville }"/>"  > 
+						<span>${MapErreurs['ville']}</span>
+					</div>
+				</div>
+				<div class="form-row justify-content-left">
+					<div class="form-group col-md-6"> 
+						<label for="motDePasse">Mot de passe actuel <span>*</span> </label> 
+						<input class="form-control" type="password" id="motDePasse" name="motDePasse" autofocus > 
+						<span>${MapErreurs['VerifMdp']}</span> 
+					</div>
+				</div> 
+				<div class="form-row justify-content-center">
+				 	<div class="form-group col-md-6"> 
+						 <label for="motDePasseNew">Nouveau mot de passe <span>*</span> </label> 
+						<input class="form-control" type="password" id="motDePasseNew" name="motDePasseNew"  > 
+						<span>${MapErreurs['motDePasseNew']}</span> 
+					</div>
+					<div class="form-group col-md-6">
+						<label for="confirmation">Confirmation <span>*</span> </label> 
+						<input class="form-control" type="password"id="confirmation" name="confirmation"  > 
+						<span>${MapErreurs['confirmation']}</span> 
+					</div>
+				</div>
+				<label for="credit">Crédit : ${utilisateurSession.credit}</label>
+				<div class="btn-toolbar">
+					<button  class="btn btn-info btn-lg col-md-6" type="submit" value="modif" name="bouton" >Enregistrer</button>
+					<button class="btn btn-secondary btn-lg col-md-6" type="submit" value="suppr" name="bouton" >Supprimer mon compte</button>
+			
+			<p class="text-dark container d-flex justify-content-center">${resultat}</p>
+		</div>
 	</form>
-	<center>
-	<a href="${pageContext.request.contextPath }/Accueil">Supprimer mon compte</a>
-	</center>
+	
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
