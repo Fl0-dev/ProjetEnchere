@@ -4,22 +4,35 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Accueil</title>
-<!-- CSS -->
-<link href="${pageContext.request.contextPath }/css/style.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Enchérir</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<%-- <link href="${pageContext.request.contextPath }/css/style.css" rel="stylesheet"> --%>
 </head>
 <body>
 
 	<header>
-	<h1><a href="${pageContext.request.contextPath }/AccueilConnecte">ENI-Enchères</a></h1>
-	<p>${resultat}Bienvenue ${ sessionScope.utilisateurSession.pseudo }!</p>
-	<nav> <a
-		href="${pageContext.request.contextPath }/NouvelleVente">Vendre
-		un article</a> <a
-		href="${pageContext.request.contextPath }/MonProfil">Mon
-		profil</a> <a href="${pageContext.request.contextPath }/deconnexion">Déconnexion</a>
-	</nav> </header>
+		<nav class="navbar navbar-expand-lg bg-dark navbar-dark mb-3">
+			<h1><a class="navbar-brand text-info" href="${pageContext.request.contextPath }/AccueilConnecte">ENI-Enchères</a></h1>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#liens">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			
+			<div class="collapse navbar-collapse justify-content-end" id="liens">
+				<ul class="navbar-nav">
+					<li class="nav-item active">	
+						<a class="nav-link text-info" href="${pageContext.request.contextPath }/NouvelleVente">Vendre un article</a>
+					</li>
+      				<li class="nav-item">	 
+						<a class="nav-link text-info" href="${pageContext.request.contextPath }/MonProfil">Mon profil</a> 
+					</li>
+      				<li class="nav-item">	 
+						<a class="nav-link text-info" href="${pageContext.request.contextPath }/deconnexion">Déconnexion</a>
+					</li>
+				</ul>		
+			</div>
+		</nav> 
+	</header>
 	
 	<table>
     <thead>
@@ -33,11 +46,11 @@
         </tr>
          <tr>
             <td>Description :</td>
-            <td></td>
+            <td>${articleSelected.description }</td>
         </tr>
          <tr>
             <td>Catégorie :</td>
-            <td></td>
+            <td>${articleSelected.categorieArticle.libelle }</td>
         </tr>
          <tr>
             <td>Meilleure offre :</td>
