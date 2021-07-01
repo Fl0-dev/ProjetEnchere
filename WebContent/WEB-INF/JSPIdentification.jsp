@@ -18,18 +18,30 @@
 	</header>
 	
 	<p>${messageErreur}</p>
-	
+		<!-- LIGNE -->
+	<div class="row d-flex justify-content-center">
+		<!-- COLONNE VIDE 1 -->
+	<div class="col-md-3 align-items-start"></div>
+		
+		<!-- COLONNE CENTRALE -->
+	<main class="col-md-6 align-items-center">
+
+
+<div class="card mb-3">
+				
+	<div class="card-body">
+	<div class="h2 container d-flex justify-content-center">Identification</div>
 	<!--  Formulaire de connexion -->
-	<main class="container-fluid ">	
+		
 	<form method="POST" action="${pageContext.request.contextPath }/Identification">
-		<div>
+		 <div class="form-group">
 			<label for="identifiant">Identifiant : </label>
-			<input type="text" id="identifiant" name="identifiant" placeholder="monIdentifiant" autofocus >
+			<input class="form-control" type="text" id="identifiant" name="identifiant" placeholder="monIdentifiant" autofocus >
 		</div>
 		
-		<div>
+		 <div class="form-group">
 			<label for="mdp">Mot de passe : </label>
-			<input type="password" id="mdp" name="mdp" placeholder="monMotDePasse" >
+			<input class="form-control" type="password" id="mdp" name="mdp" placeholder="monMotDePasse" >
 		</div>
 		
 		<!-- <div>
@@ -40,13 +52,18 @@
 		
 		
 		<div>
-			<button type="submit">Connexion</button>
+			<button type="submit" class="btn btn-info btn-block mb-3">Connexion</button>
 		</div>
 	</form>
-	
-		<button><a href="${pageContext.request.contextPath }/CreationProfil">Créer un compte</a></button>
-	
-	</main>	
+	<form action="${pageContext.request.contextPath }/CreationProfil">
+		<button class="btn btn-info btn-block mb-3">Créer un compte</button>
+	</form>
+
+	</div>
+
+		</main>
+	<div class="col-md-3 align-items-end"></div>
+	</div>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

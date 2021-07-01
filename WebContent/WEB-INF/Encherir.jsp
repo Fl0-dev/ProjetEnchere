@@ -1,14 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html lang=""fr>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>ENI-Enchères</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
 <title>Enchérir</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 <%-- <link href="${pageContext.request.contextPath }/css/style.css" rel="stylesheet"> --%>
 </head>
+
 <body>
 
 	<header>
@@ -34,16 +42,25 @@
 		</nav> 
 	</header>
 	
+	<!-- LIGNE -->
+	<div class="row d-flex justify-content-center">
+		<!-- COLONNE VIDE 1 -->
+	<div class="col-md-3 align-items-start"></div>
+		
+		<!-- COLONNE CENTRALE -->
+	<main class="col-md-6 align-items-center">
+
+
+<div class="card mb-3">
+				
+	<div class="card-body">
+	<div class="h2 container d-flex justify-content-center">Détail vente</div>
+
+	<h5 class="card-title">${articleSelected.nomArticle }</h5>
 	<table>
-    <thead>
-        <tr>
-            <th colspan="2">Détail vente</th>
-        </tr>
-    </thead>
+  
     <tbody>
-        <tr>
-            <td><em>${articleSelected.nomArticle }</em></td>
-        </tr>
+
          <tr>
             <td>Description :</td>
             <td>${articleSelected.description }</td>
@@ -80,10 +97,21 @@
 	
 			<label for="montant_enchere">Ma proposition :</label>
 			<input type="number" id="montant_enchere" name="montant_enchere" required step="1" min="${articleSelected.enchereMax.montant_enchere == 0 ? articleSelected.miseAPrix : articleSelected.enchereMax.montant_enchere }" placeholder="${articleSelected.enchereMax.montant_enchere == 0 ? articleSelected.miseAPrix : articleSelected.enchereMax.montant_enchere }">
-		
-			<button type="submit">Enchérir</button>
+			<input id="article" name="article" type="hidden" value="${articleSelected.noArticle }">
+			<button class="btn btn-info btn-block mb-3" type="submit">Enchérir</button>
 	
 	</form>
+			</div>
+			
+	</div>
+	</main>
+
+
+<div class="col-md-3 align-items-end"></div>
+</div>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	
 </body>
 </html>

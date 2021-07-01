@@ -255,13 +255,6 @@ public class EnchereManager {
 		enchereDAO.insertNouvelleVente(newArticle);
 	}
 	
-	public Utilisateur selectCreditByUserId(int no_utilisateur) {
-		Utilisateur utilisateur = enchereDAO.selectCreditByUserId(no_utilisateur);
-		return utilisateur;
-		
-	}
-
-
 	/**
 	 * permet la récupération d'une recherche
 	 * sur la page d'accueil
@@ -275,6 +268,5 @@ public class EnchereManager {
 		List<ArticleVendu> resultatRechercheAccueil = enchereDAO.selectAllVentesEnCoursRecherche(pseudo,contenuRecherche,categorie);
 		return resultatRechercheAccueil;
 	}
-	
 
 }
