@@ -514,6 +514,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	 * (non-Javadoc)
 	 * 
 	 * @see fr.eni.projetenchere.dal.EnchereDAO#selectEncheresOuvertes()
+	 * 
 	 */
 	public List<ArticleVendu> selectEncheresOuvertesA(String pseudo) {
 
@@ -890,45 +891,6 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	}
 	
 
-	/**
-	 * sélectionne un utilisateur à partir de son numéro utilisateur
-	 * 
-	 * @return utilisateur
-	 */
-	@Override
-	public Utilisateur selectCreditByUserId(int no_utilisateur) {
-
-		// création des variables
-		Utilisateur utilisateur = selectUserById(no_utilisateur);
-
-		// requête SQL
-		final String SELECT_CREDIT = "SELECT credit "
-				+ "FROM utilisateurs WHERE no_utilisateur=?;";
-
-		// ouverture de la connexion à la DB
-		try (Connection connection = JdbcTools.getConnection();
-				PreparedStatement requete = connection.prepareStatement(SELECT_CREDIT)) {
-
-			// initialisation de la requête
-			requete.setInt(1, no_utilisateur);
-
-			// récupération du résultat
-			ResultSet rs = requete.executeQuery();
-
-			while (rs.next()) {
-
-				int credit = rs.getInt("credit");
-
-				// utilisation des résultats
-				utilisateur.setCredit(credit);
-
-			}
-		} catch (SQLException e) {
-			// TODO: handle exception
-		}
-
-		return utilisateur;
-
-	}
+	
 
 }

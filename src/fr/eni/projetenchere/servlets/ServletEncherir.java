@@ -61,11 +61,9 @@ public class ServletEncherir extends HttpServlet {
 		Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("utilisateurSession");
 		int article = Integer.parseInt(request.getParameter("article"));	
 		
-		//int no_article = 7;
 		ArticleVendu articleSelected = EnchereManager.getInstance().selectArticleById(article);
 		request.setAttribute("articleSelected", articleSelected);
 		
-		//utilisateurSession = EnchereManager.getInstance().selectUserById(utilisateurSession.getNoUtilisateur());
 		
 		String resultat;
         Map<String, String> MapErreurs = new HashMap<String, String>();
