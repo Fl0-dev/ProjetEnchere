@@ -50,37 +50,15 @@
 		<!-- COLONNE CENTRALE -->
 	<main class="col-md-6 align-items-center">
 
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#liens">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			
-			<div class="collapse navbar-collapse justify-content-end" id="liens">
-				<ul class="navbar-nav">
-					<li class="nav-item active">	
-						<a class="nav-link text-info" href="${pageContext.request.contextPath }/NouvelleVente">Vendre un article</a>
-					</li>
-      				<li class="nav-item">	 
-						<a class="nav-link text-info" href="${pageContext.request.contextPath }/MonProfil">Mon profil</a> 
-					</li>
-      				<li class="nav-item">	 
-						<a class="nav-link text-info" href="${pageContext.request.contextPath }/deconnexion">Déconnexion</a>
-					</li>
-				</ul>		
-			</div>
-		</nav> 
-	</header>
 
 <div class="card mb-3">
 				
 	<div class="card-body">
+	<div class="h2 container d-flex justify-content-center">Détail vente</div>
 
-	<h5 class="card-title">Détail vente</h5>
+	<h5 class="card-title">${articleSelected.nomArticle }</h5>
 	<table>
-    <thead>
-        <tr>
-            <th colspan="2">${articleSelected.nomArticle }</th>
-        </tr>
-    </thead>
+  
     <tbody>
 
          <tr>
@@ -119,17 +97,17 @@
 	
 			<label for="montant_enchere">Ma proposition :</label>
 			<input type="number" id="montant_enchere" name="montant_enchere" required step="1" min="${articleSelected.enchereMax.montant_enchere == 0 ? articleSelected.miseAPrix : articleSelected.enchereMax.montant_enchere }" placeholder="${articleSelected.enchereMax.montant_enchere == 0 ? articleSelected.miseAPrix : articleSelected.enchereMax.montant_enchere }">
-		
-			<button type="submit">Enchérir</button>
+			<input id="article" name="article" type="hidden" value="${articleSelected.noArticle }">
+			<button class="btn btn-info btn-block mb-3" type="submit">Enchérir</button>
 	
 	</form>
 			</div>
+			
 	</div>
 	</main>
 
 
 <div class="col-md-3 align-items-end"></div>
-
 </div>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
