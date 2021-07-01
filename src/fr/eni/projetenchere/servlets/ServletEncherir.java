@@ -47,6 +47,7 @@ public class ServletEncherir extends HttpServlet {
 		
 		ArticleVendu articleSelected = EnchereManager.getInstance().selectArticleById(article);		
 		request.setAttribute("articleSelected", articleSelected);
+		System.out.println(articleSelected.getLieuRetrait());
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encherir.jsp");
 		rd.forward(request, response);
