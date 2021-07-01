@@ -172,7 +172,9 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	public List<Utilisateur> selectConnexion() {
 		List<Utilisateur> listeUtilisateurConnexion = new ArrayList<>();
 
-		final String SELECT_UTILISATEUR_CONNEXION = "SELECT pseudo, email, mot_de_passe, etat FROM utilisateurs;";
+		final String SELECT_UTILISATEUR_CONNEXION = "SELECT no_utilisateur, pseudo, nom, prenom, email, "
+				+ "telephone, rue, code_postal, ville, mot_de_passe,"
+				+ " credit, administrateur, etat FROM utilisateurs;";
 
 		// ouverture de la connexion vers DB
 		try (Connection connection = JdbcTools.getConnection(); Statement requete = connection.createStatement()) {
@@ -182,14 +184,35 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			Utilisateur utilisateur;
 
 			while (rs.next()) {
-
+				int noUtilisateur = rs.getInt("no_utilisateur");
 				String pseudo = rs.getString("pseudo");
+				String nom = rs.getString("nom");
+				String prenom = rs.getString("prenom");
 				String email = rs.getString("email");
-				String mot_de_passe = rs.getString("mot_de_passe");
-				Boolean etat = rs.getBoolean("etat");
+				String telephone = rs.getString("telephone");
+				String rue = rs.getString("rue");
+				String codePostal = rs.getString("code_postal");
+				String ville = rs.getString("ville");
+				String motDePasse = rs.getString("mot_de_passe");
+				int credit = rs.getInt("credit");
+				boolean administrateur = rs.getBoolean("administrateur");
+				boolean etat = rs.getBoolean("etat");
 
-				utilisateur = new Utilisateur(pseudo, email, mot_de_passe, etat);
-
+				utilisateur = new Utilisateur();
+				utilisateur.setNoUtilisateur(noUtilisateur);
+				utilisateur.setPseudo(pseudo);
+				utilisateur.setNom(nom);
+				utilisateur.setPrenom(prenom);
+				utilisateur.setEmail(email);
+				utilisateur.setTelephone(telephone);
+				utilisateur.setRue(rue);
+				utilisateur.setCodePostal(codePostal);
+				utilisateur.setVille(ville);
+				utilisateur.setMotDePasse(motDePasse);
+				utilisateur.setCredit(credit);
+				utilisateur.setAdministrateur(administrateur);
+				utilisateur.setEtat(etat);
+				
 				listeUtilisateurConnexion.add(utilisateur);
 			}
 		} catch (SQLException e) {
