@@ -75,7 +75,7 @@ public class ServletAccueilConnecte extends HttpServlet {
 
 		// on envoie ça dans la requête
 		request.setAttribute("listeAafficher", listeAafficher);
-		System.out.println(listeAafficher);
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSPAccueilConnecte.jsp");
 		rd.forward(request, response);
 		}
@@ -93,6 +93,7 @@ public class ServletAccueilConnecte extends HttpServlet {
 			// choix achats
 			if (choixAchatVente.equals("achats")) {
 				String choixRadioAchats = request.getParameter("encheres");
+				System.out.println(choixRadioAchats);
 				switch (choixRadioAchats) {
 				// selon le choix
 				case "encheresOuvertes": 
