@@ -418,19 +418,19 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		List<ArticleVendu> listeArticlesEnVente = new ArrayList<>();
 
 		// création des variables
-		ArticleVendu articleVendu;
-		Utilisateur utilisateur;
-		Enchere enchere;
+				ArticleVendu articleVendu = new ArticleVendu();
+				Utilisateur vendeur = new Utilisateur();
+				Enchere enchereMax = new Enchere();
 
 		// requête SQL
-		final String SELECT_ALL_VENTES_EN_COURS = "SELECT MAX(e.montant_enchere) as enchere_max, "
-				+ "a.nom_article, vendeur.pseudo, date_fin_encheres, c.no_categorie, c.libelle "
-				+ "FROM articles_vendus AS a  " + "inner join CATEGORIES as c on c.no_categorie = a.no_categorie "
+		final String SELECT_ALL_VENTES_EN_COURS = "SELECT MAX(e.montant_enchere) as enchere_max, a.prix_initial, "
+				+ "a.nom_article, vendeur.pseudo as vendeur, date_fin_encheres " + "FROM articles_vendus AS a \n"
+				+ "inner join CATEGORIES as c on c.no_categorie = a.no_categorie "
 				+ "inner join UTILISATEURS as vendeur on a.no_utilisateur = vendeur.no_utilisateur "
 				+ "left join ENCHERES as e on a.no_article = e.no_article "
 				+ "left join UTILISATEURS as acheteur on e.no_utilisateur = acheteur.no_utilisateur "
 				+ "where (date_debut_encheres < GETDATE() and date_fin_encheres > GETDATE()) "
-				+ "group by a.nom_article, vendeur.pseudo, date_fin_encheres, c.no_categorie, c.libelle;";
+				+ "group by a.nom_article, vendeur.pseudo, date_fin_encheres, a.prix_initial;";
 
 		// ouverture de la connexion à la DB
 		try (Connection connection = JdbcTools.getConnection();
@@ -440,22 +440,25 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			ResultSet rs = requete.executeQuery();
 
 			while (rs.next()) {
-				LocalDate dateFinEnchere = rs.getDate("date_fin_encheres").toLocalDate();
-				int enchereMax = rs.getInt("enchere_max");
+				int enchere = rs.getInt("enchere_max");
+				int miseAPrix = rs.getInt("prix_initial");
 				String nomArticle = rs.getString("nom_article");
-				String pseudoVendeur = rs.getString("pseudo");
+				String vendeurPseudo = rs.getString("vendeur");
+				LocalDate dateFinEnchere = rs.getDate("date_fin_encheres").toLocalDate();
 
 				// utilisation des résultats
-				utilisateur = new Utilisateur(pseudoVendeur);
-
-				enchere = new Enchere();
-				enchere.setMontant_enchere(enchereMax);
-
-				articleVendu = new ArticleVendu();
-				articleVendu.setDateFinEncheres(dateFinEnchere);
+				vendeur.setPseudo(vendeurPseudo);
 				articleVendu.setNomArticle(nomArticle);
-				articleVendu.setEnchereMax(enchere);
-				articleVendu.setUtilisateur(utilisateur);
+
+				// si il n'y a pas encore d'enchère on utilise la mie à prix comme enchère max
+				if (enchere != 0) {
+					enchereMax.setMontant_enchere(enchere);
+				} else {
+					enchereMax.setMontant_enchere(miseAPrix);
+				}
+				articleVendu.setUtilisateur(vendeur);
+				articleVendu.setDateFinEncheres(dateFinEnchere);
+				articleVendu.setEnchereMax(enchereMax);
 
 				// ajout dans la liste d'enchères
 				listeArticlesEnVente.add(articleVendu);
