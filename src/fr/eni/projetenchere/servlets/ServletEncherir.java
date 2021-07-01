@@ -40,8 +40,6 @@ public class ServletEncherir extends HttpServlet {
 		
 		System.out.println(utilisateurSession);
 		
-		
-		//int no_article = Integer.parseInt(request.getParameter("no_article"));
 		// récupère id article pour l'afficher
 		int article = Integer.parseInt(request.getParameter("article"));
 		
@@ -101,7 +99,7 @@ public class ServletEncherir extends HttpServlet {
              request.setAttribute("MapErreurs", MapErreurs);
         }
 	
-		response.sendRedirect("encherir");
+		response.sendRedirect("AccueilConnecte");
 	}
 
 }
