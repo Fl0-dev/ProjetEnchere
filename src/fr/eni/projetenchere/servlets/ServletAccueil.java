@@ -65,7 +65,7 @@ public class ServletAccueil extends HttpServlet {
 		String contenuRecherche = request.getParameter("contenuRecherche").trim();
 		String categorie = request.getParameter("categorie");
 		String pseudo ="";
-		List<ArticleVendu> listeVentesEnCours = EnchereManager.getInstance().selectEncheresOuvertes(pseudo,contenuRecherche,categorie);
+		List<ArticleVendu> listeVentesEnCours = EnchereManager.getInstance().selectAllVentesEnCoursRecherche(pseudo,contenuRecherche,categorie);
 		
 		
 		request.setAttribute("listeVentesEnCours", listeVentesEnCours);
