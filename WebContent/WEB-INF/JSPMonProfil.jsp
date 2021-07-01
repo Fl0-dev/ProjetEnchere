@@ -35,7 +35,7 @@
 <main>
 
  <c:if test="${ !empty sessionScope.utilisateurSession }">
-        <p>Vous êtes ${ sessionScope.utilisateurSession.pseudo } !</p>
+        <p>Votre crédit ${ sessionScope.utilisateurSession.credit } !</p>
     </c:if>
     
 <!--  TODO: récupérer les informations de l'utilisateur connecté -->
