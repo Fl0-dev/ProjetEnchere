@@ -119,7 +119,7 @@ public class ServletAccueilConnecte extends HttpServlet {
 					listeAafficher = EnchereManager.getInstance().selectVentesNonDebutees(utilisateurSession.getPseudo(),contenuRecherche,categorie);
 					break;
 				case "ventesTerminees":
-					//listeAafficher = EnchereManager.getInstance().selectVentesTerminees(utilisateurSession.getPseudo(),contenuRecherche,categorie);
+					listeAafficher = EnchereManager.getInstance().selectVentesTerminees(utilisateurSession.getPseudo(),contenuRecherche,categorie);
 					break;
 				}
 			}

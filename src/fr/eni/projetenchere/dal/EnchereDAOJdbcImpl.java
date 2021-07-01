@@ -1032,6 +1032,83 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	}
 	
 	@Override
+	/* (non-Javadoc)
+	 * @see fr.eni.projetenchere.dal.EnchereDAO#selectVentesTerminees(java.lang.String, java.lang.String, java.lang.String)
+	 */
+	public List<ArticleVendu> selectVentesTerminees(String pseudo, String contenuRecherche, String categorie){
+		
+		// création de la liste vide
+		List<ArticleVendu> listeVentesTerminees = new ArrayList<>();
+				
+		// requête SQL
+		final String SELECT_VENTES_TERMINEES = "SELECT MAX(e.montant_enchere) as enchere_max, " + 
+				"a.nom_article, a.no_article, vendeur.no_utilisateur, vendeur.pseudo as vendeur, date_fin_encheres " + 
+				"FROM articles_vendus AS a  " + 
+				"inner join CATEGORIES as c on c.no_categorie = a.no_categorie " + 
+				"inner join UTILISATEURS as vendeur on a.no_utilisateur = vendeur.no_utilisateur " + 
+				"left join ENCHERES as e on a.no_article = e.no_article " + 
+				"left join UTILISATEURS as acheteur on e.no_utilisateur = acheteur.no_utilisateur " + 
+				"where (date_fin_encheres < GETDATE()) " + 
+				"AND vendeur.pseudo = ? and c.libelle like ? and a.nom_article like ? " +   
+				"group by a.nom_article, a.no_article, vendeur.no_utilisateur, vendeur.pseudo, date_fin_encheres;";
+		
+		// ouverture de la connexion à la DB
+				try (Connection connection = JdbcTools.getConnection();
+						PreparedStatement requete = connection.prepareStatement(SELECT_VENTES_TERMINEES)) {
+					
+					// initialisation de la requête
+					requete.setString(1, pseudo);
+					
+					// si toute catégorie (categorie = "0")
+					if (categorie.equals("0")) {
+						requete.setString(2, "%");
+					} else {
+						requete.setString(2, "%" + categorie + "%");
+					}
+					requete.setString(3, "%" + contenuRecherche + "%");
+					
+				
+					// récupération du résultat
+					ResultSet rs = requete.executeQuery();
+					
+						while (rs.next()) {
+						
+						// création des variables
+						ArticleVendu articleVendu = new ArticleVendu();
+						Utilisateur vendeur = new Utilisateur();
+						Enchere enchereMax = new Enchere();
+						
+						int idArticle = rs.getInt("no_article");
+						int idUtilisateur = rs.getInt("no_utilisateur");
+						int enchere = rs.getInt("enchere_max");
+						String nomArticle = rs.getString("nom_article");
+						String vendeurPseudo = rs.getString("vendeur");
+						LocalDate dateFinEnchere = rs.getDate("date_fin_encheres").toLocalDate();
+						
+						// utilisation des résultats
+						vendeur.setNoUtilisateur(idUtilisateur);
+						articleVendu.setNoArticle(idArticle);
+						vendeur.setPseudo(vendeurPseudo);
+						articleVendu.setNomArticle(nomArticle);
+						enchereMax.setMontant_enchere(enchere);
+						articleVendu.setUtilisateur(vendeur);
+						articleVendu.setDateFinEncheres(dateFinEnchere);
+						articleVendu.setEnchereMax(enchereMax);
+						
+						// ajout dans la liste
+						listeVentesTerminees.add(articleVendu);
+						
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		
+		return listeVentesTerminees;
+		
+	}
+	
+	@Override
 	/**
 	 * insert en DB une nouvelle enchère
 	 * 

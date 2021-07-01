@@ -319,8 +319,23 @@ public class EnchereManager {
 	 * @return ListeVntesNonDebutees
 	 */
 	public List<ArticleVendu> selectVentesNonDebutees(String pseudo, String contenuRecherche, String categorie) {
-		List<ArticleVendu> ListeVntesNonDebutees = enchereDAO.selectVentesNonDebutees(pseudo,contenuRecherche,categorie);
-		return ListeVntesNonDebutees;
+		List<ArticleVendu> listeVentesNonDebutees = enchereDAO.selectVentesNonDebutees(pseudo,contenuRecherche,categorie);
+		return listeVentesNonDebutees;
+	}
+
+
+
+	/**
+	 * permet la récupération des ventes terminées 
+	 * d'un utilisateurs
+	 * @param pseudo
+	 * @param contenuRecherche
+	 * @param categorie
+	 * @return listeVentesTerminees
+	 */
+	public List<ArticleVendu> selectVentesTerminees(String pseudo, String contenuRecherche, String categorie) {
+		List<ArticleVendu> listeVentesTerminees =enchereDAO.selectVentesTerminees(pseudo,contenuRecherche,categorie);
+		return listeVentesTerminees;
 	}
 
 }
