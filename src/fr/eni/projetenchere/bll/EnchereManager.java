@@ -301,11 +301,26 @@ public class EnchereManager {
 	 * @param pseudo
 	 * @param contenuRecherche
 	 * @param categorie
-	 * @return mesVentesEnCours
+	 * @return listeMesVentesEnCours
 	 */
 	public List<ArticleVendu> selectMesVentesEnCours(String pseudo, String contenuRecherche, String categorie) {
-		List<ArticleVendu> mesVentesEnCours = enchereDAO. selectMesVentesEnCours(pseudo,contenuRecherche,categorie);
-		return mesVentesEnCours;
+		List<ArticleVendu> listeMesVentesEnCours = enchereDAO.selectMesVentesEnCours(pseudo,contenuRecherche,categorie);
+		return listeMesVentesEnCours;
+	}
+
+
+
+	/**
+	 * permet la récupération des ventes non commencées
+	 * d'un utilisateur
+	 * @param pseudo
+	 * @param contenuRecherche
+	 * @param categorie
+	 * @return ListeVntesNonDebutees
+	 */
+	public List<ArticleVendu> selectVentesNonDebutees(String pseudo, String contenuRecherche, String categorie) {
+		List<ArticleVendu> ListeVntesNonDebutees = enchereDAO.selectVentesNonDebutees(pseudo,contenuRecherche,categorie);
+		return ListeVntesNonDebutees;
 	}
 
 }
