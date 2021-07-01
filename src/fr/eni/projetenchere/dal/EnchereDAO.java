@@ -148,6 +148,11 @@ public interface EnchereDAO {
 	 */
 	ArticleVendu insertNouvelleVente(ArticleVendu articleVendu);
 
+	/**
+	 * update en DB le profil d'un utilisateur
+	 */
+	void updateCredit(Utilisateur utilisateur, int montant_enchere);
+
 		
 
 }
