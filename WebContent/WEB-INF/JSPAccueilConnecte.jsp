@@ -40,9 +40,7 @@
 
 	<main class="col-md-6 align-items-center">
 
-	
 
-	<main class="container-fluid">
 	<p class="text-dark container d-flex justify-content-center">${succes}</p>
 
 		<p class="text-dark container d-flex justify-content-center">${resultat}Bienvenue ${ sessionScope.utilisateurSession.pseudo }!</p> 
