@@ -49,7 +49,7 @@
 
 		<div>
 			<label for="prix_initial">Mise à prix :</label> <input type="number"
-				id="prix_initial" name="prix_initial">
+				id="prix_initial" name="prix_initial" required>
 		</div>
 
 		<div>

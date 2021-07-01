@@ -136,13 +136,12 @@ public class ServletNouvelleVente extends HttpServlet {
 
 		// renvoie vers la JSP après traitement
 		if (utilisateurSession != null) {
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSPNouvelleVente.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("AccueilConnecte");
 			rd.forward(request, response);
 		} else {
 
 			// renvoie vers l'accueil
-			RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueil");
-			rd.forward(request, response);
+			response.sendRedirect("Accueil");
 		}
 
 	}

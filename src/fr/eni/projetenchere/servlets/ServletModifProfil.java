@@ -30,13 +30,19 @@ public class ServletModifProfil extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		// Appel de la session et de l'attribut utilisateurSession
 		HttpSession session = request.getSession();
 		Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("utilisateurSession");
-		// Envoie vers la JSP
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSPModifProfil.jsp");
-		rd.forward(request, response);
+		
+		if (utilisateurSession != null) {
+			// renvoie vers la JSP Mon Profil
+			RequestDispatcher rd = request.getRequestDispatcher("//WEB-INF/JSPModifProfil.jsp");
+			rd.forward(request, response);
+		} else {
+			// renvoie vers l'accueil
+			RequestDispatcher rd = request.getRequestDispatcher("/Accueil");
+			rd.forward(request, response);
+		}
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
