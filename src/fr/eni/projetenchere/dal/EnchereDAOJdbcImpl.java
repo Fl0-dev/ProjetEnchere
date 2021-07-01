@@ -786,28 +786,29 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		Enchere enchereMax = new Enchere();
 
 		// requête SQL
-		final String SELECT_MES_ENCHERES = "SELECT MAX(e.montant_enchere) as enchere_max, "
+		final String SELECT_MES_ENCHERES = "SELECT MAX(e.montant_enchere) as enchere_max, a.prix_initial, "
 				+ "a.nom_article, vendeur.pseudo as vendeur, date_fin_encheres " + "FROM articles_vendus AS a  "
 				+ "inner join CATEGORIES as c on c.no_categorie = a.no_categorie "
 				+ "inner join UTILISATEURS as vendeur on a.no_utilisateur = vendeur.no_utilisateur "
 				+ "inner join ENCHERES as e on a.no_article = e.no_article "
 				+ "inner join UTILISATEURS as u on u.pseudo = ? "
-				+ "where vendeur.pseudo <> 'Fl0' and c.libelle like ? and a.nom_article like ? "
-				+ "group by a.nom_article, vendeur.pseudo, date_fin_encheres;";
+				+ "where vendeur.pseudo <> ? and c.libelle like ? and a.nom_article like ? "
+				+ "group by a.nom_article, vendeur.pseudo, date_fin_encheres, a.prix_initial;";
 
 		// ouverture de la connexion à la DB
 		try (Connection connection = JdbcTools.getConnection();
 				PreparedStatement requete = connection.prepareStatement(SELECT_MES_ENCHERES)) {
 
 			// initialisation de la requête
+			requete.setString(1, pseudo);
 			// si toute catégorie (categorie = "0")
 			if (categorie.equals("0")) {
-				requete.setString(1, "%%");
+				requete.setString(2, "%");
 			} else {
-				requete.setString(1, "%" + categorie);
+				requete.setString(2, "%" + categorie + "%");
 			}
-			requete.setString(2, "%" + contenuRecherche + "%");
-			requete.setString(3, pseudo);
+			requete.setString(3, "%" + contenuRecherche + "%");
+			requete.setString(4, pseudo);
 
 			// récupération du résultat
 			ResultSet rs = requete.executeQuery();
