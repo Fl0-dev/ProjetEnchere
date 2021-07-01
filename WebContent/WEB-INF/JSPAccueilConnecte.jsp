@@ -33,11 +33,18 @@
 			</div>
 		</nav> 
 	</header>
+<div class="row d-flex justify-content-center">
+
+
+<div class="col-md-3 align-items-start"></div>
+
+	<main class="col-md-6 align-items-center">
 
 	
 
 	<main class="container-fluid">
 	<p class="text-dark container d-flex justify-content-center">${succes}</p>
+
 		<p class="text-dark container d-flex justify-content-center">${resultat}Bienvenue ${ sessionScope.utilisateurSession.pseudo }!</p> 
 		<p class="text-dark container d-flex justify-content-center">Vous avez ${sessionScope.utilisateurSession.credit} points de crédit</p> 
 		<div class="h2 container d-flex justify-content-center">Listes des enchères</div>
@@ -115,17 +122,20 @@
 					
 						<div class="card-body">
 <!-- passer dans le lien le noArticle dans l'URL-->	
-							<h5 class="card-title"><a href="${pageContext.request.contextPath }" class="card-link text-info">${articleVendu.nomArticle }</a><h5>
+							<h5 class="card-title"><a href="${pageContext.request.contextPath }/encherir?article=${articleVendu.noArticle }" class="card-link text-info">${articleVendu.nomArticle }</a><h5>
 							<h6 class"card-subtitle mb-2 text-muted">Prix : ${articleVendu.enchereMax.montant_enchere } points<h6>
 							<p>Date de fin de l'enchère : ${articleVendu.dateFinEncheres }</p>
 <!-- passer dans le lien le noUtilisateur dans l'URL-->							
-							<p>Vendeur : <a href="${pageContext.request.contextPath }/ServletProfilUtilisateur" class="card-link text-info">${articleVendu.utilisateur.pseudo }</a></p>
+							<p>Vendeur : <a href="${pageContext.request.contextPath }/voirprofil?id=${articleVendu.utilisateur.noUtilisateur }" class="card-link text-info">${articleVendu.utilisateur.pseudo }</a></p>
 						</div>	
 					
 					</div>
 			</c:forEach>	
 		</div>
 	</main>
+	
+	<div class="col-md-3 align-items-end"></div>
+	</div>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

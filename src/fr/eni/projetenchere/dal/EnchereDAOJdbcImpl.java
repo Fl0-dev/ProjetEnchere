@@ -172,7 +172,9 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	public List<Utilisateur> selectConnexion() {
 		List<Utilisateur> listeUtilisateurConnexion = new ArrayList<>();
 
-		final String SELECT_UTILISATEUR_CONNEXION = "SELECT pseudo, email, mot_de_passe, etat FROM utilisateurs;";
+		final String SELECT_UTILISATEUR_CONNEXION = "SELECT no_utilisateur, pseudo, nom, prenom, email, "
+				+ "telephone, rue, code_postal, ville, mot_de_passe,"
+				+ " credit, administrateur, etat FROM utilisateurs;";
 
 		// ouverture de la connexion vers DB
 		try (Connection connection = JdbcTools.getConnection(); Statement requete = connection.createStatement()) {
@@ -182,14 +184,35 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			Utilisateur utilisateur;
 
 			while (rs.next()) {
-
+				int noUtilisateur = rs.getInt("no_utilisateur");
 				String pseudo = rs.getString("pseudo");
+				String nom = rs.getString("nom");
+				String prenom = rs.getString("prenom");
 				String email = rs.getString("email");
-				String mot_de_passe = rs.getString("mot_de_passe");
-				Boolean etat = rs.getBoolean("etat");
+				String telephone = rs.getString("telephone");
+				String rue = rs.getString("rue");
+				String codePostal = rs.getString("code_postal");
+				String ville = rs.getString("ville");
+				String motDePasse = rs.getString("mot_de_passe");
+				int credit = rs.getInt("credit");
+				boolean administrateur = rs.getBoolean("administrateur");
+				boolean etat = rs.getBoolean("etat");
 
-				utilisateur = new Utilisateur(pseudo, email, mot_de_passe, etat);
-
+				utilisateur = new Utilisateur();
+				utilisateur.setNoUtilisateur(noUtilisateur);
+				utilisateur.setPseudo(pseudo);
+				utilisateur.setNom(nom);
+				utilisateur.setPrenom(prenom);
+				utilisateur.setEmail(email);
+				utilisateur.setTelephone(telephone);
+				utilisateur.setRue(rue);
+				utilisateur.setCodePostal(codePostal);
+				utilisateur.setVille(ville);
+				utilisateur.setMotDePasse(motDePasse);
+				utilisateur.setCredit(credit);
+				utilisateur.setAdministrateur(administrateur);
+				utilisateur.setEtat(etat);
+				
 				listeUtilisateurConnexion.add(utilisateur);
 			}
 		} catch (SQLException e) {
@@ -502,13 +525,13 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 		// requête SQL
 		final String SELECT_ENCHERES_OUVERTES = "SELECT MAX(e.montant_enchere) as enchere_max, a.prix_initial, "
-				+ "a.nom_article, vendeur.pseudo as vendeur, date_fin_encheres " + "FROM articles_vendus AS a \n"
+				+ "a.nom_article, a.no_article, vendeur.no_utilisateur, vendeur.pseudo as vendeur, date_fin_encheres " + "FROM articles_vendus AS a \n"
 				+ "inner join CATEGORIES as c on c.no_categorie = a.no_categorie "
 				+ "inner join UTILISATEURS as vendeur on a.no_utilisateur = vendeur.no_utilisateur "
 				+ "left join ENCHERES as e on a.no_article = e.no_article "
 				+ "left join UTILISATEURS as acheteur on e.no_utilisateur = acheteur.no_utilisateur "
 				+ "where (date_debut_encheres < GETDATE() and date_fin_encheres > GETDATE()) and vendeur.pseudo <> ? "
-				+ "group by a.nom_article, vendeur.pseudo, date_fin_encheres, a.prix_initial;";
+				+ "group by a.nom_article, vendeur.pseudo, date_fin_encheres, a.prix_initial, a.no_article, vendeur.no_utilisateur;";
 
 		// ouverture de la connexion à la DB
 		try (Connection connection = JdbcTools.getConnection();
@@ -527,14 +550,18 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				Enchere enchereMax = new Enchere();
 				
 				int enchere = rs.getInt("enchere_max");
+				int idArticle = rs.getInt("no_article");
 				int miseAPrix = rs.getInt("prix_initial");
 				String nomArticle = rs.getString("nom_article");
+				int idUtilisateur = rs.getInt("no_utilisateur");
 				String vendeurPseudo = rs.getString("vendeur");
 				LocalDate dateFinEnchere = rs.getDate("date_fin_encheres").toLocalDate();
 
 				// utilisation des résultats
 				vendeur.setPseudo(vendeurPseudo);
+				vendeur.setNoUtilisateur(idUtilisateur);
 				articleVendu.setNomArticle(nomArticle);
+				articleVendu.setNoArticle(idArticle);
 
 				// si il n'y a pas encore d'enchère on utilise la mie à prix comme enchère max
 				if (enchere != 0) {

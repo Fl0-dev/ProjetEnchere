@@ -41,9 +41,9 @@ public class ServletEncherir extends HttpServlet {
 			
 			//int no_article = Integer.parseInt(request.getParameter("no_article"));
 			// récupère id article pour l'afficher
+			int article = Integer.parseInt(request.getParameter("article"));
 			
-			int no_article = 7;
-			ArticleVendu articleSelected = EnchereManager.getInstance().selectArticleById(no_article);		
+			ArticleVendu articleSelected = EnchereManager.getInstance().selectArticleById(article);		
 			request.setAttribute("articleSelected", articleSelected);
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encherir.jsp");
@@ -62,9 +62,10 @@ public class ServletEncherir extends HttpServlet {
 		// on récupère les informations de session et d'article
 		HttpSession session = request.getSession();
 		Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("utilisateurSession");
-		//int no_article = Integer.parseInt(request.getParameter("no_article"));	
-		int no_article = 7;
-		ArticleVendu articleSelected = EnchereManager.getInstance().selectArticleById(no_article);
+		int article = Integer.parseInt(request.getParameter("article"));	
+		
+		//int no_article = 7;
+		ArticleVendu articleSelected = EnchereManager.getInstance().selectArticleById(article);
 		request.setAttribute("articleSelected", articleSelected);
 		
 		System.out.println(utilisateurSession);
@@ -79,7 +80,7 @@ public class ServletEncherir extends HttpServlet {
 		
 		// Validation montant de l'offre
         try {
-      	  Verification.getInstance().verifEnchere(utilisateurSession, montantEnchere, no_article);
+      	  Verification.getInstance().verifEnchere(utilisateurSession, montantEnchere, article);
 
          
         } catch ( Exception e ) {
@@ -90,11 +91,11 @@ public class ServletEncherir extends HttpServlet {
         if ( MapErreurs.isEmpty() ) {
         	
      	    // insertion de l'enchere en BD
-      		Enchere newEnchere = EnchereManager.getInstance().insertEnchere(utilisateurSession, montantEnchere, no_article);
+      		Enchere newEnchere = EnchereManager.getInstance().insertEnchere(utilisateurSession, montantEnchere, article);
       		System.out.println("Le montant de l'enchere : " + newEnchere.getMontant_enchere());
       		
       		//TODO: retirer le montant de l'offre du crédit utilisateur
-      		EnchereManager.getInstance().updateCredit(utilisateurSession, montantEnchere);
+      		//EnchereManager.getInstance().updateCredit(utilisateurSession, montantEnchere);
       		
       		resultat = "Enchère réussie.";  
         	request.setAttribute("resultat", resultat);
