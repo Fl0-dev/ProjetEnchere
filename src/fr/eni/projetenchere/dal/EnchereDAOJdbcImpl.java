@@ -525,7 +525,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 		// requête SQL
 		final String SELECT_ENCHERES_OUVERTES = "SELECT MAX(e.montant_enchere) as enchere_max, a.prix_initial, "
-				+ "a.nom_article, vendeur.pseudo as vendeur, date_fin_encheres " + "FROM articles_vendus AS a \n"
+				+ "a.nom_article, a.no_article, vendeur.no_utilisateur, vendeur.pseudo as vendeur, date_fin_encheres " + "FROM articles_vendus AS a \n"
 				+ "inner join CATEGORIES as c on c.no_categorie = a.no_categorie "
 				+ "inner join UTILISATEURS as vendeur on a.no_utilisateur = vendeur.no_utilisateur "
 				+ "left join ENCHERES as e on a.no_article = e.no_article "
@@ -550,14 +550,18 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				Enchere enchereMax = new Enchere();
 				
 				int enchere = rs.getInt("enchere_max");
+				int idArticle = rs.getInt("no_article");
 				int miseAPrix = rs.getInt("prix_initial");
 				String nomArticle = rs.getString("nom_article");
+				int idUtilisateur = rs.getInt("vendeur.no_utilisateur");
 				String vendeurPseudo = rs.getString("vendeur");
 				LocalDate dateFinEnchere = rs.getDate("date_fin_encheres").toLocalDate();
 
 				// utilisation des résultats
 				vendeur.setPseudo(vendeurPseudo);
+				vendeur.setNoUtilisateur(idUtilisateur);
 				articleVendu.setNomArticle(nomArticle);
+				articleVendu.setNoArticle(idArticle);
 
 				// si il n'y a pas encore d'enchère on utilise la mie à prix comme enchère max
 				if (enchere != 0) {
