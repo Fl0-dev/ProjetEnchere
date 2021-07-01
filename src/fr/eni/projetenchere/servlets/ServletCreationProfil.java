@@ -43,6 +43,7 @@ public class ServletCreationProfil extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		// on récupère identifiants et mot de passe du formulaire
 		String pseudo = request.getParameter("pseudo");
 		String nom = request.getParameter("nom");

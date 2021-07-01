@@ -35,9 +35,16 @@
 	</header>
 <div class="row d-flex justify-content-center">
 
+
 <div class="col-md-3 align-items-start"></div>
 
 	<main class="col-md-6 align-items-center">
+
+	
+
+	<main class="container-fluid">
+	<p class="text-dark container d-flex justify-content-center">${succes}</p>
+
 		<p class="text-dark container d-flex justify-content-center">${resultat}Bienvenue ${ sessionScope.utilisateurSession.pseudo }!</p> 
 		<div class="h2 container d-flex justify-content-center">Listes des enchères</div>
 	

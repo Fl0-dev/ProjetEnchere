@@ -47,7 +47,7 @@ public class ServletModifProfil extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		request.setCharacterEncoding("UTF-8");
 		// Appel de la session et de l'attribut utilisateurSession
 		HttpSession session = request.getSession();
 		Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("utilisateurSession");
