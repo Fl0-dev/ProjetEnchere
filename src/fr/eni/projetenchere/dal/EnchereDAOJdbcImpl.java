@@ -966,7 +966,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		
 		// requête SQL
 		final String SELECT_VENTES_NON_DEBUTEES ="SELECT MAX(e.montant_enchere) as enchere_max, " + 
-				"a.nom_article, a.no_article, vendeur.no_utilisateur, vendeur.pseudo, date_fin_encheres " + 
+				"a.nom_article, a.no_article, vendeur.no_utilisateur, vendeur.pseudo as vendeur, date_fin_encheres " + 
 				"FROM articles_vendus AS a  " + 
 				"inner join CATEGORIES as c on c.no_categorie = a.no_categorie " + 
 				"inner join UTILISATEURS as vendeur on a.no_utilisateur = vendeur.no_utilisateur " + 
