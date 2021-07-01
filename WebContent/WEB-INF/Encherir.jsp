@@ -65,8 +65,8 @@
 </table>
 	<form method="POST" action="${pageContext.request.contextPath }/encherir">
 	
-			<label for="montant_enchere">Ma proposition :</label> <input type="number"
-				id="montant_enchere" name="montant_enchere" required step="1" min="${articleSelected.enchereMax.montant_enchere == 0 ? articleSelected.miseAPrix : articleSelected.enchereMax.montant_enchere }" placeholder="${articleSelected.enchereMax.montant_enchere == 0 ? articleSelected.miseAPrix : articleSelected.enchereMax.montant_enchere }">
+			<label for="montant_enchere">Ma proposition :</label>
+			<input type="number" id="montant_enchere" name="montant_enchere" required step="1" min="${articleSelected.enchereMax.montant_enchere == 0 ? articleSelected.miseAPrix : articleSelected.enchereMax.montant_enchere }" placeholder="${articleSelected.enchereMax.montant_enchere == 0 ? articleSelected.miseAPrix : articleSelected.enchereMax.montant_enchere }">
 		
 			<button type="submit">Enchérir</button>
 	

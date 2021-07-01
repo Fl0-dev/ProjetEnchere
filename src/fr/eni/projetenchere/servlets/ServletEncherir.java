@@ -37,10 +37,6 @@ public class ServletEncherir extends HttpServlet {
 		HttpSession session = request.getSession();
 		Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("utilisateurSession");
 		
-		// on récupère les ventes (enchères) en cours
-		List<ArticleVendu> listeVentesEnCours = EnchereManager.getInstance().selectAllVentesEnCours();
-		request.setAttribute("listeVentesEnCours", listeVentesEnCours);
-		
 		if (utilisateurSession != null) {
 			
 			//int no_article = Integer.parseInt(request.getParameter("no_article"));
@@ -71,6 +67,10 @@ public class ServletEncherir extends HttpServlet {
 		ArticleVendu articleSelected = EnchereManager.getInstance().selectArticleById(no_article);
 		request.setAttribute("articleSelected", articleSelected);
 		
+		System.out.println(utilisateurSession);
+		utilisateurSession = EnchereManager.getInstance().selectUtilisateurByPseudo(utilisateurSession.getPseudo());
+		utilisateurSession = EnchereManager.getInstance().selectUserById(utilisateurSession.getNoUtilisateur());
+		
 		String resultat;
         Map<String, String> MapErreurs = new HashMap<String, String>();
 		
@@ -94,7 +94,7 @@ public class ServletEncherir extends HttpServlet {
       		System.out.println("Le montant de l'enchere : " + newEnchere.getMontant_enchere());
       		
       		//TODO: retirer le montant de l'offre du crédit utilisateur
-      		int creditUtilisateur = utilisateurSession.getCredit() - newEnchere.getMontant_enchere();
+      		EnchereManager.getInstance().updateCredit(utilisateurSession, montantEnchere);
       		
       		resultat = "Enchère réussie.";  
         	request.setAttribute("resultat", resultat);
