@@ -128,6 +128,17 @@ public interface EnchereDAO {
 	 */
 	void insertNouvelleVente(ArticleVendu articleVendu) throws SQLException;
 
+
+	/**
+	 * permet la récupération d'une recherche
+	 * sur la page d'accueil
+	 * @param pseudo
+	 * @param contenuRecherche
+	 * @param categorie
+	 * @return resultatRechercheAccueil
+	 */
+	List<ArticleVendu> selectAllVentesEnCoursRecherche(String pseudo, String contenuRecherche, String categorie);
+
 		
 
 }

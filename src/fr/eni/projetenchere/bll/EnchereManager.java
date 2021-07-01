@@ -255,6 +255,18 @@ public class EnchereManager {
 		enchereDAO.insertNouvelleVente(newArticle);
 	}
 	
-	
+	/**
+	 * permet la récupération d'une recherche
+	 * sur la page d'accueil
+	 * @param pseudo
+	 * @param contenuRecherche
+	 * @param categorie
+	 * @return resultatRechercheAccueil
+	 */
+	public List<ArticleVendu> selectAllVentesEnCoursRecherche(String pseudo, String contenuRecherche,
+			String categorie) {
+		List<ArticleVendu> resultatRechercheAccueil = enchereDAO.selectAllVentesEnCoursRecherche(pseudo,contenuRecherche,categorie);
+		return resultatRechercheAccueil;
+	}
 
 }

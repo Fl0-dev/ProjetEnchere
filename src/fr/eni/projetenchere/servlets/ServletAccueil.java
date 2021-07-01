@@ -62,17 +62,11 @@ public class ServletAccueil extends HttpServlet {
 		request.setAttribute("listeCategories", listeCategories);
 		
 		// je récupère les résultats de la recherche
-		// String contenuRecherche = request.getParameter("contenuRecherche").trim();
-		int categorie = Integer.valueOf(request.getParameter("categorie"));
+		String contenuRecherche = request.getParameter("contenuRecherche").trim();
+		String categorie = request.getParameter("categorie");
+		String pseudo ="";
+		List<ArticleVendu> listeVentesEnCours = EnchereManager.getInstance().selectAllVentesEnCoursRecherche(pseudo,contenuRecherche,categorie);
 		
-		List<ArticleVendu> listeVentesEnCours = EnchereManager.getInstance().selectAllVentesEnCours();
-		
-		// si l'option choisit est "toutes", on recherche uniquement par nom d'article
-		if (categorie == 0) {
-			
-		} else {
-			// sinon, afficher résultats de la recherche par catégorie ET nom article
-		}
 		
 		request.setAttribute("listeVentesEnCours", listeVentesEnCours);
 		
