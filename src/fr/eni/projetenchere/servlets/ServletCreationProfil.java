@@ -26,8 +26,18 @@ public class ServletCreationProfil extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSPCreationProfil.jsp");
-		rd.forward(request, response);
+		HttpSession session = request.getSession();
+		Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("utilisateurSession");
+		
+		if (utilisateurSession != null) {
+			// renvoie vers la la servlet accueil connecté
+			RequestDispatcher rd = request.getRequestDispatcher("/AccueilConnecte");
+			rd.forward(request, response);
+		} else {
+			// renvoie vers la création de profil
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/CreationProfil.jsp");
+			rd.forward(request, response);
+		}
 	}
 
 	
@@ -121,6 +131,7 @@ public class ServletCreationProfil extends HttpServlet {
         }
        
        //Initialisation du résultat global de la validation
+        
        if ( MapErreurs.isEmpty() ) {
     	   //insertion des infos
     	   Utilisateur newUtilisateur = EnchereManager.getInstance().insertNewUtilisateur(pseudo,nom,prenom,email,telephone,rue,
