@@ -31,14 +31,17 @@
 			</div>
 		</nav>
 	</header>
-	
+	<!-- LIGNE -->
 	<div class="row d-flex justify-content-center">
+		<!-- COLONNE VIDE 1 -->
 	<div class="col-md-3 align-items-start"></div>
-	
-	
+		
+		<!-- COLONNE CENTRALE -->
 	<main class="col-md-6 align-items-center">
+	
 		<p class="text-dark container d-flex justify-content-center">${resultat}</p>
 		<p class="text-dark container d-flex justify-content-center">${messageDeconnexion}</p>
+		
 		<div class="h2 container d-flex justify-content-center">Listes des enchères</div>
 		
 			<form action="${pageContext.request.contextPath }/Accueil" method="post" class="recherche">
@@ -63,8 +66,7 @@
 		
 
 <!-- Affichage des enchères en cours -->
-		
-        
+		        
         <c:forEach var="articleVendu" items="${listeVentesEnCours }">	
 			<div class="card mb-3">
 				
@@ -77,10 +79,12 @@
 	        	
 	        </div>	
         </c:forEach>
-        </div>
-	</main>
+       
+        
+	</main> 
 
 <div class="col-md-3 align-items-end"></div>
+
 </div>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
