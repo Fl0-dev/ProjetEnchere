@@ -94,7 +94,7 @@
 							<label for="MesVentes">Mes ventes</label>
 						</div>
 						<div class="form-check">
-							<input class="form-check-input" type="radio" name="ventes" value="mesVentesEnCours" id="mesVentesEnCours"> 
+							<input class="form-check-input" type="radio" name="ventes" value="mesVentesEnCours" id="mesVentesEnCours" checked> 
 							<label class="form-check-label" for="mesVentesEnCours">Mes ventes en cours</label>
 						</div>
 						<div class="form-check">

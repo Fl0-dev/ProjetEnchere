@@ -162,6 +162,17 @@ public interface EnchereDAO {
 	 */
 	List<ArticleVendu> selectMesVentesEnCours(String pseudo, String contenuRecherche, String categorie);
 
+
+	/**
+	 * permet la récupération des ventes non commencées
+	 * d'un utilisateur
+	 * @param pseudo
+	 * @param contenuRecherche
+	 * @param categorie
+	 * @return ListeVntesNonDebutees
+	 */
+	List<ArticleVendu> selectVentesNonDebutees(String pseudo, String contenuRecherche, String categorie);
+
 		
 
 }
