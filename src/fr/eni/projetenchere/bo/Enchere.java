@@ -10,6 +10,7 @@ public class Enchere {
 	private ArticleVendu articleVendu;
 	private LocalDate dateEnchere;
 	private int montant_enchere;
+	private int num_enchere;
 	
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
@@ -51,6 +52,13 @@ public class Enchere {
 		this.utilisateur = utilisateur;
 		this.articleVendu = articleVendu;
 	}
+	public int getNum_enchere() {
+		return num_enchere;
+	}
+	public void setNum_enchere(int num_enchere) {
+		this.num_enchere = num_enchere;
+	}
+
 	
 	
 	

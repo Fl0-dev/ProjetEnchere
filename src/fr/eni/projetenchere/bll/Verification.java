@@ -165,10 +165,8 @@ public class Verification {
 		 * @param no_article
 		 * @throws Exception
 		 */
-		public void verifEnchere(Utilisateur utilisateur, int montant_enchere, int no_article) throws Exception {
-			ArticleVendu articleVendu = EnchereManager.getInstance().selectArticleById(no_article);
-	
-			
+		public void verifEnchere(Utilisateur utilisateur, int montant_enchere, ArticleVendu articleVendu) throws Exception {
+						
 			if (montant_enchere < articleVendu.getEnchereMax().getMontant_enchere()) {
 				throw new Exception("Votre offre doit être strictement supérieure à la meilleure offre.");
 			}

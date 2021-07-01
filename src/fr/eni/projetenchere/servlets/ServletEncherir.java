@@ -1,6 +1,7 @@
 package fr.eni.projetenchere.servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -48,6 +49,7 @@ public class ServletEncherir extends HttpServlet {
 		System.out.println(articleSelected.getLieuRetrait());
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encherir.jsp");
+		//request.setAttribute("artid", articleSelected.getNoArticle());
 		rd.forward(request, response);
 		
 	}
@@ -58,21 +60,21 @@ public class ServletEncherir extends HttpServlet {
 		// on récupère les informations de session et d'article
 		HttpSession session = request.getSession();
 		Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("utilisateurSession");
-		int article = Integer.parseInt(request.getParameter("article"));	
 		
-		ArticleVendu articleSelected = EnchereManager.getInstance().selectArticleById(article);
+		// on récupère les données du formulaire
+		int montantEnchere = Integer.parseInt(request.getParameter("montant_enchere"));
+		int artid = Integer.parseInt(request.getParameter("artid"));
+				
+		ArticleVendu articleSelected = EnchereManager.getInstance().selectArticleById(artid);
 		request.setAttribute("articleSelected", articleSelected);
-		
 		
 		String resultat;
         Map<String, String> MapErreurs = new HashMap<String, String>();
 		
-		// on récupère les données du formulaire
-		int montantEnchere = Integer.valueOf(request.getParameter("montant_enchere"));
-		
+
 		// Validation montant de l'offre
         try {
-      	  Verification.getInstance().verifEnchere(utilisateurSession, montantEnchere, article);
+      	  Verification.getInstance().verifEnchere(utilisateurSession, montantEnchere, articleSelected);
 
          
         } catch ( Exception e ) {
@@ -83,23 +85,33 @@ public class ServletEncherir extends HttpServlet {
         if ( MapErreurs.isEmpty() ) {
         	
      	    // insertion de l'enchere en BD
-      		Enchere newEnchere = EnchereManager.getInstance().insertEnchere(utilisateurSession, montantEnchere, article);
-      		System.out.println("Le montant de l'enchere : " + newEnchere.getMontant_enchere());
+      		try {
+				Enchere newEnchere = EnchereManager.getInstance().insertEnchere(utilisateurSession, montantEnchere, artid);
+				System.out.println(newEnchere);
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
       		
       		//TODO: retirer le montant de l'offre du crédit utilisateur
       		//EnchereManager.getInstance().updateCredit(utilisateurSession, montantEnchere);
       		
       		resultat = "Enchère réussie.";  
         	request.setAttribute("resultat", resultat);
+        	
         } else {
         	resultat = "Enchère non enregistrée";
         
             System.out.println(resultat);
              request.setAttribute("resultat", resultat);
              request.setAttribute("MapErreurs", MapErreurs);
+             
+             
         }
 	
-		response.sendRedirect("AccueilConnecte");
+        RequestDispatcher rd = request.getRequestDispatcher("AccueilConnecte");
+		//request.setAttribute("artid", articleSelected.getNoArticle());
+		rd.forward(request, response);
 	}
 
 }

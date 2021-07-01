@@ -850,49 +850,48 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	 * 
 	 * @return newEnchere
 	 */
-	public Enchere insertEnchere(Utilisateur utilisateur, int montant_enchere, int no_article) {
+	public Enchere insertEnchere(Utilisateur utilisateur, int montant_enchere, int no_article) throws SQLException {
 		// requête SQL
 		final String INSERT_ENCHERE = "insert into ENCHERES (date_enchere, montant_enchere, no_article, no_utilisateur) "
 				+ "values(GETDATE(),?,?,?);";
 
 		Enchere newEnchere = new Enchere();
-		ArticleVendu articleVendu = selectArticleById(no_article);
-		newEnchere.setMontant_enchere(montant_enchere);
-		newEnchere.setUtilisateur(utilisateur);
-		newEnchere.setArticleVendu(articleVendu);
+		
 
 		// ouverture de la connexion à la DB
-		try (Connection connection = JdbcTools.getConnection()) {
+		try (Connection cnx = JdbcTools.getConnection()) {
+			
 			try {
-				// désactive l'auto-commit (pour pouvoir faire une transaction)
-				connection.setAutoCommit(false);
+				cnx.setAutoCommit(false); // on désactive l'auto-commit (pour pouvoir faire une transaction)
 
-				PreparedStatement requete = connection.prepareStatement(INSERT_ENCHERE);
+				// 1. on ajoute l'enchère
+				PreparedStatement pStmt = cnx.prepareStatement(INSERT_ENCHERE,  PreparedStatement.RETURN_GENERATED_KEYS);
+				
+				pStmt.setInt(1, montant_enchere);
+				pStmt.setInt(2, no_article);
+				pStmt.setInt(3, utilisateur.getNoUtilisateur());
+				
+				pStmt.executeUpdate();
 
-				// initialisation de la requête
-				// requete.setDate(1, Date.valueOf(LocalDate.now()));
-				requete.setInt(1, montant_enchere);
-				requete.setInt(2, no_article);
-				requete.setInt(3, utilisateur.getNoUtilisateur());
+				// récupère le no de retrait
+				ResultSet rs = pStmt.getGeneratedKeys();
+				if (rs.next()) {
+					int num_enchere = rs.getInt(1);
+					newEnchere.setNum_enchere(num_enchere);
+					
+				}
 
-				// exécution de la requête
-				requete.executeUpdate();
+				// 3. on valide
+				cnx.commit();
+			} catch (SQLException f) {
+				f.printStackTrace();
+				cnx.rollback();
 
-				// valide
-				connection.commit();
-				// si souci
-			} catch (SQLException e) {
-				e.printStackTrace();
-				// efface l'insert
-				connection.rollback();
-				// TODO gestion exception
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			// TODO gestion exception
-		}
+		
 
 		return newEnchere;
+	}
 	}
 
 	@Override

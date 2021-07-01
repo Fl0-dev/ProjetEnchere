@@ -96,8 +96,11 @@
 	<form method="POST" action="${pageContext.request.contextPath }/encherir">
 	
 			<label for="montant_enchere">Ma proposition :</label>
+			
 			<input type="number" id="montant_enchere" name="montant_enchere" required step="1" min="${articleSelected.enchereMax.montant_enchere == 0 ? articleSelected.miseAPrix : articleSelected.enchereMax.montant_enchere }" placeholder="${articleSelected.enchereMax.montant_enchere == 0 ? articleSelected.miseAPrix : articleSelected.enchereMax.montant_enchere }">
-			<input id="article" name="article" type="hidden" value="${articleSelected.noArticle }">
+			
+			<input id="artid" name="artid" type="hidden" value="${articleSelected.noArticle}">
+			
 			<button class="btn btn-info btn-block mb-3" type="submit">Enchérir</button>
 	
 	</form>

@@ -115,10 +115,11 @@ public interface EnchereDAO {
 	 * ajoute une enchère en DB
 	 * @param newEnchere
 	 * @return newEnchere
+	 * @throws SQLException 
 	 */
 	//Enchere insertEnchere(Enchere newEnchere);
 
-	Enchere insertEnchere(Utilisateur utilisateur, int montant_enchere, int no_article);
+	Enchere insertEnchere(Utilisateur utilisateur, int montant_enchere, int no_article) throws SQLException;
 
 
 	

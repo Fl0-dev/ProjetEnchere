@@ -244,8 +244,9 @@ public class EnchereManager {
 	 * ajoute une enchère en DB
 	 * @param newEnchere
 	 * @return newEnchere
+	 * @throws SQLException 
 	 */
-	public Enchere insertEnchere(Utilisateur utilisateur, int montant_enchere, int no_article) {
+	public Enchere insertEnchere(Utilisateur utilisateur, int montant_enchere, int no_article) throws SQLException {
 		Enchere enchere = enchereDAO.insertEnchere(utilisateur, montant_enchere, no_article);
 		return enchere;
 	}
