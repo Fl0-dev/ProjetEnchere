@@ -434,7 +434,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				Enchere enchere = new Enchere();
 				Retrait retrait = new Retrait();
 				Categorie categorie = new Categorie();
-
+				
+				
 				String description =rs.getString("description");
 				int enchereMax = rs.getInt("enchere_max");
 				String nomArticle = rs.getString("nom_article");
@@ -459,6 +460,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				articleVendu.setCategorieArticle(categorie);
 				articleVendu.setLieuRetrait(retrait);
 				articleVendu.setDescription(description);
+				
 
 			}
 
@@ -596,7 +598,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		Retrait retrait = new Retrait();
 
 		// requête SQL
-		final String SELECT_RETRAIT_BY_ARTID = "SELECT rue, ville, code_postal " + "FROM RETRAITS as r "
+		final String SELECT_RETRAIT_BY_ARTID = "SELECT r.no_retrait, rue, ville, code_postal " + "FROM RETRAITS as r "
 				+ "INNER JOIN ARTICLES_VENDUS as a on a.no_retrait = r.no_retrait " + "WHERE a.no_article = ?;";
 
 		// ouverture de la connexion à la DB
@@ -610,7 +612,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			ResultSet rs = requete.executeQuery();
 
 			while (rs.next()) {
-
+				int num_retrait = rs.getInt("no_retrait");
 				String rue = rs.getString("rue");
 				String codePostal = rs.getString("code_postal");
 				String ville = rs.getString("ville");
@@ -619,6 +621,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				retrait.setCode_postal_retrait(codePostal);
 				retrait.setRue_retrait(rue);
 				retrait.setVille_retrait(ville);
+				retrait.setNum_retrait(num_retrait);
 
 			}
 
