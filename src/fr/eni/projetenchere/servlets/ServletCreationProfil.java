@@ -33,12 +33,12 @@ public class ServletCreationProfil extends HttpServlet {
 			// renvoie vers la la servlet accueil connecté
 			RequestDispatcher rd = request.getRequestDispatcher("/AccueilConnecte");
 			rd.forward(request, response);
-		} else {
+		} 
 			// renvoie vers la création de profil
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/CreationProfil.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSPCreationProfil.jsp");
 			rd.forward(request, response);
 		}
-	}
+	
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
