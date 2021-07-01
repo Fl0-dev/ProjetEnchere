@@ -1,5 +1,6 @@
 package fr.eni.projetenchere.bll;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import fr.eni.projetenchere.bo.ArticleVendu;
@@ -181,5 +182,105 @@ public class Verification {
 			//	}
 				
 		}
+		
+		/**
+		 * Vérifie que le champ nom de l'article est bien rempli
+		 * @param nomArticle
+		 * @throws Exception 
+		 */
+		public void validationNomArticle(String nomArticle) throws Exception {
+			if (nomArticle.isEmpty() || nomArticle == null) {
+				throw new Exception("Veuillez saisir un nom d'article");
+			}
+			
+		}
+		
+		/**
+		 * Vérifie que le champ description est bien rempli
+		 * @param description
+		 * @throws Exception 
+		 */
+		public void validationDescription(String description) throws Exception {
+			if (description.isEmpty() || description == null) {
+				throw new Exception("Veuillez saisir une description");
+					}
+			
+		}
+		
+		/**
+		 * Vérifie que le champ description ne dépasse pas 300 caractères
+		 * @param description
+		 * @throws Exception 
+		 */
+		public void validationChamp300(String description) throws Exception {
+			if (description == null || description.trim().length() == 0) {
+				throw new Exception("Le champ est obligatoire");
+			}
+			if (description.length()>300) {
+				throw new Exception("Pas plus de 30 caractères");
+			}
+			
+		}
+		
+		/**
+		 * Vérifie que le champ categorie est bien rempli
+		 * @param categorie
+		 * @throws Exception 
+		 */
+		public void validationCategorie(int categorie) throws Exception {
+			if (categorie == 0) {
+				throw new Exception ("Veuillez sélectionner une catégorie");
+				
+			}
+			
+		}
+		
+		/**
+		 * Vérifie les champs dates nouvelle vente
+		 * @param debutenchere
+		 * @param finenchere
+		 * @throws Exception 
+		 */
+		public void validationDateEnchere(LocalDate debutenchere, LocalDate finenchere) throws Exception {
+			if (debutenchere == null || finenchere == null) {
+				throw new Exception ("Veuillez saisir une date");
+			}
+			if (finenchere.isBefore(debutenchere)) {
+				throw new Exception ("La date de début d'enchère doit être inférieure à la date de fin d'enchère");
+				
+			}
+			if (debutenchere.isBefore(LocalDate.now())) {
+				throw new Exception ("La date de début d'enchère doit être supérieure à la date du jour");
+				
+			}
+		}
+		/**
+		 * Vérifie le champ prix initial
+		 * @param prix_initial
+		 * @throws Exception 
+		 */
+		public void validationPrixInitial(int prix_initial) throws Exception {
+			if (prix_initial <= 0) {
+				throw new Exception ("Le prix doit être positif");
+				}
+			
+		}
+		
+		/**
+		 * Vérifie les champs adresse de retrait
+		 * @param rue
+		 * @param codePostal
+		 * @param ville
+		 * @throws Exception 
+		 */
+		public void validationAdresseRetrait(String rue, String codePostal, String ville) throws Exception {
+			if (rue.isEmpty() || rue == null || codePostal.isEmpty() || codePostal == null || ville.isEmpty()
+					|| ville == null) {
+				throw new Exception("L'adresse de retrait doit être renseignée");
+				}
+			
+		}
+		
+		
 		
 }

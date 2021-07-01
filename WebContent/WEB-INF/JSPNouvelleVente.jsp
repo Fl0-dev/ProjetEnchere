@@ -35,8 +35,8 @@
 	</header>
 
 
-<p>${messageErreur}</p>
-<p>${succès}</p>
+<p>${resultat}</p>
+
 
 	<form action="${pageContext.request.contextPath }/NouvelleVente" method="post">
 		<div>
