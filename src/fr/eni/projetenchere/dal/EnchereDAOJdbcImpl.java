@@ -163,164 +163,10 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	}
 
 	/**
-	 * selectionne en DB toutes les enchères en cours et les met dans une liste
-	 * 
-	 * @return listeEncheres
-	 */
-	@Override
-	public List<Enchere> selectAllEnchere() {
-		// création de la liste vide
-		List<Enchere> listeEncheres = new ArrayList<>();
-
-		// requête SQL
-		final String SELECT_ALL_ENCHERE = "select a.date_fin_encheres, montant_enchere, a.nom_article, u.pseudo from ENCHERES as e "
-				+ "inner join ARTICLES_VENDUS as a on a.no_article= e.no_article "
-				+ "inner join UTILISATEURS as u on a.no_utilisateur = u.no_utilisateur "
-				+ "where (date_debut_encheres < GETDATE() and date_fin_encheres > GETDATE())"
-				+ "order by date_enchere desc;";
-
-		// ouverture de la connexion vers DB
-		try (Connection connection = JdbcTools.getConnection(); Statement requete = connection.createStatement()) {
-			// récupération du résultat
-			ResultSet rs = requete.executeQuery(SELECT_ALL_ENCHERE);
-
-			// création des variables
-			ArticleVendu articleVendu;
-			Utilisateur utilisateur;
-			Enchere enchere;
-
-			// récupération en Java
-			while (rs.next()) {
-				LocalDate dateFinEnchere = rs.getDate("date_fin_encheres").toLocalDate();
-				int montantEnchere = rs.getInt("montant_enchere");
-				String nomArticle = rs.getString("nom_article");
-				String pseudo = rs.getString("pseudo");
-
-				// utilisation des résultats
-				utilisateur = new Utilisateur(pseudo);
-				articleVendu = new ArticleVendu(nomArticle, dateFinEnchere);
-				enchere = new Enchere(montantEnchere, utilisateur, articleVendu);
-
-				// ajout dans la liste d'enchères
-				listeEncheres.add(enchere);
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return listeEncheres;
-	}
-
-	@Override
-	public List<Enchere> selectEnchereByArticle(String nom_article) {
-		// création de la liste vide
-		List<Enchere> listeEncheresByNom = new ArrayList<>();
-		// création des variables
-		ArticleVendu articleVendu;
-		Utilisateur utilisateur;
-		Enchere enchere;
-
-		// requête SQL
-		final String SELECT_ALL_ENCHERE_BY_NOM = "select a.date_fin_encheres, montant_enchere, a.nom_article, u.pseudo from ENCHERES as e "
-				+ "inner join ARTICLES_VENDUS as a on a.no_article= e.no_article "
-				+ "inner join UTILISATEURS as u on a.no_utilisateur = u.no_utilisateur "
-				+ "where a.nom_article like ? and (date_debut_encheres < GETDATE() and date_fin_encheres > GETDATE())"
-				+ "order by date_enchere desc;";
-
-		// ouverture de la connexion à la DB
-		try (Connection connection = JdbcTools.getConnection();
-				PreparedStatement requete = connection.prepareStatement(SELECT_ALL_ENCHERE_BY_NOM)) {
-			// initialisation de la requête
-
-			requete.setString(1, "%" + nom_article + "%");
-			// récupération du résultat
-			ResultSet rs = requete.executeQuery();
-
-			while (rs.next()) {
-				LocalDate dateFinEnchere = rs.getDate("date_fin_encheres").toLocalDate();
-				int montantEnchere = rs.getInt("montant_enchere");
-				String nomArticle = rs.getString("nom_article");
-				String pseudo = rs.getString("pseudo");
-
-				// utilisation des résultats
-				utilisateur = new Utilisateur(pseudo);
-				articleVendu = new ArticleVendu(nomArticle, dateFinEnchere);
-				enchere = new Enchere(montantEnchere, utilisateur, articleVendu);
-
-				// ajout dans la liste d'enchères
-				listeEncheresByNom.add(enchere);
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return listeEncheresByNom;
-
-	}
-
-	/**
-	 * selectionne en DB toutes les enchères en cours selon
-	 * 
-	 * @param nomArticle
-	 * @param noCategorie
-	 * @return listeEncheres
-	 */
-	@Override
-	public List<Enchere> selectEnchereByCatAndArt(String nom_article, int noCategorie) {
-
-		// création de la liste vide
-		List<Enchere> listeEncheresBy = new ArrayList<>();
-
-		// création des variables
-		ArticleVendu articleVendu;
-		Utilisateur utilisateur;
-		Enchere enchere;
-
-		// requête SQL
-		final String SELECT_ALL_ENCHERE_BY = "select a.date_fin_encheres, montant_enchere, a.nom_article, u.pseudo from ENCHERES as e "
-				+ "inner join ARTICLES_VENDUS as a on a.no_article= e.no_article "
-				+ "inner join UTILISATEURS as u on a.no_utilisateur = u.no_utilisateur "
-				+ "where a.no_categorie=? and a.nom_article like ? and (date_debut_encheres < GETDATE() and date_fin_encheres > GETDATE())"
-				+ "order by date_enchere desc;";
-
-		// ouverture de la connexion à la DB
-		try (Connection connection = JdbcTools.getConnection();
-				PreparedStatement requete = connection.prepareStatement(SELECT_ALL_ENCHERE_BY)) {
-
-			// initialisation de la requête
-			requete.setInt(1, noCategorie);
-			requete.setString(2, "%" + nom_article + "%");
-			// récupération du résultat
-			ResultSet rs = requete.executeQuery();
-
-			while (rs.next()) {
-				LocalDate dateFinEnchere = rs.getDate("date_fin_encheres").toLocalDate();
-				int montantEnchere = rs.getInt("montant_enchere");
-				String nomArticle = rs.getString("nom_article");
-				String pseudo = rs.getString("pseudo");
-
-				// utilisation des résultats
-				utilisateur = new Utilisateur(pseudo);
-				articleVendu = new ArticleVendu(nomArticle, dateFinEnchere);
-				enchere = new Enchere(montantEnchere, utilisateur, articleVendu);
-
-				// ajout dans la liste d'enchères
-				listeEncheresBy.add(enchere);
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return listeEncheresBy;
-	}
-
-	/**
 	 * selectionne en base de données email, pseudo et mot de passe des utilisateurs
 	 * et les met dans une liste
 	 * 
-	 * @return listeEncheres
+	 * @return listeUtilisateur
 	 */
 	@Override
 	public List<Utilisateur> selectConnexion() {
@@ -417,10 +263,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		// création de la liste vide
 		List<ArticleVendu> listeArticlesEnVente = new ArrayList<>();
 
-		// création des variables
-				ArticleVendu articleVendu = new ArticleVendu();
-				Utilisateur vendeur = new Utilisateur();
-				Enchere enchereMax = new Enchere();
+	
 
 		// requête SQL
 		final String SELECT_ALL_VENTES_EN_COURS = "SELECT MAX(e.montant_enchere) as enchere_max, a.prix_initial, "
@@ -440,6 +283,11 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			ResultSet rs = requete.executeQuery();
 
 			while (rs.next()) {
+				// création des variables
+				ArticleVendu articleVendu = new ArticleVendu();
+				Utilisateur vendeur = new Utilisateur();
+				Enchere enchereMax = new Enchere();
+				
 				int enchere = rs.getInt("enchere_max");
 				int miseAPrix = rs.getInt("prix_initial");
 				String nomArticle = rs.getString("nom_article");
@@ -536,10 +384,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 		// création des variables
 		ArticleVendu articleVendu = new ArticleVendu();
-		Utilisateur vendeur;
-		Enchere enchere = new Enchere();
-		Retrait retrait = new Retrait();
-		Categorie categorie;
+		
 
 		// requête SQL
 		final String SELECT_ARTICLE_BY_ID = "SELECT a.nom_article, a.description, c.no_categorie, MAX(e.montant_enchere) as enchere_max,  "
@@ -562,6 +407,11 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			ResultSet rs = requete.executeQuery();
 
 			while (rs.next()) {
+				
+				Utilisateur vendeur = new Utilisateur();
+				Enchere enchere = new Enchere();
+				Retrait retrait = new Retrait();
+				Categorie categorie = new Categorie();
 
 				int enchereMax = rs.getInt("enchere_max");
 				String nomArticle = rs.getString("nom_article");
@@ -648,10 +498,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		// création de la liste vide
 		List<ArticleVendu> listeEncheresOuvertes = new ArrayList<>();
 
-		// création des variables
-		ArticleVendu articleVendu = new ArticleVendu();
-		Utilisateur vendeur = new Utilisateur();
-		Enchere enchereMax = new Enchere();
+	
 
 		// requête SQL
 		final String SELECT_ENCHERES_OUVERTES = "SELECT MAX(e.montant_enchere) as enchere_max, a.prix_initial, "
@@ -674,6 +521,11 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			ResultSet rs = requete.executeQuery();
 
 			while (rs.next()) {
+				// création des variables
+				ArticleVendu articleVendu = new ArticleVendu();
+				Utilisateur vendeur = new Utilisateur();
+				Enchere enchereMax = new Enchere();
+				
 				int enchere = rs.getInt("enchere_max");
 				int miseAPrix = rs.getInt("prix_initial");
 				String nomArticle = rs.getString("nom_article");
@@ -753,10 +605,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		// création de la liste vide
 		List<ArticleVendu> listeEncheresOuvertes = new ArrayList<>();
 
-		// création des variables
-		ArticleVendu articleVendu = new ArticleVendu();
-		Utilisateur vendeur = new Utilisateur();
-		Enchere enchereMax = new Enchere();
+	
 
 		// requête SQL
 		final String SELECT_ENCHERES_OUVERTES = "SELECT MAX(e.montant_enchere) as enchere_max, a.prix_initial, "
@@ -788,6 +637,11 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			ResultSet rs = requete.executeQuery();
 
 			while (rs.next()) {
+				// création des variables
+				ArticleVendu articleVendu = new ArticleVendu();
+				Utilisateur vendeur = new Utilisateur();
+				Enchere enchereMax = new Enchere();
+				
 				int enchere = rs.getInt("enchere_max");
 				int miseAPrix = rs.getInt("prix_initial");
 				String nomArticle = rs.getString("nom_article");

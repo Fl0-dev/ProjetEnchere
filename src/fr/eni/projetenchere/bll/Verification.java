@@ -177,21 +177,11 @@ public class Verification {
 				throw new Exception("Veuillez saisir un montant.");
 			}
 			
-			// s'il n'y a pas encore d'enchère sur l'article
-			if (articleVendu.getEnchereMax() == null) {
-				
-				// l'utilisateur a-t-il suffisamment de crédit pour enchérir sur le prix initial ?
-				if (utilisateur.getCredit() < articleVendu.getMiseAPrix()) {
+			// l'utilisateur a-t-il suffisamment de crédit pour faire cette offre ?
+				if (utilisateur.getCredit() < montant_enchere) {
 				throw new Exception("Votre crédit est insuffisant.");	
 				}
 				
-			} else {
-				// l'utilisateur a-t-il suffisamment de crédit pour enchérir sur le prix initial ?
-				if (utilisateur.getCredit() < articleVendu.getEnchereMax().getMontant_enchere()) {
-				throw new Exception("Votre crédit est insuffisant.");	
-				}
-			}
-			
 		}
 		
 }
