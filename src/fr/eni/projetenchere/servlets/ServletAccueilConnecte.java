@@ -93,7 +93,7 @@ public class ServletAccueilConnecte extends HttpServlet {
 			// choix achats
 			if (choixAchatVente.equals("achats")) {
 				String choixRadioAchats = request.getParameter("encheres");
-				System.out.println(choixRadioAchats);
+				
 				switch (choixRadioAchats) {
 				// selon le choix
 				case "encheresOuvertes": 
@@ -110,16 +110,18 @@ public class ServletAccueilConnecte extends HttpServlet {
 				// choix ventes
 			} else {
 				String choixRadioVentes = request.getParameter("ventes");
-			}
-
-			// si l'option choisit est "toutes", on recherche uniquement par nom d'article
-			if (categorie.equals("0")) {
-				// listeAafficher =
-				// EnchereManager.getInstance().selectEnchereByArticle(contenuRecherche);
-			} else {
-				// sinon, afficher résultats de la recherche par catégorie ET nom article
-				// listeEncheresEnCoursConnecte =
-				// EnchereManager.getInstance().selectEnchereByCatAndArt(contenuRecherche,categorie);
+				switch (choixRadioVentes) {
+				// selon le choix
+				case "mesVentesEnCours": 
+					listeAafficher = EnchereManager.getInstance().selectMesVentesEnCours(utilisateurSession.getPseudo(),contenuRecherche,categorie);
+					break;
+				case "ventesNonDebutees":
+					//listeAafficher = EnchereManager.getInstance().selectVentesNonDebutees(utilisateurSession.getPseudo(),contenuRecherche,categorie);
+					break;
+				case "ventesTerminees":
+					//listeAafficher = EnchereManager.getInstance().selectVentesTerminees(utilisateurSession.getPseudo(),contenuRecherche,categorie);
+					break;
+				}
 			}
 
 			request.setAttribute("listeAafficher", listeAafficher);

@@ -151,6 +151,17 @@ public interface EnchereDAO {
 	 */
 	List<ArticleVendu> selectMesEncheresRemportees(String pseudo, String contenuRecherche, String categorie);
 
+	
+	/**
+	 * permet la récupération des ventes en cours
+	 * d'un utilisateur
+	 * @param pseudo
+	 * @param contenuRecherche
+	 * @param categorie
+	 * @return mesVentesEnCours
+	 */
+	List<ArticleVendu> selectMesVentesEnCours(String pseudo, String contenuRecherche, String categorie);
+
 		
 
 }

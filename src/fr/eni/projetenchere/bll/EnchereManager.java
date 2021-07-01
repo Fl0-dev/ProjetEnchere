@@ -25,6 +25,10 @@ import fr.eni.projetenchere.dal.EnchereDAO;
  * @author Florian
  *
  */
+/**
+ * @author Florian
+ *
+ */
 public class EnchereManager {
 
 	// création d'instance
@@ -287,6 +291,21 @@ public class EnchereManager {
 	public List<ArticleVendu> selectMesEncheresRemportees(String pseudo, String contenuRecherche, String categorie) {
 		List<ArticleVendu> listeMesEncheresRemportees = enchereDAO.selectMesEncheresRemportees(pseudo,contenuRecherche,categorie);
 		return listeMesEncheresRemportees;
+	}
+
+
+
+	/**
+	 * permet la récupération des ventes en cours
+	 * d'un utilisateur
+	 * @param pseudo
+	 * @param contenuRecherche
+	 * @param categorie
+	 * @return mesVentesEnCours
+	 */
+	public List<ArticleVendu> selectMesVentesEnCours(String pseudo, String contenuRecherche, String categorie) {
+		List<ArticleVendu> mesVentesEnCours = enchereDAO. selectMesVentesEnCours(pseudo,contenuRecherche,categorie);
+		return mesVentesEnCours;
 	}
 
 }
