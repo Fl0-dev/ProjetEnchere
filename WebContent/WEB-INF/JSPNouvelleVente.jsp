@@ -11,7 +11,7 @@
 
 </head>
 <body>
-	<<header>
+	<header>
 		<nav class="navbar navbar-expand-lg bg-dark navbar-dark mb-3">
 			<h1><a class="navbar-brand text-info" href="${pageContext.request.contextPath }/AccueilConnecte">ENI-Enchères</a></h1>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#liens">
