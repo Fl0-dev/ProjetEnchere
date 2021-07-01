@@ -46,9 +46,7 @@
 					
 <div class="card-body" >
 <div class="h2 container d-flex justify-content-center">Mon profil</div>	
- <c:if test="${ !empty sessionScope.utilisateurSession }">
-        <p>Votre crédit ${ sessionScope.utilisateurSession.credit } !</p>
-    </c:if>		
+ 
 <table >
     <tbody>
         <tr>
@@ -82,6 +80,10 @@
          <tr>
             <td>Ville :</td>
             <td>${ sessionScope.utilisateurSession.ville }</td>
+        </tr>
+          <tr>
+            <td>Crédit :</td>
+            <td>${ sessionScope.utilisateurSession.credit }</td>
         </tr>
     </tbody>
 </table>

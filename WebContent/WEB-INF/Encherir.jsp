@@ -54,15 +54,14 @@
 <div class="card mb-3">
 				
 	<div class="card-body">
+	<div>${resultat }</div>
 	<div class="h2 container d-flex justify-content-center">Détail vente</div>
 
 	<h5 class="card-title">${articleSelected.nomArticle }</h5>
 	<table>
   
     <tbody>
-		<tr>
-		<td>${articleSelected.noArticle }</td>
-		</tr>
+		
          <tr>
             <td>Description :</td>
             <td>${articleSelected.description }</td>
@@ -102,8 +101,8 @@
 			
 			<input type="number" id="montant_enchere" name="montant_enchere" required step="1" min="${articleSelected.enchereMax.montant_enchere == 0 ? articleSelected.miseAPrix + 1 : articleSelected.enchereMax.montant_enchere + 1 }" placeholder="${articleSelected.enchereMax.montant_enchere == 0 ? articleSelected.miseAPrix + 1 : articleSelected.enchereMax.montant_enchere + 1 }">
 			
-			<label for="article">Numéro d'article :</label>
-			<input id="article" name="article" type="number" value="${articleSelected.noArticle}" readonly>
+			
+			<input id="article" name="article" type="hidden" value="${articleSelected.noArticle}" readonly>
 			
 			<button id="submitEnchere" name="submitEnchere" class="btn btn-info btn-block mb-3" type="submit">Enchérir</button>
 	

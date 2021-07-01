@@ -38,8 +38,7 @@ public class ServletEncherir extends HttpServlet {
 		// récupère l'utilisateur de la session
 		HttpSession session = request.getSession();
 		Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("utilisateurSession");
-		
-		System.out.println(utilisateurSession);
+		System.out.println(utilisateurSession.getCredit());
 		
 		// récupère id article pour l'afficher
 		int article = Integer.parseInt(request.getParameter("article"));
@@ -62,8 +61,6 @@ public class ServletEncherir extends HttpServlet {
 		
 		// on récupère les données du formulaire
 		int montantEnchere = Integer.parseInt(request.getParameter("montant_enchere"));
-		
-		/*
 		int article = Integer.parseInt(request.getParameter("article"));
 				
 		ArticleVendu articleSelected = EnchereManager.getInstance().selectArticleById(article);
@@ -72,22 +69,22 @@ public class ServletEncherir extends HttpServlet {
 		String resultat;
         Map<String, String> MapErreurs = new HashMap<String, String>();
 		
-*/
+
 		//Validation montant de l'offre
-        // try {
-        //	  Verification.getInstance().verifEnchere(utilisateurSession, montantEnchere, articleSelected);
+         try {
+        	  Verification.getInstance().verifEnchere(utilisateurSession, montantEnchere, articleSelected);
 
          
-        //   } catch ( Exception e ) {
-        //   	MapErreurs.put( "montant", e.getMessage() );    
-        //  }
+          } catch ( Exception e ) {
+          	MapErreurs.put( "montant", e.getMessage() );    
+          }
         
     
-        //  if ( MapErreurs.isEmpty() ) { 
+         if ( MapErreurs.isEmpty() ) { 
         	
      	    // insertion de l'enchere en BD
 		
-		/*
+		
       		try {
 				Enchere newEnchere = EnchereManager.getInstance().insertEnchere(utilisateurSession, montantEnchere, article);
 				System.out.println(newEnchere);
@@ -101,19 +98,18 @@ public class ServletEncherir extends HttpServlet {
       		
       		resultat = "Enchère réussie.";  
         	request.setAttribute("resultat", resultat);
+        	response.sendRedirect("encherir");
         	
-        	 //  } else {
-        	 //	resultat = "Enchère non enregistrée";
+        	  } else {
+        	 resultat = "Enchère non enregistrée";
         
-        	 //     System.out.println(resultat);
-        	 //     request.setAttribute("resultat", resultat);
-        	 //      request.setAttribute("MapErreurs", MapErreurs);
+        	   request.setAttribute("resultat", resultat);
+        	       request.setAttribute("MapErreurs", MapErreurs);
              
              
-        	 //  }
-	*/
-        RequestDispatcher rd = request.getRequestDispatcher("AccueilConnecte");
-		rd.forward(request, response);
+        	   }
+	
+         response.sendRedirect("encherir");
 	}
 
 }

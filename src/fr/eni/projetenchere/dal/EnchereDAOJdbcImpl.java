@@ -164,66 +164,6 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	}
 
 	/**
-	 * selectionne en base de données email, pseudo et mot de passe des utilisateurs
-	 * et les met dans une liste
-	 * 
-	 * @return listeUtilisateur
-	 */
-	@Override
-	public List<Utilisateur> selectConnexion() {
-		List<Utilisateur> listeUtilisateurConnexion = new ArrayList<>();
-
-		final String SELECT_UTILISATEUR_CONNEXION = "SELECT * FROM utilisateurs;";
-
-		// ouverture de la connexion vers DB
-		try (Connection connection = JdbcTools.getConnection(); Statement requete = connection.createStatement()) {
-			// récupération du résultat
-			ResultSet rs = requete.executeQuery(SELECT_UTILISATEUR_CONNEXION);
-
-			
-
-			while (rs.next()) {
-				
-				Utilisateur utilisateur = new Utilisateur();
-				int noUtilisateur = rs.getInt("no_utilisateur");
-				String pseudo = rs.getString("pseudo");
-				String nom = rs.getString("nom");
-				String prenom = rs.getString("prenom");
-				String email = rs.getString("email");
-				String telephone = rs.getString("telephone");
-				String rue = rs.getString("rue");
-				String codePostal = rs.getString("code_postal");
-				String ville = rs.getString("ville");
-				String motDePasse = rs.getString("mot_de_passe");
-				int credit = rs.getInt("credit");
-				boolean administrateur = rs.getBoolean("administrateur");
-				boolean etat = rs.getBoolean("etat");
-
-				utilisateur.setNoUtilisateur(noUtilisateur);
-				utilisateur.setPseudo(pseudo);
-				utilisateur.setNom(nom);
-				utilisateur.setPrenom(prenom);
-				utilisateur.setEmail(email);
-				utilisateur.setTelephone(telephone);
-				utilisateur.setRue(rue);
-				utilisateur.setCodePostal(codePostal);
-				utilisateur.setVille(ville);
-				utilisateur.setMotDePasse(motDePasse);
-				utilisateur.setCredit(credit);
-				utilisateur.setAdministrateur(administrateur);
-				utilisateur.setEtat(etat);
-				
-				listeUtilisateurConnexion.add(utilisateur);
-			}
-		} catch (SQLException e) {
-			// TODO: handle exception
-		}
-
-		return listeUtilisateurConnexion;
-
-	}
-
-	/**
 	 * sélectionne un utilisateur à partir de son pseudo
 	 * 
 	 * @return utilisateur
@@ -449,8 +389,19 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				boolean etat = rs.getBoolean("etat");
 
 				// utilisation des résultats
-				utilisateur = new Utilisateur(no_utilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal,
-						ville, mdp, credit, administrateur, etat);
+				utilisateur = new Utilisateur();
+				utilisateur.setAdministrateur(administrateur);
+				utilisateur.setEtat(etat);
+				utilisateur.setNom(nom);
+				utilisateur.setPrenom(prenom);
+				utilisateur.setPseudo(pseudo);
+				utilisateur.setTelephone(telephone);
+				utilisateur.setMotDePasse(mdp);
+				utilisateur.setEmail(email);
+				utilisateur.setRue(rue);
+				utilisateur.setVille(ville);
+				utilisateur.setCodePostal(codePostal);
+				utilisateur.setCredit(credit);
 
 			}
 		} catch (SQLException e) {
@@ -1105,6 +1056,66 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 		}
 
+	}
+
+	/**
+	 * selectionne en base de données email, pseudo et mot de passe des utilisateurs
+	 * et les met dans une liste
+	 * 
+	 * @return listeUtilisateur
+	 */
+	@Override
+	public List<Utilisateur> selectConnexion() {
+		List<Utilisateur> listeUtilisateurConnexion = new ArrayList<>();
+	
+		final String SELECT_UTILISATEUR_CONNEXION = "SELECT * FROM utilisateurs;";
+	
+		// ouverture de la connexion vers DB
+		try (Connection connection = JdbcTools.getConnection(); Statement requete = connection.createStatement()) {
+			// récupération du résultat
+			ResultSet rs = requete.executeQuery(SELECT_UTILISATEUR_CONNEXION);
+	
+			
+	
+			while (rs.next()) {
+				
+				Utilisateur utilisateur = new Utilisateur();
+				int noUtilisateur = rs.getInt("no_utilisateur");
+				String pseudo = rs.getString("pseudo");
+				String nom = rs.getString("nom");
+				String prenom = rs.getString("prenom");
+				String email = rs.getString("email");
+				String telephone = rs.getString("telephone");
+				String rue = rs.getString("rue");
+				String codePostal = rs.getString("code_postal");
+				String ville = rs.getString("ville");
+				String motDePasse = rs.getString("mot_de_passe");
+				int credit = rs.getInt("credit");
+				boolean administrateur = rs.getBoolean("administrateur");
+				boolean etat = rs.getBoolean("etat");
+	
+				utilisateur.setNoUtilisateur(noUtilisateur);
+				utilisateur.setPseudo(pseudo);
+				utilisateur.setNom(nom);
+				utilisateur.setPrenom(prenom);
+				utilisateur.setEmail(email);
+				utilisateur.setTelephone(telephone);
+				utilisateur.setRue(rue);
+				utilisateur.setCodePostal(codePostal);
+				utilisateur.setVille(ville);
+				utilisateur.setMotDePasse(motDePasse);
+				utilisateur.setCredit(credit);
+				utilisateur.setAdministrateur(administrateur);
+				utilisateur.setEtat(etat);
+				
+				listeUtilisateurConnexion.add(utilisateur);
+			}
+		} catch (SQLException e) {
+			// TODO: handle exception
+		}
+	
+		return listeUtilisateurConnexion;
+	
 	}
 	
 
