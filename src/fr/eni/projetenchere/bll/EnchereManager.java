@@ -42,21 +42,7 @@ public class EnchereManager {
 		enchereDAO = DAOFactory.getEnchereDAO();
 	}
 
-	
-	/**
-	 * récupère toutes les enchères en cours dans
-	 * 
-	 * @return listeEncheres avec
-	 *         enchère(dateEnchere,montantEnchere,utilisateur(pseudo),
-	 *         articleVendu(nomArticle))
-	 */
-	public List<Enchere> selectAllEnchere() {
-		// création de la liste des enchères
-		List<Enchere> listeEncheres;
-		listeEncheres = enchereDAO.selectAllEnchere();
-		return listeEncheres;
-		// TODO gestion des exceptions
-	}
+
 
 	/**
 	 * récupère email, pseudo et mot de passe des utilisateurs pour l'accès à la
@@ -74,36 +60,6 @@ public class EnchereManager {
 		// TODO gestion des exceptions
 	}
 
-	/**
-	 * récupère toutes les enchères selon
-	 * 
-	 * @param nomArticle
-	 * @param noCategorie
-	 * @return listeEncheresByCategorie avec
-	 *         enchère(dateEnchere,montantEnchere,utilisateur(pseudo),
-	 *         articleVendu(nomArticle))
-	 */
-	public List<Enchere> selectEnchereByCatAndArt(String nomArticle, int noCategorie) {
-		List<Enchere> listeEncheresByCategorie;
-
-		listeEncheresByCategorie = enchereDAO.selectEnchereByCatAndArt(nomArticle, noCategorie);
-
-		return listeEncheresByCategorie;
-	}
-
-	/**
-	 * récupère toutes les enchères selon
-	 * 
-	 * @param nomArticle
-	 * @return listeEncheresByArticle
-	 */
-	public List<Enchere> selectEnchereByArticle(String nomArticle) {
-		List<Enchere> listeEncheresByArticle;
-
-		listeEncheresByArticle = enchereDAO.selectEnchereByArticle(nomArticle);
-
-		return listeEncheresByArticle;
-	}
 
 	/**
 	 * récupère les catégories et
@@ -299,12 +255,5 @@ public class EnchereManager {
 		enchereDAO.insertNouvelleVente(newArticle);
 	}
 	
-	/**
-	 * update en DB le profil d'un utilisateur
-	 */
-	public void updateCredit(Utilisateur utilisateur, int montant_enchere) {
-		
-		enchereDAO.updateCredit(utilisateur, montant_enchere);
-	}
 
 }

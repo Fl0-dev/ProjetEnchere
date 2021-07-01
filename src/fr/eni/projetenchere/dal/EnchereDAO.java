@@ -1,5 +1,6 @@
 package fr.eni.projetenchere.dal;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import fr.eni.projetenchere.bo.ArticleVendu;
@@ -12,26 +13,11 @@ import fr.eni.projetenchere.bo.Utilisateur;
 public interface EnchereDAO {
 
 	/**
-	 * selectionne en DB toutes les enchères en cours et les met dans une liste
-	 * @return listeEncheres
-	 */
-	List<Enchere> selectAllEnchere();
-
-	
-	/**
 	 * selectionne en base de données email, pseudo et mot de passe des utilisateurs et les met dans une liste
 	 * @return listeEncheres
 	 */
 	List<Utilisateur> selectConnexion();
 	
-	
-	/**
-	 * selectionne en DB toutes les enchères en cours selon
-	 * @param noCategorie 
-	 * @param nomArticle 
-	 * @return listeEncheresBy
-	 */
-	List<Enchere> selectEnchereByCatAndArt(String nomArticle, int noCategorie);
 
 	/**
 	 * récupère les catégories et
@@ -46,13 +32,6 @@ public interface EnchereDAO {
 	 */
 	Utilisateur insertUtilisateur(Utilisateur newUtilisateur);
 
-
-	/**
-	 * selectionne en DB toutes les enchères en cours selon 
-	 * @param nomArticle 
-	 * @return listeEncheresByNom
-	 */
-	List<Enchere> selectEnchereByArticle(String nomArticle);
 
 	/**
 	 * sélectionne l'utilisateur à partir de son pseudo
@@ -145,8 +124,9 @@ public interface EnchereDAO {
 	
 	/**
 	 * ajoute un article
+	 * @throws SQLException 
 	 */
-	ArticleVendu insertNouvelleVente(ArticleVendu articleVendu);
+	void insertNouvelleVente(ArticleVendu articleVendu) throws SQLException;
 
 		
 
