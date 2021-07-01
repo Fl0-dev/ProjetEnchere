@@ -435,6 +435,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				Retrait retrait = new Retrait();
 				Categorie categorie = new Categorie();
 
+				String description =rs.getString("description");
 				int enchereMax = rs.getInt("enchere_max");
 				String nomArticle = rs.getString("nom_article");
 				String pseudoVendeur = rs.getString("vendeur");
@@ -457,6 +458,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				articleVendu.setUtilisateur(vendeur);
 				articleVendu.setCategorieArticle(categorie);
 				articleVendu.setLieuRetrait(retrait);
+				articleVendu.setDescription(description);
 
 			}
 

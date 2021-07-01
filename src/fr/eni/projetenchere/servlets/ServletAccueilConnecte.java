@@ -36,6 +36,7 @@ public class ServletAccueilConnecte extends HttpServlet {
 		// d'accueil non connecté
 		if (urlUtilisee.equals("/deconnexion")) {
 			HttpSession session = request.getSession();
+			session.removeAttribute("utilisateur");
 			session.invalidate();
 			request.setAttribute("messageDeconnexion", "Vous êtes bien déconnecté");
 			this.getServletContext().getRequestDispatcher("/Accueil").forward(request, response);

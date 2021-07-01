@@ -5,10 +5,15 @@
 <html lang=""fr>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
 <title>ENI-Enchères</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+
+<title>Enchérir</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+>>>>>>> branch 'main' of https://github.com/Fl0-dev/ProjetEnchere
 <%-- <link href="${pageContext.request.contextPath }/css/style.css" rel="stylesheet"> --%>
 </head>
 
@@ -16,6 +21,7 @@
 
 	<header>
 		<nav class="navbar navbar-expand-lg bg-dark navbar-dark mb-3">
+<<<<<<< HEAD
 			<h1><a class="navbar-brand text-info" href="${pageContext.request.contextPath }/Accueil">ENI-Enchères</a></h1>
 			
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#liens">
@@ -38,6 +44,28 @@
 		
 		<!-- COLONNE CENTRALE -->
 	<main class="col-md-6 align-items-center">
+=======
+			<h1><a class="navbar-brand text-info" href="${pageContext.request.contextPath }/AccueilConnecte">ENI-Enchères</a></h1>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#liens">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			
+			<div class="collapse navbar-collapse justify-content-end" id="liens">
+				<ul class="navbar-nav">
+					<li class="nav-item active">	
+						<a class="nav-link text-info" href="${pageContext.request.contextPath }/NouvelleVente">Vendre un article</a>
+					</li>
+      				<li class="nav-item">	 
+						<a class="nav-link text-info" href="${pageContext.request.contextPath }/MonProfil">Mon profil</a> 
+					</li>
+      				<li class="nav-item">	 
+						<a class="nav-link text-info" href="${pageContext.request.contextPath }/deconnexion">Déconnexion</a>
+					</li>
+				</ul>		
+			</div>
+		</nav> 
+	</header>
+
 	
 	<table>
     <thead>
@@ -55,7 +83,7 @@
         </tr>
          <tr>
             <td>Catégorie :</td>
-            <td></td>
+            <td>${articleSelected.categorieArticle.libelle }</td>
         </tr>
          <tr>
             <td>Meilleure offre :</td>
