@@ -7,19 +7,32 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Nouvelle vente</title>
 <!-- CSS -->
-<link href="${pageContext.request.contextPath }/css/style.css"
-	rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 </head>
 <body>
-	<header>
-	<h1>
-		<a href="${pageContext.request.contextPath }/AccueilConnecte">ENI-Enchères</a>
-	</h1>
-	<p>${resultat}Bienvenue ${ sessionScope.utilisateurSession.pseudo }!</p>
-	<nav> <a href="${pageContext.request.contextPath }/NouvelleVente">Vendre
-		un article</a> <a href="${pageContext.request.contextPath }/MonProfil">Mon
-		profil</a> <a href="${pageContext.request.contextPath }/deconnexion">Déconnexion</a>
-	</nav> </header>
+	<<header>
+		<nav class="navbar navbar-expand-lg bg-dark navbar-dark mb-3">
+			<h1><a class="navbar-brand text-info" href="${pageContext.request.contextPath }/AccueilConnecte">ENI-Enchères</a></h1>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#liens">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			
+			<div class="collapse navbar-collapse justify-content-end" id="liens">
+				<ul class="navbar-nav">
+					<li class="nav-item active">	
+						<a class="nav-link text-info" href="${pageContext.request.contextPath }/NouvelleVente">Vendre un article</a>
+					</li>
+      				<li class="nav-item">	 
+						<a class="nav-link text-info" href="${pageContext.request.contextPath }/MonProfil">Mon profil</a> 
+					</li>
+      				<li class="nav-item">	 
+						<a class="nav-link text-info" href="${pageContext.request.contextPath }/deconnexion">Déconnexion</a>
+					</li>
+				</ul>		
+			</div>
+		</nav> 
+	</header>
 
 
 <p>${messageErreur}</p>

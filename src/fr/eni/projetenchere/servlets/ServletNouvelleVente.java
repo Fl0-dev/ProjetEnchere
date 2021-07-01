@@ -128,7 +128,7 @@ public class ServletNouvelleVente extends HttpServlet {
 
 		try {
 			EnchereManager.getInstance().insertArticle(newArticle);
-			request.setAttribute("succès", "Votre article a été ajouté aux ventes !");
+			request.setAttribute("succes", "Votre article a été ajouté aux ventes");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

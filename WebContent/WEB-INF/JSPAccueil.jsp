@@ -31,7 +31,8 @@
 			</div>
 		</nav>
 	</header>
-
+	
+	
 	<main class="container-fluid">
 		<p class="text-dark container d-flex justify-content-center">${resultat}</p>
 		<p class="text-dark container d-flex justify-content-center">${messageDeconnexion}</p>

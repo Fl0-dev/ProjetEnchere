@@ -11,7 +11,26 @@
 </head>
 <body>
 	<header>
-		<h1><a href="${pageContext.request.contextPath }/AccueilConnecte">ENI-Enchères</a></h1>
+		<nav class="navbar navbar-expand-lg bg-dark navbar-dark mb-3">
+			<h1><a class="navbar-brand text-info" href="${pageContext.request.contextPath }/AccueilConnecte">ENI-Enchères</a></h1>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#liens">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			
+			<div class="collapse navbar-collapse justify-content-end" id="liens">
+				<ul class="navbar-nav">
+					<li class="nav-item active">	
+						<a class="nav-link text-info" href="${pageContext.request.contextPath }/NouvelleVente">Vendre un article</a>
+					</li>
+      				<li class="nav-item">	 
+						<a class="nav-link text-info" href="${pageContext.request.contextPath }/MonProfil">Mon profil</a> 
+					</li>
+      				<li class="nav-item">	 
+						<a class="nav-link text-info" href="${pageContext.request.contextPath }/deconnexion">Déconnexion</a>
+					</li>
+				</ul>		
+			</div>
+		</nav> 
 	</header>
 	<center>
 		<h1>Mon Profil</h1>
