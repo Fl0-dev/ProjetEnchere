@@ -71,10 +71,12 @@ public class ServletIdentification extends HttpServlet {
 		if (userID != 0) {
 			//Utilisateur utilisateurSession = EnchereManager.getInstance().selectUtilisateurByPseudo(utilisateurPseudo);
 			Utilisateur utilisateurSession = EnchereManager.getInstance().selectUserById(userID);
+			utilisateurSession.setNoUtilisateur(userID);
 
 			HttpSession session = request.getSession();
 
 			session.setAttribute("utilisateurSession", utilisateurSession);
+			System.out.println(utilisateurSession);
 
 			response.sendRedirect("AccueilConnecte");
 

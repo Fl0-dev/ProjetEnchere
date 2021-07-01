@@ -38,7 +38,8 @@ public class ServletEncherir extends HttpServlet {
 		// récupère l'utilisateur de la session
 		HttpSession session = request.getSession();
 		Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("utilisateurSession");
-		System.out.println(utilisateurSession.getCredit());
+		System.out.println("doGet : " + utilisateurSession);
+		System.out.println("credit utilisateur : " + utilisateurSession.getCredit());
 		
 		// récupère id article pour l'afficher
 		int article = Integer.parseInt(request.getParameter("article"));
@@ -54,10 +55,10 @@ public class ServletEncherir extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8"); 
-		
 		// on récupère les informations de session et d'article
 		HttpSession session = request.getSession();
 		Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("utilisateurSession");
+		System.out.println("doPost : " + utilisateurSession);
 		
 		// on récupère les données du formulaire
 		int montantEnchere = Integer.parseInt(request.getParameter("montant_enchere"));
@@ -98,18 +99,18 @@ public class ServletEncherir extends HttpServlet {
       		
       		resultat = "Enchère réussie.";  
         	request.setAttribute("resultat", resultat);
-        	response.sendRedirect("encherir");
+        	response.sendRedirect("AccueilConnecte");
         	
         	  } else {
         	 resultat = "Enchère non enregistrée";
         
         	   request.setAttribute("resultat", resultat);
         	       request.setAttribute("MapErreurs", MapErreurs);
-             
+        	       response.sendRedirect("AccueilConnecte");
              
         	   }
 	
-         response.sendRedirect("encherir");
+         
 	}
 
 }
