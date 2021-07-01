@@ -172,18 +172,18 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	public List<Utilisateur> selectConnexion() {
 		List<Utilisateur> listeUtilisateurConnexion = new ArrayList<>();
 
-		final String SELECT_UTILISATEUR_CONNEXION = "SELECT no_utilisateur, pseudo, nom, prenom, email, "
-				+ "telephone, rue, code_postal, ville, mot_de_passe,"
-				+ " credit, administrateur, etat FROM utilisateurs;";
+		final String SELECT_UTILISATEUR_CONNEXION = "SELECT * FROM utilisateurs;";
 
 		// ouverture de la connexion vers DB
 		try (Connection connection = JdbcTools.getConnection(); Statement requete = connection.createStatement()) {
 			// récupération du résultat
 			ResultSet rs = requete.executeQuery(SELECT_UTILISATEUR_CONNEXION);
 
-			Utilisateur utilisateur;
+			
 
 			while (rs.next()) {
+				
+				Utilisateur utilisateur = new Utilisateur();
 				int noUtilisateur = rs.getInt("no_utilisateur");
 				String pseudo = rs.getString("pseudo");
 				String nom = rs.getString("nom");
@@ -198,7 +198,6 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				boolean administrateur = rs.getBoolean("administrateur");
 				boolean etat = rs.getBoolean("etat");
 
-				utilisateur = new Utilisateur();
 				utilisateur.setNoUtilisateur(noUtilisateur);
 				utilisateur.setPseudo(pseudo);
 				utilisateur.setNom(nom);
@@ -887,6 +886,48 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			}
 
 		}
+
+	}
+	
+
+	/**
+	 * sélectionne un utilisateur à partir de son numéro utilisateur
+	 * 
+	 * @return utilisateur
+	 */
+	@Override
+	public Utilisateur selectCreditByUserId(int no_utilisateur) {
+
+		// création des variables
+		Utilisateur utilisateur = selectUserById(no_utilisateur);
+
+		// requête SQL
+		final String SELECT_CREDIT = "SELECT credit "
+				+ "FROM utilisateurs WHERE no_utilisateur=?;";
+
+		// ouverture de la connexion à la DB
+		try (Connection connection = JdbcTools.getConnection();
+				PreparedStatement requete = connection.prepareStatement(SELECT_CREDIT)) {
+
+			// initialisation de la requête
+			requete.setInt(1, no_utilisateur);
+
+			// récupération du résultat
+			ResultSet rs = requete.executeQuery();
+
+			while (rs.next()) {
+
+				int credit = rs.getInt("credit");
+
+				// utilisation des résultats
+				utilisateur.setCredit(credit);
+
+			}
+		} catch (SQLException e) {
+			// TODO: handle exception
+		}
+
+		return utilisateur;
 
 	}
 

@@ -128,6 +128,12 @@ public interface EnchereDAO {
 	 */
 	void insertNouvelleVente(ArticleVendu articleVendu) throws SQLException;
 
+	/**
+	 * selectionne le crédit de l'utilisateur
+	 *  
+	 */
+	Utilisateur selectCreditByUserId(int no_utilisateur);
+
 		
 
 }

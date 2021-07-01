@@ -139,7 +139,8 @@ public class ServletCreationProfil extends HttpServlet {
    				codePostal,ville,motDePasse);
     		
        	//récupération de tous les attributs de newUtilisateur par son pseudo
-    	Utilisateur utilisateurSession = EnchereManager.getInstance().selectUtilisateurByPseudo(pseudo);
+    	//Utilisateur utilisateurSession = EnchereManager.getInstance().selectUtilisateurByPseudo(pseudo);
+    	   Utilisateur utilisateurSession = EnchereManager.getInstance().selectUserById(newUtilisateur.getNoUtilisateur());
     	//ouverture d'une session et mise en attribut du nouvel utilisateur
     	HttpSession session = request.getSession();
 

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.management.monitor.Monitor;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,22 +38,18 @@ public class ServletEncherir extends HttpServlet {
 		HttpSession session = request.getSession();
 		Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("utilisateurSession");
 		
-		if (utilisateurSession != null) {
-			
-			//int no_article = Integer.parseInt(request.getParameter("no_article"));
-			// récupère id article pour l'afficher
-			int article = Integer.parseInt(request.getParameter("article"));
-			
-			ArticleVendu articleSelected = EnchereManager.getInstance().selectArticleById(article);		
-			request.setAttribute("articleSelected", articleSelected);
-			
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encherir.jsp");
-			rd.forward(request, response);
-		} else {
-			// renvoie vers l'accueil
-			RequestDispatcher rd = request.getRequestDispatcher("/Accueil");
-			rd.forward(request, response);
-		}
+		System.out.println(utilisateurSession);
+		
+		
+		//int no_article = Integer.parseInt(request.getParameter("no_article"));
+		// récupère id article pour l'afficher
+		int article = Integer.parseInt(request.getParameter("article"));
+		
+		ArticleVendu articleSelected = EnchereManager.getInstance().selectArticleById(article);		
+		request.setAttribute("articleSelected", articleSelected);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encherir.jsp");
+		rd.forward(request, response);
 		
 	}
 
@@ -68,9 +65,7 @@ public class ServletEncherir extends HttpServlet {
 		ArticleVendu articleSelected = EnchereManager.getInstance().selectArticleById(article);
 		request.setAttribute("articleSelected", articleSelected);
 		
-		System.out.println(utilisateurSession);
-		utilisateurSession = EnchereManager.getInstance().selectUtilisateurByPseudo(utilisateurSession.getPseudo());
-		utilisateurSession = EnchereManager.getInstance().selectUserById(utilisateurSession.getNoUtilisateur());
+		//utilisateurSession = EnchereManager.getInstance().selectUserById(utilisateurSession.getNoUtilisateur());
 		
 		String resultat;
         Map<String, String> MapErreurs = new HashMap<String, String>();

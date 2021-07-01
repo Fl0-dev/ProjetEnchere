@@ -255,5 +255,11 @@ public class EnchereManager {
 		enchereDAO.insertNouvelleVente(newArticle);
 	}
 	
+	public Utilisateur selectCreditByUserId(int no_utilisateur) {
+		Utilisateur utilisateur = enchereDAO.selectCreditByUserId(no_utilisateur);
+		return utilisateur;
+		
+	}
+	
 
 }

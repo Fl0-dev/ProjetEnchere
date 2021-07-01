@@ -51,21 +51,26 @@ public class ServletIdentification extends HttpServlet {
 		// la servlet Accueil Connecté, sinon retour sur la JSP connexion avec un
 		// message d'erreur
 
-		String utilisateurPseudo = null;
+		// String utilisateurPseudo = null;
+		int userID = 0;
+		
 		for (Utilisateur utilisateur : listeUtilisateursConnexion) {
 
 			// si l'identifiant (pseudo ou e-mail) est trouvé en BDD ET si le mot de passe
 			if ((identifiant.equals(utilisateur.getPseudo()) || (identifiant.equals(utilisateur.getEmail())))
 					&& mdp.equals(utilisateur.getMotDePasse()) && utilisateur.getEtat()==true) {
 
-				utilisateurPseudo = utilisateur.getPseudo();
+				//utilisateurPseudo = utilisateur.getPseudo();
+				userID = utilisateur.getNoUtilisateur();
 
 			}
 
 		}
 
-		if (utilisateurPseudo != null) {
-			Utilisateur utilisateurSession = EnchereManager.getInstance().selectUtilisateurByPseudo(utilisateurPseudo);
+		//if (utilisateurPseudo != null) {
+		if (userID != 0) {
+			//Utilisateur utilisateurSession = EnchereManager.getInstance().selectUtilisateurByPseudo(utilisateurPseudo);
+			Utilisateur utilisateurSession = EnchereManager.getInstance().selectUserById(userID);
 
 			HttpSession session = request.getSession();
 
