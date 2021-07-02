@@ -33,93 +33,77 @@
 			</div>
 		</nav> 
 	</header>
-<div class="row d-flex justify-content-center">
-
-
-<div class="col-md-3 align-items-start"></div>
-
+	<div class="row d-flex justify-content-center">
 	<main class="col-md-6 align-items-center">
+		<p class="text-dark container d-flex justify-content-center">${resultat}</p>
+			
+		<div class="h2 container d-flex justify-content-center">Nouvelle vente</div> 
+
+			<form action="${pageContext.request.contextPath }/NouvelleVente" method="post">
+				<div class="form-group ">
+					<label for="nom_article">Article :</label> 
+					<input class="form-control" type="text" id="nom_article" name="nom_article">
+					<span>${MapErreurs['nomArticle'] }</span>
 	
-	<div class="card mb-3">
-	<div class="card-body">
-			<p class="text-dark container d-flex justify-content-center">${resultat}</p>
+					<label for="description">Description :</label>
+					<textarea class="form-control" id="description" name="description"  placeholder="Description de l'article"></textarea>
+					<span>${MapErreurs['description'] }</span>
+					
+					<div class="form-control mt-2">
+						<label for="categories">Catégorie :</label> 
+						<select id="categories" name="categorie" class="form-control">	
+							<option value="0" selected>--</option>
+							<c:forEach items="${listeCategories }" var="categorie">
+								<option value="${categorie.noCategorie }">${categorie.libelle }</option>
+							</c:forEach>
+						</select>
+						<span>${MapErreurs['categorie'] }</span>
+					</div>
 			
-			<div class="h2 container d-flex justify-content-center">Nouvelle vente</div> 
-
-
-	<form action="${pageContext.request.contextPath }/NouvelleVente" method="post">
-		<div>
-			<label for="nom_article">Article :</label> <input type="text"
-				id="nom_article" name="nom_article">
-				<span>${MapErreurs['nomArticle'] }</span>
-		</div>
-
-		<div>
-			<label for="description">Description :</label>
-			<textarea id="description" name="description" rows="5" cols="15" placeholder="Description de l'article"></textarea>
-			<span>${MapErreurs['description'] }</span>
-		</div>
-
-		<div>
-			<label for="categories">Catégorie :</label> <select id="categories"
-				name="categorie">
-				<option value="0" selected>--</option>
+					<div>
+						<label for="prix_initial">Mise à prix :</label> 
+						<input class="form-control" type="number" id="prix_initial" name="prix_initial" required >
+						<span>${MapErreurs['prixInitial'] }</span>
+					</div>
+				
+					<div>
+						<label for="debutenchere">Début de l'enchère :</label> 
+						<input class="form-control" type="date" id="debutenchere" name="debutenchere">
+					</div>
+					<div>
+						<label for="finenchere">Fin de l'enchère :</label> 
+						<input class="form-control"type="date" id="finenchere" name="finenchere">
+						<span>${MapErreurs['dateEnchere'] }</span>
+					</div>
+				</div>
 			
-				<c:forEach items="${listeCategories }" var="categorie">
-					<option value="${categorie.noCategorie }">${categorie.libelle }</option>
-				</c:forEach>
-			</select>
-			<span>${MapErreurs['categorie'] }</span>
-		</div>
-
-		<div>
-			<label for="prix_initial">Mise à prix :</label> <input type="number"
-				id="prix_initial" name="prix_initial" required >
-				<span>${MapErreurs['prixInitial'] }</span>
-		</div>
-	<div>
-		<div>
-			<label for="debutenchere">Début de l'enchère :</label> <input
-				type="date" id="debutenchere" name="debutenchere">
-		</div>
-		<div>
-			<label for="finenchere">Fin de l'enchère :</label> <input type="date"
-				id="finenchere" name="finenchere">
-				<span>${MapErreurs['dateEnchere'] }</span>
-		</div>
-		</div>
-
-		<fieldset>
-			<legend>Retrait</legend>
-			<div>
-			<label for="rue">Rue :</label> 
-			<input type="text" id="rue" name="rue" value="<c:out value="${utilisateurSession.rue }"/>">
-			</div>
-			<div>
-			<label for="codePostal">Code postal :</label> 
-			<input type="text" id="codePostal" name="codePostal" value="<c:out value="${utilisateurSession.codePostal }"/>">
-			</div>
-			<div>
-			<label for="ville">Ville :</label> 
-			<input type="text" id="ville" name="ville" value="<c:out value="${utilisateurSession.ville }"/>">
-			</div>
-			<span>${MapErreurs['adresseRetrait'] }</span>
-		</fieldset>
-		
-		
-
-		<button class="btn btn-info btn-block mb-3"type="submit">Enregistrer</button>
-		
-
+				<div class ="card">	
+					<div class="card-body">
+						<h5 class="card-title">Retrait</h5>
+						<label for="rue">Rue :</label> 
+						<input class="form-control"type="text" id="rue" name="rue" value="<c:out value="${utilisateurSession.rue }"/>">
+						<label for="codePostal">Code postal :</label> 
+						<input class="form-control" type="text" id="codePostal" name="codePostal" value="<c:out value="${utilisateurSession.codePostal }"/>">
+						<label for="ville">Ville :</label> 
+						<input class="form-control" type="text" id="ville" name="ville" value="<c:out value="${utilisateurSession.ville }"/>">
+						<span>${MapErreurs['adresseRetrait'] }</span>
+					</div>
+				</div>
+					
+				<button class="btn btn-info btn-block my-3"type="submit">Enregistrer</button>
+				
 			</form>
-			
-			<div  class="btn btn-info btn-block mb-3"><a href="${pageContext.request.contextPath }/AccueilConnecte">Annuler</button>
+					
+			<a class="btn btn-secondary text-white btn-block mb-3" href="${pageContext.request.contextPath }/AccueilConnecte">Annuler</a>
 		</div>
-		</div>
-		</div>
-		</main>
-		<div class="col-md-3 align-items-end"></div>
-		</div>
+				
+	
+	</main>
+		
+		
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 		
 </body>
 </html>

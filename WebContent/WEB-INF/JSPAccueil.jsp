@@ -50,7 +50,7 @@
 					<input class="form-control" type="text" placeholder="Le nom de l'article contient..." name="contenuRecherche">
 				</div>
 	
-					<div class="form-control">
+					<div class="form-control ">
 						<label for="categories">Catégorie :</label>
 						<select id="categories" name="categorie" class="form-control">
 							<option value="0" selected>Toutes</option>
