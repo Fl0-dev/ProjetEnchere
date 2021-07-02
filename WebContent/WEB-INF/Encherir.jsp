@@ -42,24 +42,18 @@
 		</nav> 
 	</header>
 	
-	<!-- LIGNE -->
 	<div class="row d-flex justify-content-center">
-		<!-- COLONNE VIDE 1 -->
-	<div class="col-md-3 align-items-start"></div>
-		
-		<!-- COLONNE CENTRALE -->
 	<main class="col-md-6 align-items-center">
 
+<div>${resultat }</div>
+<div class="h2 container d-flex justify-content-center">Détail vente</div>
+	
+<div class="d-flex justify-content-center mt-3">
 
-<div class="card mb-3">
-				
-	<div class="card-body">
-	<div>${resultat }</div>
-	<div class="h2 container d-flex justify-content-center">Détail vente</div>
-
-	<h5 class="card-title">${articleSelected.nomArticle }</h5>
 	<table>
-  
+  <thead>
+  <tr><th><h5>${articleSelected.nomArticle }</h5></th></tr>
+  </thead>
     <tbody>
 		
          <tr>
@@ -95,6 +89,8 @@
  
     </tbody>
 </table>
+</div>
+<div class="d-flex justify-content-center mt-3">
 	<form name="enchere" method="POST" action="${pageContext.request.contextPath }/encherir">
 	
 			<label for="montant_enchere">Ma proposition :</label>
@@ -105,16 +101,14 @@
 			<input id="article" name="article" type="hidden" value="${articleSelected.noArticle}" readonly>
 			
 			<button id="submitEnchere" name="submitEnchere" class="btn btn-info btn-block mb-3" type="submit">Enchérir</button>
+
 	
 	</form>
-			</div>
-			
-	</div>
+		</div>
+
 	</main>
 
 
-<div class="col-md-3 align-items-end"></div>
-</div>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
