@@ -99,14 +99,15 @@ public class ServletEncherir extends HttpServlet {
       		
       		resultat = "Enchère réussie.";  
         	request.setAttribute("resultat", resultat);
-        	response.sendRedirect("AccueilConnecte");
+        	RequestDispatcher rd = request.getRequestDispatcher("AccueilConnecte");
+    		rd.forward(request, response);
         	
         	  } else {
         	 resultat = "Enchère non enregistrée";
-        
         	   request.setAttribute("resultat", resultat);
         	       request.setAttribute("MapErreurs", MapErreurs);
-        	       response.sendRedirect("AccueilConnecte");
+        	       RequestDispatcher rd = request.getRequestDispatcher("AccueilConnecte");
+           		rd.forward(request, response);
              
         	   }
 	

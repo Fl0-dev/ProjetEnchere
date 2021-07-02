@@ -23,60 +23,60 @@
 				<div class="form-row justify-content-center">
 					<div class="form-group col-md-6">
 						<label for="pseudo">Pseudo <span>*</span> </label> 
-						<input class="form-control" type="text" id="pseudo"name="pseudo" value="<c:out value="${param.pseudo }"/>" autofocus > 
+						<input class="form-control" type="text" id="pseudo"name="pseudo" value="<c:out value="${param.pseudo }"/>" autofocus required> 
 						<span>${MapErreurs['pseudo']}</span>
 				 	</div>
 				 	<div class="form-group col-md-6">
 						<label for="nom">Nom <span>*</span> </label> 
-						<input class="form-control" type="text" id="nom" name="nom" value="<c:out value="${param.nom }"/>" >
+						<input class="form-control" type="text" id="nom" name="nom" value="<c:out value="${param.nom }"/>" required>
 						<span>${MapErreurs['nom']}</span>
 					</div>
 				</div>
 				<div class="form-row justify-content-center">
 					<div class="form-group col-md-6">
 						<label for="prenom">Prénom <span>*</span> </label> 
-						<input class="form-control" type="text" id="prenom" name="prenom" value="<c:out value="${param.prenom }"/>"  > 
+						<input class="form-control" type="text" id="prenom" name="prenom" value="<c:out value="${param.prenom }"/>"  required> 
 						<span>${MapErreurs['prenom']}</span>
 			 		</div>
 				 	<div class="form-group col-md-6">
 						<label for="email">Email <span>*</span> </label> 
-						<input class="form-control" type="mail" id="email" name="email" value="<c:out value="${param.email }"/>"  >
+						<input class="form-control" type="mail" id="email" name="email" value="<c:out value="${param.email }"/>"  required>
 						<span>${MapErreurs['email']}</span>
 					</div>
 				</div>
 				<div class="form-row justify-content-center">
 					<div class="form-group col-md-6">	
 						<label for="telephone">Téléphone : </label> 
-						<input class="form-control" type="tel" id="telephone" name="telephone" value="<c:out value="${param.telephone }"/>">
+						<input class="form-control" type="tel" id="telephone" name="telephone" value="<c:out value="${param.telephone }"/>" >
 						 <span>${MapErreurs['tel']}</span>
 					</div>
 				 	<div class="form-group col-md-6">
 						<label for="rue">Rue <span>*</span> </label> 
-						<input class="form-control" type="text" id="rue" name="rue" value="<c:out value="${param.rue }"/>"  >
+						<input class="form-control" type="text" id="rue" name="rue" value="<c:out value="${param.rue }"/>" required >
 						<span>${MapErreurs['rue']}</span>
 					</div>
 				</div>
 				<div class="form-row justify-content-center">
 					<div class="form-group col-md-6">	 
 						<label for="codePostal">Code Postal <span>*</span> </label> 
-						<input class="form-control" type="text" id="codePostal" name="codePostal" value="<c:out value="${param.codePostal }"/>"  >
+						<input class="form-control" type="text" id="codePostal" name="codePostal" value="<c:out value="${param.codePostal }"/>" required >
 						<span>${MapErreurs['codePostal']}</span> 
 					</div>
 				 	<div class="form-group col-md-6">
 						<label for="ville">Ville <span>*</span> </label> 
-						<input class="form-control" type="text" id="ville" name="ville" value="<c:out value="${param.ville }"/>"  > 
+						<input class="form-control" type="text" id="ville" name="ville" value="<c:out value="${param.ville }"/>" required > 
 						<span>${MapErreurs['ville']}</span>
 					</div>
 				</div> 
 				<div class="form-row justify-content-center">
 					<div class="form-group col-md-6">	 
 						<label for="motDePasse">Mot de passe <span>*</span> </label> 
-						<input class="form-control" type="password" id="motDePasse" name="motDePasse"  > 
+						<input class="form-control" type="password" id="motDePasse" name="motDePasse"  required> 
 						<span>${MapErreurs['motDePasse']}</span>
 					</div>
 				 	<div class="form-group col-md-6"> 
 						<label for="confirmation">Confirmation <span>*</span> </label> 
-						<input class="form-control" type="password"id="confirmation" name="confirmation"  > 
+						<input class="form-control" type="password"id="confirmation" name="confirmation"  required> 
 						<span>${MapErreurs['confirmation']}</span> 
 					</div>
 				</div> 
