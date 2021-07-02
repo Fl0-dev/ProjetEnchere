@@ -73,7 +73,7 @@
         </tr>
          <tr>
             <td>Meilleure offre :</td>
-            <td>${articleSelected.enchereMax.montant_enchere } points par un utilisateur</td>
+            <td>${articleSelected.enchereMax.montant_enchere == 0 ? "Pas encore d'offre effectuée" : articleSelected.enchereMax.montant_enchere += " points"} </td>
         </tr>
          <tr>
             <td>Mise à prix :</td>
