@@ -33,21 +33,13 @@
 			</div>
 		</nav> 
 	</header>
-	<!-- LIGNE -->
-	<div class="row d-flex justify-content-center">
-		<!-- COLONNE VIDE 1 -->
-	<div class="col-md-3 align-items-start"></div>
-		
-		<!-- COLONNE CENTRALE -->
+<div class="row d-flex justify-content-center">
 	<main class="col-md-6 align-items-center">
 
 
-<div class="card mb-3">
-					
-<div class="card-body" >
 <div class="h2 container d-flex justify-content-center">Mon profil</div>	
  
-<table >
+<table class="d-flex justify-content-center mt-3">
     <tbody>
         <tr>
             <td>Pseudo :</td>
@@ -85,16 +77,18 @@
             <td>Crédit :</td>
             <td>${ sessionScope.utilisateurSession.credit }</td>
         </tr>
+           </tr>
+  
     </tbody>
+
 </table>
+<div class="d-flex justify-content-center">
+<a href="${pageContext.request.contextPath }/ModifProfil" class="btn btn-info btn-lg mt-3">Modifier</a>
 </div>
 
-<a href="${pageContext.request.contextPath }/ModifProfil" class="btn btn-info btn-block mb-3">Modifier</a>
-	</div>
+</main>
+</div>
 
-		</main>
-	<div class="col-md-3 align-items-end"></div>
-	</div>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
