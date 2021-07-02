@@ -81,8 +81,9 @@
 					</div>
 				</div> 
 			<div class="row justify-content-around">
-				<button class="btn btn-info btn-lg col-md-6" type="submit">Créer</button>
-				<a class="btn btn-secondary text-white btn-lg col-md-6" href="${pageContext.request.contextPath }/Accueil">Annuler</a>
+				<button class="btn btn-info btn-lg col-lg-2" type="submit">Créer</button>
+			
+				<a class="btn btn-secondary text-white btn-lg col-lg-2" href="${pageContext.request.contextPath }/Accueil">Annuler</a>
 				</div>
 			<p class="text-dark container d-flex justify-content-center">${resultat}</p>
 		</div>

@@ -980,7 +980,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				"left join UTILISATEURS as acheteur on e.no_utilisateur = acheteur.no_utilisateur " + 
 				"where (date_debut_encheres > GETDATE())  " + 
 				"AND vendeur.pseudo = ? and c.libelle like ? and a.nom_article like ? " +  
-				"group by a.nom_article, a.no_article, vendeur.no_utilisateur, vendeur.pseudo, date_fin_encheresa.prix_initial;"; 
+				"group by a.nom_article, a.no_article, vendeur.no_utilisateur, vendeur.pseudo, date_fin_encheres, a.prix_initial;"; 
 		
 		// ouverture de la connexion à la DB
 		try (Connection connection = JdbcTools.getConnection();

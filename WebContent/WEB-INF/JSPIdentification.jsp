@@ -56,7 +56,7 @@
 		</div>
 	</form>
 	<form action="${pageContext.request.contextPath }/CreationProfil">
-		<button class="btn btn-info btn-block mb-3">Créer un compte</button>
+		<button class="btn btn-outline-info btn-block mb-3">Créer un compte</button>
 	</form>
 
 	</div>
