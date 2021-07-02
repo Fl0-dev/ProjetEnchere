@@ -67,8 +67,8 @@
 					</div>
 				
 					<div>
-						<label for="debutenchere">Début de l'enchère :</label> 
-						<input class="form-control" type="date" id="debutenchere" name="debutenchere">
+						<label for="debutenchere">Début de l'enchère :</label>
+						<input class="form-control" type="date" id="debutenchere" name="debutenchere" value="<c:out value="${today }"/>">
 					</div>
 					<div>
 						<label for="finenchere">Fin de l'enchère :</label> 

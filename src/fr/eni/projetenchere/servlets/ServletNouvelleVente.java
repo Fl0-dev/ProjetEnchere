@@ -43,6 +43,10 @@ public class ServletNouvelleVente extends HttpServlet {
 		// on récupère la liste des catégories présentes en base de données
 		List<Categorie> listeCategories = EnchereManager.getInstance().selectCategorie();
 		request.setAttribute("listeCategories", listeCategories);
+		
+		// variable pour récupérer la date d'aujourd'hui
+		LocalDate today = LocalDate.now();
+		request.setAttribute("today", today);
 
 		// renvoie vers la JSP
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSPNouvelleVente.jsp");
@@ -154,7 +158,9 @@ public class ServletNouvelleVente extends HttpServlet {
 		
 		resultat = "Votre article a bien été ajouté";  
     	request.setAttribute("resultat", resultat);
-    	response.sendRedirect("AccueilConnecte");
+    	//response.sendRedirect("AccueilConnecte");
+    	  RequestDispatcher rd = request.getRequestDispatcher("AccueilConnecte");
+    	rd.forward(request, response);
     	
     	  } else {
     	 resultat = "Votre article n'a pas été enregistré";

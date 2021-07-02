@@ -40,8 +40,8 @@
 
 	<main class="col-md-6 align-items-center">
 
-
-			<p class="text-dark container d-flex justify-content-center">${resultat}  Bienvenue ${ sessionScope.utilisateurSession.pseudo }!</p> 
+			<p class="text-dark container d-flex justify-content-center">${resultat}</p>
+			<p class="text-dark container d-flex justify-content-center">Bienvenue ${ sessionScope.utilisateurSession.pseudo } !</p> 
 			<p class="text-dark container d-flex justify-content-center">Vous avez ${sessionScope.utilisateurSession.credit} points de crédit</p>
 		<div class="h2 container d-flex justify-content-center">Listes des enchères</div>
 	

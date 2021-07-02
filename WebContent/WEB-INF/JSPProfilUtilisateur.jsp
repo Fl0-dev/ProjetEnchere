@@ -35,18 +35,11 @@
 	</header>
 	
 <div class="row d-flex justify-content-center">
-
-
-<div class="col-md-3 align-items-start"></div>
-
 	<main class="col-md-6 align-items-center">
 
-<table>
-    <thead>
-        <tr>
-            <p class="h2 container d-flex justify-content-center">Profil de ${ profilSelected.pseudo }</p> 
-        </tr>
-    </thead>
+      <div class="h2 container d-flex justify-content-center">Profil de ${ profilSelected.pseudo }</div> 
+<table class="d-flex justify-content-center mt-3">
+
     <tbody>
         <tr>
             <td>Pseudo :</td>
@@ -84,7 +77,7 @@
 </table>
 
 </main>
-<div class="col-md-3 align-items-end"></div>
+
 </div>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
