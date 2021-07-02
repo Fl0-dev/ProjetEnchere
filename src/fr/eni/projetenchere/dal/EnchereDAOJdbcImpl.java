@@ -968,10 +968,10 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	public List<ArticleVendu> selectVentesNonDebutees(String pseudo, String contenuRecherche, String categorie){
 		
 		// création de la liste vide
-		List<ArticleVendu> ListeVntesNonDebutees = new ArrayList<>();
+		List<ArticleVendu> ListeVentesNonDebutees = new ArrayList<>();
 		
 		// requête SQL
-		final String SELECT_VENTES_NON_DEBUTEES ="SELECT MAX(e.montant_enchere) as enchere_max,a.prix_initial, " + 
+		final String SELECT_VENTES_NON_DEBUTEES ="SELECT MAX(e.montant_enchere) as enchere_max, a.prix_initial, " + 
 				"a.nom_article, a.no_article, vendeur.no_utilisateur, vendeur.pseudo as vendeur, date_fin_encheres " + 
 				"FROM articles_vendus AS a  " + 
 				"inner join CATEGORIES as c on c.no_categorie = a.no_categorie " + 
@@ -1018,27 +1018,23 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				
 				// utilisation des résultats
 				vendeur.setNoUtilisateur(idUtilisateur);
-				articleVendu.setNoArticle(idArticle);
 				vendeur.setPseudo(vendeurPseudo);
+				enchereMax.setMontant_enchere(miseAPrix);
+				articleVendu.setNoArticle(idArticle);
 				articleVendu.setNomArticle(nomArticle);
-				enchereMax.setMontant_enchere(enchere);
+				articleVendu.setEnchereMax(enchereMax);
 				articleVendu.setUtilisateur(vendeur);
 				articleVendu.setDateFinEncheres(dateFinEnchere);
-				if (enchere != 0) {
-					enchereMax.setMontant_enchere(enchere);
-				} else {
-					enchereMax.setMontant_enchere(miseAPrix);
-				}
 				
 				// ajout dans la liste
-				ListeVntesNonDebutees.add(articleVendu);
+				ListeVentesNonDebutees.add(articleVendu);
 				
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return ListeVntesNonDebutees;
+		return ListeVentesNonDebutees;
 		
 	}
 	
