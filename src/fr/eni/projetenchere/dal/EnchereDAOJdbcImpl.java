@@ -890,7 +890,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		List<ArticleVendu> listeMesVentesEnCours = new ArrayList<>();
 		
 		// requête SQL
-				final String SELECT_MES_VENTES_EN_COURS = "SELECT MAX(e.montant_enchere) as enchere_max, " + 
+				final String SELECT_MES_VENTES_EN_COURS = "SELECT MAX(e.montant_enchere) as enchere_max, a.prix_initial, " + 
 						"a.nom_article, a.no_article, vendeur.no_utilisateur, vendeur.pseudo as vendeur, date_fin_encheres " + 
 						"FROM articles_vendus AS a  " + 
 						"inner join CATEGORIES as c on c.no_categorie = a.no_categorie " + 
@@ -899,7 +899,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 						"left join UTILISATEURS as acheteur on e.no_utilisateur = acheteur.no_utilisateur " + 
 						"where (date_debut_encheres < GETDATE() and date_fin_encheres > GETDATE())  " + 
 						"AND vendeur.pseudo = ? and c.libelle like ? and a.nom_article like ? " +  
-						"group by a.nom_article, a.no_article, vendeur.no_utilisateur, vendeur.pseudo, date_fin_encheres;";
+						"group by a.nom_article, a.no_article, vendeur.no_utilisateur, vendeur.pseudo, date_fin_encheres, a.prix_initial;";
 				
 				// ouverture de la connexion à la DB
 				try (Connection connection = JdbcTools.getConnection();
@@ -927,6 +927,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 						Utilisateur vendeur = new Utilisateur();
 						Enchere enchereMax = new Enchere();
 						
+						int miseAPrix = rs.getInt("prix_initial");
 						int idArticle = rs.getInt("no_article");
 						int idUtilisateur = rs.getInt("no_utilisateur");
 						int enchere = rs.getInt("enchere_max");
@@ -939,7 +940,12 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 						articleVendu.setNoArticle(idArticle);
 						vendeur.setPseudo(vendeurPseudo);
 						articleVendu.setNomArticle(nomArticle);
-						enchereMax.setMontant_enchere(enchere);
+						// si il n'y a pas encore d'enchère on utilise la mie à prix comme enchère max
+						if (enchere != 0) {
+							enchereMax.setMontant_enchere(enchere);
+						} else {
+							enchereMax.setMontant_enchere(miseAPrix);
+						}
 						articleVendu.setUtilisateur(vendeur);
 						articleVendu.setDateFinEncheres(dateFinEnchere);
 						articleVendu.setEnchereMax(enchereMax);
@@ -965,7 +971,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		List<ArticleVendu> ListeVntesNonDebutees = new ArrayList<>();
 		
 		// requête SQL
-		final String SELECT_VENTES_NON_DEBUTEES ="SELECT MAX(e.montant_enchere) as enchere_max, " + 
+		final String SELECT_VENTES_NON_DEBUTEES ="SELECT MAX(e.montant_enchere) as enchere_max,a.prix_initial, " + 
 				"a.nom_article, a.no_article, vendeur.no_utilisateur, vendeur.pseudo as vendeur, date_fin_encheres " + 
 				"FROM articles_vendus AS a  " + 
 				"inner join CATEGORIES as c on c.no_categorie = a.no_categorie " + 
@@ -974,7 +980,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				"left join UTILISATEURS as acheteur on e.no_utilisateur = acheteur.no_utilisateur " + 
 				"where (date_debut_encheres > GETDATE())  " + 
 				"AND vendeur.pseudo = ? and c.libelle like ? and a.nom_article like ? " +  
-				"group by a.nom_article, a.no_article, vendeur.no_utilisateur, vendeur.pseudo, date_fin_encheres;"; 
+				"group by a.nom_article, a.no_article, vendeur.no_utilisateur, vendeur.pseudo, date_fin_encheresa.prix_initial;"; 
 		
 		// ouverture de la connexion à la DB
 		try (Connection connection = JdbcTools.getConnection();
@@ -1002,6 +1008,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				Utilisateur vendeur = new Utilisateur();
 				Enchere enchereMax = new Enchere();
 				
+				int miseAPrix = rs.getInt("prix_initial");
 				int idArticle = rs.getInt("no_article");
 				int idUtilisateur = rs.getInt("no_utilisateur");
 				int enchere = rs.getInt("enchere_max");
@@ -1017,7 +1024,11 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				enchereMax.setMontant_enchere(enchere);
 				articleVendu.setUtilisateur(vendeur);
 				articleVendu.setDateFinEncheres(dateFinEnchere);
-				articleVendu.setEnchereMax(enchereMax);
+				if (enchere != 0) {
+					enchereMax.setMontant_enchere(enchere);
+				} else {
+					enchereMax.setMontant_enchere(miseAPrix);
+				}
 				
 				// ajout dans la liste
 				ListeVntesNonDebutees.add(articleVendu);

@@ -36,7 +36,7 @@
 <div class="row d-flex justify-content-center">
 
 
-<div class="col-md-3 align-items-start"></div>
+
 
 	<main class="col-md-6 align-items-center">
 
@@ -112,7 +112,8 @@
 		</form>
 
 			<!-- Affichage des enchères en cours -->
-			<div>
+			
+			
 				<c:forEach var="articleVendu" items="${listeAafficher }">
 					<div class="card mb-3">
 					
@@ -124,8 +125,8 @@
 <!-- passer dans le lien le noUtilisateur dans l'URL-->							
 							<p>Vendeur : <a href="${pageContext.request.contextPath }/voirprofil?id=${articleVendu.utilisateur.noUtilisateur }" class="card-link text-info">${articleVendu.utilisateur.pseudo }</a></p>
 						</div>	
+					</div>	
 					
-					</div>
 			</c:forEach>	
 		</div>
 	</main>
